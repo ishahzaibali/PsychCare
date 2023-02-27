@@ -1,0 +1,70 @@
+.contact-main {
+	display: flex;
+	flex: 2 1 auto;
+	justify-content: center;
+	align-items: center;
+
+	margin: 20px 20px;
+	padding-top: 80px;
+	min-height: 80vh;
+}
+.contact-main .contact-details {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+.contact-main .contact-details h1 {
+	text-align: center;
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 36px;
+	line-height: 30px;
+	/* identical to box height, or 64% */
+
+	color: #3d4146;
+}
+.contact-main .contact-details h4 {
+	text-align: center;
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 36px;
+	padding: 5%;
+	/* or 150% */
+
+	color: #3d4146;
+}
+.contact-main .contact-fields {
+	display: flex;
+	flex: 2;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	background: #fff;
+	min-height: 40vh;
+	border-radius: 10px;
+}
+.contact-fields h1 {
+	margin-top: 20px;
+}
+.contact-fields .contact-input-fields {
+	display: flex;
+	flex-direction: column;
+}
+.contact-input-fields #datetime {
+	background-color: #fafafa;
+	padding: 5%;
+	border-radius: 5px;
+}
+.contact-input-fields #username {
+	background-color: #fafafa;
+	padding: 5%;
+	border-radius: 5px;
+	margin-top: 2%;
+}

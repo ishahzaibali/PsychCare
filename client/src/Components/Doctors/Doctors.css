@@ -1,0 +1,45 @@
+.doctors-main {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+.doctors-content {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	justify-content: flex-start;
+	align-items: center;
+	margin-top: 60px;
+}
+.doctors-content .h1 {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 36px;
+	line-height: 120%;
+	color: #292d32;
+	justify-content: center;
+	align-items: center;
+}
+.doctors-content p {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 300;
+	font-size: 14px;
+	line-height: 120%;
+	/* identical to box height, or 22px */
+	padding-top: 10px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+
+	/* Text Color */
+
+	color: #3d4146;
+}
+.empty {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-top: 40px;
+}

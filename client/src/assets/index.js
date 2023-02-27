@@ -1,0 +1,10 @@
+export { default as smile } from './Smile.svg';
+export { default as arrow } from './Icon right.svg';
+export { default as burger } from './Burger.svg';
+export { default as heart } from './Heart.svg';
+export { default as doctor } from './doctor.png';
+export { default as timing } from './sleep timing.png';
+export { default as name } from './doctor name.png';
+export { default as rectangles } from './rectangles.png';
+export { default as messages } from './messages.png';
+export { default as consultationImage } from './consultation-image.png';

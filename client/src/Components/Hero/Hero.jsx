@@ -1,26 +1,32 @@
 import React from 'react';
 import './Hero.css';
-import { motion } from "framer-motion";
-import {smile,heart,doctor, name, timing, rectangles} from '../../assets'
+import { motion } from 'framer-motion';
+import { smile, heart, doctor, name, timing, rectangles } from '../../assets';
+import { heroData } from './heroData';
 const Hero = () => {
 	return (
 		<>
 			<div className='main'>
 				<div className='content-area'>
-					<span className='ellipse'></span>
-					<button
-						className='tag'
-						disabled='disabled'>
-						Top Psychologists in Pakistan
-					</button>
-					<h1 className='heading'>
-						Providing the Best Online Medical <span> Consultation</span>
-					</h1>
-					<p>
-						we provide best consultation to you with the best doctors in the
-						field.
-					</p>
-					<motion.button whileTap={{scale:0.6}} className='btn'>Make an appointment</motion.button>
+					{heroData.map((data) => (
+						<>
+							<span className='ellipse'></span>
+							<button
+								className='tag'
+								disabled='disabled'>
+								{data.tag}
+							</button>
+							<h1 className='heading'>
+								{data.heading} <span>{data.heading_span}</span>
+							</h1>
+							<p>{data.text}</p>
+							<motion.button
+								whileTap={{ scale: 0.6 }}
+								className='btn'>
+								{data.btn_title}
+							</motion.button>
+						</>
+					))}
 				</div>
 				<div className='img-area'>
 					<div className='smile'>
@@ -35,15 +41,24 @@ const Hero = () => {
 							alt='heart'
 						/>
 					</div>
-               <div className="doctor-name">
-                  <img src={name} alt="" />
-               </div>
-               <div className="sleep-timing">
-                  <img src={timing} alt="" />
-               </div>
-               <div className="rectangles">
-                  <img src={rectangles} alt="" />
-               </div>
+					<div className='doctor-name'>
+						<img
+							src={name}
+							alt=''
+						/>
+					</div>
+					<div className='sleep-timing'>
+						<img
+							src={timing}
+							alt=''
+						/>
+					</div>
+					<div className='rectangles'>
+						<img
+							src={rectangles}
+							alt=''
+						/>
+					</div>
 					<div className='doctor'>
 						<img
 							src={doctor}

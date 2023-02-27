@@ -1,43 +1,62 @@
 .contact-main {
 	display: flex;
 	flex: 2 1 auto;
-	justify-content: center;
-	align-items: center;
 
-	margin: 20px 20px;
-	padding-top: 80px;
-	min-height: 80vh;
+	margin: -30px 20px 30px 20px;
+	padding-top: 30px;
+	min-height: 100vh;
 }
 .contact-main .contact-details {
 	display: flex;
 	flex-direction: column;
 	flex: 1;
 	flex-wrap: wrap;
-	justify-content: center;
-	align-items: center;
+	justify-content: flex-end;
+	padding-bottom: 4%;
+	padding-left: 2%;
+	align-items: flex-start;
+	background-image: url('../../assets/moon_image.png');
+	background-size: cover;
 }
 .contact-main .contact-details h1 {
 	text-align: center;
 	font-family: 'Poppins';
 	font-style: normal;
-	font-weight: 700;
-	font-size: 36px;
-	line-height: 30px;
-	/* identical to box height, or 64% */
+	font-weight: 600;
+	letter-spacing: -0.03em;
 
+	font-size: 22px;
+	line-height: 30px;
 	color: #3d4146;
 }
-.contact-main .contact-details h4 {
-	text-align: center;
+.contact-main .contact-details p {
 	font-family: 'Poppins';
 	font-style: normal;
 	font-weight: 400;
-	font-size: 16px;
-	line-height: 36px;
-	padding: 5%;
-	/* or 150% */
-
+	font-size: 14px;
+	padding-right: 10%;
+	padding-top: 2%;
 	color: #3d4146;
+}
+.contact-main .contact-details .social_media {
+	display: flex;
+	padding-top: 5%;
+	padding-right: 5%;
+	width: 100%;
+}
+.social_media .facebook,
+.twitter,
+.linkedin,
+.instagram {
+	padding: 2%;
+	background: #418cfd;
+	margin-left: 2%;
+}
+.social_media #facebook,
+.twitter,
+.linkedin,
+#instagram {
+	color: #fafafa;
 }
 .contact-main .contact-fields {
 	display: flex;
@@ -46,25 +65,102 @@
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
-	background: #fff;
+
 	min-height: 40vh;
 	border-radius: 10px;
 }
-.contact-fields h1 {
-	margin-top: 20px;
+.contact-main .contact-fields h1 {
+	text-align: center;
+	margin-top: 10%;
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 36px;
+	line-height: 30px;
+	/* identical to box height, or 64% */
+	color: #3d4146;
+}
+.contact-fields p {
+	font-size: 0.7rem;
+	padding-top: 1%;
+	color: rgba(61, 65, 70, 0.6);
 }
 .contact-fields .contact-input-fields {
 	display: flex;
 	flex-direction: column;
+	margin-top: 2rem;
+	margin: 5% 0;
 }
-.contact-input-fields #datetime {
-	background-color: #fafafa;
-	padding: 5%;
-	border-radius: 5px;
+.contact-input-fields .username {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	grid-gap: 1rem;
 }
-.contact-input-fields #username {
-	background-color: #fafafa;
-	padding: 5%;
-	border-radius: 5px;
-	margin-top: 2%;
+
+.username .first_name {
+	font-weight: 500;
+	font-family: 'poppins';
+	font-size: 14px;
+	color: #3d4146 !important;
+}
+.username .last_name {
+	font-weight: 500;
+	font-family: 'poppins';
+	font-size: 14px;
+	color: #3d4146 !important;
+}
+
+.username .inputProp {
+	font-family: 'poppins';
+	font-weight: 600;
+	padding: 2%;
+}
+.contact-input-fields .email {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 1rem;
+}
+
+.email .email_label {
+	font-weight: 500;
+	font-family: 'poppins';
+	font-size: 14px;
+	color: #3d4146 !important;
+}
+.email .inputProp {
+	font-family: 'poppins';
+	font-weight: 600;
+	padding: 2%;
+}
+.contact-input-fields .description {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 1rem;
+}
+.description .email_label {
+	font-weight: 500;
+	font-family: 'poppins';
+	font-size: 14px;
+	color: #3d4146 !important;
+}
+.description .inputProp {
+	font-weight: 600;
+	font-family: 'poppins';
+	padding: 2%;
+}
+.contact-input-fields .contact_btn {
+	margin-top: 5%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+.contact_btn .btn_contact {
+	background: #418cfd;
+	border-radius: 0;
+	width: 100%;
+	margin: 0;
+	padding: 20px 40px;
 }

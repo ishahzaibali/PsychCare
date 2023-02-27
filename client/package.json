@@ -9,6 +9,7 @@
     "@mantine/core": "^5.10.3",
     "@mantine/ds": "^5.10.3",
     "@material-tailwind/react": "^1.2.5",
+    "@material-ui/core": "^4.12.4",
     "@mui/material": "^5.11.7",
     "@tabler/icons": "^2.2.0",
     "@testing-library/jest-dom": "^5.16.5",

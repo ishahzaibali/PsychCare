@@ -50,7 +50,7 @@
 .instagram {
 	padding: 2%;
 	background: #418cfd;
-	margin-left: 2%;
+	margin-left: 3%;
 }
 .social_media #facebook,
 .twitter,
@@ -60,7 +60,7 @@
 }
 .contact-main .contact-fields {
 	display: flex;
-	flex: 2;
+	flex: 3;
 	flex-wrap: wrap;
 	flex-direction: column;
 	justify-content: flex-start;
@@ -163,4 +163,51 @@
 	width: 100%;
 	margin: 0;
 	padding: 20px 40px;
+}
+
+@media screen and (max-width: 768px) {
+	.contact-main {
+		display: flex;
+		flex-direction: column;
+		margin-top: -70px;
+		padding-top: 0px;
+	}
+	.contact-main .contact-details {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		padding: 10%;
+		background: #fafafa !important;
+	}
+	.contact-main .contact-details p {
+		text-align: center;
+		padding-right: 0%;
+	}
+	.contact-main .contact-details .social_media {
+		justify-content: center;
+	}
+	.contact-fields p {
+		text-align: center;
+		align-items: center;
+		justify-content: center;
+	}
+	.contact-main .contact-fields {
+		
+		justify-content: center;
+		
+	
+	}
+	.contact-fields .contact-input-fields {
+		
+		margin: 5% 0%;
+		width: 100%;
+		padding: 3%;
+	}
+	.contact-input-fields .username {
+		display: grid;
+		grid-template-columns: repeat(1, minmax(0, 1fr));
+		grid-gap: 1rem;
+		width: 100%;
+	}
 }

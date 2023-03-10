@@ -2,6 +2,7 @@
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
+	flex-wrap: wrap;
 }
 .content {
 	display: flex;
@@ -205,29 +206,75 @@
 	color: #3d4146;
 }
 
-@media (max-width: 960px) {
+@media screen and (max-width: 768px) {
 	.issue {
-		display: flex;
-		flex-direction: column;
-
-		justify-content: center;
-		padding: 0px 80px;
-		margin-bottom: 40px;
+		justify-content: space-between;
+		align-items: center;
+		/* margin: 2%; */
 	}
 	.issue .depression {
-		margin-bottom: 20px;
+		width: calc(50%-10px);
+		margin: 05px;
+		flex-wrap: wrap;
+		height: auto;
+		padding: 0;
+		border-radius: 15px;
 	}
-	.issue .anxiety {
-		margin-bottom: 20px;
+	.issue .depression h1 {
+		padding-top: 8%;
+		font-size: 16px;
+	}
+	.issue .depression p {
+		font-size: 12px;
+		line-height: 14px;
 	}
 	.issue .special-needs {
-		margin-bottom: 20px;
+		width: calc(50%-10px);
+		margin: 05px;
+		flex-wrap: wrap;
+		height: auto;
+		padding: 0;
+		border-radius: 15px;
+	}
+	.issue .special-needs h1 {
+		padding-top: 8%;
+		font-size: 16px;
+	}
+	.issue .special-needs p {
+		font-size: 12px;
+		line-height: 14px;
+	}
+
+	.issue .anxiety {
+		width: calc(50%-10px);
+		margin: 05px;
+		flex-wrap: wrap;
+		height: auto;
+		padding: 0;
+		border-radius: 15px;
+	}
+	.issue .anxiety h1 {
+		padding-top: 8%;
+		font-size: 16px;
+	}
+	.issue .anxiety p {
+		font-size: 12px;
+		line-height: 14px;
 	}
 	.issue .memory-lost {
-		margin-bottom: 20px;
+		width: calc(50%-10px);
+		margin: 05px;
+		flex-wrap: wrap;
+		height: auto;
+		padding: 0;
+		border-radius: 15px;
 	}
-	.content p {
-		padding: 30px 100px;
+	.issue .memory-lost h1 {
+		padding-top: 8%;
+		font-size: 16px;
+	}
+	.issue .memory-lost p {
 		font-size: 12px;
+		line-height: 14px;
 	}
 }

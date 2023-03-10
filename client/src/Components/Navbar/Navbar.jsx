@@ -25,7 +25,7 @@ const Navbar = () => {
 	const navList = (
 		<ul>
 			{menuData.map((item, index) => (
-				<li  key={index}>
+				<li key={index}>
 					<NavLink
 						to={item.url}
 						className=''>
@@ -76,7 +76,9 @@ const Navbar = () => {
 								}}>
 								<MenuHandler>
 									<MenuItem className='MenuItem'>
+										<NavLink to= '/login'>
 										Login/Registration{' '}
+										</NavLink>
 										<span className='right'>
 											<svg
 												width='20'
@@ -95,73 +97,9 @@ const Navbar = () => {
 												</g>
 											</svg>
 										</span>
+										
 									</MenuItem>
 								</MenuHandler>
-								<MenuList className='MenuList'>
-									<MenuItem className='MenuItem'>
-										Patient
-										<span className='right'>
-											<svg
-												width='20'
-												height='25'
-												viewBox='0 0 17 22'
-												fill='none'
-												xmlns='http://www.w3.org/2000/svg'>
-												<g id='chevron / right'>
-													<path
-														id='Rectangle (Stroke)'
-														fill-rule='evenodd'
-														clip-rule='evenodd'
-														d='M13.639 11L10.2626 14.3764L11.5 15.6138L16.1139 11L11.5 6.38609L10.2626 7.62352L13.639 11Z'
-														fill='currentColor'
-													/>
-												</g>
-											</svg>
-										</span>
-									</MenuItem>
-									<MenuItem className='MenuItem'>
-										Doctor
-										<span className='right'>
-											<svg
-												width='20'
-												height='25'
-												viewBox='0 0 17 22'
-												fill='none'
-												xmlns='http://www.w3.org/2000/svg'>
-												<g id='chevron / right'>
-													<path
-														id='Rectangle (Stroke)'
-														fill-rule='evenodd'
-														clip-rule='evenodd'
-														d='M13.639 11L10.2626 14.3764L11.5 15.6138L16.1139 11L11.5 6.38609L10.2626 7.62352L13.639 11Z'
-														fill='currentColor'
-													/>
-												</g>
-											</svg>
-										</span>
-									</MenuItem>
-									<MenuItem className='MenuItem'>
-										Admin
-										<span className='right'>
-											<svg
-												width='20'
-												height='25'
-												viewBox='0 0 17 22'
-												fill='none'
-												xmlns='http://www.w3.org/2000/svg'>
-												<g id='chevron / right'>
-													<path
-														id='Rectangle (Stroke)'
-														fill-rule='evenodd'
-														clip-rule='evenodd'
-														d='M13.639 11L10.2626 14.3764L11.5 15.6138L16.1139 11L11.5 6.38609L10.2626 7.62352L13.639 11Z'
-														fill='currentColor'
-													/>
-												</g>
-											</svg>
-										</span>
-									</MenuItem>
-								</MenuList>
 							</Menu>
 
 							<MenuItem className='MenuItem'>

@@ -5,7 +5,7 @@ export const menuData = [
 		cName: 'nav-links',
 	},
 	{
-		title: 'Doctors',
+		title: 'Contact',
 		url: '/contact',
 		cName: 'nav-links',
 	},

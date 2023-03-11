@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import { Contact, Navbar, Home, Footer, Login, Signup } from './Components';
+import { Contact, Navbar, Home, Footer, Login, Signup, PsychologistPage } from './Components';
 const App = () => {
 	return (
 		<>
@@ -24,6 +24,10 @@ const App = () => {
 					<Route
 						path='/signup'
 						element={<Signup />}
+					/>
+					<Route
+						path='/psychologists'
+						element={<PsychologistPage />}
 					/>
 				</Routes>
 			</div>

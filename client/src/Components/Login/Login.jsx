@@ -163,7 +163,7 @@ const Login = () => {
 						</div>
 					</div>
 					<div className='xl:w-1/3 md:w-1/2 lg:ml-16 ml-8 md:mt-0 mt-6'>
-						<div className='pl-8 block logo'>
+						<div className='pl-8 block logo-sub'>
 							<h1>
 								Psych<span>Care.</span>
 							</h1>

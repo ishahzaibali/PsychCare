@@ -15,8 +15,11 @@
 .login-button {
    margin-left: 0;
 }
-.logo {
+.logo-sub {
    font-family: 'poppins';
    font-size: 2rem;
    font-weight: 600;
+}
+.logo-sub span {
+   color: #418CFD;
 }

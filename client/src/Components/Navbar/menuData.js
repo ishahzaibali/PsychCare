@@ -4,19 +4,20 @@ export const menuData = [
 		url: '/',
 		cName: 'nav-links',
 	},
+
 	{
-		title: 'Contact',
-		url: '/contact',
-		cName: 'nav-links',
-	},
-	{
-		title: 'Hospitals',
-		url: '#',
+		title: 'Doctors',
+		url: '/psychologists',
 		cName: 'nav-links',
 	},
 	{
 		title: 'Blog',
 		url: '#',
+		cName: 'nav-links',
+	},
+	{
+		title: 'Contact',
+		url: '/contact',
 		cName: 'nav-links',
 	},
 ];

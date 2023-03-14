@@ -1,5 +1,6 @@
 import React from 'react';
 import './Signup.css';
+import { NavLink } from 'react-router-dom';
 const Signup = () => {
 	return (
 		<>
@@ -90,11 +91,13 @@ const Signup = () => {
 										</p>
 									</button>
 									<div class='relative'>
-										<button
-											class='w-full inline-block pt-4 pr-5 pb-4 pl-5 text-xl font-medium text-center text-white bg-indigo-500
+										<NavLink to='/'>
+											<button
+												class='w-full inline-block pt-4 pr-5 pb-4 pl-5 text-xl font-medium text-center text-white bg-indigo-500
                   rounded-lg transition duration-200 hover:bg-indigo-600 ease signup-btn'>
-											Submit
-										</button>
+												Submit
+											</button>
+										</NavLink>
 									</div>
 								</div>
 							</div>

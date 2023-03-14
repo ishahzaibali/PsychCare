@@ -9,6 +9,7 @@ import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import PsychologistCard from '../PsychologistCard/PsychologistCard';
 import { topFilms, top100Films, qualification, countries } from './data';
 
 function sleep(delay = 0) {
@@ -39,7 +40,7 @@ const PsychologistPage = () => {
 	const [open, setOpen] = useState(false);
 	const [options, setOptions] = useState([]);
 	const [value, setValue] = useState(2);
-  const [hover, setHover] = useState(-1);
+	const [hover, setHover] = useState(-1);
 	const loading = open && options.length === 0;
 	useEffect(() => {
 		let active = true;
@@ -238,7 +239,12 @@ const PsychologistPage = () => {
 							)}
 						</Box>
 					</div>
-					<div className='cards'>Cards</div>
+
+					{/* cards section */}
+
+					<div className='cards'>
+						<PsychologistCard/>
+					</div>
 				</div>
 			</div>
 		</>

@@ -22,7 +22,7 @@
 	grid-column: 1/2;
 }
 .location-container .location-input {
-	width: 50px;
+	/* width: 50px; */
 	margin-top: 10px;
 }
 .location-container .location-input Input {
@@ -49,31 +49,20 @@
 	margin-top: 10px;
 }
 .date-container .container-input {
-	display: grid;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
-	grid-gap: 0;
+	display: flex;
 }
-.date-container .date-input Input {
+.date-container .date-input #date-and-time {
 	border: 1px solid transparent;
 	background: rgba(65, 140, 253, 0.05);
 	border-radius: 5px;
 	font-family: 'Poppins';
 	display: flex;
-	width: 52%;
-	flex-direction: column;
+	width: calc(87%);
+	height: 40px;
+	padding: 2%;
+	
 }
-.date-container .time-input {
-	margin-top: 10px;
-}
-.date-container .time-input Input {
-	border: 1px solid transparent;
-	background: rgba(65, 140, 253, 0.05);
-	border-radius: 5px;
-	font-family: 'Poppins';
-	display: flex;
-	width: 52%;
-	flex-direction: column;
-}
+
 .residence-container .residence-input {
 	margin-top: 10px;
 }
@@ -82,8 +71,8 @@
 	background: rgba(65, 140, 253, 0.05);
 	border-radius: 5px;
 	font-family: 'Poppins';
+	width: 100%;
 	display: flex;
-	flex-direction: column;
 }
 .main-container .search-button {
 	display: flex;

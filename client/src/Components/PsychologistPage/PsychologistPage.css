@@ -1,45 +1,43 @@
 .main-section {
 	display: block;
-	min-height: 100vh;
+	min-height: 150vh;
 	justify-content: center;
 }
 .main-section .heading {
-   font-size: 2.5rem;
-   margin-top: 5%;
-   color: #2D2E2E;
-   text-align: center;
+	font-size: 2.5rem;
+	margin-top: 5%;
+	color: #2d2e2e;
+	text-align: center;
 }
 .main-section .sub-heading {
-   text-align: center;
-   color: rgba(61, 65, 70, 0.6);
+	text-align: center;
+	color: rgba(61, 65, 70, 0.6);
 }
 .search-cards {
-   display: flex;
-   flex: 1 1 0;
-   margin-top: 5%;
+	display: flex;
+	flex: 1 1 0;
+	margin-top: 5%;
 }
 .search-cards .filters {
-   display: flex;
-   flex: 1;
-   flex-direction: column;
-   justify-content: flex-start;
-   align-items: flex-start;
-   padding: 2%;
-   margin: 2%;
-   position: sticky;
-   border-radius: 10px;
-   background-color: #fff;
-   filter: drop-shadow(0px 15px 10px rgba(22, 22, 22, 0.1));
-
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	padding: 2%;
+	margin: 2%;
+	
+	border-radius: 10px;
+	background-color: #fff;
+	filter: drop-shadow(0px 15px 10px rgba(22, 22, 22, 0.1));
 }
 .search-cards .cards {
-   display: flex;
-   flex: 3;
-   justify-content: center;
-   /* border-left: 1px solid #2D2E2E; */
+	display: flex;
+	flex: 3;
+	justify-content: center;
+	/* border-left: 1px solid #2D2E2E; */
 }
 .filters h4 {
-   margin-top: 5%;
-   margin-bottom: 2%;
-  
+	margin-top: 5%;
+	margin-bottom: 2%;
 }

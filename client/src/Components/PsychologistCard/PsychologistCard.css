@@ -1,76 +1,50 @@
 .card-body {
+	width: 100%;
+	padding: 2rem;
+	margin-top: 0.5rem;
+	margin-bottom: 0.75rem;
+	margin-right: 1.25rem;
+	height: 20rem;
+	width: 50rem;
+   font-family: 'poppins';
 	background-color: #fff;
-	width: 90%;
-	height: 50%;
-	border-radius: 0.25rem;
-   margin-bottom: 1.5rem;
-	filter: drop-shadow(0 1px 2px rgb(56 65 74 / 15%));
-	display: flex;
-   flex: 1 1 auto;
-   flex-direction: column;
-   
 }
-.card-body .profile {
+.card-button {
+	margin: 0;
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+	height: 2rem;
+   font-family: 'poppins';
+}
+.card-data {
+	display: flex;
+   font-family: 'poppins';
+}
+.card-data .user {
 	display: flex;
 	flex: 1;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
-.profile .avatar {
+.user .name {
+	font-family: 'poppins';
+	margin-top: 2%;
+}
+.card-data .details {
+	display: flex;
+	flex-direction: column;
+	flex: 2;
+	align-items: flex-start;
+	justify-content: center;
+   font-family: 'poppins';
+}
+.booking {
    display: flex;
    align-items: center;
-   justify-content: center;
+   justify-content: flex-start;
 }
-.profile .username {
-   font-size: 1.4rem;
-   font-weight: 600;
-   margin-top: 2%;
-}
-.card-body .details {
-	display: flex;
-   flex-direction: column;
-	flex: 1;
-   align-items: center;
-   justify-content: center;
-}
-.btn {
-   display: inline-block;
-   font-weight: 400;
-   line-height: 1.5;
-   text-align: center;
-   vertical-align: middle;
-   cursor: pointer;
-   color: #fafafa;
-   background-color: #418c42;
-}
-.card-body h6 {
-   display: block;
-   font-size: 0.67rem;
-   margin-block-end: 2.33em;
-   margin-block-start: 2.33em;
-   margin-inline-start: 0;
-   margin-inline-end: 0;
-   font-weight: 600;
-   line-height: 1.2;
-}
-.card-body h5 {
-   display: block;
-   font-size: 0.83rem;
-   margin-block-end: 1.67em;
-   margin-block-start: 1.67em;
-   margin-inline-start: 0;
-   margin-inline-end: 0;
-   font-weight: bold;
-   line-height: 1.2;
-}
-.card-body p {
-   display: block;
-
-   margin-block-end: 1em;
-   margin-block-start: 1em;
-   margin-inline-start: 0;
-   margin-inline-end: 0;
-   font-weight: 600;
-   line-height: 1.2;
+.sub-heading {
+   font-family: 'poppins';
 }

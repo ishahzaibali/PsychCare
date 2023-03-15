@@ -3,13 +3,14 @@ import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import {
 	Contact,
-	Navbar,
 	Home,
 	Footer,
 	Login,
 	Signup,
+	Navbar,
 	PsychologistPage,
 	AdminDashboard,
+	// Header,
 } from './Components';
 const App = () => {
 	return (

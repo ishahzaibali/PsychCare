@@ -1,7 +1,7 @@
 import React from 'react';
 import './Search.css';
-import TextField from '@mui/material/TextField';
-import { Input } from '@material-tailwind/react';
+import { Input, Button } from '@material-tailwind/react';
+import { NavLink } from 'react-router-dom';
 
 const Search = () => {
 	return (
@@ -67,7 +67,9 @@ const Search = () => {
 			</div>
 
 			<div className='search-button'>
-				<button>Search</button>
+				<NavLink to='/psychologists'>
+					<Button className='w-full ml-0'>Search</Button>
+				</NavLink>
 			</div>
 		</div>
 	);

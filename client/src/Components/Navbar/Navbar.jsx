@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 import { NavLink } from 'react-router-dom';
-import {
-	MobileNav,
-	IconButton,
-	Menu,
-	MenuHandler,
-	MenuList,
-	MenuItem,
-} from '@material-tailwind/react';
+import { MobileNav, IconButton, Button } from '@material-tailwind/react';
 import { menuData, BtnData } from './menuData';
-import { motion } from 'framer-motion';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 const Navbar = () => {
 	const [openNav, setOpenNav] = useState(false);
-
+	const [anchorEl, setAnchorEl] = React.useState(null);
+	const open = Boolean(anchorEl);
 	useEffect(() => {
 		window.addEventListener(
 			'resize',
@@ -36,6 +31,12 @@ const Navbar = () => {
 		</ul>
 	);
 
+	const handleClick = (event) => {
+		setAnchorEl(event.currentTarget);
+	};
+	const handleClose = () => {
+		setAnchorEl(null);
+	};
 	return (
 		<>
 			<div className='mx-auto max-w-screen-xl py-5 px-10 lg:px-5 lg:py-10'>
@@ -47,83 +48,26 @@ const Navbar = () => {
 					</div>
 
 					<div className='menu'>{navList}</div>
+					<Button
+						id='basic-button'
+						aria-controls={open ? 'basic-menu' : undefined}
+						aria-haspopup='true'
+						aria-expanded={open ? 'true' : undefined}
+						onClick={handleClick}>
+						Account
+					</Button>
 					<Menu
-						animate={{
-							mount: { y: 0 },
-							unmount: { y: 25 },
+						id='basic-menu'
+						anchorEl={anchorEl}
+						open={open}
+						onClose={handleClose}
+						MenuListProps={{
+							'aria-labelledby': 'basic-button',
 						}}>
-						<MenuHandler>
-							<div className='button'>
-								{BtnData.map((data) => {
-									return (
-										<motion.button
-											whileTap={{ scale: 0.6 }}
-											type='default'>
-											{data.title}
-											<span>{data.svg}</span>
-										</motion.button>
-									);
-								})}
-							</div>
-						</MenuHandler>
-						<MenuList className='MenuList'>
-							<Menu
-								placement='left-start'
-								offset={12}
-								animate={{
-									mount: { y: 0 },
-									unmount: { y: 25 },
-								}}>
-								<MenuHandler>
-									<MenuItem className='MenuItem'>
-										<NavLink to= '/login'>
-										Login/Registration{' '}
-										</NavLink>
-										<span className='right'>
-											<svg
-												width='20'
-												height='25'
-												viewBox='0 0 17 22'
-												fill='none'
-												xmlns='http://www.w3.org/2000/svg'>
-												<g id='chevron / right'>
-													<path
-														id='Rectangle (Stroke)'
-														fill-rule='evenodd'
-														clip-rule='evenodd'
-														d='M13.639 11L10.2626 14.3764L11.5 15.6138L16.1139 11L11.5 6.38609L10.2626 7.62352L13.639 11Z'
-														fill='currentColor'
-													/>
-												</g>
-											</svg>
-										</span>
-										
-									</MenuItem>
-								</MenuHandler>
-							</Menu>
-
-							<MenuItem className='MenuItem'>
-								Join as Doctor{' '}
-								<span className='right'>
-									<svg
-										width='20'
-										height='25'
-										viewBox='0 0 17 22'
-										fill='none'
-										xmlns='http://www.w3.org/2000/svg'>
-										<g id='chevron / right'>
-											<path
-												id='Rectangle (Stroke)'
-												fill-rule='evenodd'
-												clip-rule='evenodd'
-												d='M13.639 11L10.2626 14.3764L11.5 15.6138L16.1139 11L11.5 6.38609L10.2626 7.62352L13.639 11Z'
-												fill='currentColor'
-											/>
-										</g>
-									</svg>
-								</span>
-							</MenuItem>
-						</MenuList>
+						<NavLink to='/login'>
+							<MenuItem onClick={handleClose}>Login/Registration</MenuItem>
+						</NavLink>
+						<MenuItem onClick={handleClose}>Join as Psychologist</MenuItem>
 					</Menu>
 
 					<IconButton

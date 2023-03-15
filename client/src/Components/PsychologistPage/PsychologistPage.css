@@ -26,7 +26,9 @@
 	align-items: flex-start;
 	padding: 2%;
 	margin: 2%;
-	
+	height: 35rem;
+	position: sticky;
+	top: 0;
 	border-radius: 10px;
 	background-color: #fff;
 	filter: drop-shadow(0px 15px 10px rgba(22, 22, 22, 0.1));
@@ -40,4 +42,12 @@
 .filters h4 {
 	margin-top: 5%;
 	margin-bottom: 2%;
+}
+.filters h1 {
+	font-weight: 600;
+	font-size: larger;
+}
+.cards {
+	display: flex;
+	flex-direction: column;
 }

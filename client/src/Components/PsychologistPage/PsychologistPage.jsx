@@ -11,6 +11,7 @@ import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import PsychologistCard from '../PsychologistCard/PsychologistCard';
 import { topFilms, top100Films, qualification, countries } from './data';
+import { Button } from "@material-tailwind/react";
 
 function sleep(delay = 0) {
 	return new Promise((resolve) => {
@@ -78,6 +79,7 @@ const PsychologistPage = () => {
 				</p>
 				<div className='search-cards'>
 					<div className='filters'>
+						<h1>Filters</h1>
 						<h4>Search</h4>
 						<Autocomplete
 							id='asynchronous-demo'
@@ -99,7 +101,7 @@ const PsychologistPage = () => {
 							renderInput={(params) => (
 								<TextField
 									{...params}
-									label='Asynchronous'
+									label='Choose Search Parameters'
 									InputProps={{
 										...params.InputProps,
 										endAdornment: (
@@ -142,7 +144,7 @@ const PsychologistPage = () => {
 							renderInput={(params) => (
 								<TextField
 									{...params}
-									label='Checkboxes'
+									label='Choose Psychological Issues'
 								/>
 							)}
 						/>
@@ -170,7 +172,7 @@ const PsychologistPage = () => {
 							renderInput={(params) => (
 								<TextField
 									{...params}
-									label='Checkboxes'
+									label='Choose Qualification'
 								/>
 							)}
 						/>
@@ -238,12 +240,16 @@ const PsychologistPage = () => {
 								<Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
 							)}
 						</Box>
+						<Button className='w-full flex justify-center items-center ml-0 mt-6 font-[poppins]'>Apply Filters</Button>
 					</div>
 
 					{/* cards section */}
 
 					<div className='cards'>
 						<PsychologistCard/>
+						<PsychologistCard/>
+						<PsychologistCard/>
+
 					</div>
 				</div>
 			</div>

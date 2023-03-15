@@ -1,25 +1,32 @@
-
-.google-button {
-   background: transparent !important;
-   border-radius: 5px;
-   margin-top: 7%;
-   align-items: center;justify-content: center;
-   margin-left: 0;
+.login-main {
+	display: flex;
+	min-height: 100vh;
+	display: flex;
+	flex: 1 1 auto;
+	align-items: center;
+	justify-content: center;
 }
-.login-form {
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   /* align-items: center; */
+.login-main .login-fields {
+	display: flex;
+	flex: 1;
+	margin-left: 10%;
+}
+.login-fields .h2 {
+	color: #418cfd;
+}
+.login-fields Card {
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+}
+.login-main .login-image {
+	display: flex;
+	flex: 3;
 }
 .login-button {
-   margin-left: 0;
-}
-.logo-sub {
-   font-family: 'poppins';
-   font-size: 2rem;
-   font-weight: 600;
-}
-.logo-sub span {
-   color: #418CFD;
+	background-color: linear-gradient(
+		310deg,
+		rgb(33, 82, 255),
+		rgb(33, 212, 253)
+	);
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import './Login.css';
+import Navbar from '../Navbar/Navbar';
 import {
 	Card,
 	Typography,
@@ -8,11 +9,12 @@ import {
 	Switch,
 } from '@material-tailwind/react';
 import { NavLink } from 'react-router-dom';
-import curvedImage from '../../assets/curved-images/curved-6.jpg';
+
 
 const Login = () => {
 	return (
 		<>
+			<Navbar/>
 			<div className='login-main '>
 				<div className='login-fields'>
 					<Card

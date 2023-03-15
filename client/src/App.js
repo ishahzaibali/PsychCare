@@ -4,10 +4,8 @@ import { Route, Routes } from 'react-router-dom';
 import {
 	Contact,
 	Home,
-	Footer,
 	Login,
 	Signup,
-	Navbar,
 	PsychologistPage,
 	AdminDashboard,
 	// Header,
@@ -15,8 +13,6 @@ import {
 const App = () => {
 	return (
 		<>
-			<Navbar />
-
 			<div>
 				<Routes>
 					<Route
@@ -45,8 +41,6 @@ const App = () => {
 					/>
 				</Routes>
 			</div>
-
-			<Footer />
 		</>
 	);
 };

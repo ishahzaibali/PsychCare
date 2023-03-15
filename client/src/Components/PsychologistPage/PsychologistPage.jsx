@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './PsychologistPage.css';
+import Navbar from '../Navbar/Navbar';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
@@ -11,7 +12,8 @@ import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import PsychologistCard from '../PsychologistCard/PsychologistCard';
 import { topFilms, top100Films, qualification, countries } from './data';
-import { Button } from "@material-tailwind/react";
+import { Button } from '@material-tailwind/react';
+import Footer from '../Footer/Footer';
 
 function sleep(delay = 0) {
 	return new Promise((resolve) => {
@@ -71,6 +73,7 @@ const PsychologistPage = () => {
 
 	return (
 		<>
+			<Navbar />
 			<div className='main-section'>
 				<h1 className='heading'>Search Doctor, Make an Appointment</h1>
 				<p className='sub-heading'>
@@ -240,19 +243,21 @@ const PsychologistPage = () => {
 								<Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
 							)}
 						</Box>
-						<Button className='w-full flex justify-center items-center ml-0 mt-6 font-[poppins]'>Apply Filters</Button>
+						<Button className='w-full flex justify-center items-center ml-0 mt-6 font-[poppins]'>
+							Apply Filters
+						</Button>
 					</div>
 
 					{/* cards section */}
 
 					<div className='cards'>
-						<PsychologistCard/>
-						<PsychologistCard/>
-						<PsychologistCard/>
-
+						<PsychologistCard />
+						<PsychologistCard />
+						<PsychologistCard />
 					</div>
 				</div>
 			</div>
+			<Footer />
 		</>
 	);
 };

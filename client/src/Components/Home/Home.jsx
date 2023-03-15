@@ -5,9 +5,12 @@ import Doctors from '../Doctors/Doctors';
 import Hero from '../Hero/Hero';
 import PsychologicalIssues from '../PsychologicalIssues/PsychologicalIssues';
 import Search from '../Search/Search';
+import Navbar from '../Navbar/Navbar';
+import Footer from '../Footer/Footer';
 const Home = () => {
 	return (
 		<>
+			<Navbar />
 			<div className='hero'>
 				<Hero />
 			</div>
@@ -23,6 +26,7 @@ const Home = () => {
 			<div className='consultation'>
 				<Consultation />
 			</div>
+			<Footer />
 		</>
 	);
 };

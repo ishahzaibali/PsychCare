@@ -10,11 +10,10 @@ import {
 } from '@material-tailwind/react';
 import { NavLink } from 'react-router-dom';
 
-
 const Login = () => {
 	return (
 		<>
-			<Navbar/>
+			<Navbar />
 			<div className='login-main '>
 				<div className='login-fields'>
 					<Card
@@ -55,7 +54,7 @@ const Login = () => {
 								}
 								containerProps={{ className: 'ml-2.5' }}
 							/>
-							<NavLink to='/admin'>
+							<NavLink to='/dashboard'>
 								<Button
 									className='mt-6 ml-0 login-button'
 									variant='gradient'

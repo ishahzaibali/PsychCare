@@ -6,7 +6,7 @@ export const menuData = [
 	},
 
 	{
-		title: 'Doctors',
+		title: 'Psychologist',
 		url: '/psychologists',
 		cName: 'nav-links',
 	},

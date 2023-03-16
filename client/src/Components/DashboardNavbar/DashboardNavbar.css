@@ -1,0 +1,27 @@
+.navbar-content {
+	display: flex;
+	flex: 1 1 auto;
+}
+.navbar-content .breadcrumb {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+}
+.navbar-content .breadcrumb h1 {
+	margin-left: 4%;
+	font-weight: 600;
+}
+.navbar-content .navbar-menu {
+	display: flex;
+   vertical-align: middle;
+   text-align: center;
+   gap: 0;
+	flex: 1;
+	margin-right: 2rem;
+	justify-content: flex-end;
+}
+.SignIn {
+	color: #3d4146;
+}

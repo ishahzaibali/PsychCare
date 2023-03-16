@@ -1,3 +1,80 @@
 .dashboard-main {
-   min-height: 100vh;
+	min-height: 100vh;
+	display: flex;
+	flex: 1 1 auto;
+
+	gap: 5%;
+}
+.sideNav {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	background: #fff;
+	border-radius: 20px;
+	justify-content: flex-start;
+	align-items: center;
+	margin: 1rem 0 1rem 1rem;
+	box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+	max-width: 15rem;
+}
+.site-title h1 {
+	margin: 2rem;
+   font-weight: 700;
+   margin: 1rem 0;
+   opacity: 0.6;
+   text-transform: uppercase;
+   font-size: 18px;
+   display: flex;
+}
+.site-title hr {
+	stroke: 2;
+   width: 100%;
+	margin: 1rem 0;
+	color: linear-gradient(
+		0 deg,
+		rgba(61, 65, 70, 0),
+		rgba(61, 65, 70, 0.5),
+		rgba(61, 65, 70, 0)
+	);
+}
+.navMenu {
+   margin: 0;
+   padding: 0;
+   display: flex;
+   flex-direction: column;
+}
+.menuContent {
+   display: flex;
+   padding: 0.6rem;
+   justify-content: flex-start;
+   gap: 1rem;
+   align-items: center;
+}
+.menuContent span {
+   font-size: 15px;
+   color: rgba(61, 65, 70, 0.6);
+}
+.menuContent span:hover {
+   font-size: 15px;
+   color: #3D4146;
+}
+.iconButton {
+   color: #fafafa;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.sideNav .ap {
+   font-weight: 700;
+   margin: 1rem 0;
+   opacity: 0.6;
+   text-transform: uppercase;
+   font-size: 14px;
+   display: flex;
+   
+}
+.dashboard-content {
+	display: flex;
+	flex: 3;
+   margin-top: 1rem;
 }

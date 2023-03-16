@@ -24,7 +24,7 @@ const App = () => {
 						element={<Contact />}
 					/>
 					<Route
-						path='/admin'
+						path='/dashboard'
 						element={<AdminDashboard />}
 					/>
 					<Route

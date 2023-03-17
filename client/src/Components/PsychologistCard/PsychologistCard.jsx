@@ -10,7 +10,7 @@ import {
 	Avatar,
 } from '@material-tailwind/react';
 import { StarIcon } from '@heroicons/react/24/solid';
-const PsychologistCard = () => {
+const PsychologistCard = ({Psychologist}) => {
 	return (
 		<>
 			<Card
@@ -30,19 +30,19 @@ const PsychologistCard = () => {
 							<Avatar
 								size='xl'
 								variant='circular'
-								src='https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80'
+								src={Psychologist.image}
 								alt='candice wu'
 							/>
 							<Typography
 								variant='h5'
 								className='name'
 								color='blue-gray'>
-								Candice Wade
+								{Psychologist.name}
 							</Typography>
 							<Typography
 								className='sub-heading'
 								color='blue-gray'>
-								Psychologist
+								{Psychologist.occupation}
 							</Typography>
 							<div className='5 flex items-center mt-1 gap-0'>
 								<StarIcon className='h-4 w-4 text-yellow-700' />
@@ -62,7 +62,7 @@ const PsychologistCard = () => {
 								<Typography
 									className='font-[poppins]'
 									color='blue-gray'>
-									MS (Clinical Psychology)
+									{Psychologist.degree}
 								</Typography>
 							</div>
 							<div className='specialty mb-2'>
@@ -74,7 +74,7 @@ const PsychologistCard = () => {
 								<Typography
 									className='font-[poppins]'
 									color='blue-gray'>
-									Mental health specialists
+									{Psychologist.specialty}
 								</Typography>
 							</div>
 							<div className='clinic mb-2'>
@@ -86,7 +86,7 @@ const PsychologistCard = () => {
 								<Typography
 									className='font-[poppins]'
 									color='blue-gray'>
-									Health City Hospital, Lahore
+									{Psychologist.address}
 								</Typography>
 							</div>
 						</div>

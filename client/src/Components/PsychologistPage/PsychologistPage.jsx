@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './PsychologistPage.css';
+import PsychologistCards from '../PsychologistCard/PsychologistCards';
+import Pagination from '../Pagination/Pagination';
 import Navbar from '../Navbar/Navbar';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
@@ -10,8 +12,7 @@ import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import PsychologistCard from '../PsychologistCard/PsychologistCard';
-import { topFilms, top100Films, qualification, countries } from './data';
+import { topFilms, top100Films, qualification, countries, psychologists } from './data';
 import { Button } from '@material-tailwind/react';
 import Footer from '../Footer/Footer';
 
@@ -42,6 +43,8 @@ function getLabelText(value) {
 const PsychologistPage = () => {
 	const [open, setOpen] = useState(false);
 	const [options, setOptions] = useState([]);
+	const [currentPage, setcurrentPage] = useState(1);
+  const [postsPerPage] = useState(3);
 	const [value, setValue] = useState(2);
 	const [hover, setHover] = useState(-1);
 	const loading = open && options.length === 0;
@@ -70,6 +73,13 @@ const PsychologistPage = () => {
 			setOptions([]);
 		}
 	}, [open]);
+
+	const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPsychologist = psychologists.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = (pageNumber) => {
+    setcurrentPage(pageNumber)
+  }
 
 	return (
 		<>
@@ -251,11 +261,14 @@ const PsychologistPage = () => {
 					{/* cards section */}
 
 					<div className='cards'>
-						<PsychologistCard />
-						<PsychologistCard />
-						<PsychologistCard />
+						<PsychologistCards Psychologists={currentPsychologist} />
+						
 					</div>
+					
 				</div>
+				<div className="pagination">
+					<Pagination postsPerPage={postsPerPage} totalPosts={psychologists.length} paginate = {paginate} />
+					</div>
 			</div>
 			<Footer />
 		</>

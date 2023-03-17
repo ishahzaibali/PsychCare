@@ -1,6 +1,7 @@
 .navbar-content {
 	display: flex;
 	flex: 1 1 auto;
+	height: 58px;
 }
 .navbar-content .breadcrumb {
 	display: flex;
@@ -15,13 +16,66 @@
 }
 .navbar-content .navbar-menu {
 	display: flex;
-   vertical-align: middle;
-   text-align: center;
-   gap: 0;
-	flex: 1;
+	vertical-align: middle;
+	text-align: center;
+	gap: 0;
+	flex: 2;
 	margin-right: 2rem;
 	justify-content: flex-end;
 }
 .SignIn {
 	color: #3d4146;
+	opacity: 0.6;
+	/* height: 40px; */
+	
+}
+.nav-menu-items {
+	display: grid;
+	grid-template-columns: repeat(15, minmax(0, 1fr));
+	gap: 0px;
+}
+.nav-menu-items .search {
+	grid-column: 7/12;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.nav-menu-items .sign-btn {
+	grid-column: 12/14;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+.sign-btn .SignIn:hover {
+	background-color: transparent;
+}
+.nav-menu-items .setting-btn {
+	grid-column: 14/15;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.nav-menu-items .notification-btn {
+	grid-column: 15/16;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.setting-btn .setting svg {
+	color: #3d4146 !important;
+	opacity: 0.6;
+	
+}
+.setting-btn .setting:hover {
+	background-color: transparent;
+	
+}
+.notification-btn svg {
+	color: #3d4146 !important;
+	opacity: 0.6;
+	
+}
+.notification-btn .setting:hover {
+	background-color: transparent;
 }

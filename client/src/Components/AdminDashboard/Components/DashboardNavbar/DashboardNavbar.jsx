@@ -1,5 +1,6 @@
 import React from 'react';
 import './DashboardNavbar.css';
+
 import {
 	Breadcrumbs,
 	Input,
@@ -7,6 +8,7 @@ import {
 	IconButton,
 } from '@material-tailwind/react';
 import { NavLink } from 'react-router-dom';
+
 const DashboardNavbar = () => {
 	return (
 		<>

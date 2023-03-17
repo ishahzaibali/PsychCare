@@ -79,3 +79,8 @@
 .notification-btn .setting:hover {
 	background-color: transparent;
 }
+
+.breadcrumb .active {
+	color: #3d4146;
+	font-weight: 500;
+}

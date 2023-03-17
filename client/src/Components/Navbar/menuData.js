@@ -12,7 +12,7 @@ export const menuData = [
 	},
 	{
 		title: 'Blog',
-		url: '#',
+		url: '/blog',
 		cName: 'nav-links',
 	},
 	{

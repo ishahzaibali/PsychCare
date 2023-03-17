@@ -73,6 +73,9 @@ button span {
 #basic-menu MenuItem {
 	color: #fafafa;
 }
+.active {
+	color: #418cfd;
+}
 
 @media (max-width: 960px) {
 	.Header {

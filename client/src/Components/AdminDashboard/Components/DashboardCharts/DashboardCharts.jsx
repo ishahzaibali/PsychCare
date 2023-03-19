@@ -1,27 +1,202 @@
 import React from 'react';
 import './DashboardCharts.css';
+
 import {
 	Card,
 	CardHeader,
 	CardBody,
 	Typography,
-	Tooltip,
 } from '@material-tailwind/react';
 
+import {
+	Chart as ChartJS,
+	CategoryScale,
+	LinearScale,
+	BarElement,
+	PointElement,
+	LineElement,
+	Title,
+	Tooltip,
+	Legend,
+} from 'chart.js';
+import { Bar, Line } from 'react-chartjs-2';
+
+ChartJS.register(
+	CategoryScale,
+	LinearScale,
+	BarElement,
+	PointElement,
+	LineElement,
+	Title,
+	Tooltip,
+	Legend
+);
+
+export const baroptions = {
+	responsive: true,
+	maintainAspectRatio: false,
+	plugins: {
+		legend: {
+			display: false,
+		},
+	},
+	interaction: {
+		intersect: false,
+		mode: 'index',
+	},
+	scales: {
+		y: {
+			grid: {
+				drawBorder: false,
+				display: false,
+				drawOnChartArea: false,
+				drawTicks: false,
+			},
+			ticks: {
+				suggestedMin: 0,
+				suggestedMax: 500,
+				beginAtZero: true,
+				padding: 15,
+				font: {
+					size: 16,
+					family: `Open Sans`,
+					style: 'normal',
+					lineHeight: 2,
+				},
+				color: '#fff',
+			},
+		},
+		x: {
+			grid: {
+				drawBorder: false,
+				display: false,
+				drawOnChartArea: false,
+				drawTicks: false,
+			},
+			ticks: {
+				display: false,
+			},
+		},
+	},
+};
+export const lineoptions = {
+	responsive: true,
+	maintainAspectRatio: false,
+	plugins: {
+		legend: {
+			display: false,
+		},
+	},
+	interaction: {
+		intersect: false,
+		mode: 'index',
+	},
+	scales: {
+		y: {
+			grid: {
+				drawBorder: false,
+				display: true,
+				drawOnChartArea: true,
+				drawTicks: false,
+				borderDash: [1, 1],
+			},
+			ticks: {
+				display: true,
+				padding: 10,
+				color: '#b2b9bf',
+				font: {
+					size: 12,
+					family: 'Open Sans',
+					style: 'normal',
+					lineHeight: 2,
+				},
+			},
+		},
+		x: {
+			grid: {
+				drawBorder: false,
+				display: false,
+				drawOnChartArea: false,
+				drawTicks: false,
+				borderDash: [3, 3],
+			},
+			ticks: {
+				display: true,
+				color: '#b2b9bf',
+				padding: 20,
+				font: {
+					size: 11,
+					family: 'poppins',
+					style: 'normal',
+					lineHeight: 2,
+				},
+			},
+		},
+	},
+};
+
+export const bardata = {
+	labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+	datasets: [
+		{
+			label: 'Sales',
+			tension: 0.4,
+			borderWidth: 0,
+			borderRadius: 4,
+			borderSkipped: false,
+			backgroundColor: '#fff',
+			data: [400, 200, 400, 220, 500, 100, 400, 230, 500],
+			maxBarThickness: 6,
+		},
+	],
+};
+export const linedata = {
+	labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+	datasets: [
+		{
+			label: 'Mobile apps',
+			tension: 0.4,
+			fill: true,
+			pointRadius: 0,
+			borderColor: '#17c1e8',
+			borderWidth: 3,
+			backgroundColor: [
+				'rgba(203,12,159)',
+				'rgba(72,72,176,0.4)',
+				'rgba(203,12,159,0)',
+			],
+
+			data: [50, 40, 300, 200, 450, 250, 400, 230, 400],
+			maxBarThickness: 6,
+		},
+		{
+			label: 'Websites',
+			tension: 0.4,
+			pointRadius: 0,
+			borderColor: '#3A416F',
+			borderWidth: 3,
+			backgroundColor:
+				'bg-gradient-to-r from-blue-500 via-purple-500 to-pink-100',
+			fill: true,
+			data: [70, 90, 40, 140, 290, 290, 340, 230, 500],
+			maxBarThickness: 6,
+		},
+	],
+};
 
 const DashboardCharts = () => {
 	return (
 		<>
 			<div className='charts-main'>
 				<div className='bar-chart'>
-					<Card className='w-full max-w-[26rem] shadow-lg'>
+					<Card className='w-full  h-[26rem] shadow-lg'>
 						<CardHeader
-							className='h-[12.5rem] barChart'
+							className='h-[11rem] barChart'
 							floated={false}
 							color='blue-gray'>
-							<img
-								src='https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'
-								alt='ui/ux review check'
+							<Bar
+								options={baroptions}
+								data={bardata}
 							/>
 						</CardHeader>
 						<CardBody>
@@ -39,14 +214,9 @@ const DashboardCharts = () => {
 								(<span className='font-[600]'>+23%</span>) than last week
 							</Typography>
 							<div className='group justify-around mt-8 flex flex-wrap items-center gap-3'>
-								<Tooltip
-									animate={{
-										mount: { scale: 1, y: 0 },
-										unmount: { scale: 0, y: 25 },
-									}}
-									content='Users'>
+								<div>
 									<span className='flex gap-2 items-center text-xs font-[500] font-[poppins]'>
-										<div className='w-[20px] h-[20px] bg-blue-600 rounded-[5px] flex flex-wrap justify-center items-center'>
+										<div className='w-[20px] users h-[20px]  rounded-[5px] flex flex-wrap justify-center items-center'>
 											<svg
 												width='10px'
 												height='10px'
@@ -89,15 +259,10 @@ const DashboardCharts = () => {
 										</div>
 										Users
 									</span>
-								</Tooltip>
-								<Tooltip
-									animate={{
-										mount: { scale: 1, y: 0 },
-										unmount: { scale: 0, y: 25 },
-									}}
-									content='Clicks'>
+								</div>
+								<div>
 									<span className='flex gap-2 items-center text-xs font-[500] font-[poppins]'>
-										<div className='w-[20px] h-[20px] bg-blue-600 rounded-[5px] flex flex-wrap justify-center items-center'>
+										<div className='w-[20px] clicks h-[20px]  rounded-[5px] flex flex-wrap justify-center items-center'>
 											<svg
 												width='10px'
 												height='10px'
@@ -149,119 +314,147 @@ const DashboardCharts = () => {
 										</div>
 										Clicks
 									</span>
-								</Tooltip>
-								<Tooltip
-									animate={{
-										mount: { scale: 1, y: 0 },
-										unmount: { scale: 0, y: 25 },
-									}}
-									content='Sales'>
+								</div>
+								<div content='Sales'>
 									<span className='flex items-center gap-2 text-xs font-[500] font-[poppins]'>
-										<div className='w-[20px] h-[20px] bg-blue-600 rounded-[5px] flex flex-wrap justify-center items-center'>
-                              <svg
-													width="10px"
-													height="10px"
-													viewBox="0 0 43 36"
-													version="1.1"
-													xmlns="http://www.w3.org/2000/svg"
-													xlink="http://www.w3.org/1999/xlink">
-													<title>credit-card</title>
+										<div className='w-[20px] h-[20px] sales rounded-[5px] flex flex-wrap justify-center items-center'>
+											<svg
+												width='10px'
+												height='10px'
+												viewBox='0 0 43 36'
+												version='1.1'
+												xmlns='http://www.w3.org/2000/svg'
+												xlink='http://www.w3.org/1999/xlink'>
+												<title>credit-card</title>
+												<g
+													id='Basic-Elements'
+													stroke='none'
+													stroke-width='1'
+													fill='none'
+													fill-rule='evenodd'>
 													<g
-														id="Basic-Elements"
-														stroke="none"
-														stroke-width="1"
-														fill="none"
-														fill-rule="evenodd">
+														id='Rounded-Icons'
+														transform='translate(-2169.000000, -745.000000)'
+														fill='#FFFFFF'
+														fill-rule='nonzero'>
 														<g
-															id="Rounded-Icons"
-															transform="translate(-2169.000000, -745.000000)"
-															fill="#FFFFFF"
-															fill-rule="nonzero">
+															id='Icons-with-opacity'
+															transform='translate(1716.000000, 291.000000)'>
 															<g
-																id="Icons-with-opacity"
-																transform="translate(1716.000000, 291.000000)">
-																<g
-																	id="credit-card"
-																	transform="translate(453.000000, 454.000000)">
-																	<path
-																		class="color-background"
-																		d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"
-																		id="Path"
-																		opacity="0.593633743"></path>
-																	<path
-																		class="color-background"
-																		d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"
-																		id="Shape"></path>
-																</g>
+																id='credit-card'
+																transform='translate(453.000000, 454.000000)'>
+																<path
+																	class='color-background'
+																	d='M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z'
+																	id='Path'
+																	opacity='0.593633743'></path>
+																<path
+																	class='color-background'
+																	d='M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z'
+																	id='Shape'></path>
 															</g>
 														</g>
 													</g>
-												</svg>
+												</g>
+											</svg>
 										</div>
 										Sales
 									</span>
-								</Tooltip>
-								<Tooltip
+								</div>
+								<div
 									animate={{
 										mount: { scale: 1, y: 0 },
 										unmount: { scale: 0, y: 25 },
 									}}
 									content='Users'>
 									<span className='flex items-center gap-2 text-xs font-[500] font-[poppins]'>
-										<div className='w-[20px] h-[20px] bg-blue-600 rounded-[5px] flex flex-wrap justify-center items-center'>
-                              <svg
-													width="10px"
-													height="10px"
-													viewBox="0 0 40 40"
-													version="1.1"
-													xmlns="http://www.w3.org/2000/svg"
-													xlink="http://www.w3.org/1999/xlink">
-													<title>settings</title>
+										<div className='w-[20px] h-[20px] items rounded-[5px] flex flex-wrap justify-center items-center'>
+											<svg
+												width='10px'
+												height='10px'
+												viewBox='0 0 40 40'
+												version='1.1'
+												xmlns='http://www.w3.org/2000/svg'
+												xlink='http://www.w3.org/1999/xlink'>
+												<title>settings</title>
+												<g
+													id='Basic-Elements'
+													stroke='none'
+													stroke-width='1'
+													fill='none'
+													fill-rule='evenodd'>
 													<g
-														id="Basic-Elements"
-														stroke="none"
-														stroke-width="1"
-														fill="none"
-														fill-rule="evenodd">
+														id='Rounded-Icons'
+														transform='translate(-2020.000000, -442.000000)'
+														fill='#FFFFFF'
+														fill-rule='nonzero'>
 														<g
-															id="Rounded-Icons"
-															transform="translate(-2020.000000, -442.000000)"
-															fill="#FFFFFF"
-															fill-rule="nonzero">
+															id='Icons-with-opacity'
+															transform='translate(1716.000000, 291.000000)'>
 															<g
-																id="Icons-with-opacity"
-																transform="translate(1716.000000, 291.000000)">
-																<g
-																	id="settings"
-																	transform="translate(304.000000, 151.000000)">
-																	<polygon
-																		class="color-background"
-																		id="Path"
-																		opacity="0.596981957"
-																		points="18.0883333 15.7316667 11.1783333 8.82166667 13.3333333 6.66666667 6.66666667 0 0 6.66666667 6.66666667 13.3333333 8.82166667 11.1783333 15.315 17.6716667"></polygon>
-																	<path
-																		class="color-background"
-																		d="M31.5666667,23.2333333 C31.0516667,23.2933333 30.53,23.3333333 30,23.3333333 C29.4916667,23.3333333 28.9866667,23.3033333 28.48,23.245 L22.4116667,30.7433333 L29.9416667,38.2733333 C32.2433333,40.575 35.9733333,40.575 38.275,38.2733333 L38.275,38.2733333 C40.5766667,35.9716667 40.5766667,32.2416667 38.275,29.94 L31.5666667,23.2333333 Z"
-																		id="Path"
-																		opacity="0.596981957"></path>
-																	<path
-																		class="color-background"
-																		d="M33.785,11.285 L28.715,6.215 L34.0616667,0.868333333 C32.82,0.315 31.4483333,0 30,0 C24.4766667,0 20,4.47666667 20,10 C20,10.99 20.1483333,11.9433333 20.4166667,12.8466667 L2.435,27.3966667 C0.95,28.7083333 0.0633333333,30.595 0.00333333333,32.5733333 C-0.0583333333,34.5533333 0.71,36.4916667 2.11,37.89 C3.47,39.2516667 5.27833333,40 7.20166667,40 C9.26666667,40 11.2366667,39.1133333 12.6033333,37.565 L27.1533333,19.5833333 C28.0566667,19.8516667 29.01,20 30,20 C35.5233333,20 40,15.5233333 40,10 C40,8.55166667 39.685,7.18 39.1316667,5.93666667 L33.785,11.285 Z"
-																		id="Path"></path>
-																</g>
+																id='settings'
+																transform='translate(304.000000, 151.000000)'>
+																<polygon
+																	class='color-background'
+																	id='Path'
+																	opacity='0.596981957'
+																	points='18.0883333 15.7316667 11.1783333 8.82166667 13.3333333 6.66666667 6.66666667 0 0 6.66666667 6.66666667 13.3333333 8.82166667 11.1783333 15.315 17.6716667'></polygon>
+																<path
+																	class='color-background'
+																	d='M31.5666667,23.2333333 C31.0516667,23.2933333 30.53,23.3333333 30,23.3333333 C29.4916667,23.3333333 28.9866667,23.3033333 28.48,23.245 L22.4116667,30.7433333 L29.9416667,38.2733333 C32.2433333,40.575 35.9733333,40.575 38.275,38.2733333 L38.275,38.2733333 C40.5766667,35.9716667 40.5766667,32.2416667 38.275,29.94 L31.5666667,23.2333333 Z'
+																	id='Path'
+																	opacity='0.596981957'></path>
+																<path
+																	class='color-background'
+																	d='M33.785,11.285 L28.715,6.215 L34.0616667,0.868333333 C32.82,0.315 31.4483333,0 30,0 C24.4766667,0 20,4.47666667 20,10 C20,10.99 20.1483333,11.9433333 20.4166667,12.8466667 L2.435,27.3966667 C0.95,28.7083333 0.0633333333,30.595 0.00333333333,32.5733333 C-0.0583333333,34.5533333 0.71,36.4916667 2.11,37.89 C3.47,39.2516667 5.27833333,40 7.20166667,40 C9.26666667,40 11.2366667,39.1133333 12.6033333,37.565 L27.1533333,19.5833333 C28.0566667,19.8516667 29.01,20 30,20 C35.5233333,20 40,15.5233333 40,10 C40,8.55166667 39.685,7.18 39.1316667,5.93666667 L33.785,11.285 Z'
+																	id='Path'></path>
 															</g>
 														</g>
 													</g>
-												</svg>
+												</g>
+											</svg>
 										</div>
 										Items
 									</span>
-								</Tooltip>
+								</div>
 							</div>
 						</CardBody>
 					</Card>
 				</div>
-				<div className='line-chart'>Line Chart</div>
+
+				{/* Line Chart  */}
+
+				<div className='line-chart'>
+					<Card className='w-full h-[26rem] shadow-lg'>
+						<CardHeader
+							className='bg-transparent z-20  shadow-none '
+							floated={false}
+							color='blue-gray'>
+							<div className='mb-3 flex items-center justify-between'>
+								<Typography
+									variant='h6'
+									color='blue-gray'
+									className='font-[600] font-[poppins] leading-tight'>
+									Active Users
+								</Typography>
+							</div>
+							<Typography
+								color='gray'
+								className='font-[poppins] text-sm font-[400]  z-20 leading-tight'>
+								(<span className='font-[600]'>+23%</span>) than last week
+							</Typography>
+						</CardHeader>
+						<CardBody>
+							<div className='lineChart h-[300px] w-full'>
+								<Line
+									className=''
+									options={lineoptions}
+									data={linedata}
+								/>
+							</div>
+						</CardBody>
+					</Card>
+				</div>
 			</div>
 		</>
 	);

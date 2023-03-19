@@ -1,7 +1,7 @@
 .site-title h1 {
 	margin: 2rem;
 	font-weight: 700;
-	margin: 1rem 0;
+	margin: 1rem ;
 	opacity: 0.6;
 	text-transform: uppercase;
 	font-size: 18px;
@@ -23,6 +23,9 @@
 	padding: 0;
 	display: flex;
 	flex-direction: column;
+	height: 90vh;
+	padding: 1rem;
+	overflow: scroll;
 }
 .menuContent {
 	display: flex;
@@ -50,7 +53,7 @@
 .iconButton:hover {
 	box-shadow: none;
 }
-.sideNav .ap {
+.sidenav .ap {
 	font-weight: 700;
 	margin: 1rem 0;
 	opacity: 0.6;
@@ -63,9 +66,10 @@
 	flex: 3;
 	margin-top: 1rem;
 }
-.sideNav {
-	position: sticky; 
+.sidenav {
+	position: sticky;
 	top: 0;
+	
 }
 
 .active .menuContent {

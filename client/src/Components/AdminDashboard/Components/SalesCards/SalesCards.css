@@ -2,6 +2,7 @@
 	display: grid;
 	grid-template-columns: repeat(4, minmax(0, 1fr));
 	gap: 1.5rem;
+	margin-right: 1rem;
 }
 .card {
 	font-weight: 400;
@@ -28,9 +29,13 @@
 	justify-content: center;
 	gap: 5%;
 }
+.iButton {
+	background: linear-gradient(310deg, rgb(33, 82, 255), rgb(33, 212, 253));
+	box-shadow: none;
+}
 .iButton svg {
 	box-shadow: none;
-   color: #fff !important;
+	color: #fff !important;
 }
 
 .cardData {

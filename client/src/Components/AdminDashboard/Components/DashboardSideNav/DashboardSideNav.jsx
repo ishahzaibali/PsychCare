@@ -7,7 +7,7 @@ import { IconButton } from '@material-tailwind/react';
 const DashboardSideNav = () => {
 	return (
 		<>
-			<div className='sideNav'>
+			<div className='sidenav'>
 				<div className='site-title'>
 					<h1>PsychCare</h1>
 					<hr />
@@ -56,7 +56,7 @@ const DashboardSideNav = () => {
 					})}
 				</div>
 
-				<div className='navMenu'></div>
+				
 			</div>
 		</>
 	);

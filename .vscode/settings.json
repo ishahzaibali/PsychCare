@@ -1,19 +1,21 @@
 {
-   "cSpell.words": [
-      "COMSATS",
-      "datetime",
-      "firstname",
-      "heroicons",
-      "lastname",
-      "Mantine",
-      "mockdata",
-      "navlist",
-      "Raiwand",
-      "Shahzaib",
-      "showpass",
-      "signup",
-      "srch",
-      "tabler",
-      "totop"
-   ]
+	"cSpell.words": [
+		"COMSATS",
+		"dashboardtables",
+		"datetime",
+		"firstname",
+		"heroicons",
+		"lastname",
+		"Mantine",
+		"mockdata",
+		"navlist",
+		"navs",
+		"Raiwand",
+		"Shahzaib",
+		"showpass",
+		"signup",
+		"srch",
+		"tabler",
+		"totop"
+	]
 }

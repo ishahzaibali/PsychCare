@@ -8,8 +8,10 @@ import {
 	Signup,
 	PsychologistPage,
 	AdminDashboard,
+	DashboardLayout,
 	// Header,
 } from './Components';
+import { DashboardTables } from './Components/AdminDashboard/Components';
 const App = () => {
 	return (
 		<>
@@ -23,10 +25,17 @@ const App = () => {
 						path='/contact'
 						element={<Contact />}
 					/>
-					<Route
-						path='/dashboard'
-						element={<AdminDashboard />}
-					/>
+					<Route element={<DashboardLayout />}>
+						<Route
+							path='/dashboard'
+							element={<AdminDashboard />}
+						/>
+						<Route
+							path='/dashboardtables'
+							element={<DashboardTables />}
+						/>
+					</Route>
+
 					<Route
 						path='/login'
 						element={<Login />}

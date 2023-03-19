@@ -1,16 +1,16 @@
 import React from 'react';
 import './Dashboard.css';
-import { DashboardNavbar, DashboardSideNav } from './Components';
+import { SalesCards } from './Components';
+
 
 const Dashboard = () => {
 	return (
 		<>
 			<div className='dashboard-main'>
-				<div className='side-menu'>
-					<DashboardSideNav />
-				</div>
 				<div className='dashboard-content'>
-					<DashboardNavbar />
+					<div className='sales-cards'>
+						<SalesCards />
+					</div>
 				</div>
 			</div>
 		</>

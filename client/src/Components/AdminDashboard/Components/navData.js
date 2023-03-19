@@ -48,7 +48,7 @@ export const navData = [
 
 	{
 		title: 'Tables',
-		url: '/tables',
+		url: '/dashboardtables',
 		icon: (
 			<svg
 				width='12px'

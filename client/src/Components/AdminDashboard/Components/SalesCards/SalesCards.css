@@ -1,0 +1,41 @@
+.main-box {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 1.5rem;
+}
+.card {
+	font-weight: 400;
+	font-size: 1rem;
+	line-height: 1.625;
+	letter-spacing: 0.00938em;
+	font-family: 'Poppins';
+	box-shadow: rgba(0, 0, 0, 0.05) 0rem 1.25rem 1.6875rem 0rem;
+	box-sizing: border-box;
+	width: 100%;
+}
+.card-main {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0;
+	gap: 1rem;
+	padding: 16px;
+	border-radius: 1rem;
+}
+.moneyData {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5%;
+}
+.iButton svg {
+	box-shadow: none;
+   color: #fff !important;
+}
+
+.cardData {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+}

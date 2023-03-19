@@ -12,3 +12,4 @@ export { default as Login } from './Login/Login';
 export { default as Signup } from './Signup/Signup';
 export { default as PsychologistPage } from './PsychologistPage/PsychologistPage';
 export { default as AdminDashboard } from './AdminDashboard/Dashboard';
+export { default as DashboardLayout } from './DashboardLayout/DashboardLayout';

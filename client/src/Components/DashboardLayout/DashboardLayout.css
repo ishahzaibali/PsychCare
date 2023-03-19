@@ -1,0 +1,17 @@
+.main-layout {
+	width: 100%;
+	height: 100%;
+   display: flex;
+   gap: 2rem;
+   min-height: 100vh;
+}
+.main-layout .sideNav {
+	width: 15rem;
+	margin: 1rem;
+   flex: 1;
+}
+.main-layout .topNav {
+   flex: 2;
+   display: flex;
+   flex-direction: column;
+}

@@ -2,6 +2,7 @@
 	display: flex;
 	flex: 1 1 auto;
 	height: 58px;
+	margin-top: 2rem;
 }
 .navbar-content .breadcrumb {
 	display: flex;

@@ -1,7 +1,6 @@
 import React from 'react';
 import './Dashboard.css';
-import { SalesCards } from './Components';
-
+import { DashboardCharts, SalesCards } from './Components';
 
 const Dashboard = () => {
 	return (
@@ -10,6 +9,9 @@ const Dashboard = () => {
 				<div className='dashboard-content'>
 					<div className='sales-cards'>
 						<SalesCards />
+					</div>
+					<div className='dashboard-charts'>
+						<DashboardCharts />
 					</div>
 				</div>
 			</div>

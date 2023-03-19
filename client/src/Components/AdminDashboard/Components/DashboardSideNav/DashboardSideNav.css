@@ -63,6 +63,10 @@
 	flex: 3;
 	margin-top: 1rem;
 }
+.sideNav {
+	position: sticky; 
+	top: 0;
+}
 
 .active .menuContent {
 	background-color: rgba(255, 255, 255, 0.8);

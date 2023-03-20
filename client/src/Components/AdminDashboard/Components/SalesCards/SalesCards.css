@@ -2,7 +2,7 @@
 	display: grid;
 	grid-template-columns: repeat(4, minmax(0, 1fr));
 	gap: 1.5rem;
-	margin-right: 1rem;
+	
 }
 .card {
 	font-weight: 400;

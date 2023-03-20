@@ -1,5 +1,5 @@
 import React from 'react';
-import Psychologists from './AllPsychologists/Psychologists';
+import PsychologistsDetailed from './AllPsychologists/PsychologistsDetailed';
 import ApprovePsychologists from './ApprovePsychologists/ApprovePsychologists';
 import './DashboardPsychologists.css';
 
@@ -7,7 +7,7 @@ const DashboardPsychologists = () => {
 	return (
 		<>
 			<div className='main-content'>
-				<Psychologists />
+				<PsychologistsDetailed />
 				<ApprovePsychologists />
 			</div>
 		</>

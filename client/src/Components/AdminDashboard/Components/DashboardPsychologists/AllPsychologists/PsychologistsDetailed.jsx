@@ -16,13 +16,14 @@ import {
 	Menu,
 	MenuHandler,
 	MenuList,
+	Avatar,
 	MenuItem,
 } from '@material-tailwind/react';
 
 const Psychologists = () => {
 	return (
 		<>
-			<Card className='w-full mb-[1rem] h-[35rem] shadow-lg '>
+			<Card className='w-full mb-[1rem]  shadow-lg '>
 				<div className='header'>
 					<div className='title'>
 						<Typography
@@ -80,12 +81,8 @@ const Psychologists = () => {
 							aria-label='simple table'>
 							<TableHead>
 								<TableRow className='table-head font-[poppins] font-[800] uppercase text-sm'>
-									<TableCell className='table-head '>Name</TableCell>
-									<TableCell
-										className='table-head font-[poppins] font-[800] uppercase text-sm'
-										align='left'>
-										Email
-									</TableCell>
+									<TableCell className='table-head '>Psychologist</TableCell>
+
 									<TableCell
 										className='table-head font-[poppins] font-[800] uppercase text-sm'
 										align='left'>
@@ -101,11 +98,16 @@ const Psychologists = () => {
 										align='left'>
 										Address
 									</TableCell>
+									<TableCell
+										className='table-head font-[poppins] font-[800] uppercase text-sm'
+										align='left'>
+										Action
+									</TableCell>
 								</TableRow>
 							</TableHead>
 
 							<TableBody className='font-[poppins] font-[500] text-sm'>
-								{tableData.slice(0, 6).map((row) => (
+								{tableData.map((row) => (
 									<TableRow
 										key={row.Name}
 										sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
@@ -113,13 +115,24 @@ const Psychologists = () => {
 											component='th'
 											className='table-row '
 											scope='row'>
-											{row.Name}
+											<div className='flex flex-row gap-4'>
+												<span className='flex gap-2 flex-row'>
+													<Avatar
+														src={row.avatar}
+														size='sm'
+														className='rounded-xl'
+														alt='avatar'
+													/>
+												</span>
+												<div className='flex flex-col'>
+													{row.Name}
+													<span className='opacity-[0.6] font-[400]'>
+														{row.Email}
+													</span>
+												</div>
+											</div>
 										</TableCell>
-										<TableCell
-											className='table-row-2 '
-											align='left'>
-											{row.Email}
-										</TableCell>
+
 										<TableCell
 											className='table-row-2 '
 											align='left'>
@@ -134,6 +147,11 @@ const Psychologists = () => {
 											className='table-row-2 '
 											align='left'>
 											{row.Address}
+										</TableCell>
+										<TableCell
+											className='table-row-3 '
+											align='left'>
+											Edit
 										</TableCell>
 									</TableRow>
 								))}

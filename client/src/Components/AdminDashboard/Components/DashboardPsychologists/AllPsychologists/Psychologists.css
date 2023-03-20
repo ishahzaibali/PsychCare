@@ -26,6 +26,15 @@
    letter-spacing: 0.03333em !important;
    line-height: 1.25 !important;
 }
+.table-row-3 {
+	font-family: 'poppins' !important;
+	font-weight: 500 !important;
+   color: rgb(52, 71, 103) !important;
+	font-size: 0.75rem !important;
+   letter-spacing: 0.03333em !important;
+   line-height: 1.25 !important;
+   opacity: 0.7;
+}
 .table .table-head {
 	font-family: 'poppins';
 	text-transform: uppercase;

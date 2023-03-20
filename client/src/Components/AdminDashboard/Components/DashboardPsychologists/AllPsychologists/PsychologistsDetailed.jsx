@@ -7,7 +7,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import TableHead from '@mui/material/TableHead';
 import TableCell from '@mui/material/TableCell';
-import TablePagination from '@mui/material/TablePagination';
 import { tableData } from './tableData';
 
 import {
@@ -22,18 +21,6 @@ import {
 } from '@material-tailwind/react';
 
 const Psychologists = () => {
-	const [page, setPage] = React.useState(0);
-	const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-	const handleChangePage = (event, newPage) => {
-		setPage(newPage);
-	};
-
-	const handleChangeRowsPerPage = (event) => {
-		setRowsPerPage(+event.target.value);
-		setPage(0);
-	};
-
 	return (
 		<>
 			<Card className='w-full mb-[1rem]  shadow-lg '>

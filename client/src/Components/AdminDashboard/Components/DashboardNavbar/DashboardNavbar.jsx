@@ -1,5 +1,6 @@
 import React from 'react';
 import './DashboardNavbar.css';
+import { useLocation } from 'react-router-dom';
 
 import {
 	Breadcrumbs,
@@ -10,6 +11,24 @@ import {
 import { NavLink } from 'react-router-dom';
 
 const DashboardNavbar = () => {
+	const location = useLocation();
+
+	console.log(location);
+	let currLink = '';
+	const crumbs = location.pathname
+		.split('/')
+		.filter((crumb) => crumb !== '')
+		.map((crumb) => {
+			currLink = +`/${crumb}`;
+			return (
+				<div
+					className='crumb'
+					key={crumb}>
+					<NavLink to={currLink}>{crumb}</NavLink>
+				</div>
+			);
+		});
+
 	return (
 		<>
 			<div className='navbar-content'>
@@ -28,11 +47,12 @@ const DashboardNavbar = () => {
 						</NavLink>
 
 						<NavLink
-							to='/dashboard'
+							to='#'
 							className='font-[poppins]'>
-							Dashboard
+							{crumbs}
 						</NavLink>
 					</Breadcrumbs>
+
 					<h1>Dashboard</h1>
 				</div>
 				<div className='navbar-menu'>

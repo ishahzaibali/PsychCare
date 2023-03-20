@@ -1,8 +1,8 @@
 import React from 'react';
 import {
 	DashboardNavbar,
+	DashboardPsychologists,
 	DashboardSideNav,
-	DashboardTables,
 } from '../AdminDashboard/Components';
 import { Box } from '@mui/material';
 import './DashboardLayout.css';
@@ -30,8 +30,8 @@ const DashboardLayout = () => {
 							element={<Dashboard />}
 						/>
 						<Route
-							path='/dashboardtables'
-							element={<DashboardTables />}
+							path='/dashboardpsychologists'
+							element={<DashboardPsychologists />}
 						/>
 					</Routes>
 				</Box>

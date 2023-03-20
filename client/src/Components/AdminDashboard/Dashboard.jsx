@@ -5,6 +5,7 @@ import { DashboardCharts, SalesCards } from './Components';
 const Dashboard = () => {
 	return (
 		<>
+			
 			<div className='dashboard-main'>
 				<div className='dashboard-content'>
 					<div className='sales-cards'>

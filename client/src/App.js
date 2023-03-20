@@ -31,7 +31,7 @@ const App = () => {
 							element={<AdminDashboard />}
 						/>
 						<Route
-							path='/dashboardtables'
+							path='/dashboardpsychologists'
 							element={<DashboardTables />}
 						/>
 					</Route>

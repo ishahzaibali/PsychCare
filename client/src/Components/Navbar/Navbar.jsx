@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 import { NavLink } from 'react-router-dom';
-import { MobileNav, IconButton, Button } from '@material-tailwind/react';
+import {
+	MobileNav,
+	IconButton,
+	Button,
+	Menu,
+	MenuItem,
+	MenuHandler,
+	MenuList,
+} from '@material-tailwind/react';
 import { menuData, BtnData } from './menuData';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 
 const Navbar = () => {
 	const [openNav, setOpenNav] = useState(false);
@@ -48,26 +54,17 @@ const Navbar = () => {
 					</div>
 
 					<div className='menu'>{navList}</div>
-					<Button
-						id='basic-button'
-						aria-controls={open ? 'basic-menu' : undefined}
-						aria-haspopup='true'
-						aria-expanded={open ? 'true' : undefined}
-						onClick={handleClick}>
-						Account
-					</Button>
-					<Menu
-						id='basic-menu'
-						anchorEl={anchorEl}
-						open={open}
-						onClose={handleClose}
-						MenuListProps={{
-							'aria-labelledby': 'basic-button',
-						}}>
-						<NavLink to='/login'>
-							<MenuItem onClick={handleClose}>Login/Registration</MenuItem>
-						</NavLink>
-						<MenuItem onClick={handleClose}>Join as Psychologist</MenuItem>
+
+					<Menu>
+						<MenuHandler>
+							<Button className='ml-0' variant='gradient'>Account</Button>
+						</MenuHandler>
+						<MenuList className='menu-list'>
+							<NavLink to='/login'>
+								<MenuItem className='ml-0 menu-list-item'>Login/Registration</MenuItem>
+							</NavLink>
+							<MenuItem className='ml-0 menu-list-item'>Join as Psychologist</MenuItem>
+						</MenuList>
 					</Menu>
 
 					<IconButton

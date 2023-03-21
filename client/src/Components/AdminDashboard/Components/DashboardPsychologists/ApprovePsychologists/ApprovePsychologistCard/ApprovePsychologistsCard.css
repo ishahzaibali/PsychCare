@@ -1,0 +1,71 @@
+.p-main {
+	display: flex;
+	flex-direction: column;
+	height: calc(11rem - 10px);
+	width: 100%;
+	background: rgb(248, 249, 250);
+	padding: 16px;
+	border-radius: 1rem;
+	gap: 2rem;
+	margin-bottom: 1rem;
+}
+.option {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1rem;
+	width: 100%;
+}
+.btns {
+	display: flex;
+	justify-content: flex-end;
+	gap: 0.25rem;
+}
+.btns .dec-btn {
+	background: rgb(234, 6, 6, 0.1);
+	color: rgb(234, 6, 6);
+	box-shadow: none;
+	width: 40%;
+	font-size: 0.6rem;
+	font-family: 'poppins';
+}
+.btns .apr-btn {
+	background: rgb(52, 71, 103);
+	font-size: 0.6rem;
+	font-family: 'poppins';
+	box-shadow: none;
+	width: 40%;
+}
+.p-name .name {
+	font-size: 0.875rem;
+	font-family: 'poppins';
+	letter-spacing: 0.02857em;
+	color: rgb(52, 71, 103);
+	font-weight: 500;
+}
+.d-text {
+	color: #67748e;
+	margin-bottom: 2px;
+	font-size: 0.8rem;
+	font-weight: 400;
+	font-family: 'poppins';
+}
+.d-text span {
+	color: rgb(52, 71, 103);
+	margin-bottom: 2px;
+	font-size: 0.8rem;
+	font-weight: 500;
+	font-family: 'poppins';
+}
+.h6 {
+	font-size: 1rem;
+	line-height: 1.6;
+	color: rgb(52, 71, 103);
+	font-weight: 500;
+   font-family: 'poppins';
+}
+.p {
+   font-size: 0.7rem;
+   color: rgb(103, 116, 142);
+   font-weight: 400;
+}

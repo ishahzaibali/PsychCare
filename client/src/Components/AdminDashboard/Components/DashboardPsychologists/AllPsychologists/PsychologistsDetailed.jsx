@@ -22,7 +22,7 @@ import {
 const Psychologists = () => {
 	return (
 		<>
-			<Card className='w-full mb-[1rem]  shadow-lg '>
+			<Card className='w-full mb-[1rem]  shadow-none '>
 				<div className='header'>
 					<div className='title'>
 						<Typography
@@ -92,11 +92,7 @@ const Psychologists = () => {
 										align='left'>
 										Clinic
 									</TableCell>
-									<TableCell
-										className='table-head font-[poppins] font-[800] uppercase text-sm'
-										align='left'>
-										Address
-									</TableCell>
+
 									<TableCell
 										className='table-head font-[poppins] font-[800] uppercase text-sm'
 										align='left'>
@@ -140,13 +136,14 @@ const Psychologists = () => {
 										<TableCell
 											className='table-row-2 '
 											align='left'>
-											{row.Clinic}
+											<div className='flex flex-col'>
+												{row.Clinic}
+												<span className='opacity-[0.6] font-[400]'>
+													{row.Address}
+												</span>
+											</div>
 										</TableCell>
-										<TableCell
-											className='table-row-2 '
-											align='left'>
-											{row.Address}
-										</TableCell>
+
 										<TableCell
 											className='table-row-3 '
 											align='left'>

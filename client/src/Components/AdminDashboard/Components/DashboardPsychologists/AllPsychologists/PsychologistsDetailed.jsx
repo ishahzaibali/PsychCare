@@ -1,6 +1,5 @@
 import React from 'react';
 import './Psychologists.css';
-
 import { Table } from '@mui/material';
 import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';

@@ -1,0 +1,76 @@
+.d-card {
+   margin-bottom: 1rem;
+}
+.title {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 30px;
+	letter-spacing: 0.03em;
+	color: #3d4146;
+}
+.post-details {
+	margin: 2rem 2rem 0rem 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+}
+.title-details {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 1rem;
+}
+.time {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 21px;
+	/* identical to box height */
+
+	letter-spacing: 0.03em;
+
+	color: rgba(61, 65, 70, 0.34);
+}
+.details {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 24px;
+	letter-spacing: 0.03em;
+
+	color: rgba(61, 65, 70, 0.7);
+}
+.comment-syntax {
+	font-family: 'poppins';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 24px;
+	/* identical to box height, or 171% */
+margin-right: 10rem;
+	color: rgba(61, 65, 70, 0.45);
+}
+.comment-user {
+   font-family: 'Poppins';
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 21px;
+/* identical to box height */
+color: #418CFD;
+letter-spacing: 0.03em;
+
+}
+.comment-container {
+   background: rgba(65, 140, 253, 0.05);
+   border: none;
+}
+.user-detail {
+   margin-right: 3rem;
+   margin-bottom: 1rem;
+}

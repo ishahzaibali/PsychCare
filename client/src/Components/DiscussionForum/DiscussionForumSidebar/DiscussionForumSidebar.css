@@ -1,9 +1,10 @@
 .sidebar-container {
 	display: flex;
 	flex-direction: column;
-	position: fixed;
 	gap: 2rem;
 	margin-left: 1rem;
+	
+
 }
 .right-sidebar-container {
 	display: flex;

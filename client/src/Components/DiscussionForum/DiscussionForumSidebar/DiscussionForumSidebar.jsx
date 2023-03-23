@@ -62,7 +62,7 @@ const DiscussionForumSidebar = () => {
 						</div>
 						{discussion}
 					</div>
-					<div className='gap-4 flex flex-col'>
+					<div className='gap-4 flex flex-col mb-4'>
 						<div className='flex gap-3 font-[600]'>
 							<MapPinIcon
 								width='1.25rem'

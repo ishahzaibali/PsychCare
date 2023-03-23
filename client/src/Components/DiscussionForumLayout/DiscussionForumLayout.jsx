@@ -13,15 +13,20 @@ function DiscussionForumLayout() {
 	return (
 		<>
 			<div className='layout-container'>
-				<Box top={0}>
-					<DiscussionForumHeader />
-				</Box>
-				<div className='flex justify-between gap-4'>
-					<Box
-						top={0}
-						left={0}>
-						<DiscussionForumSidebar />
+				<div className='sticky-header'>
+					<Box top={0}>
+						<DiscussionForumHeader />
 					</Box>
+				</div>
+
+				<div className='flex justify-between gap-4'>
+					<div className='sticky-sidebar'>
+						<Box
+							top={0}
+							left={0}>
+							<DiscussionForumSidebar />
+						</Box>
+					</div>
 					<div className='discussion-posts'>
 						<Routes>
 							<Route
@@ -30,11 +35,13 @@ function DiscussionForumLayout() {
 							/>
 						</Routes>
 					</div>
-					<Box
-						top={0}
-						right={0}>
-						<DiscussionForumSidebarRight />
-					</Box>
+					<div className='sticky-user'>
+						<Box
+							top={0}
+							right={0}>
+							<DiscussionForumSidebarRight />
+						</Box>
+					</div>
 				</div>
 			</div>
 		</>

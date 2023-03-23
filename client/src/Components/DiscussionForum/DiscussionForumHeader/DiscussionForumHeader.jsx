@@ -1,14 +1,17 @@
 import React from 'react';
 import './DiscussionForumHeader.css';
 import { Input,Navbar } from '@material-tailwind/react';
+import { NavLink } from 'react-router-dom';
 
 const DiscussionForumHeader = () => {
 	return (
 		<>
-			<Navbar className='header-container'>
+			<Navbar blurred={true} className='header-container'>
+				<NavLink to={'/'}>
 				<div className='logo'>
 					Psych <span>Care.</span>
 				</div>
+				</NavLink>
 				<div className='search-bar'>
 					<Input
 						label='Search'

@@ -1,0 +1,17 @@
+.insertPost Button {
+	background: rgba(255, 255, 255, 0.8);
+
+	border-radius: 0;
+	color: #418cfd;
+	letter-spacing: 0.125rem;
+	box-shadow: none;
+}
+.insertPost Button:hover {
+	box-shadow: none;
+}
+.insertPost {
+	position: sticky;
+	top: 5rem;
+	z-index: 20;
+	backdrop-filter: blur(40px);
+}

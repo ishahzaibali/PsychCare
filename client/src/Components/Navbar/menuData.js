@@ -11,8 +11,8 @@ export const menuData = [
 		cName: 'nav-links',
 	},
 	{
-		title: 'Blog',
-		url: '/blog',
+		title: 'Discussion Forum',
+		url: '/discussions',
 		cName: 'nav-links',
 	},
 	{

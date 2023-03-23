@@ -13,3 +13,5 @@ export { default as Signup } from './Signup/Signup';
 export { default as PsychologistPage } from './PsychologistPage/PsychologistPage';
 export { default as AdminDashboard } from './AdminDashboard/Dashboard';
 export { default as DashboardLayout } from './DashboardLayout/DashboardLayout';
+export { default as DiscussionForum } from './DiscussionForum/DiscussionForum';
+export { default as DiscussionForumLayout } from './DiscussionForumLayout/DiscussionForumLayout';

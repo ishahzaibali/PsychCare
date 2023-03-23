@@ -36,6 +36,7 @@
 .iButton svg {
 	box-shadow: none;
 	color: #fff !important;
+	opacity: 1;
 }
 
 .cardData {

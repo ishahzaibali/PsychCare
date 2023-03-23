@@ -9,12 +9,15 @@ import {
 	PsychologistPage,
 	AdminDashboard,
 	DashboardLayout,
+	DiscussionForum,
+	DiscussionForumLayout,
 	// Header,
 } from './Components';
 import {
 	DashboardTables,
 	DashboardUsers,
 } from './Components/AdminDashboard/Components';
+
 const App = () => {
 	return (
 		<>
@@ -42,6 +45,12 @@ const App = () => {
 							element={<DashboardUsers />}
 						/>
 					</Route>
+					<Route element={<DiscussionForumLayout />}>
+						<Route
+							path='/discussions'
+							element={<DiscussionForum />}
+						/>
+					</Route>
 
 					<Route
 						path='/login'
@@ -51,6 +60,7 @@ const App = () => {
 						path='/signup'
 						element={<Signup />}
 					/>
+					
 					<Route
 						path='/psychologists'
 						element={<PsychologistPage />}

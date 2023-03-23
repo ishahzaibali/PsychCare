@@ -1,0 +1,66 @@
+.header-container {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	height: 5rem;
+   gap: 3rem;
+	background: #fff;
+   align-items: center;
+	justify-content: center;
+   margin: 1rem;
+   border-radius: 15px;
+	box-shadow: 0px 10px 70px rgba(22, 22, 22, 0.1);
+}
+.header-container .logo {
+	grid-column: 1/2;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.header-container .search-bar {
+	grid-column: 2/3;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+   
+}
+.header-container .user-menu {
+	grid-column: 3/4;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+   color: #3d4146;
+}
+.user-menu .user-name h1 {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 1rem;
+	line-height: 18px;
+}
+.user-menu .user-name p {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 0.75rem;
+	line-height: 18px;
+}
+
+.date {
+	padding: 1rem;
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 0.875rem;
+	line-height: 18px;
+}
+.icons {
+   display: flex;
+   gap: 01rem;
+   align-items: center;
+   justify-content: center;
+   /* margin-right: 0.5rem; */
+}
+.icons svg {
+   cursor: pointer;
+}

@@ -26,6 +26,7 @@
 	height: 90vh;
 	padding: 1rem;
 	overflow: scroll;
+	
 }
 .menuContent {
 	display: flex;
@@ -91,4 +92,8 @@
 	color: #3d4146;
 	opacity: 0.8;
 	font-weight: 600;
+}
+
+::-webkit-scrollbar {
+	display: none;
 }

@@ -1,0 +1,102 @@
+.sidebar-container {
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	gap: 2rem;
+	margin-left: 1rem;
+}
+.right-sidebar-container {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	margin-right: 1rem;
+}
+.sidebar-menu {
+	background: #fafafa;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border-radius: 15px;
+	width: 214px;
+	height: 179px;
+}
+.tags-menu {
+	background: #fafafa;
+	display: flex;
+	color: #3d4146 !important;
+	gap: 2rem;
+	margin-bottom: 0.75rem;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border-radius: 15px;
+	width: 214px;
+}
+.tags-menu ul li {
+	color: #3d4146 !important;
+	font-weight: 400;
+}
+
+.user-details {
+	width: 214px;
+	height: 270px;
+	gap: 1rem;
+	padding: 1rem;
+	background: #fafafa;
+	border-radius: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+.user-about {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 0.75rem;
+}
+.user-about .username {
+	font-weight: 600;
+	font-family: 'Poppins';
+	font-style: normal;
+	font-size: 14px;
+	line-height: 21px;
+	color: #3d4146;
+}
+.user-contact {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+.user-contact .email {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 400;
+	display: flex;
+	gap: 0.25rem;
+	font-size: 12px;
+	line-height: 15px;
+	color: #3d4146;
+}
+.user-contact .phone {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 400;
+	display: flex;
+	gap: 0.25rem;
+	font-size: 12px;
+	line-height: 15px;
+	color: #3d4146;
+}
+.user-about .about {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 14px;
+	padding: 1rem;
+	text-align: justify;
+	color: rgba(61, 65, 70, 0.7);
+}

@@ -1,7 +1,7 @@
 export const navData = [
 	{
 		title: 'Dashboard',
-		url: '/dashboard',
+		url: '/Dashboard',
 		icon: (
 			<svg
 				width='12px'
@@ -48,7 +48,7 @@ export const navData = [
 
 	{
 		title: 'Psychologists',
-		url: '/dashboardpsychologists',
+		url: '/Psychologist',
 		icon: (
 			<svg
 				width='12px'
@@ -94,7 +94,7 @@ export const navData = [
 	},
 	{
 		title: 'Users',
-		url: '/users',
+		url: '/Users',
 		icon: (
 			<svg
 				xmlns='http://www.w3.org/2000/svg'

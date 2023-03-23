@@ -25,7 +25,7 @@ const ApprovePsychologists = () => {
 							<ApprovePsychologistsCards approved={tableData} />
 						</div>
 						<div className='v-all'>
-							<NavLink to={'/dashboardpsychologists'}>
+							<NavLink to={'/Psychologist#approve-psychologists'}>
 								<Button
 									variant='filled'
 									className=' shadow-none hover:shadow-none  w-full ml-0 mt-12'>

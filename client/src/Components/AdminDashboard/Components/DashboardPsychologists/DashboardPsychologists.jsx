@@ -17,11 +17,13 @@ const DashboardPsychologists = () => {
 		{
 			label: 'Psychologists',
 			value: 'Psychologists',
+			id: 'all-Psychologists',
 			component: <PsychologistsDetailed />,
 		},
 		{
 			label: 'Approve Requests',
 			value: 'approve',
+			id: 'approve-psychologists',
 			component: <ApprovePsychologistsCardsDetailed approved={tableData} />,
 		},
 	];
@@ -31,10 +33,11 @@ const DashboardPsychologists = () => {
 			<div className='main-content shadow-lg'>
 				<Tabs value='Psychologists'>
 					<TabsHeader>
-						{data.map(({ label, value }) => (
+						{data.map(({ label, value, id }) => (
 							<Tab
 								key={value}
-								value={value}>
+								value={value}
+								id={id}>
 								{label}
 							</Tab>
 						))}

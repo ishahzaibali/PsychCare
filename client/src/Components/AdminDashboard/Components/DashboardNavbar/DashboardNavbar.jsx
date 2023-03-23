@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 import {
 	Breadcrumbs,
+	Navbar,
 	Input,
 	Button,
 	IconButton,
@@ -31,7 +32,7 @@ const DashboardNavbar = () => {
 
 	return (
 		<>
-			<div className='navbar-content'>
+			<Navbar blurred className='navbar-content sticky inset-0'>
 				<div className='breadcrumb'>
 					<Breadcrumbs className='bg-transparent'>
 						<NavLink
@@ -53,7 +54,7 @@ const DashboardNavbar = () => {
 						</NavLink>
 					</Breadcrumbs>
 
-					<h1>Dashboard</h1>
+					<h1 className='font-[500]'>{crumbs}</h1>
 				</div>
 				<div className='navbar-menu'>
 					<div className='nav-menu-items'>
@@ -126,7 +127,7 @@ const DashboardNavbar = () => {
 						</div>
 					</div>
 				</div>
-			</div>
+			</Navbar>
 		</>
 	);
 };

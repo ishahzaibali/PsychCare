@@ -3,11 +3,12 @@ import {
 	DashboardNavbar,
 	DashboardPsychologists,
 	DashboardSideNav,
+	DashboardUsers,
 } from '../AdminDashboard/Components';
 import { Box } from '@mui/material';
 import './DashboardLayout.css';
 import Dashboard from '../AdminDashboard/Dashboard';
-import { Routes,Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 const DashboardLayout = () => {
 	return (
@@ -23,15 +24,20 @@ const DashboardLayout = () => {
 				<Box top={0}>
 					<div className='topNav'>
 						<DashboardNavbar />
+						{/* <DashboardHeader/> */}
 					</div>
 					<Routes>
 						<Route
-							path='/dashboard'
+							path='/Dashboard'
 							element={<Dashboard />}
 						/>
 						<Route
-							path='/dashboardpsychologists'
+							path='/Psychologist'
 							element={<DashboardPsychologists />}
+						/>
+						<Route
+							path='/Users'
+							element={<DashboardUsers />}
 						/>
 					</Routes>
 				</Box>

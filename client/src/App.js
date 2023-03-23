@@ -11,7 +11,10 @@ import {
 	DashboardLayout,
 	// Header,
 } from './Components';
-import { DashboardTables } from './Components/AdminDashboard/Components';
+import {
+	DashboardTables,
+	DashboardUsers,
+} from './Components/AdminDashboard/Components';
 const App = () => {
 	return (
 		<>
@@ -27,12 +30,16 @@ const App = () => {
 					/>
 					<Route element={<DashboardLayout />}>
 						<Route
-							path='/dashboard'
+							path='/Dashboard'
 							element={<AdminDashboard />}
 						/>
 						<Route
-							path='/dashboardpsychologists'
+							path='/Psychologist'
 							element={<DashboardTables />}
+						/>
+						<Route
+							path='/Users'
+							element={<DashboardUsers />}
 						/>
 					</Route>
 

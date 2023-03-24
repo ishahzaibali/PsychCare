@@ -13,7 +13,7 @@ import {
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 
-const DiscussionPostsCard = () => {
+const DiscussionPostsCard = ({ discussion }) => {
 	const [email, setEmail] = React.useState('');
 	const onChange = ({ target }) => setEmail(target.value);
 
@@ -27,7 +27,7 @@ const DiscussionPostsCard = () => {
 								variant='h5'
 								color='blue-gray'
 								className='title font-medium mt-4'>
-								How can we know about the psychologist expertise?
+								{discussion.title}
 							</Typography>
 							<Typography
 								variant='p'
@@ -49,8 +49,9 @@ const DiscussionPostsCard = () => {
 						className='h-[239px] shadow-none'>
 						<div>
 							<img
-								src='https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'
+								src={discussion.featured_image}
 								alt='ui/ux review check'
+								className='image-cover'
 							/>
 						</div>
 					</CardHeader>
@@ -59,8 +60,7 @@ const DiscussionPostsCard = () => {
 						<Typography
 							color='gray'
 							className='details'>
-							Enter a freshly updated and thoughtfully furnished peaceful home
-							surrounded by ancient trees, stone walls, and open meadows.
+							{discussion.desc}
 						</Typography>
 					</CardBody>
 					<CardFooter className='pt-3 w-full'>

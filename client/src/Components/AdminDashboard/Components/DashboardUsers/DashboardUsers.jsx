@@ -24,7 +24,7 @@ const DashboardUsers = () => {
 			<div className='users-container '>
 				<Card className='w-full mb-[1rem] mr-[1rem]  shadow-lg '>
 					<div className='header'>
-						<div className='title'>
+						<div className='title-user'>
 							<Typography
 								className='pt-5 pl-5 h2'
 								color='blue-gray'
@@ -59,9 +59,7 @@ const DashboardUsers = () => {
 									<MenuItem className='ml-0 menu-list-item'>
 										Search Users
 									</MenuItem>
-									<MenuItem className='ml-0 menu-list-item'>
-										Add Users
-									</MenuItem>
+									<MenuItem className='ml-0 menu-list-item'>Add Users</MenuItem>
 									<MenuItem className='ml-0 menu-list-item'>
 										Delete Users
 									</MenuItem>

@@ -24,7 +24,7 @@ const Psychologists = () => {
 		<>
 			<Card className='w-full mb-[1rem]  shadow-none '>
 				<div className='header'>
-					<div className='title'>
+					<div className='title-psy'>
 						<Typography
 							className='pt-5 pl-5 h2'
 							color='blue-gray'

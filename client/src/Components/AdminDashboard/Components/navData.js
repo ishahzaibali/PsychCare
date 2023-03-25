@@ -112,7 +112,7 @@ export const navData = [
 	},
 	{
 		title: 'Discussion Forum',
-		url: '/discussion',
+		url: '/Discussion',
 		icon: (
 			<svg
 				xmlns='http://www.w3.org/2000/svg'

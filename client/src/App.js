@@ -14,6 +14,7 @@ import {
 	// Header,
 } from './Components';
 import {
+	DashboardDiscussions,
 	DashboardTables,
 	DashboardUsers,
 } from './Components/AdminDashboard/Components';
@@ -43,6 +44,10 @@ const App = () => {
 						<Route
 							path='/Users'
 							element={<DashboardUsers />}
+						/>
+						<Route
+							path='/Discussion'
+							element={<DashboardDiscussions />}
 						/>
 					</Route>
 					<Route element={<DiscussionForumLayout />}>

@@ -6,3 +6,4 @@ export { default as DashboardTables } from './DashboardTables/DashboardTables';
 export { default as DashboardCharts } from './DashboardCharts/DashboardCharts';
 export { default as DashboardUsers } from './DashboardUsers/DashboardUsers';
 export { default as DashboardPsychologists } from './DashboardPsychologists/DashboardPsychologists';
+export { default as DashboardDiscussions } from './DashboardDiscussions/DashboardDiscussions';

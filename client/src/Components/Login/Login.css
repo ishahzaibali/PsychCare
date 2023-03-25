@@ -1,18 +1,20 @@
 .login-main {
 	display: flex;
-	min-height: 100vh;
-	display: flex;
-	flex: 1 1 auto;
+	min-height: 80vh;
 	align-items: center;
 	justify-content: center;
 }
 .login-main .login-fields {
 	display: flex;
 	flex: 1;
-	margin-left: 10%;
+	/* margin-left: 10%; */
+	align-items: center;
+	justify-content: center;
 }
 .login-fields .h2 {
 	color: #418cfd;
+	font-size: 2rem;
+	font-weight: 700;
 }
 .login-fields Card {
 	display: flex;

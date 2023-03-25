@@ -16,6 +16,8 @@
 .search-cards {
 	display: flex;
 	flex: 1 1 0;
+	justify-content: center;
+	align-items: flex-start;
 	margin-top: 5%;
 }
 .search-cards .filters {

@@ -14,8 +14,7 @@ import { menuData, BtnData } from './menuData';
 
 const Navbar = () => {
 	const [openNav, setOpenNav] = useState(false);
-	const [anchorEl, setAnchorEl] = React.useState(null);
-	const open = Boolean(anchorEl);
+
 	useEffect(() => {
 		window.addEventListener(
 			'resize',
@@ -37,12 +36,6 @@ const Navbar = () => {
 		</ul>
 	);
 
-	const handleClick = (event) => {
-		setAnchorEl(event.currentTarget);
-	};
-	const handleClose = () => {
-		setAnchorEl(null);
-	};
 	return (
 		<>
 			<div className='mx-auto max-w-screen-xl py-5 px-10 lg:px-5 lg:py-10'>
@@ -57,13 +50,21 @@ const Navbar = () => {
 
 					<Menu>
 						<MenuHandler>
-							<Button className='ml-0' variant='gradient'>Account</Button>
+							<Button
+								className='ml-0'
+								variant='gradient'>
+								Account
+							</Button>
 						</MenuHandler>
 						<MenuList className='menu-list'>
 							<NavLink to='/login'>
-								<MenuItem className='ml-0 menu-list-item'>Login/Registration</MenuItem>
+								<MenuItem className='ml-0 menu-list-item'>
+									Login/Registration
+								</MenuItem>
 							</NavLink>
-							<MenuItem className='ml-0 menu-list-item'>Join as Psychologist</MenuItem>
+							<MenuItem className='ml-0 menu-list-item'>
+								Join as Psychologist
+							</MenuItem>
 						</MenuList>
 					</Menu>
 

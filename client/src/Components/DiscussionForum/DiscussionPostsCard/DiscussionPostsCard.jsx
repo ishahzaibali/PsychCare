@@ -100,7 +100,7 @@ const DiscussionPostsCard = ({ discussion }) => {
 									</Typography>
 								</CardBody>
 								<CardFooter>
-									<div className='relative flex w-full m-0 '>
+									<div className='relative -ml-6 flex w-full m-0 '>
 										<Input
 											type='text'
 											label='Write comment'
@@ -128,7 +128,14 @@ const DiscussionPostsCard = ({ discussion }) => {
 						</div>
 					</CardFooter>
 					<div className='user-detail'>
-						<div className='flex w-full justify-end gap-2 mr-8'>
+						<div className=''>
+							<Button
+								className='ml-4 w-full font-[poppins] text-[#3d4146]'
+								variant='text'>
+								View all comments
+							</Button>
+						</div>
+						<div className='flex  flex-[1] w-full justify-end gap-2 mr-8'>
 							<div className='flex items-center justify-between'>
 								<Typography
 									variant='h5'

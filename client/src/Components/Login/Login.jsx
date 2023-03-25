@@ -20,8 +20,8 @@ const Login = () => {
 						color='transparent'
 						shadow={false}>
 						<Typography
-							variant='h2'
-							textGradient
+							variant='h1'
+							textGradient = {true}
 							className='h2'
 							color='current'>
 							Welcome
@@ -76,7 +76,6 @@ const Login = () => {
 						</form>
 					</Card>
 				</div>
-				<div className='login-image'></div>
 			</div>
 		</>
 	);

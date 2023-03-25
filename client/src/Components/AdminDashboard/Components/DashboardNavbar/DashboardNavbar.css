@@ -1,6 +1,6 @@
 .navbar-content {
-	display: flex;
-	flex: 1 1 auto;
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
 	height: 5rem;
 	margin-top: 0.75rem;
 	justify-content: center;
@@ -13,7 +13,7 @@
 }
 .navbar-content .breadcrumb {
 	display: flex;
-	flex: 1;
+	grid-column: 1/2;
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: flex-start;
@@ -21,10 +21,10 @@
 
 .navbar-content .navbar-menu {
 	display: flex;
+	grid-column: 2/3;
 	vertical-align: middle;
 	text-align: center;
-	gap: 0;
-	flex: 2;
+
 	margin-right: 2rem;
 	justify-content: flex-end;
 }
@@ -34,51 +34,48 @@
 	/* height: 40px; */
 }
 .nav-menu-items {
-	display: grid;
-	grid-template-columns: repeat(15, minmax(0, 1fr));
-	gap: 0px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	gap: 0.5rem;
 }
 .nav-menu-items .search {
-	grid-column: 7/12;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 .nav-menu-items .sign-btn {
-	grid-column: 12/14;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 100%;
+	color: #3d4146;
+	opacity: 0.8;
+	gap: 0.25rem;
 }
-.sign-btn .SignIn:hover {
-	background-color: transparent;
-}
+
 .nav-menu-items .setting-btn {
-	grid-column: 14/15;
 	display: flex;
 	justify-content: center;
+	opacity: 0.6;
 	align-items: center;
+	color: #3d4146;
 }
 .nav-menu-items .notification-btn {
-	grid-column: 15/16;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	color: #3d4146;
+	opacity: 0.8;
 }
 .setting-btn .setting svg {
 	color: #3d4146 !important;
-	opacity: 0.6;
+	opacity: 0.8;
 }
-.setting-btn .setting:hover {
-	background-color: transparent;
-}
+
 .notification-btn svg {
 	color: #3d4146 !important;
-	opacity: 0.6;
-}
-.notification-btn .setting:hover {
-	background-color: transparent;
+	opacity: 0.8;
 }
 
 .breadcrumb .active {

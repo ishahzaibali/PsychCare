@@ -1,12 +1,12 @@
 import React from 'react';
-import './DashboardUsers.css';
+import './DashboardDiscussions.css';
 import { Table } from '@mui/material';
 import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import TableHead from '@mui/material/TableHead';
 import TableCell from '@mui/material/TableCell';
-import { tableData } from '../DashboardPsychologists/AllPsychologists/tableData';
+import { postData } from '../../../DiscussionForum/DiscussionPostsCard/postData';
 import {
 	Card,
 	CardBody,
@@ -14,14 +14,21 @@ import {
 	Menu,
 	MenuHandler,
 	MenuList,
-	Avatar,
 	MenuItem,
 } from '@material-tailwind/react';
+import {PencilSquareIcon} from '@heroicons/react/24/solid'
 
-const DashboardUsers = () => {
+const columns = [
+	{ field: 'users', headerName: 'Post Title', align: 'left' },
+	{ field: 'contact', headerName: 'Post Time', align: 'center' },
+	{ field: 'home', headerName: 'Description', align: 'left' },
+	{ field: 'action', headerName: 'Action', align: 'left' },
+];
+
+const DashboardDiscussions = () => {
 	return (
 		<>
-			<div className='users-container '>
+			<div className='dis-main'>
 				<Card className='w-full mb-[1rem] mr-[1rem]  shadow-lg '>
 					<div className='header'>
 						<div className='title-user'>
@@ -29,13 +36,13 @@ const DashboardUsers = () => {
 								className='pt-5 pl-5 h2'
 								color='blue-gray'
 								as='h2'>
-								Users
+								Discussion Posts
 							</Typography>
 							<Typography
 								className='pl-5 p'
 								color='blue-gray'
 								as='p'>
-								List of all Users
+								List of all Discussion Posts
 							</Typography>
 						</div>
 						<div className='action-menu'>
@@ -78,31 +85,20 @@ const DashboardUsers = () => {
 								aria-label='simple table'>
 								<TableHead>
 									<TableRow className='table-head font-[poppins] font-[800] uppercase text-sm'>
-										<TableCell className='table-head '>Users</TableCell>
-
-										<TableCell
-											className='table-head font-[poppins] font-[800] uppercase text-sm'
-											align='left'>
-											Contact
-										</TableCell>
-										<TableCell
-											className='table-head font-[poppins] font-[800] uppercase text-sm'
-											align='left'>
-											Home
-										</TableCell>
-
-										<TableCell
-											className='table-head font-[poppins] font-[800] uppercase text-sm'
-											align='left'>
-											Action
-										</TableCell>
+										{columns.map((data) => (
+											<TableCell
+												className='table-head font-[poppins] font-[800] uppercase text-sm'
+												align={data.align}>
+												{data.headerName}
+											</TableCell>
+										))}
 									</TableRow>
 								</TableHead>
 
 								<TableBody className='font-[poppins] font-[500] text-sm'>
-									{tableData.map((row) => (
+									{postData.map((row) => (
 										<TableRow
-											key={row.Name}
+											key={row.id}
 											sx={{
 												'&:last-child td, &:last-child th': { border: 0 },
 											}}>
@@ -110,56 +106,34 @@ const DashboardUsers = () => {
 												component='th'
 												className='table-row '
 												scope='row'>
-												<div className='flex flex-row gap-4'>
-													<span className='flex gap-2 flex-row'>
-														<Avatar
-															src={row.avatar}
-															size='sm'
-															className='rounded-xl'
-															alt='avatar'
-														/>
-													</span>
-													<div className='flex flex-col'>
-														{row.Name}
-														<span className='opacity-[0.6] font-[400]'>
-															{row.Email}
-														</span>
-													</div>
-												</div>
+												<div className='flex flex-row gap-4'>{row.title}</div>
 											</TableCell>
 
 											<TableCell
-												className='table-row-2 '
-												align='left'>
-												{row.Contact}
+												className='table-row-2 w-60 '
+												align='center'>
+												{new Date().toLocaleTimeString()}
 											</TableCell>
 											<TableCell
 												className='table-row-2 '
 												align='left'>
-												<div className='flex flex-col'>
-													{row.Clinic}
-													<span className='opacity-[0.6] font-[400]'>
-														{row.Address}
-													</span>
-												</div>
+												<div className='flex flex-col'>{row.desc}</div>
 											</TableCell>
-
 											<Menu placement='left-start'>
 												<MenuHandler>
 													<TableCell
 														className='table-row-3 cursor-pointer'
 														align='left'>
-														Edit
+														<PencilSquareIcon width='1.25rem' height='1.25rem'/>
 													</TableCell>
 												</MenuHandler>
 												<MenuList className='menu-list'>
 													<MenuItem className='ml-0 menu-list-item'>
-														Edit User Details
+														Edit Post
 													</MenuItem>
 													<MenuItem className='ml-0 menu-list-item'>
-														Delete User
+														Delete Post
 													</MenuItem>
-													
 												</MenuList>
 											</Menu>
 										</TableRow>
@@ -174,4 +148,4 @@ const DashboardUsers = () => {
 	);
 };
 
-export default DashboardUsers;
+export default DashboardDiscussions;

@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+	DashboardDiscussions,
 	DashboardNavbar,
 	DashboardPsychologists,
 	DashboardSideNav,
@@ -21,7 +22,9 @@ const DashboardLayout = () => {
 						<DashboardSideNav />
 					</div>
 				</Box>
-				<Box top={0}>
+				<Box
+					top={0}
+					width={'100%'}>
 					<div className='topNav'>
 						<DashboardNavbar />
 						{/* <DashboardHeader/> */}
@@ -38,6 +41,10 @@ const DashboardLayout = () => {
 						<Route
 							path='/Users'
 							element={<DashboardUsers />}
+						/>
+						<Route
+							path='/Discussion'
+							element={<DashboardDiscussions />}
 						/>
 					</Routes>
 				</Box>

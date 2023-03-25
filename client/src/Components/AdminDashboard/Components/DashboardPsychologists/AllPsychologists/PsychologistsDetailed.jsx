@@ -144,11 +144,23 @@ const Psychologists = () => {
 											</div>
 										</TableCell>
 
-										<TableCell
-											className='table-row-3 '
-											align='left'>
-											Edit
-										</TableCell>
+										<Menu placement='left-start'>
+											<MenuHandler>
+												<TableCell
+													className='table-row-3 cursor-pointer'
+													align='left'>
+													Edit
+												</TableCell>
+											</MenuHandler>
+											<MenuList className='menu-list'>
+												<MenuItem className='ml-0 menu-list-item'>
+													Edit Psychologist
+												</MenuItem>
+												<MenuItem className='ml-0 menu-list-item'>
+													Warn Psychologist
+												</MenuItem>
+											</MenuList>
+										</Menu>
 									</TableRow>
 								))}
 							</TableBody>

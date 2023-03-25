@@ -1,4 +1,11 @@
 .users-container {
 	margin-top: 3rem;
-   margin-right: 1rem !important;
+	margin-right: 1rem;
+}
+@media screen and (max-width: 768px) {
+	.users-container {
+		margin-top: 1rem;
+		margin-right: 0rem !important;
+		padding: 0px 2rem;
+	}
 }

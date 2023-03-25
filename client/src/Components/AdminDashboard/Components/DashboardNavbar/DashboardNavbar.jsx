@@ -1,13 +1,33 @@
 import React from 'react';
 import './DashboardNavbar.css';
 import { useLocation } from 'react-router-dom';
-
-import { Breadcrumbs, Navbar, Input } from '@material-tailwind/react';
-import { UserIcon, Cog6ToothIcon, BellIcon } from '@heroicons/react/24/solid';
+import DashboardSideNav from '../DashboardSideNav/DashboardSideNav';
+import avatar from '../../../../assets/team-4.jpg'
+import avatar2 from '../../../../assets/team-3.jpg'
+import {
+	Breadcrumbs,
+	Navbar,
+	Input,
+	Dialog,
+	MenuHandler,
+	MenuList,
+	Menu,
+	MenuItem,
+	Avatar 
+} from '@material-tailwind/react';
+import {
+	UserIcon,
+	Cog6ToothIcon,
+	BellIcon,
+	BarsArrowUpIcon,
+	ClockIcon,
+} from '@heroicons/react/24/solid';
 import { NavLink } from 'react-router-dom';
 
 const DashboardNavbar = () => {
 	const location = useLocation();
+	const [open, setOpen] = React.useState(false);
+	const handleOpen = () => setOpen((cur) => !cur);
 
 	console.log(location);
 	let currLink = '';
@@ -87,11 +107,70 @@ const DashboardNavbar = () => {
 								height='1.1rem'
 							/>
 						</div>
-						<div className='notification-btn'>
-							<BellIcon
-								width='1.1rem'
-								height='1.1rem'
+						<div className='drawer-btn'>
+							<BarsArrowUpIcon
+								onClick={handleOpen}
+								width='1.25rem'
+								stroke='4'
+								height='1.25rem'
 							/>
+							<Dialog
+								size='lg'
+								open={open}
+								handler={handleOpen}
+								className='bg-white h-full w-full shadow-lg'>
+								<DashboardSideNav className='bg-white' />
+							</Dialog>
+						</div>
+						<div className='notification-btn'>
+							<Menu
+								animate={{
+									mount: { scale: 1, y: 0 },
+									unmount: { scale: 0, y: 25 },
+								}}
+								placement='bottom-start'>
+								<MenuHandler>
+									<BellIcon
+										width='1.1rem'
+										height='1.1rem'
+										className='cursor-pointer'
+									/>
+								</MenuHandler>
+								<MenuList className='mt-4 p-[0.5rem] border-none shadow-xl bg-white'>
+									<MenuItem
+										color='blue-grey'
+										className='m-0  font-[poppins] text-[rgb(52,71,103)] p-[0.7rem]  bg-transparent'>
+										<div className='flex gap-2 items-center justify-center'>
+											<Avatar src={avatar2} alt="avatar" size="sm"/>
+											<div className='flex gap-2 flex-col'>
+												<h4>
+													<span className='font-[700] text-[rgb(52,71,103)]'>New Message</span> from Shahzaib{' '}
+												</h4>
+												<div className='flex gap-1 opacity-[0.5] font-[poppins] text-xs'>
+													<ClockIcon height='1rem' width='1rem'/>
+													<p>13 minutes ago</p>
+												</div>
+											</div>
+										</div>
+									</MenuItem>
+									<MenuItem
+										color='blue-grey'
+										className='m-0 font-[poppins] text-[rgb(52,71,103)] p-[0.7rem]  bg-transparent'>
+										<div className='flex gap-2 items-center justify-start'>
+											<Avatar src={avatar} alt="avatar" size="sm"/>
+											<div className='flex gap-2 flex-col'>
+												<h4>
+													<span className='font-[700] text-[rgb(52,71,103)]'>New Album</span> from Uzair{' '}
+												</h4>
+												<div className='flex gap-1 opacity-[0.5] font-[poppins] text-xs'>
+													<ClockIcon height='1rem' width='1rem'/>
+													<p>20 minutes ago</p>
+												</div>
+											</div>
+										</div>
+									</MenuItem>
+								</MenuList>
+							</Menu>
 						</div>
 					</div>
 				</div>

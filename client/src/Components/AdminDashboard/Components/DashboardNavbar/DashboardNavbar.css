@@ -68,6 +68,9 @@
 	color: #3d4146;
 	opacity: 0.8;
 }
+.nav-menu-items .drawer-btn {
+	display: none;
+}
 .setting-btn .setting svg {
 	color: #3d4146 !important;
 	opacity: 0.8;
@@ -87,4 +90,17 @@
 	/* font-weight: 500; */
 	margin-left: 5%;
 	font-weight: 700 !important;
+}
+
+@media screen and (max-width: 768px) {
+	.nav-menu-items .drawer-btn {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: #3d4146;
+		opacity: 0.8;
+	}
+	.nav-menu-items .search {
+		display: none;
+	}
 }

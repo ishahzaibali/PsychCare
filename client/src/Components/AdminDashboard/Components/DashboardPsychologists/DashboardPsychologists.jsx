@@ -1,6 +1,5 @@
 import React from 'react';
 import PsychologistsDetailed from './AllPsychologists/PsychologistsDetailed';
-
 import './DashboardPsychologists.css';
 import {
 	Tabs,
@@ -30,7 +29,7 @@ const DashboardPsychologists = () => {
 
 	return (
 		<>
-			<div className='main-content shadow-lg'>
+			<div className='main-content sm:p-2 shadow-lg'>
 				<Tabs value='Psychologists'>
 					<TabsHeader>
 						{data.map(({ label, value, id }) => (

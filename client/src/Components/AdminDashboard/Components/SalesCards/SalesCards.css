@@ -2,7 +2,6 @@
 	display: grid;
 	grid-template-columns: repeat(4, minmax(0, 1fr));
 	gap: 1.5rem;
-	
 }
 .card {
 	font-weight: 400;
@@ -44,4 +43,12 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
+}
+
+@media screen and (max-width: 768px) {
+	.main-box {
+		display: grid;
+		grid-template-columns: repeat(1, minmax(0, 1fr));
+		gap: 1rem;
+	}
 }

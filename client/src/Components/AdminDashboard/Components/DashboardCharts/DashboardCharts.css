@@ -27,3 +27,11 @@
 .items {
 	background: linear-gradient(310deg, rgb(234, 6, 6), rgb(255, 102, 124));
 }
+
+@media screen and (max-width: 768px) {
+	.charts-main {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+}

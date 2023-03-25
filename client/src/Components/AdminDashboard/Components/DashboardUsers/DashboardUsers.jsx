@@ -18,11 +18,38 @@ import {
 	MenuItem,
 } from '@material-tailwind/react';
 
+const columns = [
+	{
+		field: 'user',
+		headerName: 'Users',
+		align: 'left',
+		className: 'table-head font-[poppins] font-[800] uppercase text-sm',
+	},
+	{
+		field: 'user_contact',
+		headerName: 'Contact',
+		align: 'left',
+		className: 'table-head font-[poppins] font-[800] uppercase text-sm',
+	},
+	{
+		field: 'user_address',
+		headerName: 'Address',
+		align: 'left',
+		className: 'table-head font-[poppins] font-[800] uppercase text-sm',
+	},
+	{
+		field: 'action',
+		headerName: 'Action',
+		align: 'left',
+		className: 'table-head font-[poppins] font-[800] uppercase text-sm',
+	},
+];
+
 const DashboardUsers = () => {
 	return (
 		<>
 			<div className='users-container '>
-				<Card className='w-full mb-[1rem] mr-[1rem]  shadow-lg '>
+				<Card className='w-full mb-[1rem] shadow-lg '>
 					<div className='header'>
 						<div className='title-user'>
 							<Typography
@@ -78,24 +105,13 @@ const DashboardUsers = () => {
 								aria-label='simple table'>
 								<TableHead>
 									<TableRow className='table-head font-[poppins] font-[800] uppercase text-sm'>
-										<TableCell className='table-head '>Users</TableCell>
-
-										<TableCell
-											className='table-head font-[poppins] font-[800] uppercase text-sm'
-											align='left'>
-											Contact
-										</TableCell>
-										<TableCell
-											className='table-head font-[poppins] font-[800] uppercase text-sm'
-											align='left'>
-											Home
-										</TableCell>
-
-										<TableCell
-											className='table-head font-[poppins] font-[800] uppercase text-sm'
-											align='left'>
-											Action
-										</TableCell>
+										{columns.map((data) => (
+											<TableCell
+												className={data.className}
+												align={data.align}>
+												{data.headerName}
+											</TableCell>
+										))}
 									</TableRow>
 								</TableHead>
 
@@ -159,7 +175,6 @@ const DashboardUsers = () => {
 													<MenuItem className='ml-0 menu-list-item'>
 														Delete User
 													</MenuItem>
-													
 												</MenuList>
 											</Menu>
 										</TableRow>

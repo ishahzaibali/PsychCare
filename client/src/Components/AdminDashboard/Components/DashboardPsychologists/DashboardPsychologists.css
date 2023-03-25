@@ -5,3 +5,11 @@
 	padding: 2rem;
 	border-radius: 15px;
 }
+
+@media screen and (max-width: 768px) {
+	.main-content {
+		margin-top: 1rem;
+		margin-right: 0rem;
+		padding: 1rem !important;
+	}
+}

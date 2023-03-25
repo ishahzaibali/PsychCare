@@ -1,16 +1,17 @@
 .sticky-sidebar {
-   position: sticky !important;
+	position: sticky !important;
 	top: 7rem !important;
-   height: 30rem;
+	height: 30rem;
 }
 .sticky-user {
-   position: sticky !important;
+	position: sticky !important;
 	top: 7rem !important;
-   height: 10rem;
+	height: 10rem;
 }
 .sticky-header {
-   position: sticky !important;
+	position: sticky !important;
 	top: 0 !important;
-   height: 7rem;
-   z-index: 20;
+	height: 7rem;
+	transition: all 5s ease-in-out;
+	z-index: 20;
 }

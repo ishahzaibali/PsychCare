@@ -22,7 +22,7 @@
 	grid-column: 1/2;
 }
 .location-container .location-input {
-	/* width: 50px; */
+	/* width: 40px; */
 	margin-top: 10px;
 }
 .location-container .location-input Input {
@@ -30,8 +30,7 @@
 	background: rgba(65, 140, 253, 0.05);
 	border-radius: 5px;
 	font-family: 'Poppins';
-	display: flex;
-	flex-direction: column;
+
 }
 .input-fields .residence-container {
 	display: flex;

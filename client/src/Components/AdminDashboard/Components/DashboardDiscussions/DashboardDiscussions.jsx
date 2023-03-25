@@ -16,13 +16,33 @@ import {
 	MenuList,
 	MenuItem,
 } from '@material-tailwind/react';
-import {PencilSquareIcon} from '@heroicons/react/24/solid'
+import { PencilSquareIcon } from '@heroicons/react/24/solid';
 
 const columns = [
-	{ field: 'users', headerName: 'Post Title', align: 'left' },
-	{ field: 'contact', headerName: 'Post Time', align: 'center' },
-	{ field: 'home', headerName: 'Description', align: 'left' },
-	{ field: 'action', headerName: 'Action', align: 'left' },
+	{
+		field: 'post_title',
+		headerName: 'Post Title',
+		align: 'left',
+		className: 'table-head font-[poppins] font-[800] uppercase text-sm',
+	},
+	{
+		field: 'post_time',
+		headerName: 'Post Time',
+		align: 'center',
+		className: 'table-head font-[poppins] font-[800] uppercase text-sm',
+	},
+	{
+		field: 'post_desc',
+		headerName: 'Description',
+		align: 'left',
+		className: 'table-head font-[poppins] font-[800] uppercase text-sm',
+	},
+	{
+		field: 'action',
+		headerName: 'Action',
+		align: 'left',
+		className: 'table-head font-[poppins] font-[800] uppercase text-sm',
+	},
 ];
 
 const DashboardDiscussions = () => {
@@ -87,7 +107,7 @@ const DashboardDiscussions = () => {
 									<TableRow className='table-head font-[poppins] font-[800] uppercase text-sm'>
 										{columns.map((data) => (
 											<TableCell
-												className='table-head font-[poppins] font-[800] uppercase text-sm'
+												className={data.className}
 												align={data.align}>
 												{data.headerName}
 											</TableCell>
@@ -124,7 +144,10 @@ const DashboardDiscussions = () => {
 													<TableCell
 														className='table-row-3 cursor-pointer'
 														align='left'>
-														<PencilSquareIcon width='1.25rem' height='1.25rem'/>
+														<PencilSquareIcon
+															width='1.25rem'
+															height='1.25rem'
+														/>
 													</TableCell>
 												</MenuHandler>
 												<MenuList className='menu-list'>

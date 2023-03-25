@@ -1,4 +1,12 @@
 .dis-main {
-   margin-top: 3rem;
-   margin-right: 1rem;
+	margin-top: 3rem;
+	margin-right: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+	.dis-main {
+		margin-top: 1rem;
+		margin-right: 0rem;
+		padding: 0px 1rem;
+	}
 }

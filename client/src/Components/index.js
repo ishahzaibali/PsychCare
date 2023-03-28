@@ -15,3 +15,6 @@ export { default as AdminDashboard } from './AdminDashboard/Dashboard';
 export { default as DashboardLayout } from './DashboardLayout/DashboardLayout';
 export { default as DiscussionForum } from './DiscussionForum/DiscussionForum';
 export { default as DiscussionForumLayout } from './DiscussionForumLayout/DiscussionForumLayout';
+export { default as PsychologistDashboard } from './PsychologistDashboard/PsychologistDashboard';
+export { default as PsychologistDashboardLayout } from './PsychologistDashboardLayout/PsychologistDashboardLayout';
+export { default as PsychologistCards } from './PsychologistCard/PsychologistCards';

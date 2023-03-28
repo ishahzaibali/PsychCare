@@ -1,6 +1,36 @@
-.main-section {
+::-webkit-scrollbar {
+	width: 0.5rem;
+}
+::-webkit-scrollbar-track {
+	background-color: #f3f5fa;
+}
+::-webkit-scrollbar-thumb {
+	background: linear-gradient(
+		180deg,
+		rgba(65, 140, 253, 0) 0%,
+		rgba(65, 140, 253, 0.7) 100%
+	);
+	border-radius: 16px;
+	border: 0.2px solid transparent;
+	background-clip: content-box;
+}
+
+.psychologist-page {
+	background: #fff;
 	display: block;
 	min-height: 150vh;
+	padding: 0 2rem;
+}
+
+.main-section {
+	justify-content: center;
+	background: #fafafa;
+	height: 20rem;
+	/* padding: 0 2rem; */
+	border-radius: 15px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	justify-content: center;
 }
 .main-section .heading {
@@ -13,43 +43,77 @@
 	text-align: center;
 	color: rgba(61, 65, 70, 0.6);
 }
-.search-cards {
+
+.psychologists-search-section {
 	display: flex;
-	flex: 1 1 0;
-	justify-content: center;
-	align-items: flex-start;
-	margin-top: 5%;
-}
-.search-cards .filters {
-	display: flex;
-	flex: 1;
 	flex-direction: column;
+	align-items: flex-start;
 	justify-content: flex-start;
-	align-items: flex-start;
-	padding: 2%;
-	margin: 2%;
-	height: 35rem;
-	position: sticky;
-	top: 0;
-	border-radius: 10px;
-	background-color: #fff;
-	filter: drop-shadow(0px 15px 10px rgba(22, 22, 22, 0.1));
+	padding: 2rem;
 }
-.search-cards .cards {
-	display: flex;
-	flex: 3;
-	justify-content: center;
-	/* border-left: 1px solid #2D2E2E; */
+.psychologists-search-section .heading {
+	color: rgba(61, 65, 70, 0.9);
+	font-size: 1.5rem;
+	font-weight: 500;
 }
-.filters h4 {
-	margin-top: 5%;
-	margin-bottom: 2%;
+.psychologists-search-section .heading span {
+	color: rgba(61, 65, 70, 0.9);
+	font-size: 1.5rem;
+	font-weight: 500;
 }
-.filters h1 {
-	font-weight: 600;
-	font-size: larger;
+.psychologists-search-section .sub-heading {
+	color: rgba(61, 65, 70, 0.6);
+	font-size: 0.875rem;
+	font-weight: 400;
 }
-.cards {
+.main-psychologists {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
+	overflow: hidden;
+	/* scrollbar-width: 2rem; */
+	align-items: center;
+	justify-content: center;
+	margin: 2rem;
+}
+.filters-section {
+	width: 100%;
+	/* scrollbar-width: 2rem; */
+	height: 8rem;
+	/* background: #000; */
+	/* display: flex; */
+	align-items: center;
+	justify-content: center;
+	gap: 1.5rem;
+	/* overflow: auto; */
+	padding: 2rem;
+	/* margin: 2rem; */
+	/* scroll-behavior: smooth; */
+	/* position: sticky;
+	top: 0; */
+}
+
+.filter-option {
+	height: 60px !important;
+	width: 183px;
+	background: rgb(65, 140, 253, 0.05) !important;
+	display: flex;
+	gap: 2%;
+	border-radius: 10px;
+	font-size: 14px;
+	align-items: center;
+	justify-content: center;
+	font-weight: 600;
+	cursor: pointer;
+}
+.filter-option .icon-section {
+	background: rgb(65, 140, 253, 0.4) !important;
+	width: 80px;
+	height: 100%;
+	border-top-left-radius: 15px;
+	border-bottom-left-radius: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
 }

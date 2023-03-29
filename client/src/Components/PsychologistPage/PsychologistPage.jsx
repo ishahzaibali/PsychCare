@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './PsychologistPage.css';
 import { psychologists } from './data';
 // import { Select, Option, Button } from '@material-tailwind/react';
-import { Navbar, PsychologistCards, Search } from '../index';
+import { Footer, Navbar, PsychologistCards, Search } from '../index';
+import Pagination from '../Pagination/Pagination';
 import {
 	BriefcaseIcon,
 	CalendarIcon,
@@ -37,12 +38,24 @@ const responsive = {
 };
 
 const PsychologistPage = () => {
+	const [currentPage, setcurrentPage] = useState(1);
+	const [postsPerPage] = useState(4);
+
+	const indexOfLastPost = currentPage * postsPerPage;
+	const indexOfFirstPost = indexOfLastPost - postsPerPage;
+	const currentPsychologist = psychologists.slice(
+		indexOfFirstPost,
+		indexOfLastPost
+	);
+	const paginate = (pageNumber) => {
+		setcurrentPage(pageNumber);
+	};
 	return (
 		<>
 			<div className='psychologist-page'>
 				<Navbar />
 				<div className='main-section'>
-					<h1 className='heading'>Search Doctor, Make an Appointment</h1>
+					<h1 className='heading'>Search Psychologist, Make an Appointment</h1>
 					<p className='sub-heading'>
 						Discover the best psychologists, clinic & hospital the city nearest
 						you.
@@ -57,8 +70,10 @@ const PsychologistPage = () => {
 						Mental Health Specialist , Mahir-e-imraz-e- nafsiyat
 					</p>
 				</div>
-				<div className='sticky h-20 top-0 z-20 bg-white flex '>
-					<Carousel responsive={responsive}>
+				<div className='sticky h-20 top-0 z-20 bg-white '>
+					<Carousel
+						responsive={responsive}
+						className='sticky h-20 top-0 z-20 bg-white flex '>
 						<div className='filter-option'>
 							<div className='icon-section flex-[1]'>
 								<MapPinIcon
@@ -66,7 +81,7 @@ const PsychologistPage = () => {
 									height='1.75rem'
 								/>
 							</div>
-							<h1 className='flex-[2] p-[0.5rem]'>Location</h1>
+							<h1 className='flex-[2] p-[0.5rem]'>Nearby Psychologists</h1>
 						</div>
 						<div className='filter-option'>
 							<div className='icon-section flex-[1]'>
@@ -144,10 +159,18 @@ const PsychologistPage = () => {
 				</div>
 				<div className='main-psychologists'>
 					<div className='mt-2'>
-						<PsychologistCards Psychologists={psychologists} />
+						<PsychologistCards Psychologists={currentPsychologist} />
 					</div>
 				</div>
+				<div className='pagination'>
+					<Pagination
+						postsPerPage={postsPerPage}
+						totalPosts={psychologists.length}
+						paginate={paginate}
+					/>
+				</div>
 			</div>
+			<Footer />
 		</>
 	);
 };

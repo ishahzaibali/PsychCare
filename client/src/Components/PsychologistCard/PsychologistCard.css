@@ -1,12 +1,12 @@
 .card-body {
 	width: 100%;
 	padding: 2rem;
-	margin-top: 0.5rem;
+	/* margin-top: 0.5rem; */
 	margin-bottom: 0.75rem;
-	margin-right: 1.25rem;
-	height: 20rem;
-	width: 50rem;
-   font-family: 'poppins';
+	/* margin-right: 1.25rem; */
+	height: 24rem;
+	width: 75rem;
+	font-family: 'poppins';
 	background-color: #fafafa;
 }
 .card-button {
@@ -15,18 +15,15 @@
 	align-items: flex-end;
 	justify-content: flex-end;
 	height: 2rem;
-   font-family: 'poppins';
+	font-family: 'poppins';
 }
-.card-data {
-	display: flex;
-   font-family: 'poppins';
-}
+
 .card-data .user {
 	display: flex;
-	flex: 1;
+gap: 0.75rem;
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	justify-content: flex-start;
+	align-items: flex-start;
 }
 .user .name {
 	font-family: 'poppins';
@@ -38,13 +35,37 @@
 	flex: 2;
 	align-items: flex-start;
 	justify-content: center;
-   font-family: 'poppins';
+	font-family: 'poppins';
 }
 .booking {
-   display: flex;
-   align-items: center;
-   justify-content: flex-start;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
 }
 .sub-heading {
-   font-family: 'poppins';
+	font-family: 'poppins';
+}
+.content-container {
+	display: flex;
+	
+}
+.content-container .card-btn {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 2rem;
+}
+.card-data {
+	display: flex;
+	gap: 2rem;
+	flex: 2;
+	font-family: 'poppins';
+}
+.appointment-btn {
+	display: flex;
+	gap: 2%;
+	margin-top: 1rem;
 }

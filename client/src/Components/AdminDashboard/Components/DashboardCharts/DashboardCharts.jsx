@@ -160,11 +160,7 @@ export const linedata = {
 			pointRadius: 0,
 			borderColor: '#17c1e8',
 			borderWidth: 3,
-			backgroundColor: [
-				'rgba(203,12,159)',
-				'rgba(72,72,176,0.4)',
-				'rgba(203,12,159,0)',
-			],
+			backgroundColor: 'rgba(72,72,176,0)',
 
 			data: [50, 40, 300, 200, 450, 250, 400, 230, 400],
 			maxBarThickness: 6,

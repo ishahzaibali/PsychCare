@@ -47,6 +47,7 @@ const PsychologistPage = () => {
 		indexOfFirstPost,
 		indexOfLastPost
 	);
+	// console.log("🚀 ~ file: PsychologistPage.jsx:50 ~ PsychologistPage ~ currentPsychologist:", currentPsychologist)
 	const paginate = (pageNumber) => {
 		setcurrentPage(pageNumber);
 	};

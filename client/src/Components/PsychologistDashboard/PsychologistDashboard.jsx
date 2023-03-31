@@ -4,7 +4,7 @@ import './PsychologistDashboard.css';
 const PsychologistDashboard = () => {
 	return (
 		<>
-			<div>PsychologistDashboard</div>
+			<div className='bg-[#EFF1F4]'>Dashboard</div>
 		</>
 	);
 };

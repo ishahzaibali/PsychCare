@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Signup.css';
 import Navbar from '../Navbar/Navbar';
 import {
@@ -8,8 +8,38 @@ import {
 	Button,
 	Typography,
 } from '@material-tailwind/react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import userService from '../../services/UserService.js';
 const Signup = () => {
+	const [name, setName] = useState('');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [error, setError] = useState(false);
+	const [emailError, setEmailError] = useState(false);
+
+	const history = useNavigate();
+
+	const handleRegister = (e) => {
+		e.preventDefault();
+		if (name.length === 0 || email.length === 0 || password.length === 0) {
+			setError(true);
+			setEmailError(false);
+		} else {
+			
+			userService
+				.register(name, email, password)
+				.then((data) => {
+					e.preventDefault();
+					console.log(data);
+					history('/login');
+					
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		}
+	};
+
 	return (
 		<>
 			<Navbar />
@@ -33,16 +63,48 @@ const Signup = () => {
 							<Input
 								size='lg'
 								label='Name'
+								value={name}
+								onChange={(e) => setName(e.target.value)}
 							/>
+							{error && name.length === 0 ? (
+								<label className='text-red-500 text-sm -mt-5'>
+									Username could not be empty!
+								</label>
+							) : (
+								''
+							)}
 							<Input
 								size='lg'
 								label='Email'
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
 							/>
+							{error && email.length === 0 ? (
+								<label className='text-red-500 text-sm -mt-5'>
+									Email could not be empty!
+								</label>
+							) : (
+								''
+							)}
+							{emailError && (
+								<p className='text-red-500 text-sm -mt-5'>
+									Email already registered
+								</p>
+							)}
 							<Input
 								type='password'
 								size='lg'
 								label='Password'
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
 							/>
+							{error && password.length === 0 ? (
+								<label className='text-red-500 text-sm -mt-5'>
+									Password could not be empty!
+								</label>
+							) : (
+								''
+							)}
 						</div>
 						<Checkbox
 							label={
@@ -60,13 +122,14 @@ const Signup = () => {
 							}
 							containerProps={{ className: '-ml-2.5' }}
 						/>
-						<NavLink to='/'>
-							<Button
-								className='mt-6 ml-0'
-								fullWidth>
-								Register
-							</Button>
-						</NavLink>
+
+						<Button
+							onClick={handleRegister}
+							className='mt-6 ml-0'
+							fullWidth>
+							Register
+						</Button>
+
 						<Typography
 							color='gray'
 							className='mt-4 text-center font-normal'>

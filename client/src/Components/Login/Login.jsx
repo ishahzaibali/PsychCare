@@ -1,27 +1,71 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Login.css';
 import Navbar from '../Navbar/Navbar';
+import { useNavigate } from 'react-router-dom';
 import {
 	Card,
 	Typography,
 	Input,
 	Button,
 	Switch,
+	Alert,
 } from '@material-tailwind/react';
+import { ExclamationTriangleIcon } from '@heroicons/react/24/solid';
 import { NavLink } from 'react-router-dom';
+import userService from '../../services/UserService.js';
 
 const Login = () => {
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [error, setError] = useState(false);
+	const [loginError, setLoginError] = useState(false);
+	const history = useNavigate();
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		if (email.length === 0 || password.length === 0) {
+			setError(true);
+			setLoginError(false);
+		} else {
+			userService
+				.login(email, password)
+				.then((data) => {
+					console.log(data);
+					if (userService.isAdmin()) {
+						e.preventDefault();
+						history('/Dashboard');
+					} else {
+						e.preventDefault();
+						history('/psychologist_dashboard');
+					}
+				})
+				.catch((err) => {
+					console.log(err);
+					setLoginError(true);
+				});
+		}
+	};
 	return (
 		<>
 			<Navbar />
+
 			<div className='login-main '>
+				<div className='w-[40%] '>
+					{loginError && (
+						<Alert
+							color='red'
+							icon={<ExclamationTriangleIcon className='h-6 w-6' />}>
+							Sorry, something went wrong please try again.
+						</Alert>
+					)}
+				</div>
 				<div className='login-fields'>
 					<Card
 						color='transparent'
 						shadow={false}>
 						<Typography
 							variant='h1'
-							textGradient = {true}
+							textGradient={true}
 							className='h2'
 							color='current'>
 							Welcome
@@ -31,18 +75,41 @@ const Login = () => {
 							className='mt-1 font-[poppins] font-normal'>
 							Enter your email and password to sign in.
 						</Typography>
-						<form className='mt-8 mb-2 w-80 max-w-screen-lg sm:w-96'>
+						<form
+							method='POST'
+							className='mt-8 mb-2 w-80 max-w-screen-lg sm:w-96'>
 							<div className='mb-4 flex flex-col gap-6'>
 								<Input
 									size='lg'
 									label='Email'
+									// required='true'
+									value={email}
+									onChange={(e) => setEmail(e.target.value)}
 								/>
+								{error && email.length === 0 ? (
+									<label className='text-red-500 text-sm -mt-5'>
+										Email could not be empty!
+									</label>
+								) : (
+									''
+								)}
 								<Input
 									type='password'
 									size='lg'
 									label='Password'
+									// required='true'
+									value={password}
+									onChange={(e) => setPassword(e.target.value)}
 								/>
+								{error && password.length === 0 ? (
+									<label className='text-red-500 text-sm -mt-5'>
+										Password could not be empty!
+									</label>
+								) : (
+									''
+								)}
 							</div>
+
 							<Switch
 								label={
 									<Typography
@@ -54,15 +121,17 @@ const Login = () => {
 								}
 								containerProps={{ className: 'ml-2.5' }}
 							/>
-							<NavLink to='/dashboard'>
-								<Button
-									className='mt-6 ml-0 login-button'
-									variant='gradient'
-									color='current'
-									fullWidth>
-									Login
-								</Button>
-							</NavLink>
+
+							<Button
+								onClick={handleSubmit}
+								type='submit'
+								className='mt-6 ml-0 login-button'
+								variant='gradient'
+								color='current'
+								fullWidth>
+								Login
+							</Button>
+
 							<Typography
 								color='gray'
 								className='mt-4 text-center font-normal'>

@@ -11,6 +11,8 @@ import {
 	DashboardLayout,
 	DiscussionForum,
 	DiscussionForumLayout,
+	PsychologistDashboardLayout,
+	PsychologistDashboard,
 	// Header,
 } from './Components';
 import {
@@ -18,10 +20,13 @@ import {
 	DashboardTables,
 	DashboardUsers,
 } from './Components/AdminDashboard/Components';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
 	return (
 		<>
+			<ToastContainer />
 			<div>
 				<Routes>
 					<Route
@@ -57,6 +62,13 @@ const App = () => {
 						/>
 					</Route>
 
+					<Route element={<PsychologistDashboardLayout />}>
+						<Route
+							path='/psychologist_dashboard'
+							element={<PsychologistDashboard />}
+						/>
+					</Route>
+
 					<Route
 						path='/login'
 						element={<Login />}
@@ -65,7 +77,7 @@ const App = () => {
 						path='/signup'
 						element={<Signup />}
 					/>
-					
+
 					<Route
 						path='/psychologists'
 						element={<PsychologistPage />}

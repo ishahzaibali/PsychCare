@@ -12,6 +12,7 @@ const Pagination = ({
 	const pageNumbers = [];
 	const [currentPage] = React.useState(1);
 	indexOfLastPost = currentPage * postsPerPage;
+	// console.log("🚀 ~ file: Pagination.jsx:15 ~ indexOfLastPost:", indexOfLastPost)
 	indexOfFirstPost = indexOfLastPost - postsPerPage + 1;
 	for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
 		pageNumbers.push(i);

@@ -1,0 +1,84 @@
+.menuC {
+	display: flex;
+	padding: 0.6rem;
+   margin-bottom: 0.25rem;
+	justify-content: flex-start;
+	gap: 0.875rem;
+	align-items: center;
+}
+.menuC span {
+	font-size: 14px;
+	font-weight: 300;
+	color: #fff;
+	opacity: 0.5;
+}
+.menuC:hover {
+	font-size: 4px;
+	background-color: rgb(255, 255, 255, 0.1);
+	border-radius: 10px;
+   transition: all 0.2s ease-in-out;
+}
+.bottom {
+	background-image: linear-gradient(
+		to right,
+		rgba(255, 255, 255, 0),
+		rgb(255, 255, 255, 0.5),
+		rgba(255, 255, 255, 0)
+	) !important;
+	background-color: transparent;
+	border-top: 0px solid rgba(0, 0, 0, 0.08);
+	border-right: 0px solid rgba(0, 0, 0, 0.08);
+	border-left: 0px solid rgba(0, 0, 0, 0.08);
+	height: 0.0625rem;
+}
+.iconBtn {
+	/* color: rgba(0, 0, 0, 0.87); */
+	box-shadow: none;
+	color: #fff;
+	opacity: 0.5;
+	/* border: 1px solid rgb(61, 65, 70,0.08); */
+	width: 30px;
+	height: 30px;
+	display: flex;
+	border-radius: 6px;
+	justify-content: center;
+	align-items: center;
+}
+.iconBtn:hover {
+	box-shadow: none;
+}
+
+.active .menuC {
+	background-color: #42a5f5;
+   color: #fff;
+	border-radius: 5px;
+	transition: all 0.4s ease-in-out;
+}
+.active .menuC .iconBtn {
+	/* background: #42a5f5 !important; */
+	border: none;
+	color: #fff;
+	opacity: 1;
+	transition: all 0.3s ease-in-out;
+}
+.active .menuC .iconBtn svg {
+	color: #fff !important;
+	opacity: 1;
+
+	transition: all 0.3s ease-in-out;
+}
+.active .menuC span {
+	color: #fff !important;
+	opacity: 1;
+
+	font-weight: 600;
+}
+
+.sideCard {
+	background: linear-gradient(195deg, rgb(66, 66, 74), rgb(25, 25, 25));
+	height: calc(100vh - 2rem);
+	margin: 1rem;
+	border-radius: 0.75rem;
+	position: fixed;
+	top: 0;
+}

@@ -1,0 +1,13 @@
+.bottom {
+	background-image: linear-gradient(
+		to right,
+		rgba(0, 0, 0, 0),
+		rgb(0, 0, 0, 0.5),
+		rgba(0, 0, 0, 0)
+	) !important;
+	background-color: transparent;
+	border-top: 0px solid rgba(255, 255, 255, 0.08);
+	border-right: 255px solid rgba(255, 255, 255, 0.08);
+	border-left: 255px solid rgba(255, 255, 255, 0.08);
+	height: 0.0625rem;
+}

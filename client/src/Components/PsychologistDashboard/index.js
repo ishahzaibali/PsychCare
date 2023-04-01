@@ -5,3 +5,6 @@ export { default as PsychologistDashboardMessages } from './components/Psycholog
 export { default as PsychologistDashboardPayments } from './components/PsychologistDashboardPayments/PsychologistDashboardPayments';
 export { default as PsychologistDashboardVideo } from './components/PsychologistDashboardVideo/PsychologistDashboardVideo';
 export { default as DashboardCards } from './components/DashboardCards/DashboardCards';
+export { default as DashboardAppointments } from './components/PsychologistDashboardAppointments/DashboardAppointments';
+export { default as DashboardMessages } from './components/PsychologistDashboardMessages/DashboardMessages';
+export { default as DashboardCalendar } from './components/DashboardCalendar/DashboardCalendar';

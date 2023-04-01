@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@material-tailwind/react';
+
 // import { SoftUIControllerProvider } from "./context";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

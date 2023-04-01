@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "https://backend-ir87-dtmt5ui05-uzairghaffar1144.vercel.app/api/",
   "dependencies": {
+    "@chakra-ui/react": "^2.5.5",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@headlessui/react": "^1.7.13",

@@ -22,6 +22,12 @@ import {
 } from './Components/AdminDashboard/Components';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {
+	PsychologistDashboardAppointments,
+	PsychologistDashboardMessages,
+	PsychologistDashboardPayments,
+	PsychologistDashboardVideo,
+} from './Components/PsychologistDashboard';
 
 const App = () => {
 	return (
@@ -66,6 +72,22 @@ const App = () => {
 						<Route
 							path='/psychologist_dashboard'
 							element={<PsychologistDashboard />}
+						/>
+						<Route
+							path='/psychologist_appointments'
+							element={<PsychologistDashboardAppointments />}
+						/>
+						<Route
+							path='/psychologist_messages'
+							element={<PsychologistDashboardMessages />}
+						/>
+						<Route
+							path='/psychologist_payments'
+							element={<PsychologistDashboardPayments />}
+						/>
+						<Route
+							path='/psychologist_video_calls'
+							element={<PsychologistDashboardVideo />}
 						/>
 					</Route>
 

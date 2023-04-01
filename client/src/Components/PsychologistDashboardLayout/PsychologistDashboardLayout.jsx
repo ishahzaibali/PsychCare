@@ -4,8 +4,13 @@ import { Box } from '@mui/material';
 import {
 	PsychologistDashboardSidebar,
 	PsychologistDashboardNavbar,
+	PsychologistDashboardAppointments,
+	PsychologistDashboardMessages,
+	PsychologistDashboardPayments,
+	PsychologistDashboardVideo,
 } from '../PsychologistDashboard/index';
 import PsychologistDashboard from '../PsychologistDashboard/PsychologistDashboard';
+import { Route, Routes } from 'react-router-dom';
 
 const PsychologistDashboardLayout = () => {
 	return (
@@ -25,7 +30,30 @@ const PsychologistDashboardLayout = () => {
 					<div>
 						<PsychologistDashboardNavbar />
 					</div>
-					<PsychologistDashboard />
+					<div className='mt-4 mr-8'>
+						<Routes>
+							<Route
+								path='/psychologist_dashboard'
+								element={<PsychologistDashboard />}
+							/>
+							<Route
+								path='/psychologist_appointments'
+								element={<PsychologistDashboardAppointments />}
+							/>
+							<Route
+								path='/psychologist_messages'
+								element={<PsychologistDashboardMessages />}
+							/>
+							<Route
+								path='/psychologist_payments'
+								element={<PsychologistDashboardPayments />}
+							/>
+							<Route
+								path='/psychologist_video_calls'
+								element={<PsychologistDashboardVideo />}
+							/>
+						</Routes>
+					</div>
 				</Box>
 			</div>
 		</>

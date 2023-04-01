@@ -1,0 +1,19 @@
+.cards-main {
+	display: flex;
+	gap: 2rem;
+	height: 50vh;
+	align-items: flex-start;
+	justify-content: center;
+}
+.cards-main .psychologist-cards {
+	flex: 2;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+.cards-main .psychologist-profile-card {
+	flex: 1;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}

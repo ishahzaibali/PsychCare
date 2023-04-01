@@ -17,25 +17,25 @@ export const navData = [
 
 	{
 		title: 'Appointments',
-		url: '/',
+		url: '/psychologist_appointments',
 		icon: <CalendarIcon className='w-5 h-5' />,
 		cName: 'nav-links',
 	},
 	{
 		title: 'Messages',
-		url: '/',
+		url: '/psychologist_messages',
 		icon: <ChatBubbleOvalLeftIcon className='w-5 h-5' />,
 		cName: 'nav-links',
 	},
 	{
 		title: 'Payments',
-		url: '/',
+		url: '/psychologist_payments',
 		icon: <CreditCardIcon className='w-5 h-5' />,
 		cName: 'nav-links',
 	},
 	{
 		title: 'Video Calls',
-		url: '/',
+		url: '/psychologist_video_calls',
 		icon: <VideoCameraIcon className='w-5 h-5' />,
 		cName: 'nav-links',
 	},

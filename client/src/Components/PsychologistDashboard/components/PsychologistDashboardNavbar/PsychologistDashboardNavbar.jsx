@@ -2,7 +2,6 @@ import React from 'react';
 import './PsychologistDashboardNavbar.css';
 import {
 	Navbar,
-	MobileNav,
 	Typography,
 	Button,
 	Menu,
@@ -111,23 +110,16 @@ function ProfileMenu() {
 // nav list menu
 
 const PsychologistDashboardNavbar = () => {
-	const [isNavOpen, setIsNavOpen] = React.useState(false);
-
-	React.useEffect(() => {
-		window.addEventListener(
-			'resize',
-			() => window.innerWidth >= 768 && setIsNavOpen(false)
-		);
-	}, []);
-
 	return (
 		<>
 			<div className='p-navbar-main'>
-				<div className='flex flex-col leading-tight text-xs'>
-					Welcome <span className='text-xl font-[600]'>Shahzaib!</span>
-				</div>
-				<Navbar className='shadow-none  w-[30rem] right-0 p-2 lg:rounded-full lg:pl-6'>
-					<div className='flex gap-4 justify-between items-center text-blue-gray-900'>
+				<Navbar
+					blurred={true}
+					className='p-navbar sticky inset-0 z-10 shadow-none  w-full right-0 p-2 '>
+					<div className='flex flex-col leading-tight text-blue-gray-900 text-xs'>
+						Welcome <span className='text-xl font-[600]'>Shahzaib!</span>
+					</div>
+					<div className='flex gap-4 p-2 w-[30rem] bg-white rounded-full lg:pl-6 justify-between items-center text-blue-gray-900'>
 						<BarsArrowUpIcon className='BarsArrow w-6 h-6' />
 						<div className='date-and-time xs:hidden justify-end items-center text-blue-gray-800'>
 							<div className='flex gap-1 items-center'>
@@ -157,11 +149,6 @@ const PsychologistDashboardNavbar = () => {
 							<ProfileMenu />
 						</div>
 					</div>
-					<MobileNav
-						open={isNavOpen}
-						className='overflow-scroll'>
-						{/* <NavList /> */}
-					</MobileNav>
 				</Navbar>
 			</div>
 		</>

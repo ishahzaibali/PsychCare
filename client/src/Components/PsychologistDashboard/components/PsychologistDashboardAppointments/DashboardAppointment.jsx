@@ -5,7 +5,7 @@ const DashboardAppointments = ({ appointment }) => {
 	return (
 		<>
 			<div className='mb-2 ml-2 h-full w-full '>
-				<Card className='shadow-none h-[6rem] w-80 flex justify-center rounded-[10px]'>
+				<Card className='shadow-none bg-[#f8f9fa] h-[6rem] w-80 flex justify-center rounded-[10px]'>
 					<CardBody className='font-[poppins] flex items-center gap-2 w-full h-full'>
 						<div className='items-center flex justify-start w-full h-full flex-[1]'>
 							<img

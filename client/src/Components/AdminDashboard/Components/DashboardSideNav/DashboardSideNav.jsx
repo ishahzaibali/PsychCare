@@ -9,7 +9,7 @@ const DashboardSideNav = () => {
 		<>
 			<div className='sidenav'>
 				<div className='site-title'>
-					<h1>PsychCare</h1>
+					<h1 className='logo'>Psych<span>Care.</span></h1>
 					<hr />
 				</div>
 				<div className='navMenu'>

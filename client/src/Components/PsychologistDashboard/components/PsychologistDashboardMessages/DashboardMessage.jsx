@@ -3,7 +3,7 @@ import { Card, CardBody, Typography, Avatar } from '@material-tailwind/react';
 const DashboardMessage = ({ message }) => {
 	return (
 		<div className='mb-2 ml-2 h-full w-full '>
-			<Card className='shadow-none h-[9rem] w-80 flex rounded-[10px]'>
+			<Card className='shadow-none bg-[#F8F9FA] h-[9rem] w-80 flex rounded-[10px]'>
 				<CardBody className='font-[poppins] flex flex-col items-start justify-between h-full  gap-2 '>
 					<div className='flex gap-2 w-full justify-between items-center'>
 						{message.icon}

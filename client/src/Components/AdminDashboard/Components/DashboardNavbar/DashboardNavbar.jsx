@@ -53,7 +53,7 @@ const DashboardNavbar = () => {
 				<div className='breadcrumb'>
 					<Breadcrumbs className='bg-transparent'>
 						<NavLink
-							to='/'
+							to='/Dashboard'
 							className='opacity-60'>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'

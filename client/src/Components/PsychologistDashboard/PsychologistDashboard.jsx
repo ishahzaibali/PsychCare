@@ -11,7 +11,7 @@ import { messageData, patientData } from './patientData';
 const PsychologistDashboard = () => {
 	return (
 		<>
-			<div className=' pr-8 w-full pb-4'>
+			<div className=' pr-8 w-full pb-4 bg-[#fafafa]'>
 				<DashboardCards />
 				<div className='flex gap-4 w-full  items-center h-[65vh] justify-center'>
 					<div className='flex-[1] overflow-hidden flex flex-col h-full rounded-[20px] w-full bg-[rgb(61,65,70,0.06)]'>

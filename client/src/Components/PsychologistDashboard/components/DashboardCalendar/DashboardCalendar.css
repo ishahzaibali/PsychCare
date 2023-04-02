@@ -1,0 +1,8 @@
+.css-156tkzh-MuiButtonBase-root-MuiPickersDay-root {
+   box-shadow: none !important;
+   background: transparent  !important;
+}
+.css-156tkzh-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
+   background: #418cfd !important;
+   box-shadow: none !important;
+}

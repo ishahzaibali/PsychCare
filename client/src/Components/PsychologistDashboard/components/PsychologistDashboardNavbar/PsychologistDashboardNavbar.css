@@ -3,6 +3,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	
 }
 .BarsArrow {
 	display: none;
@@ -22,6 +23,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	
 }
 @media screen and (max-width: 768px) {
 	.p-navbar-main {

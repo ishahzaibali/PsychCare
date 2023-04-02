@@ -37,22 +37,6 @@ class UserService extends GenericService {
 			else return false;
 		} else return false;
 	};
-	// checkEmail = (email) => {
-	// 	new Promise((resolve, reject) => {
-	// 		// Make an API call to check if the email is already registered
-	// 		// Replace this with your own API call
-	// 		fetch(
-	// 			`https://backend-ir87-dtmt5ui05-uzairghaffar1144.vercel.app/api/users/login =${email}`
-	// 		)
-	// 			.then((response) => response.json())
-	// 			.then((data) => {
-	// 				resolve(data);
-	// 			})
-	// 			.catch((err) => {
-	// 				reject(err);
-	// 			});
-	// 	});
-	// };
 }
 
 let userService = new UserService();

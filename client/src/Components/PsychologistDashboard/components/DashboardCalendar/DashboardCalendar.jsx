@@ -8,7 +8,7 @@ import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import './DashboardCalendar.css';
 
 const DashboardCalendar = () => {
-	const [value, setValue] = React.useState(dayjs('today'));
+	const [value, setValue] = React.useState(dayjs(new Date()));
 	return (
 		<>
 			<div className='w-full '>
@@ -43,7 +43,6 @@ const DashboardCalendar = () => {
 								</p>
 								<p className='text-md font-semibold '>2</p>
 							</div>
-							
 						</div>
 					</CardBody>
 				</Card>

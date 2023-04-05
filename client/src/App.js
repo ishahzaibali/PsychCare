@@ -13,6 +13,8 @@ import {
 	DiscussionForumLayout,
 	PsychologistDashboardLayout,
 	PsychologistDashboard,
+	SignupPsychologist,
+	CTA,
 	// Header,
 } from './Components';
 import {
@@ -98,6 +100,14 @@ const App = () => {
 					<Route
 						path='/signup'
 						element={<Signup />}
+					/>
+					<Route
+						path='/signup_psychologist'
+						element={<SignupPsychologist />}
+					/>
+					<Route
+						path='/getting_started'
+						element={<CTA />}
 					/>
 
 					<Route

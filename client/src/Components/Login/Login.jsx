@@ -19,6 +19,7 @@ const Login = () => {
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState(false);
 	const [loginError, setLoginError] = useState(false);
+	const [errorMessage, setErrorMessage] = useState('');
 	const history = useNavigate();
 
 	const handleSubmit = (e) => {
@@ -34,14 +35,18 @@ const Login = () => {
 					if (userService.isAdmin()) {
 						e.preventDefault();
 						history('/Dashboard');
-					} else {
+					} else if (userService.isPsychologist()) {
 						e.preventDefault();
 						history('/psychologist_dashboard');
+					} else {
+						e.preventDefault();
+						history('/');
 					}
 				})
 				.catch((err) => {
-					console.log(err);
+					console.log('🚀 ~ file: Login.jsx:47 ~ handleSubmit ~ err:', err);
 					setLoginError(true);
+					setErrorMessage(err.message);
 				});
 		}
 	};
@@ -50,12 +55,12 @@ const Login = () => {
 			<Navbar />
 
 			<div className='login-main '>
-				<div className='w-[40%] '>
+				<div className='w-[30%] '>
 					{loginError && (
 						<Alert
 							color='red'
 							icon={<ExclamationTriangleIcon className='h-6 w-6' />}>
-							Sorry, something went wrong please try again.
+							{errorMessage}
 						</Alert>
 					)}
 				</div>

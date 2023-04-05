@@ -62,9 +62,11 @@ const Navbar = () => {
 									Login/Registration
 								</MenuItem>
 							</NavLink>
-							<MenuItem className='ml-0 menu-list-item'>
-								Join as Psychologist
-							</MenuItem>
+							<NavLink to={'/getting_started'}>
+								<MenuItem className='ml-0 menu-list-item'>
+									Join as Psychologist
+								</MenuItem>
+							</NavLink>
 						</MenuList>
 					</Menu>
 

@@ -4,18 +4,22 @@ import Navbar from '../Navbar/Navbar';
 import {
 	Card,
 	Input,
-	Checkbox,
 	Button,
 	Typography,
+	Alert,
 } from '@material-tailwind/react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { ExclamationTriangleIcon } from '@heroicons/react/24/solid';
 import userService from '../../services/UserService.js';
+
 const Signup = () => {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState(false);
-	const [emailError, setEmailError] = useState(false);
+	const [signupError, setSignupError] = useState(false);
+	const [emailError, setEmailError] = useState('');
+	const [errorMessage, setErrorMessage] = useState('');
 
 	const history = useNavigate();
 
@@ -23,19 +27,19 @@ const Signup = () => {
 		e.preventDefault();
 		if (name.length === 0 || email.length === 0 || password.length === 0) {
 			setError(true);
-			setEmailError(false);
 		} else {
-			
 			userService
 				.register(name, email, password)
 				.then((data) => {
 					e.preventDefault();
 					console.log(data);
 					history('/login');
-					
 				})
 				.catch((err) => {
-					console.log(err);
+					setSignupError(true);
+					setErrorMessage(err.message);
+					setEmailError(err.response.data);
+					console.log('🚀 ~ file: Signup.jsx:30 ~ handleRegister ~ err:', err);
 				});
 		}
 	};
@@ -44,6 +48,15 @@ const Signup = () => {
 		<>
 			<Navbar />
 			<div className='signup-container'>
+				<div className='w-[30%] '>
+					{signupError && (
+						<Alert
+							color='red'
+							icon={<ExclamationTriangleIcon className='h-6 w-6' />}>
+							{errorMessage} <span>{emailError}</span>
+						</Alert>
+					)}
+				</div>
 				<Card
 					color='transparent'
 					shadow={false}>
@@ -86,11 +99,7 @@ const Signup = () => {
 							) : (
 								''
 							)}
-							{emailError && (
-								<p className='text-red-500 text-sm -mt-5'>
-									Email already registered
-								</p>
-							)}
+
 							<Input
 								type='password'
 								size='lg'
@@ -106,22 +115,17 @@ const Signup = () => {
 								''
 							)}
 						</div>
-						<Checkbox
-							label={
-								<Typography
-									variant='small'
-									color='gray'
-									className='flex items-center font-normal'>
-									I agree the
-									<NavLink
-										to='#'
-										className='font-medium transition-colors hover:text-blue-500'>
-										&nbsp;Terms and Conditions
-									</NavLink>
-								</Typography>
-							}
-							containerProps={{ className: '-ml-2.5' }}
-						/>
+						<Typography
+							variant='small'
+							color='gray'
+							className='flex items-center font-normal'>
+							Signup as Psychologist ?
+							<NavLink
+								to='/signup_psychologist'
+								className='font-medium ml-1 text-blue-500 transition-colors hover:text-blue-500'>
+								Get started
+							</NavLink>
+						</Typography>
 
 						<Button
 							onClick={handleRegister}

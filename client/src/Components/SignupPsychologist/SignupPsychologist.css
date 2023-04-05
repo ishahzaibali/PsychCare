@@ -1,0 +1,14 @@
+.cta-header {
+   display: flex;
+   min-height: 50vh;
+   background-image: url('../../assets/curved-images/base1.jpg');
+   background-size: cover;
+   justify-content: flex-start;
+   align-items: flex-start;
+  
+}
+.main-cta {
+   min-height: 100vh;
+   background-image: url('../../assets/curved-images/base2.jpg');
+   background-size: cover;
+}

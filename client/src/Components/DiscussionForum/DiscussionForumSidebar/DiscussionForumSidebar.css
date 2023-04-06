@@ -3,8 +3,6 @@
 	flex-direction: column;
 	gap: 2rem;
 	margin-left: 1rem;
-	
-
 }
 .right-sidebar-container {
 	display: flex;
@@ -100,4 +98,13 @@
 	padding: 1rem;
 	text-align: justify;
 	color: rgba(61, 65, 70, 0.7);
+}
+
+@media screen and (max-width: 768px) {
+	.right-sidebar-container {
+		display: none;
+	}
+	.sidebar-container {
+		display: none;
+	}
 }

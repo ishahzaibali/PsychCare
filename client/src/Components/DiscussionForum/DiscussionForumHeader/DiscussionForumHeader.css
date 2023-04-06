@@ -65,3 +65,27 @@
 .icons svg {
 	cursor: pointer;
 }
+.drawer-svg {
+	display: none;
+}
+
+@media screen and (max-width:768px) {
+	.header-container {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0rem;
+		margin: 0rem;
+		border-radius: 5px;
+	}
+	.header-container .search-bar {
+		display: none;
+	}
+	.date {
+		display: none;
+	}
+	.logout-svg {
+		display: none;
+	}
+	.drawer-svg {
+		display: block;
+	}
+}

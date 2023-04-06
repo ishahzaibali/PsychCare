@@ -121,7 +121,7 @@ const Signup = () => {
 							className='flex items-center font-normal'>
 							Signup as Psychologist ?
 							<NavLink
-								to='/signup_psychologist'
+								to='/getting_started'
 								className='font-medium ml-1 text-blue-500 transition-colors hover:text-blue-500'>
 								Get started
 							</NavLink>

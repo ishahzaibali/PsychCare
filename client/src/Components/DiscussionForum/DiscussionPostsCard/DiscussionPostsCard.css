@@ -84,3 +84,19 @@
 .image-cover {
 	object-fit: cover;
 }
+
+@media screen and (max-width:768px) {
+	.title-details {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0rem;
+	}
+	.details {
+		text-align: justify;
+	}
+	.user-detail {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	
+}

@@ -1,16 +1,18 @@
 import React from 'react';
 import './DiscussionForumHeader.css';
-import { Input,Navbar } from '@material-tailwind/react';
+import { Input, Navbar } from '@material-tailwind/react';
 import { NavLink } from 'react-router-dom';
 
 const DiscussionForumHeader = () => {
 	return (
 		<>
-			<Navbar blurred={true} className='header-container'>
+			<Navbar
+				blurred={true}
+				className='header-container'>
 				<NavLink to={'/'}>
-				<div className='logo'>
-					Psych <span>Care.</span>
-				</div>
+					<div className='logo'>
+						Psych <span>Care.</span>
+					</div>
 				</NavLink>
 				<div className='search-bar'>
 					<Input
@@ -65,12 +67,58 @@ const DiscussionForumHeader = () => {
 							viewBox='0 0 24 24'
 							stroke-width='1.5'
 							stroke='currentColor'
-							class='w-6 h-6'>
+							class='w-6 h-6 logout-svg'>
 							<path
 								stroke-linecap='round'
 								stroke-linejoin='round'
 								d='M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9'
 							/>
+						</svg>
+						<svg
+							width='26'
+							height='26'
+							viewBox='0 0 24 24'
+							className='drawer-svg'
+							fill='none'
+							xmlns='http://www.w3.org/2000/svg'>
+							<g
+								id='Burger'
+								clip-path='url(#clip0_489_3998)'>
+								<path
+									id='Vector'
+									d='M18.7402 18H5.26023'
+									stroke='#25282B'
+									stroke-width='2'
+									stroke-linecap='round'
+									stroke-linejoin='round'
+								/>
+								<path
+									id='Vector_2'
+									d='M19 12L11 12'
+									stroke='#25282B'
+									stroke-width='2'
+									stroke-linecap='round'
+									stroke-linejoin='round'
+								/>
+								<path
+									id='Vector_3'
+									d='M18.7402 6L5.26023 6'
+									stroke='#25282B'
+									stroke-width='2'
+									stroke-linecap='round'
+									stroke-linejoin='round'
+								/>
+							</g>
+							<defs>
+								<clipPath id='clip0_489_3998'>
+									<rect
+										width='30'
+										height='30'
+										fill='white'
+										transform='matrix(-1 0 0 -1 24 24)'
+									/>
+								</clipPath>
+							</defs>
 						</svg>
 					</div>
 				</div>

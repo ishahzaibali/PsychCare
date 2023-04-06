@@ -18,7 +18,7 @@ const CTA = () => {
 			<div className='main-cta'>
 				<NavLink to={'/'}>
 					<div className=' cta-header '>
-						<div className='flex m-10  items-center text-white hover:text-blue-500'>
+						<div className='flex m-10  items-center text-[#3d4146] hover:text-blue-500'>
 							<ArrowLongLeftIcon className='w-6 h-5' />
 							<span>Home</span>
 						</div>

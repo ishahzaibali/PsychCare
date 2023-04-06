@@ -56,7 +56,7 @@ const DiscussionPostsCard = ({ discussion }) => {
 						</div>
 					</CardHeader>
 					<CardBody>
-						<div className='mb-3 flex items-center justify-between'></div>
+						
 						<Typography
 							color='gray'
 							className='details'>
@@ -135,7 +135,7 @@ const DiscussionPostsCard = ({ discussion }) => {
 								View all comments
 							</Button>
 						</div>
-						<div className='flex  flex-[1] w-full justify-end gap-2 mr-8'>
+						<div className='flex comment-det  flex-[1] w-full justify-end gap-2 mr-8'>
 							<div className='flex items-center justify-between'>
 								<Typography
 									variant='h5'

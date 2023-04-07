@@ -13,12 +13,12 @@ import { useNavigate } from 'react-router-dom';
 const SignupPsychologist = () => {
 	const { token } = theme.useToken();
 	const [current, setCurrent] = useState(0);
-	const [formData, setFormData] = useState({
+	const [user_id, setuser_id] = useState({
 		name: '',
 		email: '',
 		password: '',
-		location: '',
-		degree: '',
+		role: '',
+		experience: '',
 		specialization: '',
 		reference: '',
 		info: '',
@@ -41,8 +41,8 @@ const SignupPsychologist = () => {
 			title: 'Basic Information',
 			content: (
 				<BasicInformation
-					formData={formData}
-					setFormData={setFormData}
+					user_id={user_id}
+					setuser_id={setuser_id}
 				/>
 			),
 		},
@@ -50,8 +50,8 @@ const SignupPsychologist = () => {
 			title: 'Professional Details',
 			content: (
 				<EducationDetails
-					formData={formData}
-					setFormData={setFormData}
+					user_id={user_id}
+					setuser_id={setuser_id}
 				/>
 			),
 		},
@@ -59,8 +59,8 @@ const SignupPsychologist = () => {
 			title: 'Finishing Up',
 			content: (
 				<FinishingUp
-					formData={formData}
-					setFormData={setFormData}
+					user_id={user_id}
+					setuser_id={setuser_id}
 				/>
 			),
 		},
@@ -72,7 +72,7 @@ const SignupPsychologist = () => {
 	const handleRegister = (e) => {
 		e.preventDefault();
 		userService
-			.registerPsychologists(formData)
+			.registerPsychologists(user_id)
 			.then((data) => {
 				e.preventDefault();
 				message.success('Information received!');

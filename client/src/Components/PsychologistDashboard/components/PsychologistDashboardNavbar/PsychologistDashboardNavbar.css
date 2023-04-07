@@ -3,7 +3,6 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	
 }
 .BarsArrow {
 	display: none;
@@ -23,12 +22,11 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	
 }
 @media screen and (max-width: 768px) {
 	.p-navbar-main {
-		flex-direction: column;
 		align-items: flex-start;
+		flex-direction: column;
 		justify-content: flex-end;
 	}
 	.BarsArrow {
@@ -39,14 +37,18 @@
 	}
 	.userMenu {
 		justify-content: flex-end;
-		gap: 0.25rem;
+		gap: 0rem;
+	}
+	.userMenu .Menu {
+		margin-right: -2rem;
 	}
 	.p-navbar {
-
 		display: flex;
-		flex-direction: column;
 		align-items: flex-start;
 		gap: 1rem;
-	
+	}
+	.p-nav-user {
+		justify-content: flex-end;
+		align-items: center;
 	}
 }

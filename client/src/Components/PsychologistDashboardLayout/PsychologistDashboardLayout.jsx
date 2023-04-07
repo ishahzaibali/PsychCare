@@ -19,7 +19,7 @@ const PsychologistDashboardLayout = () => {
 				<Box
 					top={0}
 					left={0}>
-					<div className='flex-[1] w-[18rem]'>
+					<div className='flex-[1] w-[18rem] p-side'>
 						<PsychologistDashboardSidebar />
 					</div>
 				</Box>

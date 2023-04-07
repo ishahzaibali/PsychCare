@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './PsychologistDashboardNavbar.css';
 import avatar from '../../../../assets/team-4.jpg';
 import avatar2 from '../../../../assets/team-3.jpg';
-
+import { Drawer } from 'antd';
 import {
 	Navbar,
 	Typography,
@@ -25,6 +25,7 @@ import {
 import { BellIcon } from '@heroicons/react/24/solid';
 import userService from '../../../../services/UserService';
 import { useNavigate } from 'react-router-dom';
+import { PsychologistDashboardSidebar } from '../../index';
 
 // profile menu component
 const profileMenuItems = [
@@ -47,6 +48,13 @@ const profileMenuItems = [
 
 const PsychologistDashboardNavbar = () => {
 	const [user, setUser] = useState(null);
+	const [open, setOpen] = useState(false);
+	const showDrawer = () => {
+		setOpen(true);
+	};
+	const onClose = () => {
+		setOpen(false);
+	};
 	useEffect(() => {
 		const loggedInUser = userService.getLoggedInUser();
 		if (loggedInUser) {
@@ -156,8 +164,17 @@ const PsychologistDashboardNavbar = () => {
 							Welcome <span className='text-xl font-[600]'>Shahzaib!</span>
 						</div>
 					)}
-					<div className='flex gap-4 p-2 w-[30rem] bg-white rounded-full lg:pl-6 justify-between items-center text-blue-gray-900'>
-						<BarsArrowUpIcon className='BarsArrow w-6 h-6' />
+					<div className='flex gap-4 p-2 p-nav-user w-[30rem] bg-white rounded-full lg:pl-6 justify-between items-center text-blue-gray-900'>
+						<BarsArrowUpIcon
+							className='BarsArrow cursor-pointer w-6 h-6'
+							onClick={showDrawer}
+						/>
+						<Drawer
+							placement='left'
+							onClose={onClose}
+							open={open}>
+							<PsychologistDashboardSidebar />
+						</Drawer>
 						<div className='date-and-time xs:hidden justify-end items-center text-blue-gray-800'>
 							<div className='flex gap-1 items-center'>
 								<CalendarDaysIcon className='w-4 h-4 ' />
@@ -189,7 +206,7 @@ const PsychologistDashboardNavbar = () => {
 								}}
 								placement='bottom-start'>
 								<MenuHandler>
-									<BellIcon className='w-6 h-6 cursor-pointer text-blue-gray-800' />
+									<BellIcon className='w-6 h-6 Menu cursor-pointer text-blue-gray-800' />
 								</MenuHandler>
 								<MenuList className='mt-4 p-[0.5rem] border-none shadow-xl bg-white'>
 									<MenuItem

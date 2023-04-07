@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Input, Typography } from '@material-tailwind/react';
 
-const BasicInformation = ({ formData, setFormData }) => {
+const BasicInformation = ({ user_id, setuser_id }) => {
 	return (
 		<>
 			<div className='w-full h-full flex items-center justify-center'>
@@ -27,18 +27,18 @@ const BasicInformation = ({ formData, setFormData }) => {
 								size='lg'
 								required={true}
 								label='Name'
-								value={formData.name}
+								value={user_id.name}
 								onChange={(e) =>
-									setFormData({ ...formData, name: e.target.value })
+									setuser_id({ ...user_id, name: e.target.value })
 								}
 							/>
 							<Input
 								size='lg'
 								required
 								label='Email'
-								value={formData.email}
+								value={user_id.email}
 								onChange={(e) =>
-									setFormData({ ...formData, email: e.target.value })
+									setuser_id({ ...user_id, email: e.target.value })
 								}
 							/>
 							<Input
@@ -46,9 +46,9 @@ const BasicInformation = ({ formData, setFormData }) => {
 								size='lg'
 								required
 								label='Password'
-								value={formData.password}
+								value={user_id.password}
 								onChange={(e) =>
-									setFormData({ ...formData, password: e.target.value })
+									setuser_id({ ...user_id, password: e.target.value })
 								}
 							/>
 						</div>

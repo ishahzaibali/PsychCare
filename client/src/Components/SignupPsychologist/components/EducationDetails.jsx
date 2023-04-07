@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Input, Typography } from '@material-tailwind/react';
 
-const EducationDetails = ({ formData, setFormData }) => {
+const EducationDetails = ({ user_id, setuser_id }) => {
 	return (
 		<>
 			<div className='w-full h-full flex items-center justify-center'>
@@ -27,28 +27,29 @@ const EducationDetails = ({ formData, setFormData }) => {
 								size='lg'
 								required={true}
 								label='Practice Location'
-								value={formData.location}
+								value={user_id.role}
 								onChange={(e) =>
-									setFormData({ ...formData, location: e.target.value })
+									setuser_id({ ...user_id, role: e.target.value })
 								}
 							/>
 							<div className='flex gap-2'>
 								<Input
 									size='lg'
 									required={true}
-									label='Degree'
-									value={formData.degree}
+									type='number'
+									label='Experience'
+									value={user_id.experience}
 									onChange={(e) =>
-										setFormData({ ...formData, degree: e.target.value })
+										setuser_id({ ...user_id, experience: e.target.value })
 									}
 								/>
 								<Input
 									size='lg'
 									required={true}
 									label='Specialization'
-									value={formData.specialization}
+									value={user_id.specialization}
 									onChange={(e) =>
-										setFormData({ ...formData, specialization: e.target.value })
+										setuser_id({ ...user_id, specialization: e.target.value })
 									}
 								/>
 							</div>
@@ -56,9 +57,9 @@ const EducationDetails = ({ formData, setFormData }) => {
 								size='lg'
 								required={true}
 								label='Reference Number'
-								value={formData.reference}
+								value={user_id.reference}
 								onChange={(e) =>
-									setFormData({ ...formData, reference: e.target.value })
+									setuser_id({ ...user_id, reference: e.target.value })
 								}
 							/>
 						</div>

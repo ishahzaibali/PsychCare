@@ -7,45 +7,85 @@ import BasicInformation from './components/BasicInformation';
 import EducationDetails from './components/EducationDetails';
 import FinishingUp from './components/FinishingUp';
 import { NavLink } from 'react-router-dom';
-
-const steps = [
-	{
-		title: 'Basic Information',
-		content: <BasicInformation />,
-	},
-	{
-		title: 'Professional Details',
-		content: <EducationDetails />,
-	},
-	{
-		title: 'Finishing Up',
-		content: <FinishingUp />,
-	},
-];
+import userService from '../../services/UserService';
+import { useNavigate } from 'react-router-dom';
 
 const SignupPsychologist = () => {
 	const { token } = theme.useToken();
 	const [current, setCurrent] = useState(0);
+	const [formData, setFormData] = useState({
+		name: '',
+		email: '',
+		password: '',
+		location: '',
+		degree: '',
+		specialization: '',
+		reference: '',
+		info: '',
+	});
+	const history = useNavigate();
 	const next = () => {
 		setCurrent(current + 1);
 	};
 	const prev = () => {
 		setCurrent(current - 1);
 	};
+
+	const contentStyle = {
+		backgroundColor: token.colorFillAlter,
+		borderRadius: token.borderRadiusLG,
+		marginTop: 16,
+	};
+	const steps = [
+		{
+			title: 'Basic Information',
+			content: (
+				<BasicInformation
+					formData={formData}
+					setFormData={setFormData}
+				/>
+			),
+		},
+		{
+			title: 'Professional Details',
+			content: (
+				<EducationDetails
+					formData={formData}
+					setFormData={setFormData}
+				/>
+			),
+		},
+		{
+			title: 'Finishing Up',
+			content: (
+				<FinishingUp
+					formData={formData}
+					setFormData={setFormData}
+				/>
+			),
+		},
+	];
 	const items = steps.map((item) => ({
 		key: item.title,
 		title: item.title,
 	}));
-	const contentStyle = {
-		// lineHeight: '260px',
-		// textAlign: 'center',
-		// color: token.colorTextTertiary,
-		backgroundColor: token.colorFillAlter,
-		borderRadius: token.borderRadiusLG,
-		// border: `1px dashed ${token.colorBorder}`,
-		marginTop: 16,
+	const handleRegister = (e) => {
+		e.preventDefault();
+		userService
+			.registerPsychologists(formData)
+			.then((data) => {
+				e.preventDefault();
+				message.success('Information received!');
+				console.log(
+					'🚀 ~ file: SignupPsychologist.jsx:81 ~ .then ~ data:',
+					data
+				);
+				history('/login');
+			})
+			.catch((err) => {
+				console.log('🚀 ~ file: Signup.jsx:30 ~ handleRegister ~ err:', err);
+			});
 	};
-
 	return (
 		<>
 			<Navbar />
@@ -81,7 +121,7 @@ const SignupPsychologist = () => {
 							<Button
 								className='shadow-none bg-[#418cfd] text-white'
 								type='primary'
-								onClick={() => message.success('Information received!')}>
+								onClick={handleRegister}>
 								Done
 							</Button>
 						</NavLink>

@@ -17,11 +17,11 @@ const SalesCards = () => {
 						<div className='card1'>
 							{data.moneyCard.map((data) => (
 								<Card className='card'>
-									<CardBody className='card-main p-[16px] w-full'>
+									<CardBody className='card-main p-[24px] w-full'>
 										<div className='cardData'>
 											<Typography
 												variant='p'
-												className='font-[poppins] font-[500] leading-tight text-xs'>
+												className='font-[poppins] font-[600] leading-tight text-sm opacity-[0.6]'>
 												Today's Money
 											</Typography>
 											<div className='moneyData'>
@@ -37,7 +37,7 @@ const SalesCards = () => {
 										</div>
 										<div className='cardButton'>
 											<IconButton
-												variant='gradient'
+												
 												size='lg'
 												className='ml-0 iButton'>
 												{data.icon}
@@ -54,7 +54,7 @@ const SalesCards = () => {
 										<div className='cardData'>
 											<Typography
 												variant='p'
-												className='font-[poppins] font-[500] leading-tight text-xs'>
+												className='font-[poppins] font-[600] leading-tight text-sm opacity-[0.6]'>
 												Today's Users
 											</Typography>
 											<div className='moneyData'>
@@ -70,7 +70,7 @@ const SalesCards = () => {
 										</div>
 										<div className='cardButton'>
 											<IconButton
-												variant='gradient'
+												
 												size='lg'
 												className='ml-0 iButton'>
 												{data.icon}
@@ -87,7 +87,7 @@ const SalesCards = () => {
 										<div className='cardData'>
 											<Typography
 												variant='p'
-												className='font-[poppins] font-[500] leading-tight text-xs'>
+												className='font-[poppins] font-[600] leading-tight text-sm opacity-[0.6]'>
 												New Psychologists
 											</Typography>
 											<div className='moneyData'>
@@ -103,7 +103,7 @@ const SalesCards = () => {
 										</div>
 										<div className='cardButton'>
 											<IconButton
-												variant='gradient'
+												
 												size='lg'
 												className='ml-0 iButton'>
 												{data.icon}
@@ -120,7 +120,7 @@ const SalesCards = () => {
 										<div className='cardData'>
 											<Typography
 												variant='p'
-												className='font-[poppins] font-[500] leading-tight text-xs'>
+												className='font-[poppins] font-[600] leading-tight text-sm opacity-[0.6]'>
 												Sales
 											</Typography>
 											<div className='moneyData'>
@@ -136,7 +136,7 @@ const SalesCards = () => {
 										</div>
 										<div className='cardButton'>
 											<IconButton
-												variant='gradient'
+												
 												size='lg'
 												className='ml-0 iButton'>
 												{data.icon}

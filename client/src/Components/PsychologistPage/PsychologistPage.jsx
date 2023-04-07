@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './PsychologistPage.css';
 import { psychologists } from './data';
-// import { Select, Option, Button } from '@material-tailwind/react';
+import axios from 'axios';
 import { Footer, Navbar, PsychologistCards, Search } from '../index';
 import Pagination from '../Pagination/Pagination';
 import {
@@ -40,6 +40,26 @@ const responsive = {
 const PsychologistPage = () => {
 	const [currentPage, setcurrentPage] = useState(1);
 	const [postsPerPage] = useState(4);
+
+	const getPsychologists = async () => {
+		try {
+			const res = await axios.get('users/psychologists');
+			console.log(
+				'🚀 ~ file: PsychologistPage.jsx:55 ~ getPsychologists ~ data:',
+				res.data
+			);
+
+			if (!res.status === 200) {
+				window.alert('Invalid Information');
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	useEffect(() => {
+		getPsychologists();
+	}, []);
 
 	const indexOfLastPost = currentPage * postsPerPage;
 	const indexOfFirstPost = indexOfLastPost - postsPerPage;

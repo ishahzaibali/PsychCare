@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Typography, Textarea } from '@material-tailwind/react';
 
-const FinishingUp = () => {
+const FinishingUp = ({ formData, setFormData }) => {
 	return (
 		<>
 			<div className='w-full h-full flex items-center justify-center'>
@@ -25,7 +25,11 @@ const FinishingUp = () => {
 						<div className='mb-4 flex flex-col w-[28rem] gap-6'>
 							<Textarea
 								color='gray'
-                        variant='standard'
+								variant='standard'
+								value={formData.info}
+								onChange={(e) =>
+									setFormData({ ...formData, info: e.target.value })
+								}
 								placeholder='Enter some information about yourself'
 								className='font-[poppins] h-[174px] rounded-md'
 							/>

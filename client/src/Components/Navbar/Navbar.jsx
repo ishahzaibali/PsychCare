@@ -20,7 +20,7 @@ import {
 	Cog6ToothIcon,
 	PowerIcon,
 } from '@heroicons/react/24/outline';
-import { menuData, BtnData } from './menuData';
+import { menuData } from './menuData';
 import userService from '../../services/UserService.js';
 
 const Navbar = () => {
@@ -70,6 +70,13 @@ const Navbar = () => {
 	function ProfileMenu() {
 		const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 		const closeMenu = () => setIsMenuOpen(false);
+		const [user, setUser] = useState(null);
+		useEffect(() => {
+			const loggedInUser = userService.getLoggedInUser();
+			if (loggedInUser) {
+				setUser(loggedInUser);
+			}
+		}, []);
 
 		return (
 			<Menu
@@ -97,18 +104,29 @@ const Navbar = () => {
 					</Button>
 				</MenuHandler>
 				<MenuList className='p-1 ml-0 border-none '>
+					{user ? (
+						<div
+							aria-disabled
+							className='flex items-start p-4'>
+							<Typography
+								variant='p'
+								className='text-sm  text-[rgb(27,37,89,0.7)] font-[poppins] font-semibold'>
+								<span>👋</span>
+								Hey,<span>{user.name}</span>
+							</Typography>
+							<hr className='h-2 bg-[rgb(27,37,89,0.7)] text-[rgb(27,37,89,0.7)]' />
+						</div>
+					) : (
+						''
+					)}
 					{profileMenuItems.map(({ label, icon }, key) => {
 						const isLastItem = key === profileMenuItems.length - 1;
 						return (
 							<>
-								{/* <div className='flex flex-col items-start'>
-									<p className='text-xs font-semibold'>Shahzaib</p>
-									<p className='text-xs'>Admin</p>
-								</div> */}
 								<MenuItem
 									key={label}
 									onClick={isLastItem ? handleLogout : closeMenu}
-									className={`flex ml-0 bg-transparent text-gray-600 border-none items-center gap-2 rounded ${
+									className={`flex font-[poppins] ml-0 bg-transparent text-gray-600 border-none items-center gap-2 rounded ${
 										isLastItem
 											? 'hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10'
 											: ''
@@ -120,7 +138,7 @@ const Navbar = () => {
 									<Typography
 										as='span'
 										variant='small'
-										className='font-normal'
+										className='font-normal font-[poppins]'
 										color={isLastItem ? 'red' : 'inherit'}>
 										{label}
 									</Typography>
@@ -241,10 +259,7 @@ const Navbar = () => {
 				<MobileNav
 					className='MobileNav'
 					open={openNav}>
-					<div className=' navlist container  '>
-						{navList}
-						
-					</div>
+					<div className=' navlist container  '>{navList}</div>
 				</MobileNav>
 			</div>
 		</>

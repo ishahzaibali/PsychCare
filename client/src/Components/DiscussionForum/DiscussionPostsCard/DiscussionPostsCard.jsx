@@ -14,8 +14,8 @@ import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 
 const DiscussionPostsCard = ({ discussion }) => {
-	const [email, setEmail] = React.useState('');
-	const onChange = ({ target }) => setEmail(target.value);
+	const [comment, setComment] = React.useState('');
+	const onChange = ({ target }) => setComment(target.value);
 
 	return (
 		<>
@@ -104,7 +104,7 @@ const DiscussionPostsCard = ({ discussion }) => {
 										<Input
 											type='text'
 											label='Write comment'
-											value={email}
+											value={comment}
 											onChange={onChange}
 											className='comment-container'
 											containerProps={{
@@ -113,8 +113,8 @@ const DiscussionPostsCard = ({ discussion }) => {
 										/>
 										<Button
 											size='sm'
-											color={email ? 'blue' : 'blue-gray'}
-											disabled={!email}
+											color={comment ? 'blue' : 'blue-gray'}
+											disabled={!comment}
 											className='!absolute right-1 top-1 rounded ml-0'>
 											<PaperAirplaneIcon
 												width='2

@@ -17,6 +17,34 @@ class UserService extends GenericService {
 		});
 	register = (name, email, password) =>
 		this.post('users/register', { password, email, name });
+	registerPsychologists = (
+		name,
+		email,
+		password,
+		location,
+		degree,
+		specialization,
+		reference,
+		info,
+		rating,
+		experience,
+		onlineAppointment,
+		onsiteAppointment
+	) =>
+		this.post('users/psychologists', {
+			name,
+			email,
+			password,
+			location,
+			degree,
+			specialization,
+			reference,
+			info,
+			rating,
+			experience,
+			onlineAppointment,
+			onsiteAppointment,
+		});
 	logout = () => {
 		localStorage.removeItem('token');
 	};

@@ -22,6 +22,13 @@ export const patientData = [
 		bookingTime: '12:30 AM',
 		status: 'Pending',
 	},
+	{
+		image:
+			'https://images.unsplash.com/photo-1636041247924-17cced2e0fd4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80',
+		name: 'Talha Amir',
+		bookingTime: '12:30 AM',
+		status: 'Pending',
+	},
 	
 ];
 

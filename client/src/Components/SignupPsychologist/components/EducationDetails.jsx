@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Input, Typography } from '@material-tailwind/react';
 
-const EducationDetails = () => {
+const EducationDetails = ({ formData, setFormData }) => {
 	return (
 		<>
 			<div className='w-full h-full flex items-center justify-center'>
@@ -27,27 +27,40 @@ const EducationDetails = () => {
 								size='lg'
 								required={true}
 								label='Practice Location'
+								value={formData.location}
+								onChange={(e) =>
+									setFormData({ ...formData, location: e.target.value })
+								}
 							/>
-                     <div className='flex gap-2'>
-                     <Input
-								size='lg'
-								required={true}
-                        // className='w-[90%]'
-								label='Degree'
-							/>
-							<Input
-								size='lg'
-								required={true}
-                        // className='w-[90%]'
-								label='Specialization'
-							/>
-                     </div>
+							<div className='flex gap-2'>
+								<Input
+									size='lg'
+									required={true}
+									label='Degree'
+									value={formData.degree}
+									onChange={(e) =>
+										setFormData({ ...formData, degree: e.target.value })
+									}
+								/>
+								<Input
+									size='lg'
+									required={true}
+									label='Specialization'
+									value={formData.specialization}
+									onChange={(e) =>
+										setFormData({ ...formData, specialization: e.target.value })
+									}
+								/>
+							</div>
 							<Input
 								size='lg'
 								required={true}
 								label='Reference Number'
+								value={formData.reference}
+								onChange={(e) =>
+									setFormData({ ...formData, reference: e.target.value })
+								}
 							/>
-							
 						</div>
 					</form>
 				</Card>

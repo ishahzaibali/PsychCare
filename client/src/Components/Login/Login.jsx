@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css';
 import Navbar from '../Navbar/Navbar';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 import {
 	Card,
 	Typography,
@@ -11,7 +11,6 @@ import {
 	Alert,
 } from '@material-tailwind/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/solid';
-import { NavLink } from 'react-router-dom';
 import userService from '../../services/UserService.js';
 
 const Login = () => {
@@ -20,9 +19,11 @@ const Login = () => {
 	const [error, setError] = useState(false);
 	const [loginError, setLoginError] = useState(false);
 	const [errorMessage, setErrorMessage] = useState('');
+	const [loadings, setLoadings] = useState([]);
 	const history = useNavigate();
 
 	const handleSubmit = (e) => {
+		enterLoading(1);
 		e.preventDefault();
 		if (email.length === 0 || password.length === 0) {
 			setError(true);
@@ -32,6 +33,7 @@ const Login = () => {
 				.login(email, password)
 				.then((data) => {
 					console.log(data);
+
 					if (userService.isAdmin()) {
 						e.preventDefault();
 						history('/Dashboard');
@@ -49,6 +51,21 @@ const Login = () => {
 					setErrorMessage(err.message);
 				});
 		}
+	};
+
+	const enterLoading = (index) => {
+		setLoadings((prevLoadings) => {
+			const newLoadings = [...prevLoadings];
+			newLoadings[index] = true;
+			return newLoadings;
+		});
+		setTimeout(() => {
+			setLoadings((prevLoadings) => {
+				const newLoadings = [...prevLoadings];
+				newLoadings[index] = false;
+				return newLoadings;
+			});
+		}, 6000);
 	};
 	return (
 		<>
@@ -129,6 +146,7 @@ const Login = () => {
 
 							<Button
 								onClick={handleSubmit}
+								loading={loadings[1]}
 								type='submit'
 								className='mt-6 ml-0 login-button'
 								variant='gradient'

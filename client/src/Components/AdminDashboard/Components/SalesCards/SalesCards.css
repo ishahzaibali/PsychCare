@@ -1,7 +1,7 @@
 .main-box {
 	display: grid;
 	grid-template-columns: repeat(4, minmax(0, 1fr));
-	gap: 1.5rem;
+	gap: 1rem;
 }
 .card {
 	font-weight: 400;
@@ -11,15 +11,19 @@
 	font-family: 'Poppins';
 	box-shadow: rgba(0, 0, 0, 0.05) 0rem 1.25rem 1.6875rem 0rem;
 	box-sizing: border-box;
+	
+	
 	width: 100%;
 }
+
 .card-main {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	margin: 0;
 	gap: 1rem;
-	padding: 16px;
+	
+	padding: 24px;
 	border-radius: 1rem;
 }
 .moneyData {
@@ -31,6 +35,8 @@
 .iButton {
 	background: linear-gradient(310deg, rgb(33, 82, 255), rgb(33, 212, 253));
 	box-shadow: none;
+	opacity: 1;
+	
 }
 .iButton svg {
 	box-shadow: none;

@@ -22,7 +22,7 @@ import {
 	ClockIcon,
 	BarsArrowUpIcon,
 } from '@heroicons/react/24/outline';
-import { BellIcon } from '@heroicons/react/24/solid';
+import { BellIcon, EnvelopeIcon } from '@heroicons/react/24/solid';
 import userService from '../../../../services/UserService';
 import { useNavigate } from 'react-router-dom';
 import { PsychologistDashboardSidebar } from '../../index';
@@ -170,6 +170,11 @@ const PsychologistDashboardNavbar = () => {
 							onClick={showDrawer}
 						/>
 						<Drawer
+							className='!bg-transparent -ml-8 mt-8 !shadow-none !max-w-[20rem]'
+							autoFocus={true}
+							width={265}
+							height='100vh'
+							size='large'
 							placement='left'
 							onClose={onClose}
 							open={open}>
@@ -206,7 +211,71 @@ const PsychologistDashboardNavbar = () => {
 								}}
 								placement='bottom-start'>
 								<MenuHandler>
-									<BellIcon className='w-6 h-6 Menu cursor-pointer text-blue-gray-800' />
+									<EnvelopeIcon className='w-5 h-5 mr-2 lg:mr-0 cursor-pointer text-blue-gray-700' />
+								</MenuHandler>
+								<MenuList className='mt-4 p-[0.5rem] border-none shadow-xl bg-white'>
+									<MenuItem
+										color='blue-grey'
+										className='m-0  font-[poppins] text-[rgb(52,71,103)] p-[0.7rem]  bg-transparent'>
+										<div className='flex gap-2 items-center justify-center'>
+											<Avatar
+												src={avatar2}
+												alt='avatar'
+												size='sm'
+											/>
+											<div className='flex gap-2 flex-col'>
+												<h4>
+													<span className='font-[700] text-[rgb(52,71,103)]'>
+														New Message
+													</span>{' '}
+													from Shahzaib{' '}
+												</h4>
+												<div className='flex gap-1 opacity-[0.5] font-[poppins] text-xs'>
+													<ClockIcon
+														height='1rem'
+														width='1rem'
+													/>
+													<p>13 minutes ago</p>
+												</div>
+											</div>
+										</div>
+									</MenuItem>
+									<MenuItem
+										color='blue-grey'
+										className='m-0 font-[poppins] text-[rgb(52,71,103)] p-[0.7rem]  bg-transparent'>
+										<div className='flex gap-2 items-center justify-start'>
+											<Avatar
+												src={avatar}
+												alt='avatar'
+												size='sm'
+											/>
+											<div className='flex gap-2 flex-col'>
+												<h4>
+													<span className='font-[700] text-[rgb(52,71,103)]'>
+														New Album
+													</span>{' '}
+													from Uzair{' '}
+												</h4>
+												<div className='flex gap-1 opacity-[0.5] font-[poppins] text-xs'>
+													<ClockIcon
+														height='1rem'
+														width='1rem'
+													/>
+													<p>20 minutes ago</p>
+												</div>
+											</div>
+										</div>
+									</MenuItem>
+								</MenuList>
+							</Menu>
+							<Menu
+								animate={{
+									mount: { scale: 1, y: 0 },
+									unmount: { scale: 0, y: 25 },
+								}}
+								placement='bottom-start'>
+								<MenuHandler>
+									<BellIcon className='w-5 h-5 Menu cursor-pointer text-blue-gray-700' />
 								</MenuHandler>
 								<MenuList className='mt-4 p-[0.5rem] border-none shadow-xl bg-white'>
 									<MenuItem

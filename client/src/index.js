@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@material-tailwind/react';
+import ContextWrapper from './context/ContextWrapper';
 
 // import { SoftUIControllerProvider } from "./context";
 
@@ -12,7 +13,9 @@ root.render(
 	<BrowserRouter>
 		<React.StrictMode>
 			<ThemeProvider>
-				<App />
+				<ContextWrapper>
+					<App />
+				</ContextWrapper>
 			</ThemeProvider>
 		</React.StrictMode>
 	</BrowserRouter>

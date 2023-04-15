@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
+import './SignupPsychologist.css';
 import { message, Steps, theme } from 'antd';
 import { Button } from '@material-tailwind/react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Navbar } from '../index';
-import './SignupPsychologist.css';
 import BasicInformation from './components/BasicInformation';
 import EducationDetails from './components/EducationDetails';
 import FinishingUp from './components/FinishingUp';
-import { NavLink } from 'react-router-dom';
 import userService from '../../services/UserService';
-import { useNavigate } from 'react-router-dom';
 
 const SignupPsychologist = () => {
 	const { token } = theme.useToken();

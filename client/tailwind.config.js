@@ -23,6 +23,9 @@ module.exports = withMT({
 			gridTemplateColumns: {
 				'1/5': '1fr 5fr',
 			},
+			boxShadow: {
+				'3xl' : 'rgba(0, 0, 0, 0.05) 0rem 1.25rem 1.6875rem 0rem',
+			}
 		},
 	},
 	plugins: [require('flowbite/plugin'), require('@tailwindcss/forms')],

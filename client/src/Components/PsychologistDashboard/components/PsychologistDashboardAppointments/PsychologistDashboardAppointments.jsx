@@ -20,7 +20,7 @@ const PsychologistDashboardAppointments = () => {
 			{showEventModal && <EventModal />}
 			<div className='ap-main'>
 				<div className='timeline'>
-					<div className='h-screen w-full flex flex-col'>
+					<div className='h-screen w-full flex flex-col mb-4'>
 						<CalendarHeader />
 						<div className='flex flex-1'>
 							<Month month={currenMonth} />

@@ -108,3 +108,17 @@
 .pmt-arr {
 	color: rgb(234, 6, 6);
 }
+.pmt-arrt {
+	color: rgb(130, 214, 22);
+}
+.pmt-amnr {
+	background: #ea0606;
+	background: linear-gradient(310deg, rgb(23, 173, 55), rgb(152, 236, 45));
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+
+	font-weight: 500;
+	font-size: 0.875rem;
+	line-height: 1.5rem;
+	letter-spacing: 0.0002875em;
+}

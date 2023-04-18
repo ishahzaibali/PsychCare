@@ -39,11 +39,13 @@ const responsive = {
 
 const PsychologistPage = () => {
 	const [currentPage, setcurrentPage] = useState(1);
+	const [showPsychologists, setshowPsychologists] = useState([]);
 	const [postsPerPage] = useState(4);
 
 	const getPsychologists = async () => {
 		try {
 			const res = await axios.get('users/psychologists');
+			setshowPsychologists(res.data)
 			console.log(
 				'🚀 ~ file: PsychologistPage.jsx:55 ~ getPsychologists ~ data:',
 				res.data
@@ -53,7 +55,10 @@ const PsychologistPage = () => {
 				window.alert('Invalid Information');
 			}
 		} catch (error) {
-			console.log(error);
+			console.log(
+				'🚀 ~ file: PsychologistPage.jsx:56 ~ getPsychologists ~ error:',
+				error
+			);
 		}
 	};
 
@@ -63,11 +68,11 @@ const PsychologistPage = () => {
 
 	const indexOfLastPost = currentPage * postsPerPage;
 	const indexOfFirstPost = indexOfLastPost - postsPerPage;
-	const currentPsychologist = psychologists.slice(
+	const currentPsychologist = showPsychologists.slice(
 		indexOfFirstPost,
 		indexOfLastPost
 	);
-	// console.log("🚀 ~ file: PsychologistPage.jsx:50 ~ PsychologistPage ~ currentPsychologist:", currentPsychologist)
+	
 	const paginate = (pageNumber) => {
 		setcurrentPage(pageNumber);
 	};
@@ -186,7 +191,7 @@ const PsychologistPage = () => {
 				<div className='pagination'>
 					<Pagination
 						postsPerPage={postsPerPage}
-						totalPosts={psychologists.length}
+						totalPosts={showPsychologists.length}
 						paginate={paginate}
 					/>
 				</div>

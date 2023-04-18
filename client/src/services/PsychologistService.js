@@ -8,6 +8,13 @@ class PsychologistService extends GenericService {
 
 	getPsychologist = () => this.get('users/psychologists');
 	getSinglePsychologist = (id) => this.get('users/psychologists/' + id);
+	isApproved() {
+		if (this.getPsychologist().approved === true) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
 
 let psychologistService = new PsychologistService();

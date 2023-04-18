@@ -12,35 +12,37 @@ const EducationDetails = ({ user_id, setuser_id }) => {
 					<Typography
 						variant='h4'
 						textGradient
+						className='font-poppins'
 						color='blue-gray'>
 						Professional Details
 					</Typography>
 					<Typography
 						color='gray'
 						textGradient
-						className='mt-1 font-normal'>
+						className='mt-1 font-normal font-poppins'>
 						Enter your professional details.
 					</Typography>
-					<form className='mt-8 mb-2 w-80 max-w-screen-lg sm:w-96'>
+					<form className='mt-8 mb-2 w-80 font-poppins max-w-screen-lg sm:w-96'>
 						<div className='mb-4 flex flex-col w-[28rem] gap-6'>
 							<Input
 								size='lg'
 								required={true}
-								label='Practice Location'
-								value={user_id.role}
+								type='number'
+								className='font-poppins'
+								label='Experience'
+								value={user_id.experience}
 								onChange={(e) =>
-									setuser_id({ ...user_id, role: e.target.value })
+									setuser_id({ ...user_id, experience: e.target.value })
 								}
 							/>
 							<div className='flex gap-2'>
 								<Input
 									size='lg'
 									required={true}
-									type='number'
-									label='Experience'
-									value={user_id.experience}
+									label='Degree'
+									value={user_id.degree}
 									onChange={(e) =>
-										setuser_id({ ...user_id, experience: e.target.value })
+										setuser_id({ ...user_id, degree: e.target.value })
 									}
 								/>
 								<Input
@@ -53,7 +55,7 @@ const EducationDetails = ({ user_id, setuser_id }) => {
 									}
 								/>
 							</div>
-							<Input
+							{/* <Input
 								size='lg'
 								required={true}
 								label='Reference Number'
@@ -61,7 +63,7 @@ const EducationDetails = ({ user_id, setuser_id }) => {
 								onChange={(e) =>
 									setuser_id({ ...user_id, reference: e.target.value })
 								}
-							/>
+							/> */}
 						</div>
 					</form>
 				</Card>

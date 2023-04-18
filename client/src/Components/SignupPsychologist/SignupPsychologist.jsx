@@ -4,10 +4,11 @@ import { message, Steps, theme } from 'antd';
 import { Button } from '@material-tailwind/react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Navbar } from '../index';
+
 import BasicInformation from './components/BasicInformation';
 import EducationDetails from './components/EducationDetails';
 import FinishingUp from './components/FinishingUp';
-import userService from '../../services/UserService';
+import psychologistService from '../../services/PsychologistService';
 
 const SignupPsychologist = () => {
 	const { token } = theme.useToken();
@@ -16,12 +17,12 @@ const SignupPsychologist = () => {
 		name: '',
 		email: '',
 		password: '',
-		role: '',
+		degree: '',
 		experience: '',
 		specialization: '',
-		reference: '',
-		info: '',
+		about: '',
 	});
+
 	const history = useNavigate();
 	const next = () => {
 		setCurrent(current + 1);
@@ -68,10 +69,11 @@ const SignupPsychologist = () => {
 		key: item.title,
 		title: item.title,
 	}));
+
 	const handleRegister = (e) => {
 		e.preventDefault();
-		userService
-			.registerPsychologists(user_id)
+		psychologistService
+			.addPsychologist(user_id)
 			.then((data) => {
 				e.preventDefault();
 				message.success('Information received!');
@@ -88,6 +90,7 @@ const SignupPsychologist = () => {
 	return (
 		<>
 			<Navbar />
+
 			<div className='mx-28 mt-12'>
 				<Steps
 					current={current}
@@ -109,7 +112,7 @@ const SignupPsychologist = () => {
 					}}>
 					{current < steps.length - 1 && (
 						<Button
-							className='shadow-none bg-[#418cfd] text-white'
+							className='shadow-none font-poppins bg-[#418cfd] text-white'
 							type='primary'
 							onClick={() => next()}>
 							Next
@@ -118,7 +121,7 @@ const SignupPsychologist = () => {
 					{current === steps.length - 1 && (
 						<NavLink to={'/login'}>
 							<Button
-								className='shadow-none bg-[#418cfd] text-white'
+								className='shadow-none bg-[#418cfd] font-poppins text-white'
 								type='primary'
 								onClick={handleRegister}>
 								Done
@@ -127,7 +130,7 @@ const SignupPsychologist = () => {
 					)}
 					{current > 0 && (
 						<Button
-							className='shadow-none border-0 bg-[rgb(65,140,253,0.1)] text-[#418cfd] hover:shadow-xs '
+							className='shadow-none border-0 font-poppins bg-[rgb(65,140,253,0.1)] text-[#418cfd] hover:shadow-xs '
 							style={{
 								margin: '0 8px',
 								color: '#418cfd !important',

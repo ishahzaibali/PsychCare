@@ -21,7 +21,7 @@ import {
 	PowerIcon,
 } from '@heroicons/react/24/outline';
 import { menuData } from './menuData';
-import userService from '../../services/UserService.js';
+import userService from '../../services/UserService';
 
 const Navbar = () => {
 	const [openNav, setOpenNav] = useState(false);
@@ -147,7 +147,6 @@ const Navbar = () => {
 									size='sm'
 									alt='candice wu'
 									className='border border-blue-500 p-0.5'
-									
 								/>
 								<ChevronDownIcon
 									strokeWidth={2.5}

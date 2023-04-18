@@ -32,7 +32,8 @@ const Login = () => {
 			userService
 				.login(email, password)
 				.then((data) => {
-					console.log(data);
+					// console.log(data);
+					console.log('🚀 ~ file: Login.jsx:36 ~ .then ~ data:', data);
 
 					if (userService.isAdmin()) {
 						e.preventDefault();
@@ -94,7 +95,7 @@ const Login = () => {
 						</Typography>
 						<Typography
 							color='gray'
-							className='mt-1 font-[poppins] font-normal'>
+							className='mt-1 font-poppins font-normal'>
 							Enter your email and password to sign in.
 						</Typography>
 						<form

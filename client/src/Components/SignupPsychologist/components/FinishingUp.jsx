@@ -12,26 +12,27 @@ const FinishingUp = ({ user_id, setuser_id }) => {
 					<Typography
 						variant='h4'
 						textGradient
+						className='font-poppins'
 						color='blue-gray'>
 						Tell something about yourself
 					</Typography>
 					<Typography
 						color='gray'
 						textGradient
-						className='mt-1 font-normal'>
+						className='mt-1 font-normal font-poppins'>
 						Enter your details.
 					</Typography>
-					<form className='mt-8 mb-2 w-80 max-w-screen-lg sm:w-96'>
+					<form className='mt-8 mb-2 w-80 font-poppins max-w-screen-lg sm:w-96'>
 						<div className='mb-4 flex flex-col w-[28rem] gap-6'>
 							<Textarea
 								color='gray'
 								variant='standard'
-								value={user_id.info}
+								value={user_id.about}
 								onChange={(e) =>
-									setuser_id({ ...user_id, info: e.target.value })
+									setuser_id({ ...user_id, about: e.target.value })
 								}
 								placeholder='Enter some information about yourself'
-								className='font-[poppins] h-[174px] rounded-md'
+								className='font-poppins h-[174px] rounded-md'
 							/>
 						</div>
 					</form>

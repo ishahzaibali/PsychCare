@@ -13,6 +13,7 @@ import {
 
 import mastercard from '../../../../assets/logos/mastercard.png';
 import visacard from '../../../../assets/logos/visa.png';
+import DashboardCharts from '../DashboardCharts/DashboardCharts';
 
 const CreditCard = () => {
 	return (
@@ -192,9 +193,11 @@ const PsychologistDashboardPayments = () => {
 						</Card>
 					</div>
 				</div>
-				<div className='pmt-second '>
-					<div className='graph flex-1'>Graph</div>
-					<div className='info flex-1'>Information</div>
+				<div className='pmt-second mb-4 '>
+					<div className='graph flex-2 w-full'>
+						<DashboardCharts />
+					</div>
+					{/* <div className='info flex-1'>Information</div> */}
 				</div>
 			</div>
 		</>

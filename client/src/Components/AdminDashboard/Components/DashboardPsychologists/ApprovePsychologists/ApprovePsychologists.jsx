@@ -50,10 +50,10 @@ const ApprovePsychologists = () => {
 							<ApprovePsychologistsCards approved={showPsychologists} />
 						</div>
 						<div className='v-all'>
-							<NavLink to={'/Psychologist#approve-psychologists'}>
+							<NavLink to={'/Psychologist'}>
 								<Button
 									variant='filled'
-									className=' shadow-none hover:shadow-none  w-full ml-0 mt-12'>
+									className=' shadow-none hover:shadow-none font-poppins w-full ml-0 mt-12'>
 									View All Requests
 								</Button>
 							</NavLink>

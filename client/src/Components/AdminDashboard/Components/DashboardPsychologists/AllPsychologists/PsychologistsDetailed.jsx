@@ -72,36 +72,36 @@ const Psychologists = () => {
 
 				<CardBody
 					color='blue-gray'
-					className='text-center w-full font-[poppins] font-[500] text-sm m-0 p-0'>
-					<TableContainer className='mt-5 font-[poppins] w-full'>
+					className='text-center w-full font-poppins font-[500] text-sm m-0 p-0'>
+					<TableContainer className='mt-5 font-poppins w-full'>
 						<Table
 							sx={{ minWidth: 650 }}
-							className='font-[poppins] w-full table font-[500] text-sm'
+							className='font-poppins w-full table font-[500] text-sm'
 							aria-label='simple table'>
 							<TableHead>
-								<TableRow className='table-head w-full font-[poppins] font-[800] uppercase text-sm'>
+								<TableRow className='table-head w-full font-poppins font-[800] uppercase text-sm'>
 									<TableCell className='table-head '>Psychologist</TableCell>
 
 									<TableCell
-										className='table-head font-[poppins] font-[800] uppercase text-sm'
+										className='table-head font-poppins font-[800] uppercase text-sm'
 										align='left'>
 										Contact
 									</TableCell>
 									<TableCell
-										className='table-head font-[poppins] font-[800] uppercase text-sm'
+										className='table-head font-poppins font-[800] uppercase text-sm'
 										align='left'>
 										Clinic
 									</TableCell>
 
 									<TableCell
-										className='table-head font-[poppins] font-[800] uppercase text-sm'
+										className='table-head font-poppins font-[800] uppercase text-sm'
 										align='left'>
 										Action
 									</TableCell>
 								</TableRow>
 							</TableHead>
 
-							<TableBody className='font-[poppins] w-full font-[500] text-sm'>
+							<TableBody className='font-poppins w-full font-[500] text-sm'>
 								{tableData.map((row) => (
 									<TableRow
 										key={row.Name}

@@ -4,6 +4,7 @@
 	background: #fff;
 	padding: 2rem;
 	border-radius: 15px;
+	font-family: 'poppins';
 }
 
 @media screen and (max-width: 768px) {

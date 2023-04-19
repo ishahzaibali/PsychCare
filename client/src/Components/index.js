@@ -19,3 +19,4 @@ export { default as PsychologistDashboard } from './PsychologistDashboard/Psycho
 export { default as PsychologistDashboardLayout } from './PsychologistDashboardLayout/PsychologistDashboardLayout';
 export { default as PsychologistCards } from './PsychologistCard/PsychologistCards';
 export { default as CTA } from './SignupPsychologist/components/CTA';
+export { default as SinglePsychologist } from './PsychologistPage/SinglePsychologist/SinglePsychologist';

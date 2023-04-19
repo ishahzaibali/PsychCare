@@ -3,7 +3,7 @@
 	display: flex;
 	flex: 1 1 auto;
 	margin-right: 1rem;
-	gap: 5%;
+	gap: 2%;
 }
 .side-menu {
 	display: flex;
@@ -21,15 +21,16 @@
 	display: flex;
 	flex: 2;
 	flex-direction: column;
+	gap: 2rem;
 }
 .sales-cards {
 	margin-top: 3rem;
 }
-.dashboard-charts {
+/* .dashboard-charts {
 	margin-top: 3rem;
-}
+} */
 .dashboard-psychologists {
-	margin-top: 3rem;
+	
 	display: grid;
 	grid-template-columns: repeat(3, minmax(0, 1fr));
 	gap: 1rem;

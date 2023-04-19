@@ -2,6 +2,7 @@ import React from 'react';
 import ApprovePsychologistsCard from './ApprovePsychologistsCard';
 import { Typography } from '@material-tailwind/react';
 import './ApprovePsychologistsCard.css';
+import psychologistService from '../../../../../../services/PsychologistService';
 
 const ApprovePsychologistsCardsDetailed = ({ approved }) => {
 	return (
@@ -17,9 +18,9 @@ const ApprovePsychologistsCardsDetailed = ({ approved }) => {
 					className='p mb-8 pl-4'>
 					Approve new Psychologists
 				</Typography>
-				{approved.map((n) => (
-					<ApprovePsychologistsCard approve={n} />
-				))}
+				{!psychologistService.isApproved()
+					? approved.map((n) => <ApprovePsychologistsCard approve={n} />)
+					: ''}
 			</div>
 		</>
 	);

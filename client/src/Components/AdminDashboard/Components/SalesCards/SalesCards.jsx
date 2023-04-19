@@ -1,11 +1,6 @@
 import React from 'react';
 import './SalesCards.css';
-import {
-	Card,
-	CardBody,
-	Typography,
-	IconButton,
-} from '@material-tailwind/react';
+import { Card, CardBody, Typography } from '@material-tailwind/react';
 import { cardData } from './cardData';
 
 const SalesCards = () => {
@@ -21,7 +16,7 @@ const SalesCards = () => {
 										<div className='cardData'>
 											<Typography
 												variant='p'
-												className='font-[poppins] font-[600] leading-tight text-sm opacity-[0.6]'>
+												className='font-[poppins] font-[600] leading-tight text-xs opacity-[0.8]'>
 												Today's Money
 											</Typography>
 											<div className='moneyData'>
@@ -29,19 +24,19 @@ const SalesCards = () => {
 													variant='h4'
 													className='font-[poppins] text-lg font-[700]'>
 													<span>{data.prefix}</span> {data.money}{' '}
-													<span className='font-[poppins] text-xs'>
+													<span
+														className={`font-poppins text-xs ${data.className}`}>
 														{data.increasing}
 													</span>
 												</Typography>
 											</div>
 										</div>
 										<div className='cardButton'>
-											<IconButton
-												
+											<div
 												size='lg'
 												className='ml-0 iButton'>
 												{data.icon}
-											</IconButton>
+											</div>
 										</div>
 									</CardBody>
 								</Card>
@@ -54,7 +49,7 @@ const SalesCards = () => {
 										<div className='cardData'>
 											<Typography
 												variant='p'
-												className='font-[poppins] font-[600] leading-tight text-sm opacity-[0.6]'>
+												className='font-[poppins] font-[600] leading-tight text-xs opacity-[0.8]'>
 												Today's Users
 											</Typography>
 											<div className='moneyData'>
@@ -62,19 +57,19 @@ const SalesCards = () => {
 													variant='h4'
 													className='font-[poppins] text-lg font-[700]'>
 													<span>{data.prefix}</span> {data.users}{' '}
-													<span className='font-[poppins] text-xs'>
+													<span
+														className={`font-poppins text-xs ${data.className}`}>
 														{data.increasing}
 													</span>
 												</Typography>
 											</div>
 										</div>
 										<div className='cardButton'>
-											<IconButton
-												
+											<div
 												size='lg'
 												className='ml-0 iButton'>
 												{data.icon}
-											</IconButton>
+											</div>
 										</div>
 									</CardBody>
 								</Card>
@@ -87,7 +82,7 @@ const SalesCards = () => {
 										<div className='cardData'>
 											<Typography
 												variant='p'
-												className='font-[poppins] font-[600] leading-tight text-sm opacity-[0.6]'>
+												className='font-[poppins] font-[600] leading-tight text-xs opacity-[0.8]'>
 												New Psychologists
 											</Typography>
 											<div className='moneyData'>
@@ -95,19 +90,19 @@ const SalesCards = () => {
 													variant='h4'
 													className='font-[poppins] text-lg font-[700]'>
 													<span>{data.prefix}</span> {data.psychologists}{' '}
-													<span className='font-[poppins] text-xs'>
-														{data.increasing}
+													<span
+														className={`font-poppins text-xs ${data.className}`}>
+														{data.decreasing}
 													</span>
 												</Typography>
 											</div>
 										</div>
 										<div className='cardButton'>
-											<IconButton
-												
+											<div
 												size='lg'
 												className='ml-0 iButton'>
 												{data.icon}
-											</IconButton>
+											</div>
 										</div>
 									</CardBody>
 								</Card>
@@ -120,7 +115,7 @@ const SalesCards = () => {
 										<div className='cardData'>
 											<Typography
 												variant='p'
-												className='font-[poppins] font-[600] leading-tight text-sm opacity-[0.6]'>
+												className='font-[poppins] font-[600] leading-tight text-xs opacity-[0.8]'>
 												Sales
 											</Typography>
 											<div className='moneyData'>
@@ -128,19 +123,19 @@ const SalesCards = () => {
 													variant='h4'
 													className='font-[poppins] text-lg font-[700]'>
 													<span>{data.prefix}</span> {data.sales}{' '}
-													<span className='font-[poppins] text-xs'>
+													<span
+														className={`font-poppins text-xs ${data.className}`}>
 														{data.increasing}
 													</span>
 												</Typography>
 											</div>
 										</div>
 										<div className='cardButton'>
-											<IconButton
-												
+											<div
 												size='lg'
 												className='ml-0 iButton'>
 												{data.icon}
-											</IconButton>
+											</div>
 										</div>
 									</CardBody>
 								</Card>

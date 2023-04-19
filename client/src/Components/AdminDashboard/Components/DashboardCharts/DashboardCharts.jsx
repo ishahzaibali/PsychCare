@@ -185,7 +185,7 @@ const DashboardCharts = () => {
 		<>
 			<div className='charts-main'>
 				<div className='bar-chart'>
-					<Card className='w-full  h-[26rem] shadow-lg'>
+					<Card className='w-full  h-[26rem] shadow-3xl'>
 						<CardHeader
 							className='h-[11rem] barChart'
 							floated={false}
@@ -421,7 +421,7 @@ const DashboardCharts = () => {
 				{/* Line Chart  */}
 
 				<div className='line-chart'>
-					<Card className='w-full h-[26rem] shadow-lg'>
+					<Card className='w-full h-[26rem] shadow-3xl'>
 						<CardHeader
 							className='bg-transparent z-20  shadow-none '
 							floated={false}
@@ -441,9 +441,9 @@ const DashboardCharts = () => {
 							</Typography>
 						</CardHeader>
 						<CardBody>
-							<div className='lineChart h-[300px] w-full'>
+							<div className='lineChart z-100 h-[300px] w-full'>
 								<Line
-									className=''
+									className='z-100'
 									options={lineoptions}
 									data={linedata}
 								/>

@@ -1,7 +1,6 @@
 import React from 'react';
 import './ApprovePsychologistsCard.css';
 import { Typography, Button } from '@material-tailwind/react';
-// import { tableData } from '../../AllPsychologists/tableData';
 
 const ApprovePsychologistsCard = ({ approve }) => {
 	return (
@@ -12,7 +11,7 @@ const ApprovePsychologistsCard = ({ approve }) => {
 						<Typography
 							className='name'
 							variant='h6'>
-							{approve.Name}
+							{approve?.user_id?.['name']}
 						</Typography>
 					</div>
 					<div className='btns'>
@@ -34,17 +33,18 @@ const ApprovePsychologistsCard = ({ approve }) => {
 					<Typography
 						className='d-text'
 						variant='p'>
-						Clinic Name: <span>{approve.Clinic}</span>
+						Experience: <span>{approve.experience} Years</span>
 					</Typography>
 					<Typography
 						className='d-text'
 						variant='p'>
-						Clinic Address: <span>{approve.Address}</span>
+						Degree: <span>{approve.degree}</span>
 					</Typography>
 					<Typography
 						className='d-text'
 						variant='p'>
-						Registration No: <span>F8752FC</span>
+						Clinic Address:{' '}
+						<span>{approve?.onsiteAppointment?.['location']}</span>
 					</Typography>
 				</div>
 			</div>

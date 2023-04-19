@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './PsychologistPage.css';
-import { psychologists } from './data';
 import axios from 'axios';
 import { Footer, Navbar, PsychologistCards, Search } from '../index';
 import Pagination from '../Pagination/Pagination';
@@ -44,7 +43,7 @@ const PsychologistPage = () => {
 
 	const getPsychologists = async () => {
 		try {
-			const res = await axios.get('users/psychologists');
+			const res = await axios.get('/users/psychologists');
 			setshowPsychologists(res.data)
 			console.log(
 				'🚀 ~ file: PsychologistPage.jsx:55 ~ getPsychologists ~ data:',

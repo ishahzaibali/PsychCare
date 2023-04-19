@@ -5,6 +5,7 @@ export const cardData = [
 				prefix: 'Rs.',
 				money: '53,000',
 				increasing: '+55%',
+				className: 'increasing',
 				icon: (
 					<svg
 						xmlns='http://www.w3.org/2000/svg'
@@ -23,8 +24,9 @@ export const cardData = [
 		userCard: [
 			{
 				prefix: ' ',
-				users: '23,00',
+				users: '2,300',
 				increasing: '+3%',
+				className: 'increasing',
 				icon: (
 					<svg
 						xmlns='http://www.w3.org/2000/svg'
@@ -44,7 +46,8 @@ export const cardData = [
 			{
 				prefix: ' ',
 				psychologists: '+200',
-				increasing: '-2%',
+				decreasing: '-2%',
+				className: 'decreasing',
 				icon: (
 					<svg
 						xmlns='http://www.w3.org/2000/svg'
@@ -64,8 +67,9 @@ export const cardData = [
 		salesCard: [
 			{
 				prefix: 'Rs.',
-				sales: '201,300',
+				sales: '2,01,300',
 				increasing: '+5%',
+				className: 'increasing',
 				icon: (
 					<svg
 						xmlns='http://www.w3.org/2000/svg'

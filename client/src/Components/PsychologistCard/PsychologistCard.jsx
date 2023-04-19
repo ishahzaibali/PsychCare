@@ -1,7 +1,7 @@
 import React from 'react';
 import './PsychologistCard.css';
 import placeholder from '../../assets/placeholder.png';
-// import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import {
 	Card,
@@ -27,30 +27,34 @@ const PsychologistCard = ({ Psychologist }) => {
 				<CardBody className='mb-6 p-0'>
 					<div className='content-container'>
 						<div className='card-data'>
-							{!Psychologist.image ? (
-								<Avatar
-									size='xxl'
-									variant='circular'
-									className='object-cover'
-									src={placeholder}
-									alt='candice wu'
-								/>
-							) : (
-								<Avatar
-									size='xxl'
-									variant='circular'
-									className='object-cover'
-									src={Psychologist.image}
-									alt='candice wu'
-								/>
-							)}
+							<NavLink to={'/users/psychologists/' + Psychologist._id}>
+								{!Psychologist.image ? (
+									<Avatar
+										size='xxl'
+										variant='circular'
+										className='object-cover'
+										src={placeholder}
+										alt='candice wu'
+									/>
+								) : (
+									<Avatar
+										size='xxl'
+										variant='circular'
+										className='object-cover'
+										src={Psychologist.image}
+										alt='candice wu'
+									/>
+								)}
+							</NavLink>
 							<div className='user'>
-								<Typography
-									variant='h5'
-									className='name'
-									color='blue-gray'>
-									{Psychologist?.user_id?.['name']}
-								</Typography>
+								<NavLink to={'/users/psychologists/' + Psychologist._id}>
+									<Typography
+										variant='h5'
+										className='name'
+										color='blue-gray'>
+										{Psychologist?.user_id?.['name']}
+									</Typography>
+								</NavLink>
 								<Typography
 									className='sub-heading'
 									color='blue-gray'>
@@ -116,13 +120,13 @@ const PsychologistCard = ({ Psychologist }) => {
 						</div>
 						<div className='card-btn'>
 							<Button
-								className='font-[poppins] w-[234px] h-[50px] rounded'
+								className='font-[poppins] text-[#418cfd] w-[234px] h-[50px] rounded'
 								variant='outlined'
-								color='gray'>
+								color=''>
 								<span>
 									<VideoCameraIcon
 										color='gray'
-										className=''
+										className='text-[#418cfd]'
 										width='0.875rem'
 										height='0.875rem'
 									/>
@@ -150,7 +154,7 @@ const PsychologistCard = ({ Psychologist }) => {
 											variant='outlined'
 											color='gray'>
 											<span className='text-[#3d4146] w-full text-start text-[0.875rem]'>
-											{Psychologist?.onsiteAppointment?.['location']} (
+												{Psychologist?.onsiteAppointment?.['location']} (
 												{Psychologist?.onsiteAppointment?.['city']})
 											</span>
 											<div className='flex  w-full font-[500] justify-between'>
@@ -180,7 +184,7 @@ const PsychologistCard = ({ Psychologist }) => {
 												<span>
 													<VideoCameraIcon
 														color='gray'
-														className='ml-0'
+														className='ml-0 text-[#418cfd]'
 														width='0.875rem'
 														height='0.875rem'
 													/>

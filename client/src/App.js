@@ -15,6 +15,7 @@ import {
 	PsychologistDashboard,
 	SignupPsychologist,
 	CTA,
+	SinglePsychologist,
 	// Header,
 } from './Components';
 import {
@@ -111,8 +112,12 @@ const App = () => {
 					/>
 
 					<Route
-						path='/psychologists'
+						path='/users/psychologists'
 						element={<PsychologistPage />}
+					/>
+					<Route
+						path='/users/psychologists/:id'
+						element={<SinglePsychologist />}
 					/>
 				</Routes>
 			</div>

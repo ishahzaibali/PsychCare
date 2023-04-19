@@ -5,15 +5,18 @@
 }
 .card {
 	font-weight: 400;
+	border-radius: 1rem !important;
+	height: 90px;
 	font-size: 1rem;
 	line-height: 1.625;
 	letter-spacing: 0.00938em;
 	font-family: 'Poppins';
 	box-shadow: rgba(0, 0, 0, 0.05) 0rem 1.25rem 1.6875rem 0rem;
 	box-sizing: border-box;
-	
-	
 	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
 }
 
 .card-main {
@@ -22,7 +25,8 @@
 	align-items: center;
 	margin: 0;
 	gap: 1rem;
-	
+	height: 100%;
+
 	padding: 24px;
 	border-radius: 1rem;
 }
@@ -36,7 +40,12 @@
 	background: linear-gradient(310deg, rgb(33, 82, 255), rgb(33, 212, 253));
 	box-shadow: none;
 	opacity: 1;
-	
+	width: 48px;
+	height: 48px;
+	border-radius: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 .iButton svg {
 	box-shadow: none;
@@ -49,6 +58,18 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
+}
+.increasing {
+	background: rgb(130, 214, 22);
+	background: linear-gradient(310deg, rgb(23, 173, 55), rgb(152, 236, 45));
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+.decreasing {
+	background: #ea0606;
+	background: linear-gradient(to left, #ea0606 0%, #ff667c 100%);
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
 
 @media screen and (max-width: 768px) {

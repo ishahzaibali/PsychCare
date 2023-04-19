@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Psychologists.css';
+import axios from 'axios';
 
 import { Table } from '@mui/material';
 import TableBody from '@mui/material/TableBody';
@@ -7,7 +8,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import TableHead from '@mui/material/TableHead';
 import TableCell from '@mui/material/TableCell';
-import { tableData } from './tableData';
 
 import {
 	Card,
@@ -18,8 +18,34 @@ import {
 	MenuList,
 	MenuItem,
 } from '@material-tailwind/react';
+import psychologistService from '../../../../../services/PsychologistService';
 
 const Psychologists = () => {
+	const [showPsychologists, setshowPsychologists] = useState([]);
+	const getPsychologists = async () => {
+		try {
+			const res = await axios.get('users/psychologists');
+			setshowPsychologists(res.data);
+			console.log(
+				'🚀 ~ file: PsychologistPage.jsx:55 ~ getPsychologists ~ data:',
+				res.data
+			);
+
+			if (!res.status === 200) {
+				window.alert('Invalid Information');
+			}
+		} catch (error) {
+			console.log(
+				'🚀 ~ file: PsychologistPage.jsx:56 ~ getPsychologists ~ error:',
+				error
+			);
+		}
+	};
+
+	useEffect(() => {
+		getPsychologists();
+	}, []);
+
 	return (
 		<>
 			<Card className='w-full mb-[1rem] h-[35rem] shadow-lg '>
@@ -72,71 +98,79 @@ const Psychologists = () => {
 
 				<CardBody
 					color='blue-gray'
-					className='text-center font-[poppins] font-[500] text-sm m-0 p-0'>
-					<TableContainer className='mt-5 font-[poppins]'>
+					className='text-center font-poppins font-[500] text-sm m-0 p-0'>
+					<TableContainer className='mt-5 font-poppins'>
 						<Table
 							sx={{ minWidth: 650 }}
-							className='font-[poppins] table font-[500] text-sm'
+							className='font-poppins table font-[500] text-sm'
 							aria-label='simple table'>
 							<TableHead>
-								<TableRow className='table-head font-[poppins] font-[800] uppercase text-sm'>
+								<TableRow className='table-head font-poppins font-[800] uppercase text-sm'>
 									<TableCell className='table-head '>Name</TableCell>
 									<TableCell
-										className='table-head font-[poppins] font-[800] uppercase text-sm'
+										className='table-head font-poppins font-[800] uppercase text-sm'
 										align='left'>
 										Email
 									</TableCell>
 									<TableCell
-										className='table-head font-[poppins] font-[800] uppercase text-sm'
+										className='table-head font-poppins font-[800] uppercase text-sm'
 										align='left'>
 										Contact
 									</TableCell>
 									<TableCell
-										className='table-head font-[poppins] font-[800] uppercase text-sm'
+										className='table-head font-poppins font-[800] uppercase text-sm'
 										align='left'>
 										Clinic
 									</TableCell>
 									<TableCell
-										className='table-head font-[poppins] font-[800] uppercase text-sm'
+										className='table-head font-poppins font-[800] uppercase text-sm'
 										align='left'>
 										Address
 									</TableCell>
 								</TableRow>
 							</TableHead>
 
-							<TableBody className='font-[poppins] font-[500] text-sm'>
-								{tableData.slice(0, 6).map((row) => (
-									<TableRow
-										key={row.Name}
-										sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-										<TableCell
-											component='th'
-											className='table-row '
-											scope='row'>
-											{row.Name}
-										</TableCell>
-										<TableCell
-											className='table-row-2 '
-											align='left'>
-											{row.Email}
-										</TableCell>
-										<TableCell
-											className='table-row-2 '
-											align='left'>
-											{row.Contact}
-										</TableCell>
-										<TableCell
-											className='table-row-2 '
-											align='left'>
-											{row.Clinic}
-										</TableCell>
-										<TableCell
-											className='table-row-2 '
-											align='left'>
-											{row.Address}
-										</TableCell>
-									</TableRow>
-								))}
+							<TableBody className='font-poppins font-[500] text-sm'>
+								{psychologistService.isApproved() ? (
+									showPsychologists.slice(0, 6).map((row) => (
+										<TableRow
+											key={row._id}
+											sx={{
+												'&:last-child td, &:last-child th': { border: 0 },
+											}}>
+											<TableCell
+												component='th'
+												className='table-row '
+												scope='row'>
+												{row?.user_id?.['name']}
+											</TableCell>
+											<TableCell
+												className='table-row-2 '
+												align='left'>
+												{row?.user_id?.['email']}
+											</TableCell>
+											<TableCell
+												className='table-row-2 '
+												align='left'>
+												{row.Contact}
+											</TableCell>
+											<TableCell
+												className='table-row-2 '
+												align='left'>
+												{row?.onsiteAppointment?.['location']}
+											</TableCell>
+											<TableCell
+												className='table-row-2 '
+												align='left'>
+												{row?.onsiteAppointment?.['city']}
+											</TableCell>
+										</TableRow>
+									))
+								) : (
+									<div className='mt-[70%] ml-[90%] w-full '>
+										No Psychologists Found!
+									</div>
+								)}
 							</TableBody>
 						</Table>
 					</TableContainer>

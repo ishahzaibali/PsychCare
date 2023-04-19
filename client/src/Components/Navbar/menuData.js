@@ -7,7 +7,7 @@ export const menuData = [
 
 	{
 		title: 'Psychologist',
-		url: '/psychologists',
+		url: '/users/psychologists',
 		cName: 'nav-links',
 	},
 	{

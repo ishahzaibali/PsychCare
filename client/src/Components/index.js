@@ -18,5 +18,6 @@ export { default as DiscussionForumLayout } from './DiscussionForumLayout/Discus
 export { default as PsychologistDashboard } from './PsychologistDashboard/PsychologistDashboard';
 export { default as PsychologistDashboardLayout } from './PsychologistDashboardLayout/PsychologistDashboardLayout';
 export { default as PsychologistCards } from './PsychologistCard/PsychologistCards';
+export { default as Loading } from './Loading/Loading';
 export { default as CTA } from './SignupPsychologist/components/CTA';
 export { default as SinglePsychologist } from './PsychologistPage/SinglePsychologist/SinglePsychologist';

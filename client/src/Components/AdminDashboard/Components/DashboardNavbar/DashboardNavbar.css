@@ -3,12 +3,13 @@
 	grid-template-columns: repeat(2, minmax(0, 1fr));
 	height: 5rem;
 	margin-top: 0.75rem;
+
 	justify-content: center;
 	align-items: center;
 	background: transparent;
 	box-shadow: none;
 	border: 0;
-	position: sticky !important;
+	
 	top: 0;
 }
 .navbar-content .breadcrumb {

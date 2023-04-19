@@ -4,12 +4,16 @@ import axios from 'axios';
 import { Card, CardBody, Button, Typography } from '@material-tailwind/react';
 import ApprovePsychologistsCards from './ApprovePsychologistCard/ApprovePsychologistsCards';
 import { NavLink } from 'react-router-dom';
+import Loading from '../../../../Loading/Loading';
 
 const ApprovePsychologists = () => {
 	const [showPsychologists, setshowPsychologists] = useState([]);
+	const [loading, setLoading] = useState(false);
+
 	const getPsychologists = async () => {
 		try {
 			const res = await axios.get('users/psychologists');
+			setLoading(true);
 			setshowPsychologists(res.data);
 			console.log(
 				'🚀 ~ file: PsychologistPage.jsx:55 ~ getPsychologists ~ data:',
@@ -46,10 +50,17 @@ const ApprovePsychologists = () => {
 							className='p'>
 							Approve new Psychologists
 						</Typography>
-						<div className='mt-4 mb-4 flex flex-col gap-4'>
-							<ApprovePsychologistsCards approved={showPsychologists} />
+						<div className='flex items-center justify-center h-[70vh]'>
+							{loading ? (
+								<div className='mt-4 mb-4 flex flex-col gap-4'>
+									<ApprovePsychologistsCards approved={showPsychologists} />
+								</div>
+							) : (
+								<Loading />
+							)}
 						</div>
-						<div className='v-all'>
+
+						<div className='v-all -mt-12'>
 							<NavLink to={'/Psychologist'}>
 								<Button
 									variant='filled'

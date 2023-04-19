@@ -1,6 +1,9 @@
 import React from 'react';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import {
 	Contact,
 	Home,
@@ -16,15 +19,13 @@ import {
 	SignupPsychologist,
 	CTA,
 	SinglePsychologist,
-	// Header,
 } from './Components';
 import {
 	DashboardDiscussions,
 	DashboardTables,
 	DashboardUsers,
+	DashboardBilling,
 } from './Components/AdminDashboard/Components';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import {
 	PsychologistDashboardAppointments,
 	PsychologistDashboardMessages,
@@ -62,6 +63,10 @@ const App = () => {
 						<Route
 							path='/Discussion'
 							element={<DashboardDiscussions />}
+						/>
+						<Route
+							path='/Billing'
+							element={<DashboardBilling />}
 						/>
 					</Route>
 					<Route element={<DiscussionForumLayout />}>

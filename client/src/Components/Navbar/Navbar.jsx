@@ -123,7 +123,7 @@ const Navbar = () => {
 					<Button
 						variant='text'
 						color='blue-gray'
-						className='flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto'>
+						className='flex font-poppins items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto'>
 						{user ? (
 							<>
 								<Avatar
@@ -293,7 +293,7 @@ const Navbar = () => {
 						<Menu>
 							<MenuHandler>
 								<Button
-									className='ml-0'
+									className='ml-0 font-poppins'
 									variant='gradient'>
 									Account
 								</Button>

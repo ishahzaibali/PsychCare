@@ -106,6 +106,7 @@ const Login = () => {
 									size='lg'
 									label='Email'
 									// required='true'
+									className='font-poppins'
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
 								/>
@@ -138,7 +139,7 @@ const Login = () => {
 									<Typography
 										variant='small'
 										color='gray'
-										className='flex items-center font-normal'>
+										className='flex items-center font-poppins font-normal'>
 										Remember me
 									</Typography>
 								}
@@ -149,7 +150,7 @@ const Login = () => {
 								onClick={handleSubmit}
 								loading={loadings[1]}
 								type='submit'
-								className='mt-6 ml-0 login-button'
+								className='mt-6 ml-0 font-poppins login-button'
 								variant='gradient'
 								color='current'
 								fullWidth>
@@ -158,7 +159,7 @@ const Login = () => {
 
 							<Typography
 								color='gray'
-								className='mt-4 text-center font-normal'>
+								className='mt-4 text-center font-poppins text-sm font-normal'>
 								Don't have an account?{' '}
 								<NavLink
 									to='/signup'

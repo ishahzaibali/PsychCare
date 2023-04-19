@@ -1,0 +1,128 @@
+.pmt-main {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+	width: 100%;
+
+	min-height: 100vh;
+	padding-right: 2rem;
+	overflow: hidden;
+	margin-top: 2rem;
+	gap: 2rem;
+}
+.pmt-first,
+.pmt-second {
+	display: flex;
+	gap: 2rem;
+	width: 100%;
+	align-items: flex-start;
+	justify-content: center;
+}
+.pmt-first-first {
+	display: flex;
+	flex-direction: column;
+	flex: 2;
+	gap: 2rem;
+	width: 100%;
+	align-items: flex-start;
+	justify-content: center;
+}
+.pmt-first-second {
+	display: flex;
+	gap: 2rem;
+	align-items: flex-start;
+	justify-content: flex-start;
+	width: 100%;
+}
+.pmt-first .transactions {
+	display: flex;
+	flex: 1;
+	align-items: center;
+	justify-content: center;
+}
+.crd-header-2 {
+	background: hsla(208, 33%, 21%, 1);
+
+	background: linear-gradient(
+		90deg,
+		hsla(208, 33%, 21%, 1) 0%,
+		hsla(211, 36%, 46%, 1) 100%
+	) !important;
+
+	background-size: cover;
+	height: 222px;
+	width: 327px;
+	overflow: hidden;
+	background-position: center;
+}
+.pmt-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 4rem;
+	height: 4rem;
+	border-radius: 0.75rem;
+	background: linear-gradient(310deg, rgb(33, 82, 255), rgb(33, 212, 253));
+	color: #ffff;
+}
+.letter-spacing {
+	font-size: 1rem;
+	line-height: 1.625rem;
+	color: rgb(52, 71, 103);
+	font-weight: 500;
+	letter-spacing: 0.0075rem;
+}
+.letter-spacing-sub {
+	font-size: 0.75rem;
+	line-height: 1.25rem;
+	color: rgb(103, 116, 142);
+	width: 100%;
+	font-weight: 400;
+	letter-spacing: 0.0075rem;
+}
+.letter-spacing-mn {
+	font-size: 1.125rem;
+	line-height: 1.375rem;
+	letter-spacing: 0.0075em !important;
+	color: rgb(52, 71, 103);
+	width: 100%;
+	font-weight: 500;
+	font-family: 'poppins';
+}
+.crd-btn {
+	background: linear-gradient(310deg, rgb(20, 23, 39), rgb(58, 65, 111));
+	box-shadow: none;
+}
+.crd-btn:hover {
+	box-shadow: rgba(0, 0, 0, 0.11) 0rem 0.25rem 0.4375rem -0.0625rem,
+		rgba(0, 0, 0, 0.07) 0rem 0.125rem 0.25rem -0.0625rem !important;
+}
+.pmt-amnt {
+	background: #ea0606;
+	background: linear-gradient(to left, #ea0606 0%, #ff667c 100%);
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+
+	font-weight: 500;
+	font-size: 0.875rem;
+	line-height: 1.5rem;
+	letter-spacing: 0.0002875em;
+}
+.pmt-arr {
+	color: rgb(234, 6, 6);
+}
+.pmt-arrt {
+	color: rgb(130, 214, 22);
+}
+.pmt-amnr {
+	background: #ea0606;
+	background: linear-gradient(310deg, rgb(23, 173, 55), rgb(152, 236, 45));
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+
+	font-weight: 500;
+	font-size: 0.875rem;
+	line-height: 1.5rem;
+	letter-spacing: 0.0002875em;
+}

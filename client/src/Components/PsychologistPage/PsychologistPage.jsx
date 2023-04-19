@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './PsychologistPage.css';
 import axios from 'axios';
-import { Footer, Navbar, PsychologistCards, Search } from '../index';
+import { Footer, Loading, Navbar, PsychologistCards, Search } from '../index';
 import Pagination from '../Pagination/Pagination';
 import {
 	BriefcaseIcon,
@@ -39,12 +39,14 @@ const responsive = {
 const PsychologistPage = () => {
 	const [currentPage, setcurrentPage] = useState(1);
 	const [showPsychologists, setshowPsychologists] = useState([]);
+	const [loading, setLoading] = useState(false);
 	const [postsPerPage] = useState(4);
 
 	const getPsychologists = async () => {
 		try {
 			const res = await axios.get('/users/psychologists');
-			setshowPsychologists(res.data)
+			setLoading(true);
+			setshowPsychologists(res.data);
 			console.log(
 				'🚀 ~ file: PsychologistPage.jsx:55 ~ getPsychologists ~ data:',
 				res.data
@@ -71,7 +73,7 @@ const PsychologistPage = () => {
 		indexOfFirstPost,
 		indexOfLastPost
 	);
-	
+
 	const paginate = (pageNumber) => {
 		setcurrentPage(pageNumber);
 	};
@@ -184,7 +186,11 @@ const PsychologistPage = () => {
 				</div>
 				<div className='main-psychologists'>
 					<div className='mt-2'>
-						<PsychologistCards Psychologists={currentPsychologist} />
+						{loading ? (
+							<PsychologistCards Psychologists={currentPsychologist} />
+						) : (
+							<Loading />
+						)}
 					</div>
 				</div>
 				<div className='pagination'>

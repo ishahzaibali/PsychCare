@@ -2,7 +2,6 @@ import React from 'react';
 import { navData, accountData } from '../navData';
 import './DashboardSideNav.css';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { IconButton } from '@material-tailwind/react';
 import userService from '../../../../services/UserService';
 
 const DashboardSideNav = () => {
@@ -30,11 +29,11 @@ const DashboardSideNav = () => {
 									<li>
 										<NavLink to={data.url}>
 											<div className='menuContent'>
-												<IconButton
+												<div
 													className='ml-0 iconButton'
 													variant='gradient'>
 													{data.icon}
-												</IconButton>
+												</div>
 												<span>{data.title}</span>
 											</div>
 										</NavLink>
@@ -54,11 +53,11 @@ const DashboardSideNav = () => {
 											to={data.url}
 											onClick={isLastItem ? handleLogout : ''}>
 											<div className='menuContent'>
-												<IconButton
+												<div
 													className='m-0 iconButton'
 													variant='gradient'>
 													{data.icon}
-												</IconButton>
+												</div>
 												<span>{data.title}</span>
 											</div>
 										</NavLink>

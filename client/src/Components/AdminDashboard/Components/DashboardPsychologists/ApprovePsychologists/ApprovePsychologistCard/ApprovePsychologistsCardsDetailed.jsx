@@ -18,6 +18,7 @@ const ApprovePsychologistsCardsDetailed = ({ approved }) => {
 					className='p mb-8 pl-4'>
 					Approve new Psychologists
 				</Typography>
+				
 				{!psychologistService.isApproved()
 					? approved.map((n) => <ApprovePsychologistsCard approve={n} />)
 					: ''}

@@ -21,7 +21,7 @@ const Hero = () => {
 								{data.heading} <span>{data.heading_span}</span>
 							</h1>
 							<p>{data.text}</p>
-							<NavLink to='/psychologists'>
+							<NavLink to='users/psychologists'>
 								<motion.button
 									whileTap={{ scale: 0.9 }}
 									className='btn'>

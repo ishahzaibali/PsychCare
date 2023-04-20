@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PsychologistsDetailed from './AllPsychologists/PsychologistsDetailed';
 import './DashboardPsychologists.css';
+import { Loading } from '../../../index';
 import axios from 'axios';
 import {
 	Tabs,
@@ -13,9 +14,11 @@ import ApprovePsychologistsCardsDetailed from './ApprovePsychologists/ApprovePsy
 
 const DashboardPsychologists = () => {
 	const [showPsychologists, setshowPsychologists] = useState([]);
+	const [loading, setLoading] = useState(false);
 	const getPsychologists = async () => {
 		try {
 			const res = await axios.get('users/psychologists');
+			setLoading(true);
 			setshowPsychologists(res.data);
 			console.log(
 				'🚀 ~ file: PsychologistPage.jsx:55 ~ getPsychologists ~ data:',
@@ -69,14 +72,19 @@ const DashboardPsychologists = () => {
 							</Tab>
 						))}
 					</TabsHeader>
-					<TabsBody className=''>
-						{data.map(({ value, component }) => (
-							<TabPanel
-								key={value}
-								value={value}>
-								{component}
-							</TabPanel>
-						))}
+
+					<TabsBody className='flex items-center justify-center min-h-[50vh]'>
+						{loading ? (
+							data.map(({ value, component }) => (
+								<TabPanel
+									key={value}
+									value={value}>
+									{component}
+								</TabPanel>
+							))
+						) : (
+							<Loading />
+						)}
 					</TabsBody>
 				</Tabs>
 			</div>

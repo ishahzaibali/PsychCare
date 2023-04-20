@@ -4,9 +4,9 @@ import './Loading.css';
 const Loading = () => {
 	return (
 		<>
-			<div class='lds-ripple'>
-				<div></div>
-				<div></div>
+			<div class='spinner'>
+				<div class='double-bounce1'></div>
+				<div class='double-bounce2'></div>
 			</div>
 		</>
 	);

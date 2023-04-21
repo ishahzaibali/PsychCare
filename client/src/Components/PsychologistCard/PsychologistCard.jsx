@@ -1,6 +1,7 @@
 import React from 'react';
 import './PsychologistCard.css';
 import placeholder from '../../assets/placeholder.png';
+import placeholder_female from '../../assets/placeholder_female.png';
 import { NavLink } from 'react-router-dom';
 
 import {
@@ -29,13 +30,31 @@ const PsychologistCard = ({ Psychologist }) => {
 						<div className='card-data'>
 							<NavLink to={'/users/psychologists/' + Psychologist._id}>
 								{!Psychologist.image ? (
-									<Avatar
-										size='xxl'
-										variant='circular'
-										className='object-cover'
-										src={placeholder}
-										alt='candice wu'
-									/>
+									Psychologist.gender === 'male' ? (
+										<Avatar
+											size='xxl'
+											variant='circular'
+											className='object-cover'
+											src={placeholder}
+											alt='candice wu'
+										/>
+									) : Psychologist.gender === 'female' ? (
+										<Avatar
+											size='xxl'
+											variant='circular'
+											className='object-cover'
+											src={placeholder_female}
+											alt='candice wu'
+										/>
+									) : (
+										<Avatar
+											size='xxl'
+											variant='circular'
+											className='object-cover'
+											src={placeholder}
+											alt='candice wu'
+										/>
+									)
 								) : (
 									<Avatar
 										size='xxl'

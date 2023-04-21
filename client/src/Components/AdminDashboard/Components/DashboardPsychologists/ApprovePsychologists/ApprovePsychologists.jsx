@@ -53,7 +53,13 @@ const ApprovePsychologists = () => {
 						<div className='flex items-center justify-center h-[70vh]'>
 							{loading ? (
 								<div className='mt-4 mb-4 flex flex-col gap-4'>
-									<ApprovePsychologistsCards approved={showPsychologists} />
+									{showPsychologists ? (
+										<ApprovePsychologistsCards approved={showPsychologists} />
+									) : (
+										<div className='mt-[10%] ml-[0%] w-full text-sm'>
+											No Psychologists Found!
+										</div>
+									)}
 								</div>
 							) : (
 								<Loading />

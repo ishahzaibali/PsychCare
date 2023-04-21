@@ -1,19 +1,27 @@
 .main-box {
 	display: grid;
 	grid-template-columns: repeat(4, minmax(0, 1fr));
-	gap: 1rem;
+	gap: 0rem;
+}
+.main-box .card1,
+.card2,
+.card3,
+.card4 {
+	display: flex;
+	align-items: center !important;
+	justify-content: center;
 }
 .card {
 	font-weight: 400;
 	border-radius: 1rem !important;
-	height: 90px;
+	height: 83px;
 	font-size: 1rem;
 	line-height: 1.625;
 	letter-spacing: 0.00938em;
 	font-family: 'Poppins';
 	box-shadow: rgba(0, 0, 0, 0.05) 0rem 1.25rem 1.6875rem 0rem;
 	box-sizing: border-box;
-	width: 100%;
+	width: 239px;
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
@@ -24,10 +32,9 @@
 	justify-content: space-between;
 	align-items: center;
 	margin: 0;
-	gap: 1rem;
+	gap: 0.5rem;
 	height: 100%;
-
-	padding: 24px;
+	padding: 16px;
 	border-radius: 1rem;
 }
 .moneyData {
@@ -77,5 +84,16 @@
 		display: grid;
 		grid-template-columns: repeat(1, minmax(0, 1fr));
 		gap: 1rem;
+		width: 100%;
+	}
+	.main-box .card1,
+	.card2,
+	.card3,
+	.card4 {
+		width: 100%;
+		padding: 0;
+	}
+	.card {
+		width: 100%;
 	}
 }

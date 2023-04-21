@@ -12,7 +12,7 @@ const SalesCards = () => {
 						<div className='card1'>
 							{data.moneyCard.map((data) => (
 								<Card className='card'>
-									<CardBody className='card-main p-[24px] w-full'>
+									<CardBody className='card-main p-[16px] w-full'>
 										<div className='cardData'>
 											<Typography
 												variant='p'
@@ -108,7 +108,7 @@ const SalesCards = () => {
 								</Card>
 							))}
 						</div>
-						<div className='card1'>
+						<div className='card4'>
 							{data.salesCard.map((data) => (
 								<Card className='card'>
 									<CardBody className='card-main p-[16px] w-full'>

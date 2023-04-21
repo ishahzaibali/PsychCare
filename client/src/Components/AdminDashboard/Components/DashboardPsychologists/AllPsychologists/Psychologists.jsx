@@ -18,12 +18,12 @@ import {
 	MenuList,
 	MenuItem,
 } from '@material-tailwind/react';
-import psychologistService from '../../../../../services/PsychologistService';
 import Loading from '../../../../Loading/Loading';
 
 const Psychologists = () => {
 	const [showPsychologists, setshowPsychologists] = useState([]);
 	const [loading, setLoading] = useState(false);
+
 	const getPsychologists = async () => {
 		try {
 			const res = await axios.get('users/psychologists');
@@ -33,7 +33,6 @@ const Psychologists = () => {
 				'🚀 ~ file: PsychologistPage.jsx:55 ~ getPsychologists ~ data:',
 				res.data
 			);
-
 			if (!res.status === 200) {
 				window.alert('Invalid Information');
 			}
@@ -48,7 +47,6 @@ const Psychologists = () => {
 	useEffect(() => {
 		getPsychologists();
 	}, []);
-
 	return (
 		<>
 			<Card className='w-full mb-[1rem] h-[35rem] shadow-lg '>
@@ -133,43 +131,47 @@ const Psychologists = () => {
 									</TableRow>
 								</TableHead>
 								<TableBody className='font-poppins font-[500] text-sm'>
-									{psychologistService.isApproved() ? (
-										showPsychologists.slice(0, 6).map((row) => (
-											<TableRow
-												key={row._id}
-												sx={{
-													'&:last-child td, &:last-child th': { border: 0 },
-												}}>
-												<TableCell
-													component='th'
-													className='table-row '
-													scope='row'>
-													{row?.user_id?.['name']}
-												</TableCell>
-												<TableCell
-													className='table-row-2 '
-													align='left'>
-													{row?.user_id?.['email']}
-												</TableCell>
-												<TableCell
-													className='table-row-2 '
-													align='left'>
-													{row.Contact}
-												</TableCell>
-												<TableCell
-													className='table-row-2 '
-													align='left'>
-													{row?.onsiteAppointment?.['location']}
-												</TableCell>
-												<TableCell
-													className='table-row-2 '
-													align='left'>
-													{row?.onsiteAppointment?.['city']}
-												</TableCell>
-											</TableRow>
-										))
+									{showPsychologists ? (
+										showPsychologists.slice(0, 6).map((row) =>
+											row.approved === true ? (
+												<TableRow
+													key={row._id}
+													sx={{
+														'&:last-child td, &:last-child th': { border: 0 },
+													}}>
+													<TableCell
+														component='th'
+														className='table-row '
+														scope='row'>
+														{row?.user_id?.['name']}
+													</TableCell>
+													<TableCell
+														className='table-row-2 '
+														align='left'>
+														{row?.user_id?.['email']}
+													</TableCell>
+													<TableCell
+														className='table-row-2 '
+														align='left'>
+														{row.contact}
+													</TableCell>
+													<TableCell
+														className='table-row-2 '
+														align='left'>
+														{row?.onsiteAppointment?.['clinicname']}
+													</TableCell>
+													<TableCell
+														className='table-row-2 '
+														align='left'>
+														{row?.onsiteAppointment?.['location']}
+													</TableCell>
+												</TableRow>
+											) : (
+												''
+											)
+										)
 									) : (
-										<div className='mt-[70%] ml-[90%] w-full '>
+										<div className='mt-[70%] ml-[90%] w-full'>
 											No Psychologists Found!
 										</div>
 									)}

@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './PsychologistPage.css';
 import axios from 'axios';
-import { Footer, Loading, Navbar, PsychologistCards, Search } from '../index';
+import {
+	Footer,
+	Loading,
+	Navbar,
+	PsychologistCards,
+	Search,
+	EmptyState,
+} from '../index';
 import Pagination from '../Pagination/Pagination';
 import {
 	BriefcaseIcon,
@@ -187,7 +194,11 @@ const PsychologistPage = () => {
 				<div className='main-psychologists'>
 					<div className='mt-2'>
 						{loading ? (
-							<PsychologistCards Psychologists={currentPsychologist} />
+							currentPsychologist ? (
+								<PsychologistCards Psychologists={currentPsychologist} />
+							) : (
+								<EmptyState />
+							)
 						) : (
 							<Loading />
 						)}

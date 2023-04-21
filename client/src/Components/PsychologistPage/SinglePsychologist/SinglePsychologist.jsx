@@ -33,6 +33,10 @@ const SinglePsychologist = () => {
 
 	useEffect(() => {
 		getPost();
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth'
+		 });
 	}, [path]);
 
 	return (

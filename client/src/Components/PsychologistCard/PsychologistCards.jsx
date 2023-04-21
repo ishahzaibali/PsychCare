@@ -4,9 +4,9 @@ import PsychologistCard from './PsychologistCard';
 const PsychologistCards = ({ Psychologists }) => {
 	return (
 		<div>
-			{Psychologists.map((n) => (
-				<PsychologistCard Psychologist={n} />
-			))}
+			{Psychologists.map((n) =>
+				n.approved === true ? <PsychologistCard Psychologist={n} /> : ''
+			)}
 		</div>
 	);
 };

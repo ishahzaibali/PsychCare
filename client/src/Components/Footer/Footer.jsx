@@ -42,6 +42,12 @@ const Footer = () => {
 				<div className='footer-totop'>
 					<motion.div
 						whileTap={{ scale: 0.5 }}
+						onClick={() => {
+							window.scrollTo({
+								top: 0,
+								behavior: 'smooth',
+							});
+						}}
 						id='button'
 						type='reset'>
 						<svg

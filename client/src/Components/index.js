@@ -5,6 +5,7 @@ export { default as Hero } from './Hero/Hero';
 export { default as Search } from './Search/Search';
 export { default as PsychologicalIssues } from './PsychologicalIssues/PsychologicalIssues';
 export { default as Doctors } from './Doctors/Doctors';
+export { default as EmptyState } from './Doctors/EmptyState';
 export { default as Consultation } from './Consultation section/Consultation';
 export { default as Footer } from './Footer/Footer';
 export { default as Login } from './Login/Login';

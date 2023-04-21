@@ -16,19 +16,32 @@ const Pagination = ({
 	for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
 		pageNumbers.push(i);
 	}
+
 	return (
 		<>
 			<div className='flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6'>
 				<div className='flex flex-1 justify-between sm:hidden'>
 					<NavLink
 						href='#'
-						onClick={() => paginate(currentPage )}
+						onClick={() => {
+							paginate(currentPage);
+							window.scrollTo({
+								top: 450,
+								behavior: 'smooth',
+							});
+						}}
 						className='relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50'>
 						Previous
 					</NavLink>
 					<NavLink
 						href='#'
-						onClick={() => paginate(currentPage + 1)}
+						onClick={() => {
+							paginate(currentPage + 1);
+							window.scrollTo({
+								top: 450,
+								behavior: 'smooth',
+							});
+						}}
 						className='relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50'>
 						Next
 					</NavLink>
@@ -47,7 +60,13 @@ const Pagination = ({
 							aria-label='Pagination'>
 							<NavLink
 								href='#'
-								onClick={() => paginate(currentPage )}
+								onClick={() => {
+									paginate(currentPage);
+									window.scrollTo({
+										top: 450,
+										behavior: 'smooth',
+									});
+								}}
 								className='relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0'>
 								<span className='sr-only'>Previous</span>
 								<ChevronLeftIcon
@@ -61,6 +80,10 @@ const Pagination = ({
 										to='#'
 										onClick={() => {
 											paginate(numbers);
+											window.scrollTo({
+												top: 450,
+												behavior: 'smooth',
+											});
 										}}
 										aria-current='page'
 										className='relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0'>
@@ -71,7 +94,13 @@ const Pagination = ({
 
 							<NavLink
 								href='#'
-								onClick={() => paginate(currentPage + 1)}
+								onClick={() => {
+									paginate(currentPage + 1);
+									window.scrollTo({
+										top: 450,
+										behavior: 'smooth',
+									});
+								}}
 								className='relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0'>
 								<span className='sr-only'>Next</span>
 								<ChevronRightIcon

@@ -36,6 +36,15 @@ export const cardData = [
 		clinicname: 'PsychCare Clinic',
 	},
 	{
+		name: 'Talha Amir',
+		experience: '5',
+		rating: '4.5',
+		degree: 'Clinical Psychology',
+		specialization: 'Language Therapy',
+		location: 'Lahore, Pakistan',
+		clinicname: 'PsychCare Clinic',
+	},
+	{
 		name: 'Oreed Afzal',
 		experience: '10',
 		rating: '4.5',

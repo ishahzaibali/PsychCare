@@ -3,7 +3,7 @@ import MinimalPsychologistCard from './MinimalPsychologistCard';
 
 const MinimalPsychologistCards = ({ cards }) => {
 	return (
-		<div className='flex gap-12 items-center justify-center flex-wrap my-8'>
+		<div className='flex gap-8 items-center justify-center flex-wrap flex-auto my-8'>
 			{cards.map((n) => (
 				<MinimalPsychologistCard card={n} />
 			))}

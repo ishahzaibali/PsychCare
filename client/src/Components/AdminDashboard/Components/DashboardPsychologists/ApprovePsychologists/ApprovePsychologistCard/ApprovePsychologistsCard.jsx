@@ -2,17 +2,18 @@ import React from 'react';
 import './ApprovePsychologistsCard.css';
 // import axios from 'axios';
 import { Typography, Button } from '@material-tailwind/react';
+// import psychologistService from '../../../../../../services/PsychologistService';
 
 const ApprovePsychologistsCard = ({ approve }) => {
-	// const approvePsychologist = (_id) => {
-	// 	const currentData = axios.get('/users/psychologists/' + _id);
+	// const approvePsychologist = (id) => {
+	// 	const currentData = axios.get('/users/psychologists/' + id);
 	// 	const newData = { ...currentData, approved: true };
-	// 	psychologistService.updatePsychologist(_id, newData);
+	// 	psychologistService.updatePsychologist(id, newData);
 	// };
-	// const declinePsychologist = async (_id) => {
-	// 	const currentData = await axios.get('/users/psychologists/' + _id);
+	// const declinePsychologist = async (id) => {
+	// 	const currentData = await axios.get('/users/psychologists/' + id);
 	// 	const newData = { ...currentData, approved: false };
-	// 	psychologistService.updatePsychologist(_id, newData);
+	// 	psychologistService.updatePsychologist(id, newData);
 	// };
 
 	return (

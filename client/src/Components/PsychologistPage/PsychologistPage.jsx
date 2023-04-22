@@ -84,6 +84,99 @@ const PsychologistPage = () => {
 	const paginate = (pageNumber) => {
 		setcurrentPage(pageNumber);
 	};
+
+	const CarouselMenu = () => {
+		return (
+			<>
+				<Carousel
+					responsive={responsive}
+					className='sticky h-20 top-0 z-20 bg-white flex '>
+					<div className='filter-option'>
+						<div className='icon-section flex-[1]'>
+							<MapPinIcon
+								width='1.75rem'
+								height='1.75rem'
+							/>
+						</div>
+						<h1 className='flex-[2] p-[0.5rem]'>Nearby Psychologists</h1>
+					</div>
+					<div className='filter-option'>
+						<div className='icon-section flex-[1]'>
+							<ShieldCheckIcon
+								width='1.75rem'
+								height='1.75rem'
+							/>
+						</div>
+						<h1 className='flex-[2] p-[0.5rem]'>Lowest Fee</h1>
+					</div>
+					<div className='filter-option'>
+						<div className='icon-section flex-[1]'>
+							<ChatBubbleOvalLeftEllipsisIcon
+								width='1.75rem'
+								height='1.75rem'
+							/>
+						</div>
+						<h1 className='flex-[2] p-[0.5rem]'>Most Reviewed</h1>
+					</div>
+					<div className='filter-option'>
+						<div className='icon-section flex-[1]'>
+							<BriefcaseIcon
+								width='1.75rem'
+								height='1.75rem'
+							/>
+						</div>
+						<h1 className='flex-[2] p-[0.5rem]'>Most Experienced</h1>
+					</div>
+					<div className='filter-option'>
+						<div className='icon-section flex-[1]'>
+							<CalendarIcon
+								width='1.75rem'
+								height='1.75rem'
+							/>
+						</div>
+						<h1 className='flex-[2] p-[0.5rem]'>Available Today</h1>
+					</div>
+					<div className='filter-option'>
+						<div className='icon-section flex-[1]'>
+							<UserIcon
+								width='1.75rem'
+								height='1.75rem'
+							/>
+						</div>
+						<h1 className='flex-[2] p-[0.5rem]'>Female Doctors</h1>
+					</div>
+					<div className='filter-option'>
+						<div className='icon-section flex-[1]'>
+							<UserIcon
+								width='1.75rem'
+								height='1.75rem'
+							/>
+						</div>
+						<h1 className='flex-[2] p-[0.5rem]'>Male Doctors</h1>
+					</div>
+					<div className='filter-option'>
+						<div className='icon-section flex-[1]'>
+							<VideoCameraIcon
+								width='1.75rem'
+								height='1.75rem'
+							/>
+						</div>
+						<h1 className='flex-[2] p-[0.5rem]'>Video Consultation</h1>
+					</div>
+					<div className='filter-option'>
+						<div className='icon-section flex-[1]'>
+							<HandThumbUpIcon
+								width='1.75rem'
+								height='1.75rem'
+							/>
+						</div>
+						<h1 className='flex-[2] p-[0.5rem]'>Highest Rated</h1>
+					</div>
+				</Carousel>
+			</>
+		);
+	};
+
 	return (
 		<>
 			<div className='psychologist-page'>
@@ -105,96 +198,12 @@ const PsychologistPage = () => {
 					</p>
 				</div>
 				<div className='sticky h-20 top-0 z-20 bg-white '>
-					<Carousel
-						responsive={responsive}
-						className='sticky h-20 top-0 z-20 bg-white flex '>
-						<div className='filter-option'>
-							<div className='icon-section flex-[1]'>
-								<MapPinIcon
-									width='1.75rem'
-									height='1.75rem'
-								/>
-							</div>
-							<h1 className='flex-[2] p-[0.5rem]'>Nearby Psychologists</h1>
-						</div>
-						<div className='filter-option'>
-							<div className='icon-section flex-[1]'>
-								<ShieldCheckIcon
-									width='1.75rem'
-									height='1.75rem'
-								/>
-							</div>
-							<h1 className='flex-[2] p-[0.5rem]'>Lowest Fee</h1>
-						</div>
-						<div className='filter-option'>
-							<div className='icon-section flex-[1]'>
-								<ChatBubbleOvalLeftEllipsisIcon
-									width='1.75rem'
-									height='1.75rem'
-								/>
-							</div>
-							<h1 className='flex-[2] p-[0.5rem]'>Most Reviewed</h1>
-						</div>
-						<div className='filter-option'>
-							<div className='icon-section flex-[1]'>
-								<BriefcaseIcon
-									width='1.75rem'
-									height='1.75rem'
-								/>
-							</div>
-							<h1 className='flex-[2] p-[0.5rem]'>Most Experienced</h1>
-						</div>
-						<div className='filter-option'>
-							<div className='icon-section flex-[1]'>
-								<CalendarIcon
-									width='1.75rem'
-									height='1.75rem'
-								/>
-							</div>
-							<h1 className='flex-[2] p-[0.5rem]'>Available Today</h1>
-						</div>
-						<div className='filter-option'>
-							<div className='icon-section flex-[1]'>
-								<UserIcon
-									width='1.75rem'
-									height='1.75rem'
-								/>
-							</div>
-							<h1 className='flex-[2] p-[0.5rem]'>Female Doctors</h1>
-						</div>
-						<div className='filter-option'>
-							<div className='icon-section flex-[1]'>
-								<UserIcon
-									width='1.75rem'
-									height='1.75rem'
-								/>
-							</div>
-							<h1 className='flex-[2] p-[0.5rem]'>Male Doctors</h1>
-						</div>
-						<div className='filter-option'>
-							<div className='icon-section flex-[1]'>
-								<VideoCameraIcon
-									width='1.75rem'
-									height='1.75rem'
-								/>
-							</div>
-							<h1 className='flex-[2] p-[0.5rem]'>Video Consultation</h1>
-						</div>
-						<div className='filter-option'>
-							<div className='icon-section flex-[1]'>
-								<HandThumbUpIcon
-									width='1.75rem'
-									height='1.75rem'
-								/>
-							</div>
-							<h1 className='flex-[2] p-[0.5rem]'>Highest Rated</h1>
-						</div>
-					</Carousel>
+					<CarouselMenu />
 				</div>
 				<div className='main-psychologists'>
 					<div className='mt-2'>
 						{loading ? (
-							currentPsychologist ? (
+							showPsychologists ? (
 								<PsychologistCards Psychologists={currentPsychologist} />
 							) : (
 								<EmptyState />

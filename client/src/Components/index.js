@@ -15,10 +15,12 @@ export { default as PsychologistPage } from './PsychologistPage/PsychologistPage
 export { default as AdminDashboard } from './AdminDashboard/Dashboard';
 export { default as DashboardLayout } from './DashboardLayout/DashboardLayout';
 export { default as DiscussionForum } from './DiscussionForum/DiscussionForum';
-export { default as DiscussionForumLayout } from './DiscussionForumLayout/DiscussionForumLayout';
-export { default as PsychologistDashboard } from './PsychologistDashboard/PsychologistDashboard';
-export { default as PsychologistDashboardLayout } from './PsychologistDashboardLayout/PsychologistDashboardLayout';
 export { default as PsychologistCards } from './PsychologistCard/PsychologistCards';
 export { default as Loading } from './Loading/Loading';
 export { default as CTA } from './SignupPsychologist/components/CTA';
+export { default as DiscussionForumLayout } from './DiscussionForumLayout/DiscussionForumLayout';
+export { default as PsychologistDashboard } from './PsychologistDashboard/PsychologistDashboard';
+export { default as PsychologistDashboardLayout } from './PsychologistDashboardLayout/PsychologistDashboardLayout';
+export { default as MinimalPsychologistCard } from './PsychologistCard/MinimalPsychologistCard/MinimalPsychologistCard';
 export { default as SinglePsychologist } from './PsychologistPage/SinglePsychologist/SinglePsychologist';
+export { default as MinimalPsychologistCards } from './PsychologistCard/MinimalPsychologistCard/MinimalPsychologistCards';

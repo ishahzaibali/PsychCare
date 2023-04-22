@@ -80,11 +80,10 @@
 	height: 454px;
 }
 .consultation-images .consultation-messages {
-	position: absolute;
+	position: relative;
 	width: 263.94px;
-	height: 251px;
-	left: 647px;
-	top: 2850px;
+	margin-top: -45%;
+	margin-left: -90%;
 	z-index: 20;
 }
 .consultation-ellipse {

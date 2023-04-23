@@ -35,13 +35,13 @@ const Login = () => {
 					// console.log(data);
 					console.log('🚀 ~ file: Login.jsx:36 ~ .then ~ data:', data);
 
-					if (userService.isAdmin()) {
+					if (data.user.role === 'admin') {
 						e.preventDefault();
 						history('/Dashboard');
-					} else if (userService.isPsychologist()) {
+					} else if (data.user.user_id.role === 'psychologist') {
 						e.preventDefault();
 						history('/psychologist_dashboard');
-					} else {
+					} else if (data.user.user_id.role === 'patient') {
 						e.preventDefault();
 						history('/');
 					}

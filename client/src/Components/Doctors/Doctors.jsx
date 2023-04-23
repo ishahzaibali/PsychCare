@@ -12,7 +12,7 @@ const Doctors = () => {
 				<p>Specialist in their field to help you</p>
 			</div>
 			<div className='px-8'>
-				{cardData.length === 0 ? (
+				{cardData.length === null ? (
 					<div className='z-30 flex items-center justify-center'>
 						<EmptyState />
 					</div>

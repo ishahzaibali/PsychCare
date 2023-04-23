@@ -36,6 +36,10 @@ const DashboardNavbar = () => {
 	const [user, setUser] = useState(null);
 	useEffect(() => {
 		const loggedInUser = userService.getLoggedInUser();
+		console.log(
+			'🚀 ~ file: DashboardNavbar.jsx:39 ~ useEffect ~ loggedInUser:',
+			loggedInUser
+		);
 		if (loggedInUser) {
 			setUser(loggedInUser);
 		}
@@ -192,7 +196,6 @@ const DashboardNavbar = () => {
 						<div className='w-50 search flex justify-center'>
 							<Input
 								className='rounded-lg'
-								
 								label='Search'
 								icon={
 									<svg
@@ -211,7 +214,7 @@ const DashboardNavbar = () => {
 								}
 							/>
 						</div>
-						{userService.isLoggedIn ? (
+						{userService.isLoggedIn() ? (
 							<>
 								<div className='setting-btn cursor-pointer'>
 									<Cog6ToothIcon

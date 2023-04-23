@@ -17,7 +17,7 @@ const DashboardPsychologists = () => {
 	const [loading, setLoading] = useState(false);
 	const getPsychologists = async () => {
 		try {
-			const res = await axios.get('users/psychologists');
+			const res = await axios.get('users/psychologists/allpsychologists');
 			setLoading(true);
 			setshowPsychologists(res.data);
 			console.log(

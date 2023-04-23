@@ -67,7 +67,7 @@ class UserService extends GenericService {
 	};
 	isPsychologist = () => {
 		if (this.isLoggedIn()) {
-			if (this.getLoggedInUser().role === 'Psychologist') return true;
+			if (this.getLoggedInUser().role === 'psychologist') return true;
 			else return false;
 		} else return false;
 	};

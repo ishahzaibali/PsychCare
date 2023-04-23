@@ -174,6 +174,37 @@ const Navbar = () => {
 					) : (
 						''
 					)}
+					{/* {userProfileItems.map(({ label, icon, url }, key) => {
+								const isLastItem = key === userProfileItems.length - 1;
+								return (
+									<>
+										<NavLink to={url}>
+											<MenuItem
+												key={label}
+												onClick={isLastItem ? handleLogout : closeMenu}
+												className={`flex font-[poppins] ml-0 bg-transparent text-gray-600 border-none items-center gap-2 rounded ${
+													isLastItem
+														? 'hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10'
+														: ''
+												}`}>
+												{React.createElement(icon, {
+													className: `h-4 w-4 ${
+														isLastItem ? 'text-red-500' : ''
+													}`,
+													strokeWidth: 2,
+												})}
+												<Typography
+													as='span'
+													variant='small'
+													className='font-normal font-[poppins]'
+													color={isLastItem ? 'red' : 'inherit'}>
+													{label}
+												</Typography>
+											</MenuItem>
+										</NavLink>
+									</>
+								);
+						  })} */}
 					{userService.isPsychologist()
 						? psychologistProfile.map(({ label, icon, url }, key) => {
 								const isLastItem = key === psychologistProfile.length - 1;
@@ -269,8 +300,6 @@ const Navbar = () => {
 									</>
 								);
 						  })}
-
-					
 				</MenuList>
 			</Menu>
 		);

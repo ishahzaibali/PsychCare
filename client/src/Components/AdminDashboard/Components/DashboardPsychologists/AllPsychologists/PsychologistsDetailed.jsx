@@ -28,7 +28,7 @@ const Psychologists = () => {
 
 	const getPsychologists = async () => {
 		try {
-			const res = await axios.get('users/psychologists');
+			const res = await axios.get('users/psychologists/allpsychologists');
 			setLoading(true);
 			setshowPsychologists(res.data);
 			console.log(
@@ -132,7 +132,7 @@ const Psychologists = () => {
 								</TableHead>
 
 								<TableBody className='font-poppins w-full font-[500] text-sm'>
-									{showPsychologists ? (
+									{showPsychologists.length !== 0 ? (
 										showPsychologists.map((row) =>
 											row.approved === true ? (
 												<TableRow
@@ -194,13 +194,13 @@ const Psychologists = () => {
 													<TableCell
 														className='table-row-2 '
 														align='left'>
-														{row.contact}
+														{row.contactnumber}
 													</TableCell>
 													<TableCell
 														className='table-row-2 '
 														align='left'>
 														<div className='flex flex-col'>
-															{row?.onsiteAppointment?.['clinicname']}
+															{row?.onsiteAppointment?.['practicelocation']}
 															<span className='opacity-[0.6] font-[400]'>
 																{row?.onsiteAppointment?.['location']}
 															</span>

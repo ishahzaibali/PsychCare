@@ -6,7 +6,7 @@ class PsychologistService extends GenericService {
 	updatePsychologist = (_id, data) =>
 		this.put('users/psychologists/' + _id, data);
 
-	getPsychologist = () => this.get('users/psychologists');
+	getPsychologist = () => this.get('users/psychologists/allpsychologists');
 	getSinglePsychologist = (id) => this.get('users/psychologists/' + id);
 	isApproved() {
 		if (this.getPsychologist().approved === true) {

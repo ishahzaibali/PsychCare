@@ -63,12 +63,12 @@ const Signup = () => {
 					<Typography
 						variant='h4'
 						color='blue'
-						className='text-[2rem] font-[poppins] font-[700]'>
+						className='text-[2rem] font-poppins font-[700]'>
 						Sign Up
 					</Typography>
 					<Typography
 						color='gray'
-						className='mt-1 font-normal'>
+						className='mt-1 font-normal font-poppins '> 
 						Enter your details to register.
 					</Typography>
 					<form className='mt-8 mb-2 w-80 max-w-screen-lg sm:w-96'>
@@ -76,6 +76,7 @@ const Signup = () => {
 							<Input
 								size='lg'
 								label='Name'
+								className='font-poppins'
 								value={name}
 								onChange={(e) => setName(e.target.value)}
 							/>
@@ -118,25 +119,25 @@ const Signup = () => {
 						<Typography
 							variant='small'
 							color='gray'
-							className='flex items-center font-normal'>
+							className='flex items-center font-poppins font-normal'>
 							Signup as Psychologist ?
 							<NavLink
 								to='/getting_started'
-								className='font-medium ml-1 text-blue-500 transition-colors hover:text-blue-500'>
+								className='font-medium ml-1 text-blue-500 transition-colors font-poppins hover:text-blue-500'>
 								Get started
 							</NavLink>
 						</Typography>
 
 						<Button
 							onClick={handleRegister}
-							className='mt-6 ml-0'
+							className='mt-6 ml-0 font-poppins'
 							fullWidth>
 							Register
 						</Button>
 
 						<Typography
 							color='gray'
-							className='mt-4 text-center font-normal'>
+							className='mt-4 text-center font-normal font-poppins text-sm'>
 							Already have an account?{' '}
 							<NavLink
 								to='/login'

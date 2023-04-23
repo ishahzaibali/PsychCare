@@ -1,17 +1,15 @@
 import React from 'react';
 import './ApprovePsychologistsCard.css';
-// import axios from 'axios';
+import axios from 'axios';
 import { Typography, Button } from '@material-tailwind/react';
-// import psychologistService from '../../../../../../services/PsychologistService';
+import psychologistService from '../../../../../../services/PsychologistService';
 
 const ApprovePsychologistsCard = ({ approve }) => {
-	// const approvePsychologist = (id) => {
-	// 	const currentData = axios.get('/users/psychologists/' + id);
-	// 	const newData = { ...currentData, approved: true };
-	// 	psychologistService.updatePsychologist(id, newData);
-	// };
+	const approvePsychologist = (id) => {
+		psychologistService.updatePsychologist(id, { approved: true });
+	};
 	// const declinePsychologist = async (id) => {
-	// 	const currentData = await axios.get('/users/psychologists/' + id);
+	// 	const currentData = await axios.put('/users/psychologists/' + id);
 	// 	const newData = { ...currentData, approved: false };
 	// 	psychologistService.updatePsychologist(id, newData);
 	// };
@@ -38,7 +36,7 @@ const ApprovePsychologistsCard = ({ approve }) => {
 						<Button
 							className='ml-0 apr-btn text-xs'
 							size='sm'
-							// onClick={approvePsychologist(`${approve._id}`)}
+							// onClick={approvePsychologist(approve._id)}
 							variant='filled'>
 							Approve
 						</Button>
@@ -59,7 +57,7 @@ const ApprovePsychologistsCard = ({ approve }) => {
 						className='d-text'
 						variant='p'>
 						Clinic Name:{' '}
-						<span>{approve?.onsiteAppointment?.['clinicname']}</span>
+						<span>{approve?.onsiteAppointment?.['practicelocation']}</span>
 					</Typography>
 				</div>
 			</div>

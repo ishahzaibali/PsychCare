@@ -12,7 +12,7 @@ const ApprovePsychologists = () => {
 
 	const getPsychologists = async () => {
 		try {
-			const res = await axios.get('users/psychologists');
+			const res = await axios.get('users/psychologists/allpsychologists');
 			setLoading(true);
 			setshowPsychologists(res.data);
 			console.log(
@@ -50,13 +50,13 @@ const ApprovePsychologists = () => {
 							className='p'>
 							Approve new Psychologists
 						</Typography>
-						<div className='flex items-center justify-center h-[70vh]'>
+						<div className='flex justify-center items-start h-[70vh]'>
 							{loading ? (
 								<div className='mt-4 mb-4 flex flex-col gap-4'>
-									{showPsychologists ? (
+									{showPsychologists.length !== 0 ? (
 										<ApprovePsychologistsCards approved={showPsychologists} />
 									) : (
-										<div className='mt-[10%] ml-[0%] w-full text-sm'>
+										<div className='flex items-center justify-center mt-[10%] text-[#3d4146] ml-[0%] w-full text-sm'>
 											No Psychologists Found!
 										</div>
 									)}

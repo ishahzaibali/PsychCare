@@ -25,7 +25,7 @@ const CTA = () => {
 					</div>
 				</NavLink>
 				<div className='flex -mt-40 items-center justify-center'>
-					<Card className='w-[80%] mx-20 h-[27rem] shadow-lg border-none overflow-hidden'>
+					<Card className='w-[80%] mx-20 h-[27rem] shadow-3xl border-none overflow-hidden'>
 						<CardBody className='flex flex-col items-center justify-center'>
 							<Typography
 								variant='h2'
@@ -121,7 +121,7 @@ const CTA = () => {
 								</div>
 							</div>
 							<NavLink to={'/signup_psychologist'}>
-								<Button className='ml-0 mr-20'>Get Started</Button>
+								<Button className='ml-0 mr-20 font-poppins'>Get Started</Button>
 							</NavLink>
 						</CardFooter>
 					</Card>

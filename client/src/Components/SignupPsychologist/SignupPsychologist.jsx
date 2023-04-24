@@ -13,14 +13,13 @@ import psychologistService from '../../services/PsychologistService';
 const SignupPsychologist = () => {
 	const { token } = theme.useToken();
 	const [current, setCurrent] = useState(0);
-	const [user_id, setuser_id] = useState({
-		name: '',
-		email: '',
-		password: '',
+	const [formData, setformData] = useState({
+		user_id: '',
 		degree: '',
 		experience: '',
+		gender: '',
 		specialization: '',
-		about: '',
+		contactnumber: '',
 	});
 
 	const history = useNavigate();
@@ -29,6 +28,27 @@ const SignupPsychologist = () => {
 	};
 	const prev = () => {
 		setCurrent(current - 1);
+	};
+	const handleNext = (data) => {
+		setformData({ ...formData, ...data });
+		setCurrent(current + 1);
+	};
+	const handleRegister = (e) => {
+		e.preventDefault();
+		psychologistService
+			.addPsychologist(formData)
+			.then((data) => {
+				message.success('Information received!');
+				console.log(
+					'🚀 ~ file: SignupPsychologist.jsx:81 ~ .then ~ data:',
+					data
+				);
+				setformData({ ...formData, user_id: data._id });
+				history('/login');
+			})
+			.catch((err) => {
+				console.log('🚀 ~ file: Signup.jsx:30 ~ handleRegister ~ err:', err);
+			});
 	};
 
 	const contentStyle = {
@@ -41,8 +61,9 @@ const SignupPsychologist = () => {
 			title: 'Basic Information',
 			content: (
 				<BasicInformation
-					user_id={user_id}
-					setuser_id={setuser_id}
+					formData={formData}
+					setformData={setformData}
+					handleNext={handleNext}
 				/>
 			),
 		},
@@ -50,8 +71,9 @@ const SignupPsychologist = () => {
 			title: 'Professional Details',
 			content: (
 				<EducationDetails
-					user_id={user_id}
-					setuser_id={setuser_id}
+					formData={formData}
+					setformData={setformData}
+					handleNext={handleNext}
 				/>
 			),
 		},
@@ -59,8 +81,9 @@ const SignupPsychologist = () => {
 			title: 'Finishing Up',
 			content: (
 				<FinishingUp
-					user_id={user_id}
-					setuser_id={setuser_id}
+					formData={formData}
+					setformData={setformData}
+					handleNext={handleNext}
 				/>
 			),
 		},
@@ -70,23 +93,6 @@ const SignupPsychologist = () => {
 		title: item.title,
 	}));
 
-	const handleRegister = (e) => {
-		e.preventDefault();
-		psychologistService
-			.addPsychologist(user_id)
-			.then((data) => {
-				e.preventDefault();
-				message.success('Information received!');
-				console.log(
-					'🚀 ~ file: SignupPsychologist.jsx:81 ~ .then ~ data:',
-					data
-				);
-				history('/login');
-			})
-			.catch((err) => {
-				console.log('🚀 ~ file: Signup.jsx:30 ~ handleRegister ~ err:', err);
-			});
-	};
 	return (
 		<>
 			<Navbar />
@@ -110,14 +116,14 @@ const SignupPsychologist = () => {
 						alignItems: 'center',
 						justifyContent: 'flex-end',
 					}}>
-					{current < steps.length - 1 && (
+					{/* {current < steps.length - 1 && (
 						<Button
 							className='shadow-none font-poppins bg-[#418cfd] text-white'
 							type='primary'
 							onClick={() => next()}>
 							Next
 						</Button>
-					)}
+					)} */}
 					{current === steps.length - 1 && (
 						<NavLink to={'/login'}>
 							<Button

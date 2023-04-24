@@ -33,6 +33,11 @@ const Login = () => {
 				.login(email, password)
 				.then((data) => {
 					// console.log(data);
+					const LoggedInUser = userService.getLoggedInUser();
+					console.log(
+						'🚀 ~ file: Login.jsx:37 ~ .then ~ LoggedInUser:',
+						LoggedInUser
+					);
 					console.log('🚀 ~ file: Login.jsx:36 ~ .then ~ data:', data);
 
 					if (data.user.role === 'admin') {

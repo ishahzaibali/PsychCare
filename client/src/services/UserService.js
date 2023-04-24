@@ -7,7 +7,7 @@ class UserService extends GenericService {
 	login = (email, password) =>
 		new Promise((resolve, reject) => {
 			this.post('users/login', { email, password })
-				.then((token) => {
+				.then(({ token }) => {
 					localStorage.setItem('token', token);
 					resolve(token);
 				})
@@ -17,34 +17,23 @@ class UserService extends GenericService {
 		});
 	register = (name, email, password) =>
 		this.post('users/register', { password, email, name });
-	registerPsychologists = (
-		name,
-		email,
-		password,
-		location,
-		degree,
-		specialization,
-		reference,
-		info,
-		rating,
-		experience,
-		onlineAppointment,
-		onsiteAppointment
-	) =>
-		this.post('users/psychologists', {
-			name,
-			email,
-			password,
-			location,
-			degree,
-			specialization,
-			reference,
-			info,
-			rating,
-			experience,
-			onlineAppointment,
-			onsiteAppointment,
+	registerPsychologist = (name, email, password) =>
+		new Promise((resolve, reject) => {
+			this.post('users/register', {
+				password,
+				email,
+				name,
+				role: 'psychologist',
+			})
+				.then(({ token }) => {
+					localStorage.setItem('token', token);
+					resolve(token);
+				})
+				.catch((err) => {
+					reject(err);
+				});
 		});
+
 	logout = () => {
 		localStorage.removeItem('token');
 	};
@@ -69,6 +58,16 @@ class UserService extends GenericService {
 		if (this.isLoggedIn()) {
 			if (this.getLoggedInUser().role === 'psychologist') return true;
 			else return false;
+		} else return false;
+	};
+	userID = () => {
+		if (this.isLoggedIn()) {
+			const userID = this.getLoggedInUser()._id;
+			console.log(
+				'🚀 ~ file: UserService.js:66 ~ UserService ~ getLoggedInUser:',
+				this.getLoggedInUser()
+			);
+			return userID;
 		} else return false;
 	};
 }

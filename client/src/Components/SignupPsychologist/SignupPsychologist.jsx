@@ -17,6 +17,7 @@ const SignupPsychologist = () => {
 		user_id: '',
 		degree: '',
 		gender: '',
+		onsiteAppointment: { practicelocation: '' },
 		experience: '',
 		specialization: '',
 		contactnumber: '',

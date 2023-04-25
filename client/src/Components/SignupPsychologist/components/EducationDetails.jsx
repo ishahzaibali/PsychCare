@@ -8,6 +8,7 @@ const EducationDetails = ({ formData, setformData, handleNext }) => {
 	const [experience, setExperience] = useState('');
 	const [degree, setDegree] = useState('');
 	const [specialization, setSpecialization] = useState('');
+	const [practicelocation, setpracticelocation] = useState('');
 
 	const [error, setError] = useState(false);
 
@@ -18,11 +19,19 @@ const EducationDetails = ({ formData, setformData, handleNext }) => {
 			contactnumber.length === 0 ||
 			degree.length === 0 ||
 			specialization.length === 0 ||
-			experience.length === 0
+			experience.length === 0 ||
+			practicelocation.length === 0
 		) {
 			setError(true);
 		} else {
-			handleNext({ gender, contactnumber, experience, specialization, degree });
+			handleNext({
+				gender,
+				contactnumber,
+				experience,
+				specialization,
+				degree,
+				onsiteAppointment: { practicelocation },
+			});
 			setformData({
 				...formData,
 				gender: gender,
@@ -30,6 +39,7 @@ const EducationDetails = ({ formData, setformData, handleNext }) => {
 				degree: degree,
 				specialization: specialization,
 				experience: experience,
+				onsiteAppointment: { practicelocation: practicelocation },
 			}); // Call handleNext with address and phone
 			console.log(
 				'🚀 ~ file: EducationDetails.jsx:27 ~ handleNextClick ~ formData:',
@@ -111,6 +121,13 @@ const EducationDetails = ({ formData, setformData, handleNext }) => {
 									onChange={(e) => setSpecialization(e.target.value)}
 								/>
 							</div>
+							<Input
+								size='lg'
+								required={true}
+								label='Clinic Name'
+								value={practicelocation}
+								onChange={(e) => setpracticelocation(e.target.value)}
+							/>
 							{error && gender.length === 0 ? (
 								<label className='text-red-500 text-sm -mt-5'>
 									Gender could not be empty!

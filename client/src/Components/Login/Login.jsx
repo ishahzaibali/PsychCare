@@ -40,13 +40,13 @@ const Login = () => {
 					);
 					console.log('🚀 ~ file: Login.jsx:36 ~ .then ~ data:', data);
 
-					if (data.user.role === 'admin') {
+					if (userService.getLoggedInUser().role === 'admin') {
 						e.preventDefault();
 						history('/Dashboard');
-					} else if (data.user.user_id.role === 'psychologist') {
+					} else if (userService.getLoggedInUser().role === 'psychologist') {
 						e.preventDefault();
 						history('/psychologist_dashboard');
-					} else if (data.user.user_id.role === 'patient') {
+					} else if (userService.getLoggedInUser().role === 'patient') {
 						e.preventDefault();
 						history('/');
 					}

@@ -32,6 +32,7 @@ import {
 	PsychologistDashboardMessages,
 	PsychologistDashboardPayments,
 	PsychologistDashboardVideo,
+	PsychologistDashboardProfile,
 } from './Components/PsychologistDashboard';
 
 const App = () => {
@@ -101,6 +102,10 @@ const App = () => {
 						<Route
 							path='/psychologist_video_calls'
 							element={<PsychologistDashboardVideo />}
+						/>
+						<Route
+							path='/psychologist_profile'
+							element={<PsychologistDashboardProfile />}
 						/>
 					</Route>
 

@@ -4,6 +4,7 @@ import {
 	Cog6ToothIcon,
 	CreditCardIcon,
 	Squares2X2Icon,
+	UserCircleIcon,
 	VideoCameraIcon,
 } from '@heroicons/react/24/solid';
 
@@ -37,6 +38,12 @@ export const navData = [
 		title: 'Video Calls',
 		url: '/psychologist_video_calls',
 		icon: <VideoCameraIcon className='w-5 h-5' />,
+		cName: 'nav-links',
+	},
+	{
+		title: 'Profile',
+		url: '/psychologist_profile',
+		icon: <UserCircleIcon className='w-5 h-5' />,
 		cName: 'nav-links',
 	},
 	{

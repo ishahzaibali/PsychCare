@@ -175,7 +175,7 @@ export const navData = [
 export const accountData = [
 	{
 		title: 'Profile',
-		url: '/profile',
+		url: '/Profile',
 		icon: (
 			<svg
 				width='12px'

@@ -16,16 +16,16 @@ const SignupPsychologist = () => {
 	const [formData, setformData] = useState({
 		user_id: '',
 		degree: '',
-		experience: '',
 		gender: '',
+		experience: '',
 		specialization: '',
 		contactnumber: '',
 	});
 
 	const history = useNavigate();
-	const next = () => {
-		setCurrent(current + 1);
-	};
+	// const next = () => {
+	// 	setCurrent(current + 1);
+	// };
 	const prev = () => {
 		setCurrent(current - 1);
 	};
@@ -38,12 +38,14 @@ const SignupPsychologist = () => {
 		psychologistService
 			.addPsychologist(formData)
 			.then((data) => {
-				message.success('Information received!');
+				message.success(
+					'Information received! We will inform you for any further progress.'
+				);
 				console.log(
 					'🚀 ~ file: SignupPsychologist.jsx:81 ~ .then ~ data:',
 					data
 				);
-				setformData({ ...formData, user_id: data._id });
+				// setformData({ ...formData, user_id: data._id });
 				history('/login');
 			})
 			.catch((err) => {

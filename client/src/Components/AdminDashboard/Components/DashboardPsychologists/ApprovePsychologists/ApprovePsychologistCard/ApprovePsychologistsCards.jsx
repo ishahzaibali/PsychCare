@@ -5,7 +5,7 @@ const ApprovePsychologistsCards = ({ approved }) => {
 		<>
 			<div className='gap-4 h-full'>
 				{approved
-					.slice(2)
+					.slice(-2)
 					.map((n) =>
 						n.approved === false ? <ApprovePsychologistsCard approve={n} /> : ''
 					)}

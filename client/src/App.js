@@ -25,6 +25,7 @@ import {
 	DashboardTables,
 	DashboardUsers,
 	DashboardBilling,
+	DashboardProfile,
 } from './Components/AdminDashboard/Components';
 import {
 	PsychologistDashboardAppointments,
@@ -67,6 +68,10 @@ const App = () => {
 						<Route
 							path='/Billing'
 							element={<DashboardBilling />}
+						/>
+						<Route
+							path='/Profile'
+							element={<DashboardProfile />}
 						/>
 					</Route>
 					<Route element={<DiscussionForumLayout />}>

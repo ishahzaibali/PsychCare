@@ -1,0 +1,13 @@
+.profile-container {
+	margin-top: 3rem;
+	margin-bottom: 1rem;
+	padding: 0 2rem;
+}
+.edit-btn {
+	background: linear-gradient(310deg, rgb(20, 23, 39), rgb(58, 65, 111));
+	box-shadow: none;
+}
+.edit-btn:hover {
+	box-shadow: rgba(0, 0, 0, 0.11) 0rem 0.25rem 0.4375rem -0.0625rem,
+		rgba(0, 0, 0, 0.07) 0rem 0.125rem 0.25rem -0.0625rem !important;
+}

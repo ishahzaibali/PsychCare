@@ -1,59 +1,12 @@
-import React, { useState } from 'react';
-import { Card, Typography, Input, Button } from '@material-tailwind/react';
-import { useNavigate } from 'react-router-dom';
-import { message } from 'antd';
-import psychologistService from '../../../services/PsychologistService';
-
+import React from 'react';
+import { Card, Typography } from '@material-tailwind/react';
 const FinishingUp = ({ formData, setformData, handleNext }) => {
-	const [experience, setExperience] = useState('');
-	const [degree, setDegree] = useState('');
-	const [specialization, setSpecialization] = useState('');
-	const [error, setError] = useState(false);
-	const history = useNavigate();
-
-	const handleRegister = (e) => {
-		e.preventDefault();
-		if (
-			degree.length === 0 ||
-			specialization.length === 0 ||
-			experience.length === 0
-		) {
-			setError(true);
-		} else {
-			handleNext({ experience, specialization, degree });
-			setformData({
-				...formData,
-				degree: degree,
-				specialization: specialization,
-				experience: experience,
-			});
-			console.log(
-				'🚀 ~ file: FinishingUp.jsx:30 ~ handleRegister ~ formData:',
-				formData
-			);
-			psychologistService
-				.addPsychologist(formData)
-				.then((data) => {
-					e.preventDefault();
-					message.success('Information received!');
-					console.log(
-						'🚀 ~ file: SignupPsychologist.jsx:81 ~ .then ~ data:',
-						data
-					);
-					setformData({ ...formData, user_id: data._id });
-					history('/login');
-				})
-				.catch((err) => {
-					console.log('🚀 ~ file: Signup.jsx:30 ~ handleRegister ~ err:', err);
-				});
-		}
-	};
 
 	return (
 		<>
 			<div className='w-full h-full flex items-center justify-center'>
 				<Card
-					className='my-4 '
+					className='my-4 p-8'
 					color='transparent'
 					shadow={false}>
 					<Typography
@@ -66,10 +19,33 @@ const FinishingUp = ({ formData, setformData, handleNext }) => {
 					<Typography
 						color='gray'
 						textGradient
-						className='mt-1 font-normal font-poppins'>
-						Verify your Details.
+						className='mt-1 font-normal font-poppins pr-[40%]'>
+						Thank you for entering your details. Please review the information
+						below to ensure that all details are correct. If any information is
+						incorrect, please update it before proceeding.
 					</Typography>
-					
+					<Typography
+						color='gray'
+						textGradient
+						className='mt-8 font-normal font-poppins'>
+						Experience:{' '}
+						<span className='font-bold'>{formData.experience} Years</span>
+					</Typography>
+					<div className='flex gap-8'>
+						<Typography
+							color='gray'
+							textGradient
+							className='mt-1 font-normal font-poppins'>
+							Degree: <span className='font-bold'>{formData.degree}</span>
+						</Typography>
+						<Typography
+							color='gray'
+							textGradient
+							className='mt-1 font-normal font-poppins'>
+							Specialization:{' '}
+							<span className='font-bold'>{formData.specialization}</span>
+						</Typography>
+					</div>
 				</Card>
 			</div>
 		</>

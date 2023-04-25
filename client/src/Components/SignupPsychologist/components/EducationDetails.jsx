@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
-import {
-	Card,
-	Input,
-	Typography,
-	Select,
-	Button,
-	Option,
-} from '@material-tailwind/react';
+import { Card, Input, Typography, Button } from '@material-tailwind/react';
+// import { Select } from 'antd';
 
 const EducationDetails = ({ formData, setformData, handleNext }) => {
 	const [gender, setGender] = useState('male');
@@ -65,39 +59,24 @@ const EducationDetails = ({ formData, setformData, handleNext }) => {
 					</Typography>
 					<form className='mt-8 mb-2 w-80 font-poppins max-w-screen-lg sm:w-96'>
 						<div className='mb-4 flex flex-col w-[28rem] gap-6'>
-							{/* <Input
-								size='lg'
-								required={true}
-								
-								className='font-poppins'
-								label='Gender'
-								value={formData.gender}
-								onChange={(e) =>
-									setformData({ ...formData, gender: e.target.value })
-								}
-							/> */}
-
 							<div className='flex gap-2'>
-								<Select
-									size='lg'
-									selected={'male'}
+								<select
 									required={true}
-									className='font-poppins ml-0'
-									label='Gender'
+									className='font-poppins ml-0 bg-transparent rounded-lg border-gray-400 h-11'
 									value={gender}
 									onChange={(e) => setGender(e.target.value)}>
-									<Option
-										className='font-poppins'
+									<option
+										className='font-poppins text-[#3d4146] z-10'
 										selected
 										value='male'>
 										Male
-									</Option>
-									<Option
+									</option>
+									<option
 										className='font-poppins'
 										value='female'>
 										Female
-									</Option>
-								</Select>
+									</option>
+								</select>
 								<Input
 									size='lg'
 									required={true}
@@ -132,15 +111,6 @@ const EducationDetails = ({ formData, setformData, handleNext }) => {
 									onChange={(e) => setSpecialization(e.target.value)}
 								/>
 							</div>
-							{/* <Input
-								size='lg'
-								required={true}
-								label='Reference Number'
-								value={formData.reference}
-								onChange={(e) =>
-									setformData({ ...formData, reference: e.target.value })
-								}
-							/> */}
 							{error && gender.length === 0 ? (
 								<label className='text-red-500 text-sm -mt-5'>
 									Gender could not be empty!

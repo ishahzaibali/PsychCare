@@ -6,6 +6,7 @@ import {
 	DashboardSideNav,
 	DashboardUsers,
 	DashboardBilling,
+	DashboardProfile,
 } from '../AdminDashboard/Components';
 import { Box } from '@mui/material';
 import './DashboardLayout.css';
@@ -28,7 +29,6 @@ const DashboardLayout = () => {
 					width={'100%'}>
 					<div className='topNav'>
 						<DashboardNavbar />
-						
 					</div>
 					<Routes>
 						<Route
@@ -50,6 +50,10 @@ const DashboardLayout = () => {
 						<Route
 							path='/Billing'
 							element={<DashboardBilling />}
+						/>
+						<Route
+							path='/Profile'
+							element={<DashboardProfile />}
 						/>
 					</Routes>
 				</Box>

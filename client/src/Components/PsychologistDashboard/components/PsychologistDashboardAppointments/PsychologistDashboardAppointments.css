@@ -25,3 +25,8 @@
 	margin-top: -0.20rem;
 	height: 100%;
 }
+
+.ant-btn {
+	background: #418cfd !important;
+	box-shadow: none;
+} 

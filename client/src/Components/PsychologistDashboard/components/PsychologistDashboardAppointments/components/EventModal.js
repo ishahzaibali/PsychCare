@@ -1,14 +1,19 @@
 import React, { useContext, useState } from 'react';
 import GlobalContext from '../../../../../context/GlobalContext';
+import { Select, TimePicker } from 'antd';
+import dayjs from 'dayjs';
+import '../PsychologistDashboardAppointments.css';
+import { ClockIcon, TrashIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import {
-	BookmarkIcon,
-	Bars3BottomLeftIcon,
-	MinusIcon,
-	ClockIcon,
-	CheckIcon,
-	TrashIcon,
-	XMarkIcon,
-} from '@heroicons/react/24/solid';
+	Typography,
+	Avatar,
+	Dialog,
+	DialogHeader,
+	DialogBody,
+	DialogFooter,
+	Button,
+} from '@material-tailwind/react';
+import avatar from '../../../../../assets/team-3.jpg';
 
 const labelsClasses = ['indigo', 'gray', 'green', 'blue', 'red', 'purple'];
 
@@ -43,14 +48,49 @@ export default function EventModal() {
 
 		setShowEventModal(false);
 	}
+	const format = 'HH:mm';
 	return (
 		<div className='h-screen z-50 w-full fixed left-0 top-0 flex justify-center items-center'>
-			<form className='bg-white rounded-lg shadow-2xl w-1/4'>
-				<header className='bg-gray-100 px-4 py-2 flex justify-between items-center'>
-					<span className='material-icons-outlined text-gray-400'>
-						<MinusIcon className='w-7 h-7' />
-					</span>
-					<div className='flex gap-2 items-center'>
+			<div onClick={() => setShowEventModal(false)}></div>
+			<Dialog
+				open={() => setShowEventModal(true)}
+				className='bg-white rounded-lg shadow-3xl w-[70%] h-[95vh]'>
+				<DialogHeader className='bg-gray-100 px-4 py-4 rounded-tl-lg rounded-tr-lg flex gap-4 justify-between items-start'>
+					<div className='flex-[3]'>
+						<div className='border-b-2 border-gray-200'>
+							<Typography
+								variant='h6'
+								color='blue-gray'
+								className='font-poppins mb-2 text-[rgb(52, 71, 103)] font-medium text-sm'>
+								Add new Appointment
+							</Typography>
+						</div>
+						<div className='flex gap-6 mt-6 items-center'>
+							<div>
+								<Avatar
+									src={avatar}
+									variant='circular'
+									alt='avatar'
+									size='lg'
+								/>
+							</div>
+							<div>
+								<Typography
+									variant='h6'
+									color='blue-gray'
+									className='font-poppins text-[rgb(52, 71, 103)] font-semibold'>
+									Shaheer Hassan
+								</Typography>
+								<Typography
+									variant='h6'
+									color='blue-gray'
+									className='font-poppins text-[rgb(52, 71, 103)] font-normal text-sm'>
+									shaheerhassan@gmail.com
+								</Typography>
+							</div>
+						</div>
+					</div>
+					<div className='flex flex-[1] justify-end'>
 						{selectedEvent && (
 							<button
 								className='bg-red-300 ml-0 hover:bg-red-400 px-6 py-2 rounded text-white'
@@ -64,69 +104,113 @@ export default function EventModal() {
 								<TrashIcon className='w-5 h-5 text-red-600' />
 							</button>
 						)}
-						<button
-							className='bg-gray-300 ml-0  px-6 py-2 rounded text-gray-600 hover:text-white hover:bg-gray-400'
-							onClick={() => setShowEventModal(false)}>
-							<XMarkIcon className='w-5 h-5 text-gray-600' />
-						</button>
 					</div>
-				</header>
-				<div className='p-3'>
-					<div className='grid grid-cols-1/5 items-end gap-y-7'>
-						<div></div>
-						<input
-							type='text'
-							name='title'
-							placeholder='Add title'
-							value={title}
-							required
-							className='pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500'
-							onChange={(e) => setTitle(e.target.value)}
-						/>
-						<span className='material-icons-outlined text-gray-400'>
-							<ClockIcon className='w-6 h-6' />
-						</span>
-						<p>{daySelected.format('dddd, MMMM DD')}</p>
-						<span className='material-icons-outlined text-gray-400'>
-							<Bars3BottomLeftIcon className='w-6 h-6' />
-						</span>
-						<input
-							type='text'
-							name='description'
-							placeholder='Add a description'
-							value={description}
-							required
-							className='pt-3 border-0 text-gray-600 pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500'
-							onChange={(e) => setDescription(e.target.value)}
-						/>
-						<span className='material-icons-outlined text-gray-400'>
-							<BookmarkIcon className='w-6 h-6' />
-						</span>
-						<div className='flex gap-x-2'>
-							{labelsClasses.map((lblClass, i) => (
-								<span
-									key={i}
-									onClick={() => setSelectedLabel(lblClass)}
-									className={`bg-${lblClass}-500 w-6 h-6 rounded-full flex items-center justify-center cursor-pointer`}>
-									{selectedLabel === lblClass && (
-										<span className='material-icons-outlined text-white text-sm'>
-											<CheckIcon className='w-4 h-4' />
+				</DialogHeader>
+				<DialogBody>
+					<form>
+						<div className='p-3'>
+							<div className='flex flex-col gap-4'>
+								<div className='flex flex-col p-4 items-start justify-between border border-gray-100  rounded-lg'>
+									<Typography
+										variant='h6'
+										color='blue-gray'
+										className='font-poppins text-[rgb(52, 71, 103)] font-medium uppercase text-xs '>
+										First You need to add a service
+									</Typography>
+									<Select
+										defaultValue='onsiteAppointment'
+										value={title}
+										onChange={(e) => setTitle(e.target.value)}
+										required
+										size='large'
+										style={{
+											width: '100%',
+											marginTop: '1rem',
+										}}
+										options={[
+											{
+												value: 'onsiteAppointment',
+												label: 'Physical Appointment',
+											},
+											{
+												value: 'onlineAppointment',
+												label: 'Video Call',
+											},
+										]}
+									/>
+									{/* <input
+								type='text'
+								name='title'
+								placeholder='Add title'
+								className='pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500'
+								onChange={(e) => setTitle(e.target.value)}
+							/> */}
+								</div>
+								<div className='flex flex-col p-4 items-start justify-between border border-gray-100  rounded-lg'>
+									<Typography
+										variant='h6'
+										color='blue-gray'
+										className='font-poppins text-[rgb(52, 71, 103)] font-medium uppercase text-xs '>
+										Select Time Slot
+									</Typography>
+									<div className='mt-4 flex items-center gap-2'>
+										<Typography
+											variant='h6'
+											color='blue-gray'
+											className='font-poppins text-[rgb(52, 71, 103)] font-medium uppercase text-xs '>
+											from
+										</Typography>
+										<TimePicker
+											defaultValue={dayjs('10:00', format)}
+											format={format}
+										/>
+										<Typography
+											variant='h6'
+											color='blue-gray'
+											className='font-poppins text-[rgb(52, 71, 103)] font-medium uppercase text-xs '>
+											to
+										</Typography>
+										<TimePicker
+											defaultValue={dayjs('11:00', format)}
+											format={format}
+										/>
+									</div>
+								</div>
+								<div className='flex flex-col p-4 items-start justify-between border border-gray-100  rounded-lg'>
+									<Typography
+										variant='h6'
+										color='blue-gray'
+										className='font-poppins text-[rgb(52, 71, 103)] font-medium uppercase text-xs '>
+										Appointment Date
+									</Typography>
+									<div className='flex gap-4 mt-4 font-poppins items-center'>
+										<span className=' text-gray-400'>
+											<ClockIcon className='w-5 h-5' />
 										</span>
-									)}
-								</span>
-							))}
+										<p className='font-medium text-sm'>
+											{daySelected.format('dddd, MMMM DD')}
+										</p>
+									</div>
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
-				<footer className='flex justify-end border-t p-3 mt-5'>
-					<button
+					</form>
+				</DialogBody>
+				<div className='flex gap-2 p-3 justify-end'>
+					<Button
+						variant='text'
+						className=' ml-0 font-poppins px-6 py-2 rounded text-gray-600 hover:text-white hover:bg-gray-400'
+						onClick={() => setShowEventModal(false)}>
+						Close
+					</Button>
+					<Button
 						type='submit'
 						onClick={handleSubmit}
-						className='bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded text-white'>
+						className='bg-[#418cfd] hover:bg-blue-600 px-6 py-2 ml-0 font-poppins w-[40%] rounded text-white'>
 						Save
-					</button>
-				</footer>
-			</form>
+					</Button>
+				</div>
+			</Dialog>
 		</div>
 	);
 }

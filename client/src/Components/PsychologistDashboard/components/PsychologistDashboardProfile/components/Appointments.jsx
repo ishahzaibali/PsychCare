@@ -100,48 +100,18 @@ const OnlineAppointments = () => {
 				</Typography>
 			</div>
 
-			<div className='flex gap-12 items-center mt-6'>
-				<div>
-					<Typography
-						variant='h6'
-						color='blue-gray'
-						className='font-poppins text-[rgb(52, 71, 103)] font-medium text-xs uppercase opacity-[0.5]'>
-						email
-					</Typography>
-					<Typography
-						variant='h6'
-						color='blue-gray'
-						className='font-poppins text-[rgb(52, 71, 103)] font-medium text-sm'>
-						shaheerhassan@gmail.com
-					</Typography>
-				</div>
-				<div>
-					<Typography
-						variant='h6'
-						color='blue-gray'
-						className='font-poppins text-[rgb(52, 71, 103)] font-medium text-xs uppercase opacity-[0.5]'>
-						contact
-					</Typography>
-					<Typography
-						variant='h6'
-						color='blue-gray'
-						className='font-poppins text-[rgb(52, 71, 103)] font-medium text-sm'>
-						03001258795
-					</Typography>
-				</div>
-			</div>
 			<div className='mt-6'>
 				<Typography
 					variant='h6'
 					color='blue-gray'
 					className='font-poppins text-[rgb(52, 71, 103)] font-medium text-xs uppercase opacity-[0.5]'>
-					bio
+					schedule
 				</Typography>
 				<Typography
 					variant='h6'
 					color='blue-gray'
 					className='font-poppins text-[rgb(52, 71, 103)] font-medium text-sm'>
-					Administrator
+					Lahore
 				</Typography>
 			</div>
 		</>

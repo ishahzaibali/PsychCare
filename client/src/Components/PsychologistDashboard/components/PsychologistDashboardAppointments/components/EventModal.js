@@ -1,41 +1,40 @@
 import React, { useContext, useState } from 'react';
 import GlobalContext from '../../../../../context/GlobalContext';
-import { Select, TimePicker } from 'antd';
 import dayjs from 'dayjs';
 import '../PsychologistDashboardAppointments.css';
-import { ClockIcon, TrashIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import { ClockIcon, TrashIcon } from '@heroicons/react/24/solid';
 import {
 	Typography,
 	Avatar,
 	Dialog,
 	DialogHeader,
 	DialogBody,
-	DialogFooter,
 	Button,
 } from '@material-tailwind/react';
 import avatar from '../../../../../assets/team-3.jpg';
 
-const labelsClasses = ['indigo', 'gray', 'green', 'blue', 'red', 'purple'];
-
 export default function EventModal() {
 	const { setShowEventModal, daySelected, dispatchCalEvent, selectedEvent } =
 		useContext(GlobalContext);
-
+	const labelsClasses = ['indigo', 'gray', 'green', 'blue', 'red', 'purple'];
 	const [title, setTitle] = useState(selectedEvent ? selectedEvent.title : '');
-	const [description, setDescription] = useState(
-		selectedEvent ? selectedEvent.description : ''
+	const [startTime, setstartTime] = useState(
+		selectedEvent ? selectedEvent.startTime : ''
+	);
+	const [endTime, setendTime] = useState(
+		selectedEvent ? selectedEvent.endTime : ''
 	);
 	const [selectedLabel, setSelectedLabel] = useState(
 		selectedEvent
 			? labelsClasses.find((lbl) => lbl === selectedEvent.label)
 			: labelsClasses[0]
 	);
-
 	function handleSubmit(e) {
 		e.preventDefault();
 		const calendarEvent = {
 			title,
-			description,
+			startTime,
+			endTime,
 			label: selectedLabel,
 			day: daySelected.valueOf(),
 			id: selectedEvent ? selectedEvent.id : Date.now(),
@@ -53,6 +52,10 @@ export default function EventModal() {
 		<div className='h-screen z-50 w-full fixed left-0 top-0 flex justify-center items-center'>
 			<div onClick={() => setShowEventModal(false)}></div>
 			<Dialog
+				animate={{
+					mount: { scale: 1, y: 0 },
+					unmount: { scale: 0.9, y: -100 },
+				}}
 				open={() => setShowEventModal(true)}
 				className='bg-white rounded-lg shadow-3xl w-[70%] h-[95vh]'>
 				<DialogHeader className='bg-gray-100 px-4 py-4 rounded-tl-lg rounded-tr-lg flex gap-4 justify-between items-start'>
@@ -110,42 +113,31 @@ export default function EventModal() {
 					<form>
 						<div className='p-3'>
 							<div className='flex flex-col gap-4'>
-								<div className='flex flex-col p-4 items-start justify-between border border-gray-100  rounded-lg'>
+								<div className='flex flex-col p-4 h-auto items-start justify-between border border-gray-100  rounded-lg'>
 									<Typography
 										variant='h6'
 										color='blue-gray'
 										className='font-poppins text-[rgb(52, 71, 103)] font-medium uppercase text-xs '>
 										First You need to add a service
 									</Typography>
-									<Select
-										defaultValue='onsiteAppointment'
+									<select
+										className='rounded-lg border-gray-200 font-poppins text-sm font-medium'
 										value={title}
-										onChange={(e) => setTitle(e.target.value)}
-										required
-										size='large'
 										style={{
 											width: '100%',
 											marginTop: '1rem',
+											height: 'auto',
 										}}
-										options={[
-											{
-												value: 'onsiteAppointment',
-												label: 'Physical Appointment',
-											},
-											{
-												value: 'onlineAppointment',
-												label: 'Video Call',
-											},
-										]}
-									/>
-									{/* <input
-								type='text'
-								name='title'
-								placeholder='Add title'
-								className='pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500'
-								onChange={(e) => setTitle(e.target.value)}
-							/> */}
+										onChange={(e) => setTitle(e.target.value)}>
+										<option
+											value='onsiteAppointment'
+											selected>
+											Physical Appointment
+										</option>
+										<option value='onlineAppointment'>Video Call</option>
+									</select>
 								</div>
+								
 								<div className='flex flex-col p-4 items-start justify-between border border-gray-100  rounded-lg'>
 									<Typography
 										variant='h6'
@@ -160,9 +152,13 @@ export default function EventModal() {
 											className='font-poppins text-[rgb(52, 71, 103)] font-medium uppercase text-xs '>
 											from
 										</Typography>
-										<TimePicker
+										<input
 											defaultValue={dayjs('10:00', format)}
+											value={startTime}
+											type='time'
+											onChange={(e) => setstartTime(e.target.value)}
 											format={format}
+											className='font-poppins rounded-lg border-gray-200 text-sm font-normal'
 										/>
 										<Typography
 											variant='h6'
@@ -170,9 +166,13 @@ export default function EventModal() {
 											className='font-poppins text-[rgb(52, 71, 103)] font-medium uppercase text-xs '>
 											to
 										</Typography>
-										<TimePicker
-											defaultValue={dayjs('11:00', format)}
+										<input
+											defaultValue={dayjs('10:00', format)}
+											value={endTime}
+											type='time'
+											onChange={(e) => setendTime(e.target.value)}
 											format={format}
+											className='font-poppins rounded-lg border-gray-200 text-sm font-normal'
 										/>
 									</div>
 								</div>

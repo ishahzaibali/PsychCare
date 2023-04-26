@@ -23,6 +23,7 @@ export default function Day({ day, rowIdx }) {
 			? 'bg-blue-600 text-white rounded-full w-7'
 			: '';
 	}
+	
 	return (
 		<div className='border border-gray-200 flex flex-col items-center justify-center'>
 			<header className='flex flex-col items-center'>
@@ -37,7 +38,7 @@ export default function Day({ day, rowIdx }) {
 			</header>
 
 			<div
-				className='flex-1 cursor-pointer flex flex-col w-full items-center justify-center'
+				className='flex-1 cursor-pointer flex flex-col w-full items-center  justify-center'
 				onClick={() => {
 					setDaySelected(day);
 					setShowEventModal(true);
@@ -49,13 +50,13 @@ export default function Day({ day, rowIdx }) {
 						className={`bg-${evt.label}-200 p-1 flex flex-col items-center justify-center  text-gray-700 text-sm rounded mb-1 truncate`}>
 						<Typography
 							variant='p'
-							className='font-poppins font-medium text-sm truncate'>
+							className='font-poppins font-medium text-xs truncate'>
 							{evt.title}
 						</Typography>
 						<Typography
 							variant='p'
 							className='font-poppins font-medium  text-xs truncate'>
-							10:00 - 11:00
+							{evt.startTime} - {evt.endTime}
 						</Typography>
 					</div>
 				))}

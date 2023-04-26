@@ -1,0 +1,11 @@
+.grd {
+	background: linear-gradient(310deg, rgb(33, 82, 255), rgb(33, 212, 253));
+}
+/* .crd-grd:hover {
+   background: linear-gradient(310deg, rgb(33, 82, 255), rgb(33, 212, 253));
+   transition: all 2s ease-in-out;
+   color: #fff !important;
+}
+.crd-grd {
+   background: #fff;
+} */

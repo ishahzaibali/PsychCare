@@ -14,6 +14,7 @@ import {
 } from '@material-tailwind/react';
 import { StarIcon } from '@heroicons/react/24/solid';
 import DetailsTab from './components/DetailsTab';
+import { AppointmentCard } from './components';
 
 const SinglePsychologist = () => {
 	const [loading, setLoading] = useState(false);
@@ -35,8 +36,8 @@ const SinglePsychologist = () => {
 		getPost();
 		window.scrollTo({
 			top: 0,
-			behavior: 'smooth'
-		 });
+			behavior: 'smooth',
+		});
 	}, [path]);
 
 	return (
@@ -150,7 +151,13 @@ const SinglePsychologist = () => {
 														post.onsiteAppointment.schedule.map((data) => (
 															<div className='ml-4 flex gap-2 items-center justify-around font-poppins mb-8'>
 																<div className='flex-[1]'>
-																	<h2 className='font-[600]'>Clinic Name</h2>
+																	<h2 className='font-[600]'>
+																		{
+																			post?.onsiteAppointment?.[
+																				'practicelocation'
+																			]
+																		}
+																	</h2>
 																	<span className='text-[#3d4146] w-full text-start text-xs'>
 																		{post?.onsiteAppointment?.['location']} (
 																		{post?.onsiteAppointment?.['city']})
@@ -175,7 +182,9 @@ const SinglePsychologist = () => {
 										</div>
 									</div>
 								</div>
-								<div className='spy-spy-ad'>Appointment Details</div>
+								<div className='spy-spy-ad'>
+									<AppointmentCard />
+								</div>
 							</div>
 							<div className='w-full px-10'>
 								<DetailsTab />

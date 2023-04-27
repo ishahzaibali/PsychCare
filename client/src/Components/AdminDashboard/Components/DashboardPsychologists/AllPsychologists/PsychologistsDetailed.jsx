@@ -149,7 +149,7 @@ const Psychologists = () => {
 																{!row.image ? (
 																	row.gender === 'male' ? (
 																		<Avatar
-																			size='lg'
+																			size='md'
 																			variant='circular'
 																			className='object-cover'
 																			src={placeholder}
@@ -157,7 +157,7 @@ const Psychologists = () => {
 																		/>
 																	) : row.gender === 'female' ? (
 																		<Avatar
-																			size='lg'
+																			size='md'
 																			variant='circular'
 																			className='object-cover rounded-lg'
 																			src={placeholder_female}
@@ -165,7 +165,7 @@ const Psychologists = () => {
 																		/>
 																	) : (
 																		<Avatar
-																			size='lg'
+																			size='md'
 																			variant='circular'
 																			className='object-cover rounded-lg'
 																			src={placeholder}
@@ -174,7 +174,7 @@ const Psychologists = () => {
 																	)
 																) : (
 																	<Avatar
-																		size='sm'
+																		size='md'
 																		variant='circular'
 																		className='object-cover rounded-lg'
 																		src={row.image}

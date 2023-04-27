@@ -173,7 +173,7 @@ const PsychologistCard = ({ Psychologist }) => {
 											variant='outlined'
 											color='gray'>
 											<span className='text-[#3d4146] w-full text-start text-[0.875rem]'>
-												{Psychologist?.onsiteAppointment?.['location']} (
+												{Psychologist?.onsiteAppointment?.['practicelocation']} (
 												{Psychologist?.onsiteAppointment?.['city']})
 											</span>
 											<div className='flex  w-full font-[500] justify-between'>

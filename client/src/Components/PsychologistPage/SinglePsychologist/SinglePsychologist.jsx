@@ -1,20 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './SinglePsychologist.css';
-import { useLocation, NavLink } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Loading, Navbar } from '../../index';
 import placeholder from '../../../assets/placeholder.png';
-import {
-	Card,
-	CardBody,
-	CardFooter,
-	Typography,
-	Button,
-	Avatar,
-} from '@material-tailwind/react';
+import placeholder_female from '../../../assets/placeholder_female.png';
+import { Typography, Avatar } from '@material-tailwind/react';
 import { StarIcon } from '@heroicons/react/24/solid';
 import DetailsTab from './components/DetailsTab';
-import { AppointmentCard } from './components';
+import { AppointmentCard, OnlineAppointmentCard } from './components';
 
 const SinglePsychologist = () => {
 	const [loading, setLoading] = useState(false);
@@ -51,23 +45,41 @@ const SinglePsychologist = () => {
 								<div className='spy-spy-pd'>
 									<div className='spy-spy-pd-user'>
 										<div>
-											{!post.image ? (
-												<Avatar
-													size='xxl'
-													variant='circular'
-													className='object-cover'
-													src={placeholder}
-													alt='user avatar'
-												/>
-											) : (
-												<Avatar
-													size='xxl'
-													variant='circular'
-													className='object-cover'
-													src={post.image}
-													alt='candice wu'
-												/>
-											)}
+										{!post.image ? (
+																	post.gender === 'male' ? (
+																		<Avatar
+																			size='xxl'
+																			variant='circular'
+																			className='object-cover'
+																			src={placeholder}
+																			alt='candice wu'
+																		/>
+																	) : post.gender === 'female' ? (
+																		<Avatar
+																			size='xxl'
+																			variant='circular'
+																			className='object-cover rounded-lg'
+																			src={placeholder_female}
+																			alt='candice wu'
+																		/>
+																	) : (
+																		<Avatar
+																			size='xxl'
+																			variant='circular'
+																			className='object-cover rounded-lg'
+																			src={placeholder}
+																			alt='candice wu'
+																		/>
+																	)
+																) : (
+																	<Avatar
+																		size='xxl'
+																		variant='circular'
+																		className='object-cover rounded-lg'
+																		src={post.image}
+																		alt='candice wu'
+																	/>
+																)}
 										</div>
 										<div className='flex flex-col gap-2'>
 											<div>
@@ -143,7 +155,8 @@ const SinglePsychologist = () => {
 													</div>
 												</div>
 											</div>
-											<div className='spy-spy-pd-locations'>
+											<hr className='w-full mt-8 h-[2px]  bg-[#418cfd] ' />
+											{/* <div className='spy-spy-pd-locations'>
 												<h3>Practice Locations</h3>
 												<div className='w-full m-0 p-0 mb-4'>
 													{post &&
@@ -178,12 +191,13 @@ const SinglePsychologist = () => {
 															</div>
 														))}
 												</div>
-											</div>
+											</div> */}
 										</div>
 									</div>
 								</div>
 								<div className='spy-spy-ad'>
-									<AppointmentCard />
+									<AppointmentCard card={post} />
+									<OnlineAppointmentCard online={post} />
 								</div>
 							</div>
 							<div className='w-full px-10'>

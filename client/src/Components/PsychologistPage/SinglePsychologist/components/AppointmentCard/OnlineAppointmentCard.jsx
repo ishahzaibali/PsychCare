@@ -12,7 +12,7 @@ import {
 	Button,
 } from '@material-tailwind/react';
 
-const AppointmentCard = ({ card }) => {
+const OnlineAppointmentCard = ({ online }) => {
 	const [open, setOpen] = useState(0);
 
 	const handleOpen = (value) => {
@@ -56,10 +56,7 @@ const AppointmentCard = ({ card }) => {
 						floated={false}
 						className='shadow-none bg-transparent mt-4 rounded-none flex items-end w-full '>
 						<div className='font-poppins flex items-center gap-1 m-0 p-3 justify-center rounded-lg '>
-							<h6 className='text-2xl font-bold'>
-								{card?.onsiteAppointment?.['practicelocation']},{' '}
-								{card?.onsiteAppointment?.['city']}
-							</h6>
+							<h6 className='text-2xl font-bold'>Online Video Consultation</h6>
 						</div>
 					</CardHeader>
 					<CardBody className='flex items-start gap-4 flex-col w-full'>
@@ -72,7 +69,7 @@ const AppointmentCard = ({ card }) => {
 							<Typography
 								variant='h6'
 								className=' font-poppins text-sm font-bold'>
-								{PKR.format(card?.onsiteAppointment?.['fee'])}
+								{PKR.format(online?.onsiteAppointment?.['fee'])}
 							</Typography>
 						</div>
 						<hr className='w-full text-[#3d4146]' />
@@ -85,7 +82,7 @@ const AppointmentCard = ({ card }) => {
 							<Typography
 								variant='h6'
 								className='font-poppins text-sm font-bold'>
-								{card?.onsiteAppointment?.['location']}
+								Use phone/laptop for video call
 							</Typography>
 						</div>
 						<hr className='w-full text-[#3d4146]' />
@@ -110,9 +107,9 @@ const AppointmentCard = ({ card }) => {
 									</Typography>
 								</AccordionHeader>
 								<AccordionBody className='w-full'>
-									{card &&
-										card.onsiteAppointment &&
-										card.onsiteAppointment.schedule.map((data) => (
+									{online &&
+										online.onsiteAppointment &&
+										online.onsiteAppointment.schedule.map((data) => (
 											<Typography
 												variant='h6'
 												className='font-poppins mt-4 font-[500] flex  items-start justify-between px-6 gap-2 w-full text-sm'>
@@ -136,7 +133,7 @@ const AppointmentCard = ({ card }) => {
 					</CardBody>
 					<CardFooter className='flex items-center justify-between py-3'>
 						<Button className='w-full ml-0 shadow-none font-poppins'>
-							Book Appointment
+							Book Online Appointment
 						</Button>
 					</CardFooter>
 				</Card>
@@ -145,4 +142,4 @@ const AppointmentCard = ({ card }) => {
 	);
 };
 
-export default AppointmentCard;
+export default OnlineAppointmentCard;

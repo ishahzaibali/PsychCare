@@ -36,7 +36,7 @@ const ApprovePsychologistsCard = ({ approve }) => {
 						<Button
 							className='ml-0 apr-btn text-xs'
 							size='sm'
-							// onClick={approvePsychologist(approve._id)}
+							onClick={() => approvePsychologist(approve._id)}
 							variant='filled'>
 							Approve
 						</Button>

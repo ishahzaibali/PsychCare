@@ -6,7 +6,7 @@ import ApprovePsychologistsCards from './ApprovePsychologistCard/ApprovePsycholo
 import { NavLink } from 'react-router-dom';
 import Loading from '../../../../Loading/Loading';
 
-const ApprovePsychologists = () => {
+const ApprovePsychologists = ({psychologists}) => {
 	const [showPsychologists, setshowPsychologists] = useState([]);
 	const [loading, setLoading] = useState(false);
 

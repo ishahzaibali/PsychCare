@@ -20,7 +20,7 @@ import {
 } from '@material-tailwind/react';
 import Loading from '../../../../Loading/Loading';
 
-const Psychologists = () => {
+const Psychologists = ({DashboardPsychologists}) => {
 	const [showPsychologists, setshowPsychologists] = useState([]);
 	const [loading, setLoading] = useState(false);
 
@@ -28,14 +28,14 @@ const Psychologists = () => {
 		try {
 			const res = await axios.get('users/psychologists/allpsychologists');
 			setLoading(true);
-			setshowPsychologists(res.data);
-
-			console.log(
-				'🚀 ~ file: PsychologistPage.jsx:55 ~ getPsychologists ~ data:',
-				res.data
-			);
 			if (!res.status === 200) {
 				window.alert('Invalid Information');
+			} else {
+				setshowPsychologists(res.data);
+				console.log(
+					'🚀 ~ file: PsychologistPage.jsx:55 ~ getPsychologists ~ data:',
+					res.data
+				);
 			}
 		} catch (error) {
 			console.log(
@@ -133,12 +133,14 @@ const Psychologists = () => {
 								</TableHead>
 								<TableBody className='font-poppins font-[500] text-sm'>
 									{showPsychologists.length !== 0 ? (
-										showPsychologists.slice(0, 6).map((row) =>
+										showPsychologists.slice(0, 5).map((row) =>
 											row.approved === true ? (
 												<TableRow
 													key={row._id}
 													sx={{
-														'&:last-child td, &:last-child th': { border: 0 },
+														'&:last-child td, &:last-child th': {
+															border: 0,
+														},
 													}}>
 													<TableCell
 														component='th'

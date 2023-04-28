@@ -45,7 +45,7 @@ const DashboardPsychologists = () => {
 			label: 'Psychologists',
 			value: 'Psychologists',
 			id: 'all-Psychologists',
-			component: <PsychologistsDetailed />,
+			component: <PsychologistsDetailed DetailedPsychologists={showPsychologists} />,
 		},
 		{
 			label: 'Approve Requests',

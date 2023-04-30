@@ -11,7 +11,8 @@ import {
 	DialogBody,
 	Button,
 } from '@material-tailwind/react';
-import avatar from '../../../../../assets/team-3.jpg';
+import avatar from '../../../../../assets/placeholder.png';
+import userService from '../../../../../services/UserService';
 
 export default function EventModal() {
 	const { setShowEventModal, daySelected, dispatchCalEvent, selectedEvent } =
@@ -48,6 +49,8 @@ export default function EventModal() {
 		setShowEventModal(false);
 	}
 	const format = 'HH:mm';
+	const username = userService.getLoggedInUser().name;
+	const role = userService.getLoggedInUser().role;
 	return (
 		<div className='h-screen z-50 w-full fixed left-0 top-0 flex justify-center items-center'>
 			<div onClick={() => setShowEventModal(false)}></div>
@@ -82,13 +85,13 @@ export default function EventModal() {
 									variant='h6'
 									color='blue-gray'
 									className='font-poppins text-[rgb(52, 71, 103)] font-semibold'>
-									Shaheer Hassan
+									{username}
 								</Typography>
 								<Typography
 									variant='h6'
 									color='blue-gray'
 									className='font-poppins text-[rgb(52, 71, 103)] font-normal text-sm'>
-									shaheerhassan@gmail.com
+									{role}
 								</Typography>
 							</div>
 						</div>
@@ -130,14 +133,14 @@ export default function EventModal() {
 										}}
 										onChange={(e) => setTitle(e.target.value)}>
 										<option
-											value='onsiteAppointment'
+											value='onsite'
 											selected>
 											Physical Appointment
 										</option>
-										<option value='onlineAppointment'>Video Call</option>
+										<option value='online'>Video Call</option>
 									</select>
 								</div>
-								
+
 								<div className='flex flex-col p-4 items-start justify-between border border-gray-100  rounded-lg'>
 									<Typography
 										variant='h6'

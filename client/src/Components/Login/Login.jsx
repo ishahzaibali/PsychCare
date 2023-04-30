@@ -19,11 +19,9 @@ const Login = () => {
 	const [error, setError] = useState(false);
 	const [loginError, setLoginError] = useState(false);
 	const [errorMessage, setErrorMessage] = useState('');
-	const [loadings, setLoadings] = useState([]);
 	const history = useNavigate();
 
 	const handleSubmit = (e) => {
-		enterLoading(1);
 		e.preventDefault();
 		if (email.length === 0 || password.length === 0) {
 			setError(true);
@@ -40,13 +38,13 @@ const Login = () => {
 					);
 					console.log('🚀 ~ file: Login.jsx:36 ~ .then ~ data:', data);
 
-					if (userService.getLoggedInUser().role === 'admin') {
+					if (LoggedInUser.role === 'admin') {
 						e.preventDefault();
 						history('/Dashboard');
-					} else if (userService.getLoggedInUser().role === 'psychologist') {
+					} else if (LoggedInUser.role === 'psychologist') {
 						e.preventDefault();
 						history('/psychologist_dashboard');
-					} else if (userService.getLoggedInUser().role === 'patient') {
+					} else if (LoggedInUser.role === 'patient') {
 						e.preventDefault();
 						history('/');
 					}
@@ -59,20 +57,6 @@ const Login = () => {
 		}
 	};
 
-	const enterLoading = (index) => {
-		setLoadings((prevLoadings) => {
-			const newLoadings = [...prevLoadings];
-			newLoadings[index] = true;
-			return newLoadings;
-		});
-		setTimeout(() => {
-			setLoadings((prevLoadings) => {
-				const newLoadings = [...prevLoadings];
-				newLoadings[index] = false;
-				return newLoadings;
-			});
-		}, 6000);
-	};
 	return (
 		<>
 			<Navbar />
@@ -153,7 +137,6 @@ const Login = () => {
 
 							<Button
 								onClick={handleSubmit}
-								loading={loadings[1]}
 								type='submit'
 								className='mt-6 ml-0 font-poppins login-button'
 								variant='gradient'

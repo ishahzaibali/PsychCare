@@ -19,14 +19,15 @@ const DashboardPsychologists = () => {
 		try {
 			const res = await axios.get('users/psychologists/allpsychologists');
 			setLoading(true);
-			setshowPsychologists(res.data);
-			console.log(
-				'🚀 ~ file: PsychologistPage.jsx:55 ~ getPsychologists ~ data:',
-				res.data
-			);
 
-			if (!res.status === 200) {
+			if (res.status !== 200) {
 				window.alert('Invalid Information');
+			} else {
+				setshowPsychologists(res.data);
+				console.log(
+					'🚀 ~ file: PsychologistPage.jsx:55 ~ getPsychologists ~ data:',
+					res.data
+				);
 			}
 		} catch (error) {
 			console.log(
@@ -45,7 +46,9 @@ const DashboardPsychologists = () => {
 			label: 'Psychologists',
 			value: 'Psychologists',
 			id: 'all-Psychologists',
-			component: <PsychologistsDetailed DetailedPsychologists={showPsychologists} />,
+			component: (
+				<PsychologistsDetailed DetailedPsychologists={showPsychologists} />
+			),
 		},
 		{
 			label: 'Approve Requests',

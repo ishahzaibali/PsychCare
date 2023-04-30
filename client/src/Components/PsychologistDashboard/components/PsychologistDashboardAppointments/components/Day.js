@@ -38,7 +38,7 @@ export default function Day({ day, rowIdx }) {
 			</header>
 
 			<div
-				className='flex-1 cursor-pointer flex flex-col w-full items-center  justify-center'
+				className='flex-1 cursor-pointer flex flex-col w-full items-center  justify-start '
 				onClick={() => {
 					setDaySelected(day);
 					setShowEventModal(true);
@@ -47,15 +47,15 @@ export default function Day({ day, rowIdx }) {
 					<div
 						key={idx}
 						onClick={() => setSelectedEvent(evt)}
-						className={`bg-${evt.label}-200 p-1 flex flex-col items-center justify-center  text-gray-700 text-sm rounded mb-1 truncate`}>
+						className={`bg-${evt.label}-200 p-1 flex flex-col items-center justify-center z-10  text-gray-700 text-xs rounded mb-1 truncate`}>
 						<Typography
 							variant='p'
-							className='font-poppins font-medium text-xs truncate'>
+							className='font-poppins font-medium text-xs'>
 							{evt.title}
 						</Typography>
 						<Typography
 							variant='p'
-							className='font-poppins font-medium  text-xs truncate'>
+							className='font-poppins font-medium  text-xs'>
 							{evt.startTime} - {evt.endTime}
 						</Typography>
 					</div>

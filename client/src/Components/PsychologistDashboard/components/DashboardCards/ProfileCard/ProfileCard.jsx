@@ -1,33 +1,38 @@
 import React from 'react';
 import './ProfileCard.css';
-import {
-	Card,
-	CardBody,
-	Typography,
-} from '@material-tailwind/react';
+import { Card, CardBody, Typography, Avatar } from '@material-tailwind/react';
+import placeholder from '../../../../../assets/placeholder.png';
+import userService from '../../../../../services/UserService';
 
 const ProfileCard = () => {
+	const username = userService.getLoggedInUser().name;
+	const role = userService.getLoggedInUser().role;
+
 	return (
 		<>
 			<div className='w-full '>
 				<Card className='w-72 h-[50vh]  shadow-none'>
 					<CardBody className='w-full text-center flex flex-col items-center justify-center'>
-						<img
-							src='https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80'
-							alt='...'
-							className='rounded-full h-20 w-20'
-						/>
+						<div>
+							<Avatar
+								size='xl'
+								variant='circular'
+								className='object-cover'
+								src={placeholder}
+								alt='candice wu'
+							/>
+						</div>
 						<Typography
 							variant='h5'
 							color='blue-gray'
-							className='mt-2 font-semibold'>
-							Dr. <span>Shahzaib Ali</span>
+							className='mt-2 font-semibold font-poppins'>
+							Dr. <span>{username}</span>
 						</Typography>
 						<Typography
 							color='gray'
-							className='font-medium text-sm opacity-[0.7]'
+							className='font-medium text-sm font-poppins opacity-[0.7]'
 							textGradient>
-							Psychologist
+							{role}
 						</Typography>
 						<hr className='bottom' />
 						<div className='flex flex-col p-8 gap-2  w-full'>
@@ -35,7 +40,7 @@ const ProfileCard = () => {
 								<p className='text-sm font-semibold opacity-[0.6]'>
 									Overall Ratings
 								</p>
-								<p className='text-md font-semibold '>4.8</p>
+								<p className='text-md font-semibold '>4.5</p>
 							</div>
 							<div className='flex justify-between gap-2 '>
 								<p className='text-sm font-semibold opacity-[0.6]'>

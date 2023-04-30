@@ -1,5 +1,6 @@
 import GenericService from './GenericService';
 import jwtDecode from 'jwt-decode';
+
 class UserService extends GenericService {
 	constructor() {
 		super();
@@ -7,9 +8,11 @@ class UserService extends GenericService {
 	login = (email, password) =>
 		new Promise((resolve, reject) => {
 			this.post('users/login', { email, password })
-				.then(({ token }) => {
+				.then(({ token, user }) => {
 					localStorage.setItem('token', token);
-					resolve(token);
+					localStorage.setItem('user', JSON.stringify(user));
+
+					resolve(token, user);
 				})
 				.catch((err) => {
 					reject(err);
@@ -44,6 +47,14 @@ class UserService extends GenericService {
 		try {
 			const jwt = localStorage.getItem('token');
 			return jwtDecode(jwt);
+		} catch (ex) {
+			return null;
+		}
+	};
+	getLoggedInUserData = () => {
+		try {
+			const user = JSON.parse(localStorage.getItem('user'));
+			return user;
 		} catch (ex) {
 			return null;
 		}

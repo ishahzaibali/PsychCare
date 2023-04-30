@@ -1,12 +1,26 @@
 import React from 'react';
 import './ApprovePsychologistsCard.css';
-import axios from 'axios';
 import { Typography, Button } from '@material-tailwind/react';
 import psychologistService from '../../../../../../services/PsychologistService';
 
 const ApprovePsychologistsCard = ({ approve }) => {
 	const approvePsychologist = (id) => {
-		psychologistService.updatePsychologist(id, { approved: true });
+		try {
+			psychologistService
+				.updatePsychologist(id, { approved: true })
+				.then(psychologistService.getPsychologist())
+				.catch((err) => {
+					console.log(
+						'🚀 ~ file: ApprovePsychologistsCard.jsx:11 ~ approvePsychologist ~ err:',
+						err
+					);
+				});
+		} catch (error) {
+			console.log(
+				'🚀 ~ file: ApprovePsychologistsCard.jsx:19 ~ approvePsychologist ~ error:',
+				error
+			);
+		}
 	};
 	// const declinePsychologist = async (id) => {
 	// 	const currentData = await axios.put('/users/psychologists/' + id);

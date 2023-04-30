@@ -19,8 +19,15 @@ import {
 	Avatar,
 	MenuItem,
 } from '@material-tailwind/react';
+import psychologistService from '../../../../../services/PsychologistService';
 
 const Psychologists = ({ DetailedPsychologists }) => {
+	const deletePsychologist = async (id) => {
+		await psychologistService.deletePsychologist(id);
+		console.log(`Psychologist with ${id} is deleted.`);
+	};
+	
+
 	return (
 		<>
 			<Card className='w-full  mb-[1rem]  shadow-none '>
@@ -187,10 +194,12 @@ const Psychologists = ({ DetailedPsychologists }) => {
 													</MenuHandler>
 													<MenuList className='menu-list'>
 														<MenuItem className='ml-0 menu-list-item'>
-															Edit Psychologist
-														</MenuItem>
-														<MenuItem className='ml-0 menu-list-item'>
 															Warn Psychologist
+														</MenuItem>
+														<MenuItem
+															onClick={() => deletePsychologist(row._id)}
+															className='ml-0 menu-list-item'>
+															Delete Psychologist
 														</MenuItem>
 													</MenuList>
 												</Menu>

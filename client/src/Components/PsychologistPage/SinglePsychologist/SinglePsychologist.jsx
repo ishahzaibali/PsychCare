@@ -45,57 +45,57 @@ const SinglePsychologist = () => {
 								<div className='spy-spy-pd'>
 									<div className='spy-spy-pd-user'>
 										<div>
-										{!post.image ? (
-																	post.gender === 'male' ? (
-																		<Avatar
-																			size='xxl'
-																			variant='circular'
-																			className='object-cover'
-																			src={placeholder}
-																			alt='candice wu'
-																		/>
-																	) : post.gender === 'female' ? (
-																		<Avatar
-																			size='xxl'
-																			variant='circular'
-																			className='object-cover rounded-lg'
-																			src={placeholder_female}
-																			alt='candice wu'
-																		/>
-																	) : (
-																		<Avatar
-																			size='xxl'
-																			variant='circular'
-																			className='object-cover rounded-lg'
-																			src={placeholder}
-																			alt='candice wu'
-																		/>
-																	)
-																) : (
-																	<Avatar
-																		size='xxl'
-																		variant='circular'
-																		className='object-cover rounded-lg'
-																		src={post.image}
-																		alt='candice wu'
-																	/>
-																)}
+											{!post.image ? (
+												post.gender === 'male' ? (
+													<Avatar
+														size='xxl'
+														variant='circular'
+														className='object-cover'
+														src={placeholder}
+														alt='candice wu'
+													/>
+												) : post.gender === 'female' ? (
+													<Avatar
+														size='xxl'
+														variant='circular'
+														className='object-cover rounded-lg'
+														src={placeholder_female}
+														alt='candice wu'
+													/>
+												) : (
+													<Avatar
+														size='xxl'
+														variant='circular'
+														className='object-cover rounded-lg'
+														src={placeholder}
+														alt='candice wu'
+													/>
+												)
+											) : (
+												<Avatar
+													size='xxl'
+													variant='circular'
+													className='object-cover rounded-lg'
+													src={post.image}
+													alt='candice wu'
+												/>
+											)}
 										</div>
 										<div className='flex flex-col gap-2'>
 											<div>
 												<Typography
-													variant='h5'
-													className='name'
+													variant='h2'
+													className='text-4xl text-[#344767] font-poppins'
 													color='blue-gray'>
 													{post?.user_id?.['name']}
 												</Typography>
 												<Typography
-													className='sub-heading'
+													className='font-poppins font-medium text-[#344767] opacity-80 text-lg'
 													color='blue-gray'>
 													{post.degree}
 												</Typography>
 												<Typography
-													className='font-poppins font-medium text-sm pt-4'
+													className='font-poppins text-[#344767] font-medium text-base pt-4'
 													color='blue-gray'>
 													{post?.user_id?.['name']} is one of the best
 													psychologists in {post?.onsiteAppointment?.['city']}{' '}
@@ -106,56 +106,56 @@ const SinglePsychologist = () => {
 												<div className='flex gap-8 mt-4 extra-content'>
 													<div className='degree mb-2 pr-4 border-r-2'>
 														<Typography
-															className='font-[poppins]'
-															variant='h6'>
-															Under 15 Min
-														</Typography>
-														<Typography
-															className='font-[poppins] text-sm'
+															className='font-poppins text-[#344767] font-semibold opacity-60 text-sm'
 															color='blue-gray'>
 															Wait Time
+														</Typography>
+														<Typography
+															className='font-poppins text-[#344767] text-lg'
+															variant='h6'>
+															Under 15 Min
 														</Typography>
 													</div>
 													<div className='degree mb-2'>
 														<Typography
-															className='font-[poppins]'
-															variant='h6'>
-															{post.experience} Years
-														</Typography>
-														<Typography
-															className='font-[poppins] text-sm '
+															className='font-poppins text-[#344767]  font-semibold opacity-60 text-sm '
 															color='blue-gray'>
 															Experience
 														</Typography>
+														<Typography
+															className='font-poppins text-[#344767] text-lg'
+															variant='h6'>
+															{post.experience} Years
+														</Typography>
 													</div>
 													<div className='degree mb-2 pl-4 border-l-2'>
 														<Typography
-															className='font-[poppins]'
-															variant='h6'>
-															98%(300)
-														</Typography>
-														<Typography
-															className='font-[poppins] text-sm'
+															className='font-poppins text-[#344767] font-semibold opacity-60 text-sm'
 															color='blue-gray'>
 															Satisfied Patient
 														</Typography>
+														<Typography
+															className='font-poppins text-[#344767] text-lg'
+															variant='h6'>
+															98%(300)
+														</Typography>
 													</div>
 													<div className='degree mb-2 pl-4 border-l-2'>
 														<Typography
-															className='font-poppins flex gap-1 items-center'
+															className='font-poppins text-[#344767] font-semibold opacity-60 text-sm'
+															color='blue-gray'>
+															Rating
+														</Typography>
+														<Typography
+															className='font-poppins flex gap-1 items-center text-[#344767] text-lg'
 															variant='h6'>
 															<StarIcon className='w-5 h-5 pb-1 text-yellow-300' />
 															{post.rating}
 														</Typography>
-														<Typography
-															className='font-[poppins] text-sm'
-															color='blue-gray'>
-															Rating
-														</Typography>
 													</div>
 												</div>
 											</div>
-											<hr className='w-full mt-8 h-[2px]  bg-[#418cfd] ' />
+											<hr className='w-full mt-8 h-[2px] opacity-60  bg-[#344767] ' />
 											{/* <div className='spy-spy-pd-locations'>
 												<h3>Practice Locations</h3>
 												<div className='w-full m-0 p-0 mb-4'>

@@ -2,7 +2,7 @@ import GenericService from './GenericService';
 class PsychologistService extends GenericService {
 	addPsychologist = (data) =>
 		this.post('users/psychologists/addnewpsychologist', data);
-	deletePsychologist = (_id) => this.delete('users/psychologists/' + _id);
+	deletePsychologist = (id) => this.delete('users/psychologists/' + id);
 	updatePsychologist = (_id, data) =>
 		this.put('users/psychologists/' + _id, data);
 

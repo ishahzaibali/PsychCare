@@ -18,11 +18,7 @@ const DashboardProfile = () => {
 			label: 'Appointments',
 			children: <Appointments />,
 		},
-		{
-			key: '3',
-			label: `Tab 3`,
-			children: `Content of Tab Pane 3`,
-		},
+		
 	];
 
 	return (

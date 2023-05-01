@@ -19,6 +19,7 @@ import {
 	SignupPsychologist,
 	CTA,
 	SinglePsychologist,
+	AppointmentBooking,
 } from './Components';
 import {
 	DashboardDiscussions,
@@ -133,6 +134,10 @@ const App = () => {
 					<Route
 						path='/users/psychologists/:id'
 						element={<SinglePsychologist />}
+					/>
+					<Route
+						path='/appointments'
+						element={<AppointmentBooking />}
 					/>
 				</Routes>
 			</div>

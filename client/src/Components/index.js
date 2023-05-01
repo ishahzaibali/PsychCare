@@ -24,3 +24,4 @@ export { default as PsychologistDashboardLayout } from './PsychologistDashboardL
 export { default as MinimalPsychologistCard } from './PsychologistCard/MinimalPsychologistCard/MinimalPsychologistCard';
 export { default as SinglePsychologist } from './PsychologistPage/SinglePsychologist/SinglePsychologist';
 export { default as MinimalPsychologistCards } from './PsychologistCard/MinimalPsychologistCard/MinimalPsychologistCards';
+export { default as AppointmentBooking } from './PsychologistPage/AppointmentBooking/AppointmentBooking';

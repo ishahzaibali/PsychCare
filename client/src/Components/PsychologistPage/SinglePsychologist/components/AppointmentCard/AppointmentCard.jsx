@@ -11,6 +11,7 @@ import {
 	AccordionBody,
 	Button,
 } from '@material-tailwind/react';
+import { NavLink } from 'react-router-dom';
 
 const AppointmentCard = ({ card }) => {
 	const [open, setOpen] = useState(0);
@@ -137,9 +138,11 @@ const AppointmentCard = ({ card }) => {
 						</div>
 					</CardBody>
 					<CardFooter className='flex items-center justify-between py-3'>
-						<Button className='w-full ml-0 shadow-none font-poppins'>
-							Book Appointment
-						</Button>
+						<NavLink to={'/appointments'} className='w-full'>
+							<Button className='w-full ml-0 shadow-none font-poppins'>
+								Book Appointment
+							</Button>
+						</NavLink>
 					</CardFooter>
 				</Card>
 			</div>

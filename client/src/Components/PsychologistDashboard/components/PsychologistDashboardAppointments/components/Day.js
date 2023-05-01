@@ -35,7 +35,7 @@ export default function Day({ day, rowIdx, event }) {
 	
 	const displayedEvents = dayEvents.slice(0, maxEventsToShow);
 	return (
-		<div className='border border-gray-200 flex flex-col items-center justify-center'>
+		<div className='border border-gray-200 flex flex-col h-full items-center justify-center'>
 			<header className='flex flex-col items-center'>
 				{rowIdx === 0 && (
 					<p className='text-sm font-semibold mt-1'>

@@ -29,17 +29,24 @@ const PsychologistDashboardAppointments = () => {
 	useEffect(() => {
 		setCurrentMonth(getMonth(monthIndex));
 		getAppointment();
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth',
+		});
 	}, [monthIndex]);
 
 	return (
 		<>
-			{showEventModal && <EventModal />}
+			{/* {showEventModal && <EventModal />} */}
 			<div className='ap-main'>
 				<div className='timeline'>
 					<div className='h-screen w-full flex flex-col mb-4'>
 						<CalendarHeader />
 						<div className='flex flex-1'>
-							<Month data={appointment} month={currenMonth}  />
+							<Month
+								data={appointment}
+								month={currenMonth}
+							/>
 						</div>
 					</div>
 				</div>

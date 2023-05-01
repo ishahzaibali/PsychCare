@@ -71,17 +71,6 @@ const UserSection = () => {
 						</Typography>
 					</div>
 				</div>
-				<div>
-					<Button
-						className='edit-btn font-poppins flex gap-2 items center justify-center shadow-none hover:shadow-none text-xs '
-						size='sm'
-						color='blue'>
-						Edit
-						<div>
-							<PencilSquareIcon className='w-3 h-3 stroke-[3]' />
-						</div>
-					</Button>
-				</div>
 			</div>
 		</>
 	);

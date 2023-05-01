@@ -10,39 +10,44 @@ import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { DayCalendarSkeleton } from '@mui/x-date-pickers/DayCalendarSkeleton';
 import { PickersDay } from '@mui/x-date-pickers/PickersDay';
 import './DashboardCalendar.css';
-
-function getRandomNumber(min, max) {
-	return Math.round(Math.random() * (max - min) + min);
-}
-function fakeFetch(date, { signal }) {
-	return new Promise((resolve, reject) => {
-		const timeout = setTimeout(() => {
-			const daysInMonth = date.daysInMonth();
-			const daysToHighlight = [1, 2, 3].map(() =>
-				getRandomNumber(1, daysInMonth)
-			);
-
-			resolve({ daysToHighlight });
-		}, 500);
-
-		signal.onabort = () => {
-			clearTimeout(timeout);
-			reject(new DOMException('aborted', 'AbortError'));
-		};
-	});
-}
+import moment from 'moment';
+import axios from 'axios';
+import userService from '../../../../services/UserService';
 
 const initialValue = dayjs(new Date());
+const user = userService.getLoggedInUserData();
+const psychologistID = user._id;
+const fakeFetch = async (date, { signal }) => {
+	try {
+		const daysInMonth = date.daysInMonth();
+		const res = await axios.get(
+			`/appointments/psychologist/${psychologistID}?month=${
+				date.month() + 1
+			}&year=${date.year()}`,
+			{ signal }
+		);
+		const appointments = res.data;
+		const daysToHighlight = appointments.map((appointment) =>
+			moment(appointment.datetime.date).day()
+		);
 
+		return { daysInMonth, daysToHighlight };
+	} catch (error) {
+		if (error.name === 'AbortError') {
+			console.log('Fetch aborted');
+		} else {
+			console.error(error);
+		}
+	}
+};
 function ServerDay(props) {
 	const { highlightedDays = [], day, outsideCurrentMonth, ...other } = props;
 
-	const isSelected =
-		!props.outsideCurrentMonth && highlightedDays.indexOf(props.day.date()) > 0;
+	const isSelected = highlightedDays.includes(moment(day.date).day());
 
 	return (
 		<Badge
-			key={props.day.toString()}
+			key={day.toString()}
 			overlap='circular'
 			badgeContent={isSelected ? '🟢' : undefined}>
 			<PickersDay
@@ -55,7 +60,7 @@ function ServerDay(props) {
 }
 
 ServerDay.propTypes = {
-	day: PropTypes.object.isRequired,
+	day: PropTypes.instanceOf(moment).isRequired,
 	highlightedDays: PropTypes.arrayOf(PropTypes.number),
 	outsideCurrentMonth: PropTypes.bool.isRequired,
 };
@@ -64,14 +69,24 @@ const DashboardCalendar = () => {
 	const [value, setValue] = React.useState(dayjs(new Date()));
 	const requestAbortController = React.useRef(null);
 	const [isLoading, setIsLoading] = React.useState(false);
-	const [highlightedDays, setHighlightedDays] = React.useState([1, 2, 15]);
+	const [highlightedDays, setHighlightedDays] = React.useState([]);
 
 	const fetchHighlightedDays = (date) => {
 		const controller = new AbortController();
-		fakeFetch(date, {
-			signal: controller.signal,
-		})
-			.then(({ daysToHighlight }) => {
+		axios
+			.get(
+				`/appointments/psychologist/${psychologistID}?month=${
+					date.month() + 1
+				}&year=${date.year()}`,
+				{
+					signal: controller.signal,
+				}
+			)
+			.then((res) => {
+				const appointments = res.data;
+				const daysToHighlight = appointments.map((appointment) =>
+					moment(appointment.datetime.date).day()
+				);
 				setHighlightedDays(daysToHighlight);
 				setIsLoading(false);
 			})
@@ -87,7 +102,7 @@ const DashboardCalendar = () => {
 	React.useEffect(() => {
 		fetchHighlightedDays(initialValue);
 		return () => requestAbortController.current?.abort();
-	}, []);
+	}, [initialValue]);
 
 	const handleMonthChange = (date) => {
 		if (requestAbortController.current) {

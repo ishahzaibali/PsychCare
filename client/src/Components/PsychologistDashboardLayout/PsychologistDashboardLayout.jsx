@@ -16,7 +16,7 @@ import { Route, Routes } from 'react-router-dom';
 const PsychologistDashboardLayout = () => {
 	return (
 		<>
-			<div className='flex min-h-[100vh] bg-[#fafafa] overflow-x-hidden'>
+			<div className='flex min-h-[130vh] bg-[#fafafa] overflow-x-hidden'>
 				<Box
 					top={0}
 					left={0}>
@@ -27,11 +27,11 @@ const PsychologistDashboardLayout = () => {
 				<Box
 					top={0}
 					right={0}
-					className='flex-[2] flex flex-col w-full'>
+					className='flex-[2] flex flex-col w-full '>
 					<div className='w-full sticky h-[7rem] top-[0rem] z-50'>
 						<PsychologistDashboardNavbar />
 					</div>
-					<div className='mt-4 overflow-hidden'>
+					<div className='mt-4 overflow-hidden min-h-[130vh]'>
 						<Routes>
 							<Route
 								path='/psychologist_dashboard'

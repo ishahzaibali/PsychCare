@@ -8,7 +8,11 @@ import {
 	Button,
 } from '@material-tailwind/react';
 import { PencilSquareIcon } from '@heroicons/react/24/outline';
-import avatar from '../../../../../assets/team-3.jpg';
+import placeholder from '../../../../../assets/placeholder.png';
+import placeholder_female from '../../../../../assets/placeholder_female.png';
+import userService from '../../../../../services/UserService';
+
+const user = userService.getLoggedInUserData();
 
 const UserSection = () => {
 	return (
@@ -16,25 +20,54 @@ const UserSection = () => {
 			<div className='flex my-8 p-4 items-center border border-gray-100  rounded-xl justify-between'>
 				<div className='flex gap-6 items-center'>
 					<div>
-						<Avatar
-							src={avatar}
-							variant='circular'
-							alt='avatar'
-							size='lg'
-						/>
+						{!user.image ? (
+							user.gender === 'male' ? (
+								<Avatar
+									size='lg'
+									variant='circular'
+									className='object-cover'
+									src={placeholder}
+									alt='candice wu'
+								/>
+							) : user.gender === 'female' ? (
+								<Avatar
+									size='lg'
+									variant='circular'
+									className='object-cover rounded-lg'
+									src={placeholder_female}
+									alt='candice wu'
+								/>
+							) : (
+								<Avatar
+									size='lg'
+									variant='circular'
+									className='object-cover rounded-lg'
+									src={placeholder}
+									alt='candice wu'
+								/>
+							)
+						) : (
+							<Avatar
+								size='lg'
+								variant='circular'
+								className='object-cover rounded-lg'
+								src={user.image}
+								alt='candice wu'
+							/>
+						)}
 					</div>
 					<div>
 						<Typography
 							variant='h6'
 							color='blue-gray'
 							className='font-poppins text-[rgb(52, 71, 103)] font-semibold'>
-							Shaheer Hassan
+							{user.user_id.name}
 						</Typography>
 						<Typography
 							variant='h6'
 							color='blue-gray'
 							className='font-poppins text-[rgb(52, 71, 103)] font-normal text-sm'>
-							Administrator
+							{user.user_id.role}
 						</Typography>
 					</div>
 				</div>
@@ -55,6 +88,9 @@ const UserSection = () => {
 };
 
 const PersonalInformation = () => {
+	const name = user.user_id.name;
+	const parts = name.split(' ');
+	const username = parts[0].concat(parts[1]).toLowerCase();
 	return (
 		<>
 			<div className='mt-8'>
@@ -68,7 +104,7 @@ const PersonalInformation = () => {
 					variant='h6'
 					color='blue-gray'
 					className='font-poppins text-[rgb(52, 71, 103)] font-medium text-sm'>
-					@ShaheerHassan
+					@<span>{username}</span>
 				</Typography>
 			</div>
 
@@ -84,7 +120,7 @@ const PersonalInformation = () => {
 						variant='h6'
 						color='blue-gray'
 						className='font-poppins text-[rgb(52, 71, 103)] font-medium text-sm'>
-						shaheerhassan@gmail.com
+						{user.user_id.email}
 					</Typography>
 				</div>
 				<div>
@@ -98,7 +134,7 @@ const PersonalInformation = () => {
 						variant='h6'
 						color='blue-gray'
 						className='font-poppins text-[rgb(52, 71, 103)] font-medium text-sm'>
-						03001258795
+						{user.contactnumber}
 					</Typography>
 				</div>
 			</div>
@@ -113,7 +149,7 @@ const PersonalInformation = () => {
 					variant='h6'
 					color='blue-gray'
 					className='font-poppins text-[rgb(52, 71, 103)] font-medium text-sm'>
-					Administrator
+					{user.about}
 				</Typography>
 			</div>
 		</>
@@ -134,7 +170,7 @@ const Address = () => {
 					variant='h6'
 					color='blue-gray'
 					className='font-poppins text-[rgb(52, 71, 103)] font-medium text-sm'>
-					OBFM2 Monno pur, Chicho-ki-mallian
+					{user.onsiteAppointment.location}
 				</Typography>
 			</div>
 
@@ -150,7 +186,7 @@ const Address = () => {
 						variant='h6'
 						color='blue-gray'
 						className='font-poppins text-[rgb(52, 71, 103)] font-medium text-sm'>
-						Sheikhupura
+						{user.onsiteAppointment.city}
 					</Typography>
 				</div>
 				<div>

@@ -8,32 +8,32 @@ import {
 } from '@material-tailwind/react';
 import { Services, About, MoreInfo, Faq } from './index';
 
-const data = [
-	{
-		label: 'About',
-		value: 'about',
-		desc: <About />,
-	},
-	{
-		label: 'Services',
-		value: 'services',
-		desc: <Services />,
-	},
+const DetailsTab = ({info}) => {
+	const data = [
+		{
+			label: 'About',
+			value: 'about',
+			desc: <About about={info} />,
+		},
+		{
+			label: 'Services',
+			value: 'services',
+			desc: <Services service={info} />,
+		},
 
-	{
-		label: 'More Info',
-		value: 'more',
-		desc: <MoreInfo />,
-	},
+		{
+			label: 'Education',
+			value: 'more',
+			desc: <MoreInfo />,
+		},
 
-	{
-		label: 'FAQs',
-		value: 'faq',
-		desc: <Faq />,
-	},
-];
+		{
+			label: 'FAQs',
+			value: 'faq',
+			desc: <Faq />,
+		},
+	];
 
-const DetailsTab = () => {
 	return (
 		<>
 			<div className='w-full'>

@@ -47,7 +47,9 @@ const AppointmentCard = ({ card }) => {
 		minimumFractionDigits: 0,
 		maximumFractionDigits: 2,
 	});
-
+	function capitalizeFirstLetter(str) {
+		return str.charAt(0).toUpperCase() + str.slice(1);
+	}
 	return (
 		<>
 			<div>
@@ -58,7 +60,7 @@ const AppointmentCard = ({ card }) => {
 						<div className='font-poppins flex items-center gap-1 m-0 p-3 justify-center rounded-lg '>
 							<h6 className='text-2xl font-bold'>
 								{card?.onsiteAppointment?.['practicelocation']},{' '}
-								{card?.onsiteAppointment?.['city']}
+								{card.onsiteAppointment.city}
 							</h6>
 						</div>
 					</CardHeader>

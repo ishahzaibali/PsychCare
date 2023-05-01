@@ -39,6 +39,7 @@ class UserService extends GenericService {
 
 	logout = () => {
 		localStorage.removeItem('token');
+		localStorage.removeItem('user');
 	};
 	isLoggedIn = () => {
 		return localStorage.getItem('token') ? true : false;

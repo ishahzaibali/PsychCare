@@ -70,11 +70,11 @@ const PsychologistDashboardSidebar = () => {
 																<li className='w-full'>
 																	<NavLink to={data.url}>
 																		<div className='menuC !m-0 !pl-6 '>
-																			<div
+																			{/* <div
 																				className='ml-0 iconBtn'
 																				variant='gradient'>
 																				{data.icon}
-																			</div>
+																			</div> */}
 																			<span className='!text-[0.78rem]'>
 																				{data.title}
 																			</span>

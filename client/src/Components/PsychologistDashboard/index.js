@@ -9,3 +9,4 @@ export { default as DashboardAppointments } from './components/PsychologistDashb
 export { default as DashboardMessages } from './components/PsychologistDashboardMessages/DashboardMessages';
 export { default as DashboardCalendar } from './components/DashboardCalendar/DashboardCalendar';
 export { default as PsychologistDashboardProfile } from './components/PsychologistDashboardProfile/PsychologistDashboardProfile';
+export { default as ScheduleAppointments } from './components/PsychologistDashboardAppointments/components/ScheduleAppointments/ScheduleAppointments';

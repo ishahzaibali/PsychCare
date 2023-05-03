@@ -34,6 +34,7 @@ import {
 	PsychologistDashboardPayments,
 	PsychologistDashboardVideo,
 	PsychologistDashboardProfile,
+	ScheduleAppointments,
 } from './Components/PsychologistDashboard';
 
 const App = () => {
@@ -91,6 +92,10 @@ const App = () => {
 						<Route
 							path='/upcoming_appointments'
 							element={<PsychologistDashboardAppointments />}
+						/>
+						<Route
+							path='/schedule_appointments'
+							element={<ScheduleAppointments />}
 						/>
 						<Route
 							path='/psychologist_messages'

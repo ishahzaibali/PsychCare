@@ -53,10 +53,14 @@ class UserService extends GenericService {
 		}
 	};
 	getLoggedInUserData = () => {
-		try {
-			const user = JSON.parse(localStorage.getItem('user'));
-			return user;
-		} catch (ex) {
+		if (this.isLoggedIn()) {
+			try {
+				const user = JSON.parse(localStorage.getItem('user'));
+				return user;
+			} catch (ex) {
+				return null;
+			}
+		} else {
 			return null;
 		}
 	};

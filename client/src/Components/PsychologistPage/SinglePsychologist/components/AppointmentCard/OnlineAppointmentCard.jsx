@@ -69,7 +69,7 @@ const OnlineAppointmentCard = ({ online }) => {
 							<Typography
 								variant='h6'
 								className=' font-poppins text-sm font-bold'>
-								{PKR.format(online?.onsiteAppointment?.['fee'])}
+								{PKR.format(online?.onlineAppointment?.['fee'])}
 							</Typography>
 						</div>
 						<hr className='w-full text-[#3d4146]' />

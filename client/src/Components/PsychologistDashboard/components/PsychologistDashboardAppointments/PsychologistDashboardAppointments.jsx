@@ -37,7 +37,7 @@ const PsychologistDashboardAppointments = () => {
 
 	return (
 		<>
-			{/* {showEventModal && <EventModal />} */}
+			{showEventModal && <EventModal />}
 			<div className='ap-main'>
 				<div className='timeline'>
 					<div className='h-screen w-full flex flex-col mb-4'>

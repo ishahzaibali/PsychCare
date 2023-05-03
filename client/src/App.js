@@ -89,7 +89,7 @@ const App = () => {
 							element={<PsychologistDashboard />}
 						/>
 						<Route
-							path='/psychologist_appointments'
+							path='/upcoming_appointments'
 							element={<PsychologistDashboardAppointments />}
 						/>
 						<Route

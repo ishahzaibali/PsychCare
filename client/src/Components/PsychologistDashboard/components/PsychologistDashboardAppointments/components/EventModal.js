@@ -2,55 +2,55 @@ import React, { useContext, useState } from 'react';
 import GlobalContext from '../../../../../context/GlobalContext';
 import dayjs from 'dayjs';
 import '../PsychologistDashboardAppointments.css';
-import { ClockIcon, TrashIcon } from '@heroicons/react/24/solid';
 import {
 	Typography,
-	Avatar,
 	Dialog,
-	DialogHeader,
 	DialogBody,
 	Button,
 } from '@material-tailwind/react';
-import avatar from '../../../../../assets/placeholder.png';
-import userService from '../../../../../services/UserService';
+import { Input, message } from 'antd';
+import axios from 'axios';
+import appointmentService from '../../../../../services/AppointmentService';
 
 export default function EventModal() {
 	const { setShowEventModal, daySelected, dispatchCalEvent, selectedEvent } =
 		useContext(GlobalContext);
-	const labelsClasses = ['indigo', 'gray', 'green', 'blue', 'red', 'purple'];
-	const [title, setTitle] = useState(selectedEvent ? selectedEvent.title : '');
-	const [startTime, setstartTime] = useState(
-		selectedEvent ? selectedEvent.startTime : ''
-	);
-	const [endTime, setendTime] = useState(
-		selectedEvent ? selectedEvent.endTime : ''
-	);
-	const [selectedLabel, setSelectedLabel] = useState(
-		selectedEvent
-			? labelsClasses.find((lbl) => lbl === selectedEvent.label)
-			: labelsClasses[0]
-	);
-	function handleSubmit(e) {
-		e.preventDefault();
-		const calendarEvent = {
-			title,
-			startTime,
-			endTime,
-			label: selectedLabel,
-			day: daySelected.valueOf(),
-			id: selectedEvent ? selectedEvent.id : Date.now(),
-		};
-		if (selectedEvent) {
-			dispatchCalEvent({ type: 'update', payload: calendarEvent });
-		} else {
-			dispatchCalEvent({ type: 'push', payload: calendarEvent });
-		}
 
-		setShowEventModal(false);
-	}
-	const format = 'HH:mm';
-	const username = userService.getLoggedInUser().name;
-	const role = userService.getLoggedInUser().role;
+	const [notes, setnotes] = useState(selectedEvent ? selectedEvent.notes : '');
+	const [prescription, setprescription] = useState(
+		selectedEvent ? selectedEvent.prescription : ''
+	);
+	const [status, setstatus] = useState(
+		selectedEvent ? selectedEvent.status : 'completed'
+	);
+
+	const appointmenttype = selectedEvent.appointmenttype;
+	const patient_name = selectedEvent.patient_id.patient_name;
+	const contact_number = selectedEvent.patient_id.contact_number;
+	const time = selectedEvent.datetime.time;
+	const id = selectedEvent._id;
+
+	const handleUpdate = async () => {
+		const calendarEvent = {
+			notes: notes,
+			prescription: prescription,
+			status: status,
+		};
+		await appointmentService
+			.updateAppointment(id, calendarEvent)
+			.then((res) => {
+				console.log(
+					'🚀 ~ file: EventModal.js:43 ~ appointmentService.updateAppointment ~ res:',
+					res
+				);
+				message.success('Appointment Status updated successfully.');
+				setShowEventModal(false);
+			})
+			.catch((err) => {
+				console.log('🚀 ~ file: Signup.jsx:30 ~ handleRegister ~ err:', err);
+			});
+	};
+
 	return (
 		<div className='h-screen z-50 w-full fixed left-0 top-0 flex justify-center items-center'>
 			<div onClick={() => setShowEventModal(false)}></div>
@@ -61,139 +61,113 @@ export default function EventModal() {
 				}}
 				open={() => setShowEventModal(true)}
 				className='bg-white rounded-lg shadow-3xl w-[70%] h-[95vh]'>
-				<DialogHeader className='bg-gray-100 px-4 py-4 rounded-tl-lg rounded-tr-lg flex gap-4 justify-between items-start'>
-					<div className='flex-[3]'>
-						<div className='border-b-2 border-gray-200'>
-							<Typography
-								variant='h6'
-								color='blue-gray'
-								className='font-poppins mb-2 text-[rgb(52, 71, 103)] font-medium text-sm'>
-								Add new Appointment
-							</Typography>
-						</div>
-						<div className='flex gap-6 mt-6 items-center'>
-							<div>
-								<Avatar
-									src={avatar}
-									variant='circular'
-									alt='avatar'
-									size='lg'
-								/>
-							</div>
-							<div>
-								<Typography
-									variant='h6'
-									color='blue-gray'
-									className='font-poppins text-[rgb(52, 71, 103)] font-semibold'>
-									{username}
-								</Typography>
-								<Typography
-									variant='h6'
-									color='blue-gray'
-									className='font-poppins text-[rgb(52, 71, 103)] font-normal text-sm'>
-									{role}
-								</Typography>
-							</div>
-						</div>
-					</div>
-					<div className='flex flex-[1] justify-end'>
-						{selectedEvent && (
-							<button
-								className='bg-red-300 ml-0 hover:bg-red-400 px-6 py-2 rounded text-white'
-								onClick={() => {
-									dispatchCalEvent({
-										type: 'delete',
-										payload: selectedEvent,
-									});
-									setShowEventModal(false);
-								}}>
-								<TrashIcon className='w-5 h-5 text-red-600' />
-							</button>
-						)}
-					</div>
-				</DialogHeader>
 				<DialogBody>
 					<form>
 						<div className='p-3'>
 							<div className='flex flex-col gap-4'>
 								<div className='flex flex-col p-4 h-auto items-start justify-between border border-gray-100  rounded-lg'>
+									<div className='  font-poppins text-base text-[#344767] font-medium'>
+										<span>{appointmenttype}</span> Appointment
+									</div>
+									<div className='flex items-center gap-4'>
+										<p className='font-normal font-poppins text-sm'>
+											{daySelected.format('dddd, MMMM DD')}
+										</p>
+										<p className='font-normal font-poppins text-sm'>{time}</p>
+									</div>
+								</div>
+								<div className='flex flex-col p-4 h-auto items-start justify-between border border-gray-100  rounded-lg'>
+									<Typography
+										variant='h6'
+										color='blue-gray'
+										className='font-poppins text-[#344767] font-medium uppercase text-xs '>
+										patient Details
+									</Typography>
+									<div className='  font-poppins text-sm mt-2  font-medium'>
+										{patient_name}
+									</div>
+									<div className='  font-poppins text-sm  font-medium'>
+										{contact_number}
+									</div>
+								</div>
+
+								{/* <div className='flex flex-col p-4 items-start justify-between border border-gray-100  rounded-lg'>
 									<Typography
 										variant='h6'
 										color='blue-gray'
 										className='font-poppins text-[rgb(52, 71, 103)] font-medium uppercase text-xs '>
-										First You need to add a service
+										Time Slot & Date
+									</Typography>
+									<div className='mt-4 w-full flex items-center justify-between gap-2'>
+										<div className='flex gap-2 items-center'>
+											<Typography
+												variant='h6'
+												color='blue-gray'
+												className='font-poppins text-[rgb(52, 71, 103)] font-medium uppercase text-xs '>
+												from
+											</Typography>
+											<input
+												defaultValue={dayjs('10:00', format)}
+												value={startTime}
+												type='time'
+												onChange={(e) => setstartTime(e.target.value)}
+												format={format}
+												className='font-poppins rounded-lg border-gray-200 text-sm font-normal'
+											/>
+										</div>
+										<div className='flex gap-4 mt-4 font-poppins items-center'>
+											<span className=' text-gray-400'>
+												<ClockIcon className='w-5 h-5' />
+											</span>
+											<p className='font-medium text-sm'>
+												{daySelected.format('dddd, MMMM DD')}
+											</p>
+										</div>
+									</div>
+								</div> */}
+								<div className='flex flex-col p-4 items-start justify-between border border-gray-100  rounded-lg'>
+									<Typography
+										variant='h6'
+										color='blue-gray'
+										className='font-poppins text-[rgb(52, 71, 103)] font-medium uppercase text-xs '>
+										notes & prescription
+									</Typography>
+									<Input
+										className='rounded-lg border-gray-200 font-poppins text-sm font-medium mt-2'
+										placeholder='Notes'
+										value={notes}
+										onChange={(e) => setnotes(e.target.value)}
+									/>
+									<Input
+										className='rounded-lg border-gray-200 font-poppins text-sm font-medium mt-2'
+										placeholder='Prescription'
+										value={prescription}
+										onChange={(e) => setprescription(e.target.value)}
+									/>
+								</div>
+								<div className='flex flex-col p-4 h-auto items-start justify-between border border-gray-100  rounded-lg'>
+									<Typography
+										variant='h6'
+										color='blue-gray'
+										className='font-poppins text-[rgb(52, 71, 103)] font-medium uppercase text-xs '>
+										Appointment Status
 									</Typography>
 									<select
 										className='rounded-lg border-gray-200 font-poppins text-sm font-medium'
-										value={title}
+										value={status}
 										style={{
 											width: '100%',
 											marginTop: '1rem',
 											height: 'auto',
 										}}
-										onChange={(e) => setTitle(e.target.value)}>
+										onChange={(e) => setstatus(e.target.value)}>
 										<option
-											value='onsite'
+											value='completed'
 											selected>
-											Physical Appointment
+											Completed
 										</option>
-										<option value='online'>Video Call</option>
+										<option value='cancelled'>Cancelled</option>
 									</select>
-								</div>
-
-								<div className='flex flex-col p-4 items-start justify-between border border-gray-100  rounded-lg'>
-									<Typography
-										variant='h6'
-										color='blue-gray'
-										className='font-poppins text-[rgb(52, 71, 103)] font-medium uppercase text-xs '>
-										Select Time Slot
-									</Typography>
-									<div className='mt-4 flex items-center gap-2'>
-										<Typography
-											variant='h6'
-											color='blue-gray'
-											className='font-poppins text-[rgb(52, 71, 103)] font-medium uppercase text-xs '>
-											from
-										</Typography>
-										<input
-											defaultValue={dayjs('10:00', format)}
-											value={startTime}
-											type='time'
-											onChange={(e) => setstartTime(e.target.value)}
-											format={format}
-											className='font-poppins rounded-lg border-gray-200 text-sm font-normal'
-										/>
-										<Typography
-											variant='h6'
-											color='blue-gray'
-											className='font-poppins text-[rgb(52, 71, 103)] font-medium uppercase text-xs '>
-											to
-										</Typography>
-										<input
-											defaultValue={dayjs('10:00', format)}
-											value={endTime}
-											type='time'
-											onChange={(e) => setendTime(e.target.value)}
-											format={format}
-											className='font-poppins rounded-lg border-gray-200 text-sm font-normal'
-										/>
-									</div>
-								</div>
-								<div className='flex flex-col p-4 items-start justify-between border border-gray-100  rounded-lg'>
-									<Typography
-										variant='h6'
-										color='blue-gray'
-										className='font-poppins text-[rgb(52, 71, 103)] font-medium uppercase text-xs '>
-										Appointment Date
-									</Typography>
-									<div className='flex gap-4 mt-4 font-poppins items-center'>
-										<span className=' text-gray-400'>
-											<ClockIcon className='w-5 h-5' />
-										</span>
-										<p className='font-medium text-sm'>
-											{daySelected.format('dddd, MMMM DD')}
-										</p>
-									</div>
 								</div>
 							</div>
 						</div>
@@ -208,9 +182,9 @@ export default function EventModal() {
 					</Button>
 					<Button
 						type='submit'
-						onClick={handleSubmit}
+						onClick={handleUpdate}
 						className='bg-[#418cfd] hover:bg-blue-600 px-6 py-2 ml-0 font-poppins w-[40%] rounded text-white'>
-						Save
+						Update Appointment
 					</Button>
 				</div>
 			</Dialog>

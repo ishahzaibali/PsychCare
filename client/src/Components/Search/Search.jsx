@@ -73,6 +73,7 @@ const Search = () => {
 						<div className='date-input'>
 							<DatePicker
 								id='date-and-time'
+								placeholder='Date & Time'
 								showTime={{
 									format: 'HH:mm',
 								}}

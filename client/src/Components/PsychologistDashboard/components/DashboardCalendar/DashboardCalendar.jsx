@@ -15,67 +15,74 @@ import axios from 'axios';
 import userService from '../../../../services/UserService';
 
 const initialValue = dayjs(new Date());
-const user = userService.getLoggedInUserData();
-const psychologistID = user._id;
-const fakeFetch = async (date, { signal }) => {
-	try {
-		const daysInMonth = date.daysInMonth();
-		const res = await axios.get(
-			`/appointments/psychologist/${psychologistID}?month=${
-				date.month() + 1
-			}&year=${date.year()}`,
-			{ signal }
-		);
-		const appointments = res.data;
-		const daysToHighlight = appointments.map((appointment) =>
-			moment(appointment.datetime.date).day()
-		);
-
-		return { daysInMonth, daysToHighlight };
-	} catch (error) {
-		if (error.name === 'AbortError') {
-			console.log('Fetch aborted');
-		} else {
-			console.error(error);
-		}
-	}
-};
-function ServerDay(props) {
-	const { highlightedDays = [], day, outsideCurrentMonth, ...other } = props;
-
-	const isSelected = highlightedDays.includes(moment(day.date).day());
-
-	return (
-		<Badge
-			key={day.toString()}
-			overlap='circular'
-			badgeContent={isSelected ? '🟢' : undefined}>
-			<PickersDay
-				{...other}
-				outsideCurrentMonth={outsideCurrentMonth}
-				day={day}
-			/>
-		</Badge>
-	);
-}
-
-ServerDay.propTypes = {
-	day: PropTypes.instanceOf(moment).isRequired,
-	highlightedDays: PropTypes.arrayOf(PropTypes.number),
-	outsideCurrentMonth: PropTypes.bool.isRequired,
-};
 
 const DashboardCalendar = () => {
 	const [value, setValue] = React.useState(dayjs(new Date()));
 	const requestAbortController = React.useRef(null);
 	const [isLoading, setIsLoading] = React.useState(false);
 	const [highlightedDays, setHighlightedDays] = React.useState([]);
+	if (userService.isLoggedIn() === true) {
+		const user = userService.getLoggedInUserData();
+		const psychologistID = user._id;
+		const fakeFetch = async (date, { signal }) => {
+			try {
+				const daysInMonth = date.daysInMonth();
+				const res = await axios.get(
+					`/appointments/psychologist/${psychologistID}?month=${
+						date.month() + 1
+					}&year=${date.year()}`,
+					{ signal }
+				);
+				const appointments = res.data;
+				const daysToHighlight = appointments.map((appointment) =>
+					moment(appointment.datetime.date).day()
+				);
+
+				return { daysInMonth, daysToHighlight };
+			} catch (error) {
+				if (error.name === 'AbortError') {
+					console.log('Fetch aborted');
+				} else {
+					console.error(error);
+				}
+			}
+		};
+		function ServerDay(props) {
+			const {
+				highlightedDays = [],
+				day,
+				outsideCurrentMonth,
+				...other
+			} = props;
+
+			const isSelected = highlightedDays.includes(moment(day.date).day());
+
+			return (
+				<Badge
+					key={day.toString()}
+					overlap='circular'
+					badgeContent={isSelected ? '🟢' : undefined}>
+					<PickersDay
+						{...other}
+						outsideCurrentMonth={outsideCurrentMonth}
+						day={day}
+					/>
+				</Badge>
+			);
+		}
+
+		ServerDay.propTypes = {
+			day: PropTypes.instanceOf(moment).isRequired,
+			highlightedDays: PropTypes.arrayOf(PropTypes.number),
+			outsideCurrentMonth: PropTypes.bool.isRequired,
+		};
+	}
 
 	const fetchHighlightedDays = (date) => {
 		const controller = new AbortController();
 		axios
 			.get(
-				`/appointments/psychologist/${psychologistID}?month=${
+				`/appointments/psychologist/?month=${
 					date.month() + 1
 				}&year=${date.year()}`,
 				{
@@ -132,7 +139,7 @@ const DashboardCalendar = () => {
 											onMonthChange={handleMonthChange}
 											renderLoading={() => <DayCalendarSkeleton />}
 											slots={{
-												day: ServerDay,
+												// day: ServerDay,
 											}}
 											slotProps={{
 												day: {

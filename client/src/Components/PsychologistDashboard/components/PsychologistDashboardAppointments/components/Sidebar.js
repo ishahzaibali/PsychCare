@@ -8,7 +8,7 @@ export default function Sidebar() {
 		<Card className='border-none m-0 shadow-none'>
 			<CardBody>
 				<aside className=' p-5 w-64 '>
-					<CreateEventButton />
+					{/* <CreateEventButton /> */}
 					<SmallCalendar />
 					<Labels />
 				</aside>

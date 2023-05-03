@@ -94,6 +94,16 @@
 	color: #fff;
 }
 
+.react-multiple-carousel__arrow {
+	background: rgb(65, 140, 253,0.8) !important;
+	min-width: 20px !important;
+	min-height: 20px !important;
+}
+.react-multiple-carousel__arrow:hover {
+	background: rgb(65, 140, 253) !important;
+	transition: all 0.2s ease-in-out;
+}
+
 @media screen and (max-width: 768px) {
 	.main-section {
 		height: auto;

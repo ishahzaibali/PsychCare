@@ -5,11 +5,8 @@ import { Typography } from '@material-tailwind/react';
 export default function Day({ day, rowIdx, event }) {
 	const [dayEvents, setDayEvents] = useState([]);
 	const [showAllEvents, setShowAllEvents] = useState(false);
-	const {
-		setDaySelected,
-		setShowEventModal,
-		setSelectedEvent,
-	} = useContext(GlobalContext);
+	const { setDaySelected, setShowEventModal, setSelectedEvent } =
+		useContext(GlobalContext);
 
 	useEffect(() => {
 		const events = event.filter((evt) =>
@@ -26,13 +23,11 @@ export default function Day({ day, rowIdx, event }) {
 			? 'bg-blue-600 text-white rounded-full w-7'
 			: '';
 	}
-	const maxEventsToShow = 1; 
-	const totalEvents = dayEvents.length; 
+	const maxEventsToShow = 1;
+	const totalEvents = dayEvents.length;
 
-	
 	const hasMoreEvents = totalEvents > maxEventsToShow;
 
-	
 	const displayedEvents = dayEvents.slice(0, maxEventsToShow);
 	return (
 		<div className='border border-gray-200 flex flex-col h-full items-center justify-center'>
@@ -47,16 +42,15 @@ export default function Day({ day, rowIdx, event }) {
 				</p>
 			</header>
 
-			<div
-				className='flex-1  cursor-pointer flex flex-col w-full items-center  justify-start '
-				onClick={() => {
-					setDaySelected(day);
-					setShowEventModal(true);
-				}}>
-				{displayedEvents.map((evt, idx) => (
+			<div className='flex-1  cursor-pointer flex flex-col w-full items-center  justify-start '>
+				{displayedEvents.map((evt) => (
 					<div
-						key={idx}
-						onClick={() => setSelectedEvent(evt)}
+						key={evt._id}
+						onClick={() => {
+							setDaySelected(day);
+							setShowEventModal(true);
+							setSelectedEvent(evt);
+						}}
 						className={`bg-blue-100 p-1  w-[90%] flex flex-col items-center justify-center z-10  text-gray-700 text-xs rounded mb-1 truncate`}>
 						<Typography
 							variant='p'
@@ -77,7 +71,11 @@ export default function Day({ day, rowIdx, event }) {
 				))}
 				{hasMoreEvents && (
 					<div
-						onClick={() => setShowAllEvents(true)}
+						onClick={() => {
+							setShowAllEvents() === true
+								? setShowAllEvents(false)
+								: setShowAllEvents(true);
+						}}
 						className={`bg-blue-100 p-1  w-[90%] flex flex-col items-center justify-center z-10  text-gray-700 text-xs rounded mb-1 truncate`}>
 						<Typography
 							variant='p'
@@ -90,7 +88,10 @@ export default function Day({ day, rowIdx, event }) {
 					dayEvents.slice(maxEventsToShow).map((evt, idx) => (
 						<div
 							key={idx}
-							onClick={() => setSelectedEvent(evt)}
+							onClick={() => {
+								setSelectedEvent(evt);
+								setShowEventModal(true);
+							}}
 							className={`bg-blue-100 p-1  w-[90%] flex flex-col items-center justify-center z-10  text-gray-700 text-xs rounded mb-1 truncate`}>
 							<Typography
 								variant='p'

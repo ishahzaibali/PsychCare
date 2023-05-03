@@ -18,7 +18,7 @@ export const navData = [
 
 	{
 		title: 'Appointments',
-		url: '/psychologist_appointments',
+		url: '#',
 		icon: <CalendarIcon className='w-5 h-5' />,
 		cName: 'nav-links',
 	},
@@ -50,6 +50,27 @@ export const navData = [
 		title: 'Settings',
 		url: '/',
 		icon: <Cog6ToothIcon className='w-5 h-5' />,
+		cName: 'nav-links',
+	},
+];
+export const subMenu = [
+	{
+		title: 'Upcoming Appointments',
+		url: '/upcoming_appointments',
+		icon: <Squares2X2Icon className='w-5 h-5' />,
+		cName: 'nav-links',
+	},
+
+	{
+		title: 'All Appointments',
+		url: '/all_appointments',
+		icon: <CalendarIcon className='w-5 h-5' />,
+		cName: 'nav-links',
+	},
+	{
+		title: 'Schedule Appointments',
+		url: '/schedule_appointments',
+		icon: <ChatBubbleOvalLeftIcon className='w-5 h-5' />,
 		cName: 'nav-links',
 	},
 ];

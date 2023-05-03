@@ -138,7 +138,7 @@ const AppointmentCard = ({ card }) => {
 						</div>
 					</CardBody>
 					<CardFooter className='flex items-center justify-between py-3'>
-						<NavLink to={'/appointments'} className='w-full'>
+						<NavLink to={`/appointments`} className='w-full'>
 							<Button className='w-full ml-0 shadow-none font-poppins'>
 								Book Appointment
 							</Button>

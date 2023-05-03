@@ -70,7 +70,7 @@ const OnsiteAppointments = ({ user }) => {
 						variant='h6'
 						color='blue-gray'
 						className='font-poppins text-[rgb(52, 71, 103)] font-medium text-sm'>
-						{capitalizeFirstLetter(user.onsiteAppointment.city)}
+						{user.onsiteAppointment.city}
 					</Typography>
 				</div>
 			</div>

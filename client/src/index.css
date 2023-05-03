@@ -7,6 +7,7 @@ body {
 	font-family: 'Poppins', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	scroll-behavior: smooth
 }
 
 @tailwind base;
@@ -15,6 +16,7 @@ body {
 
 ::-webkit-scrollbar {
 	width: 0.5rem;
+	scroll-behavior: smooth;
 }
 
 ::-webkit-scrollbar-track {

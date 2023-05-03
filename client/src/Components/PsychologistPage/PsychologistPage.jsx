@@ -191,7 +191,8 @@ const PsychologistPage = () => {
 				</div>
 				<div className='psychologists-search-section'>
 					<h1 className='heading'>
-						<span>12 </span>best Psychologists in <span>Lahore</span>
+						<span>{showPsychologists.length} </span>best Psychologists in{' '}
+						<span>Pakistan</span>
 					</h1>
 					<p className='sub-heading'>
 						Mental Health Specialist , Mahir-e-imraz-e- nafsiyat

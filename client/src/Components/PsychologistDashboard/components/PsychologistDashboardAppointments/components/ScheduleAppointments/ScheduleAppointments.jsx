@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+// import dayjs from 'dayjs';
 import './ScheduleAppointments.css';
 import {
 	Card,
@@ -26,10 +27,15 @@ const ScheduleAppointments = () => {
 	const handleOpenPersonal = () => {
 		setOpenPersonal(!openPersonal);
 	};
-	const [openOnsite, setOpenOnsite] = useState(false);
-	const handleOpenOnsite = () => {
-		setOpenOnsite(!openOnsite);
+	const [openOnsiteSchedule, setOpenOnsiteSchedule] = useState(false);
+	const handleOpenOnsiteSchedule = () => {
+		setOpenOnsiteSchedule(!openOnsiteSchedule);
 	};
+	const [openOnlineSchedule, setOpenOnlineSchedule] = useState(false);
+	const handleOpenOnlineSchedule = () => {
+		setOpenOnlineSchedule(!openOnlineSchedule);
+	};
+	
 
 	const OnsiteAppointments = ({ user }) => {
 		const [fee, setFee] = useState(user.onsiteAppointment.fee);
@@ -38,14 +44,45 @@ const ScheduleAppointments = () => {
 		);
 		const [city, setCity] = useState(user.onsiteAppointment.city);
 		const [address, setAddress] = useState(user.onsiteAppointment.location);
+		const [onsiteSlotsData, setOnsiteSlotsData] = useState({
+			available: true,
+			start: '',
+			end: '',
+		});
 
-		const handleUpdate = async (id) => {
+		const [slotsArray, setslotsArray] = useState([]);
+		const slotsArrayHandle = (e) => {
+			e.preventDefault();
+			setslotsArray([...slotsArray, { ...onsiteSlotsData }]);
+			setOnsiteSlotsData({ start: '', end: '', available: true });
+		};
+		const [onsiteSchedule, setOnsiteSchedule] = useState({
+			day: 'Monday',
+			slots: slotsArray,
+		});
+
+		const [scheduleArray, setScheduleArray] = useState([]);
+		const scheduleArrayHandle = (e) => {
+			e.preventDefault();
+			const newSchedule = {
+				day: onsiteSchedule.day,
+				slots: slotsArray,
+			};
+			setScheduleArray([...scheduleArray, newSchedule]);
+			setslotsArray([]);
+
+			setOnsiteSchedule({ day: 'Monday', slots: slotsArray });
+		};
+
+		const handleOnsiteScheduleSubmit = async (id) => {
 			const data = {
 				onsiteAppointment: {
+					...user,
 					practicelocation: practiceLocation,
 					fee: fee,
 					location: address,
 					city: city,
+					schedule: scheduleArray,
 				},
 			};
 			await psychologistService
@@ -56,7 +93,7 @@ const ScheduleAppointments = () => {
 						res
 					);
 					message.success('Data updated Successfully');
-					setOpenPersonal(false);
+					setOpenOnsiteSchedule(false);
 				})
 				.catch((err) => {
 					console.log(
@@ -65,6 +102,14 @@ const ScheduleAppointments = () => {
 					);
 				});
 		};
+
+		useEffect(() => {
+			setOnsiteSchedule({
+				...onsiteSchedule,
+				slots: slotsArray,
+			});
+		}, [slotsArray, scheduleArray]);
+
 		return (
 			<>
 				<div className='mt-8'>
@@ -144,7 +189,7 @@ const ScheduleAppointments = () => {
 								<Typography
 									variant='h6'
 									className='font-poppins  font-[500] flex  items-start justify-between px-6 gap-2 w-full text-sm'>
-									{data.day}, 23 May{' '}
+									{data.day}, {' '}
 									<span>
 										{data.slots.map((ed) =>
 											ed.available ? (
@@ -160,95 +205,267 @@ const ScheduleAppointments = () => {
 							))}
 					</Typography>
 				</div>
+
 				<div>
 					<Dialog
-						open={openPersonal}
-						handler={handleOpenPersonal}
+						className='h-[95vh]'
+						open={openOnsiteSchedule}
+						handler={setOpenOnsiteSchedule}
 						animate={{
 							mount: { scale: 1, y: 0 },
-							unmount: { scale: 0.9, y: -100 },
+							unmount: { scale: 0.9, y: -200 },
 						}}>
-						<DialogBody>
+						<DialogBody className='overflow-y-scroll h-[80vh]'>
 							<form action=''>
-								<div className='flex gap-6 items-center mt-6'>
-									<div className='flex-[1]'>
-										<Typography
-											variant='h6'
-											color='blue-gray'
-											className='font-poppins text-[rgb(52, 71, 103)] font-medium text-xs uppercase opacity-[0.5]'>
-											appointment fee
-										</Typography>
+								<div className='px-2 pb-4 mt-2 '>
+									<Typography
+										variant='h6'
+										color='blue-gray'
+										className='font-poppins text-base w-full text-[rgb(52, 71, 103)] font-semibold'>
+										Input Clinic and Location Details
+									</Typography>
+									<div className='flex gap-6 items-center mt-4'>
+										<div className='flex-[1]'>
+											<Typography
+												variant='h6'
+												color='blue-gray'
+												className='font-poppins text-xs w-full text-[rgb(52, 71, 103)] font-semibold uppercase'>
+												appointment fee
+											</Typography>
 
-										<Input
-											className='rounded-lg border-gray-200 font-poppins text-sm font-medium mt-2'
-											type='number'
-											value={fee}
-											onChange={(e) => {
-												e.preventDefault();
-												setFee(e.target.value);
-											}}
-											placeholder={PKR.format(user.onsiteAppointment.fee)}
-										/>
+											<Input
+												className='rounded-lg text-[rgb(52, 71, 103)]  border-gray-200 font-poppins text-sm font-medium mt-2'
+												type='number'
+												value={fee}
+												onChange={(e) => {
+													e.preventDefault();
+													setFee(e.target.value);
+												}}
+												placeholder={PKR.format(user.onsiteAppointment.fee)}
+											/>
+										</div>
+										<div className='flex-[2]'>
+											<Typography
+												variant='h6'
+												color='blue-gray'
+												className='font-poppins text-xs w-full text-[rgb(52, 71, 103)] font-semibold uppercase'>
+												Practice Location
+											</Typography>
+
+											<Input
+												className='rounded-lg border-gray-200 text-[rgb(52, 71, 103)]  font-poppins text-sm font-medium mt-2'
+												type='tel'
+												value={practiceLocation}
+												onChange={(e) => {
+													e.preventDefault();
+													setPracticeLocation(e.target.value);
+												}}
+												placeholder={user.onsiteAppointment.practicelocation}
+											/>
+										</div>
 									</div>
-									<div className='flex-[2]'>
-										<Typography
-											variant='h6'
-											color='blue-gray'
-											className='font-poppins text-[rgb(52, 71, 103)] font-medium text-xs uppercase opacity-[0.5]'>
-											Practice Location
-										</Typography>
 
-										<Input
-											className='rounded-lg border-gray-200 font-poppins text-sm font-medium mt-2'
-											type='tel'
-											value={practiceLocation}
-											onChange={(e) => {
-												e.preventDefault();
-												setPracticeLocation(e.target.value);
-											}}
-											placeholder={user.onsiteAppointment.practicelocation}
-										/>
+									<div className='flex gap-6 items-center mt-2 mb-4'>
+										<div className='flex-[2]'>
+											<Typography
+												variant='h6'
+												color='blue-gray'
+												className='font-poppins text-xs w-full text-[rgb(52, 71, 103)] font-semibold uppercase'>
+												Address
+											</Typography>
+
+											<Input
+												className='rounded-lg border-gray-200 font-poppins text-sm font-medium mt-2'
+												type='tel'
+												value={address}
+												onChange={(e) => {
+													e.preventDefault();
+													setAddress(e.target.value);
+												}}
+												placeholder={user.onsiteAppointment.location}
+											/>
+										</div>
+										<div className='flex-[1]'>
+											<Typography
+												variant='h6'
+												color='blue-gray'
+												className='font-poppins text-xs w-full text-[rgb(52, 71, 103)] font-semibold uppercase'>
+												city
+											</Typography>
+
+											<Input
+												className='rounded-lg border-gray-200 font-poppins text-sm font-medium mt-2'
+												type='tel'
+												value={city}
+												onChange={(e) => {
+													e.preventDefault();
+													setCity(e.target.value);
+												}}
+												placeholder={user.onsiteAppointment.city}
+											/>
+										</div>
 									</div>
-								</div>
+									<div className='flex p-4 items-start justify-start border border-gray-100  rounded-lg'>
+										<div>
+											<Typography
+												variant='h6'
+												color='blue-gray'
+												className='font-poppins text-base w-full text-[rgb(52, 71, 103)] font-semibold'>
+												Input Weekly Schedule
+											</Typography>
+											<div className='mt-8 flex flex-col gap-2 items-start justify-start'>
+												<Typography
+													variant='h6'
+													color='blue-gray'
+													className='font-poppins text-xs w-full text-[rgb(52, 71, 103)] font-semibold'>
+													Select Day
+												</Typography>
+												<select
+													label='Select Day'
+													variant='outlined'
+													value={onsiteSchedule.day}
+													onChange={(e) =>
+														setOnsiteSchedule({
+															...onsiteSchedule,
+															day: e.target.value,
+														})
+													}
+													className='rounded-lg border-gray-200 font-poppins text-sm font-medium '>
+													<option value='Monday'>Monday</option>
+													<option value='Tuesday'>Tuesday</option>
+													<option value='Wednesday'>Wednesday</option>
+													<option value='Thursday'>Thursday</option>
+													<option value='Friday'>Friday</option>
+													<option value='Saturday'>Saturday</option>
+													<option value='Sunday'>Sunday</option>
+												</select>
+											</div>
+											{onsiteSchedule.day.length !== 0 ? (
+												<div className='mt-8 flex flex-col gap-2 items-start justify-start'>
+													<Typography
+														variant='h6'
+														color='blue-gray'
+														className='font-poppins text-xs w-full text-[rgb(52, 71, 103)] font-semibold'>
+														Select Time Slots
+													</Typography>
+													<div className='flex items-center justify-start gap-4 mt-4'>
+														<Typography
+															variant='h6'
+															color='blue-gray'
+															className='font-poppins text-xs text-[rgb(52, 71, 103)] font-semibold'>
+															From
+														</Typography>
+														<input
+															className='m-0 rounded-lg border-gray-200 font-poppins text-sm w-full font-medium '
+															type='time'
+															step='60'
+															timeFormat='24'
+															value={onsiteSlotsData.start}
+															onChange={(e) =>
+																setOnsiteSlotsData({
+																	...onsiteSlotsData,
+																	start: e.target.value,
+																})
+															}
+														/>
 
-								<div className='flex gap-6 items-center mt-6'>
-									<div className='flex-[2]'>
-										<Typography
-											variant='h6'
-											color='blue-gray'
-											className='font-poppins text-[rgb(52, 71, 103)] font-medium text-xs uppercase opacity-[0.5]'>
-											Address
-										</Typography>
+														<Typography
+															variant='h6'
+															color='blue-gray'
+															className='font-poppins text-xs text-[rgb(52, 71, 103)] font-semibold'>
+															Till
+														</Typography>
+														<input
+															className='rounded-lg w-full border-gray-200 font-poppins text-sm font-medium '
+															step='60'
+															type='time'
+															timeFormat='24'
+															value={onsiteSlotsData.end}
+															onChange={(e) =>
+																setOnsiteSlotsData({
+																	...onsiteSlotsData,
+																	end: e.target.value,
+																})
+															}
+														/>
+														<Button
+															size='sm'
+															onClick={slotsArrayHandle}
+															type='gradient'
+															className='font-poppins ml-0'>
+															Add
+														</Button>
+													</div>
+													{slotsArray.map((info, idx) => {
+														return (
+															<>
+																<div
+																	key={idx}
+																	className='flex items-center justify-start gap-4 mt-4'>
+																	<Typography
+																		variant='h6'
+																		color='blue-gray'
+																		className='font-poppins text-xs text-[rgb(52, 71, 103)] font-semibold'>
+																		{`Slot [${idx}] :`}
+																	</Typography>
+																	<Typography
+																		variant='h6'
+																		color='blue-gray'
+																		className='font-poppins text-xs text-[rgb(52, 71, 103)] font-semibold'>
+																		{info.start}
+																	</Typography>
+																	<Typography
+																		variant='h6'
+																		color='blue-gray'
+																		className='font-poppins text-xs text-[rgb(52, 71, 103)] font-semibold'>
+																		till
+																	</Typography>
 
-										<Input
-											className='rounded-lg border-gray-200 font-poppins text-sm font-medium mt-2'
-											type='tel'
-											value={address}
-											onChange={(e) => {
-												e.preventDefault();
-												setAddress(e.target.value);
-											}}
-											placeholder={user.onsiteAppointment.location}
-										/>
-									</div>
-									<div className='flex-[1]'>
-										<Typography
-											variant='h6'
-											color='blue-gray'
-											className='font-poppins text-[rgb(52, 71, 103)] font-medium text-xs uppercase opacity-[0.5]'>
-											city
-										</Typography>
-
-										<Input
-											className='rounded-lg border-gray-200 font-poppins text-sm font-medium mt-2'
-											type='tel'
-											value={city}
-											onChange={(e) => {
-												e.preventDefault();
-												setCity(e.target.value);
-											}}
-											placeholder={user.onsiteAppointment.city}
-										/>
+																	<Typography
+																		variant='h6'
+																		color='blue-gray'
+																		className='font-poppins text-xs text-[rgb(52, 71, 103)] font-semibold'>
+																		{info.end}
+																	</Typography>
+																</div>
+															</>
+														);
+													})}
+													<Button
+														size='sm'
+														onClick={scheduleArrayHandle}
+														// onClick={handleScheduleSubmit}
+														type='gradient'
+														className='font-poppins ml-0 mt-8'>
+														Add Daily Schedule
+													</Button>
+													{scheduleArray.map((date, idx) => {
+														return (
+															<>
+																<div
+																	key={idx}
+																	className='flex items-center justify-start gap-4 '>
+																	<Typography
+																		variant='h6'
+																		color='blue-gray'
+																		className='font-poppins text-xs text-[rgb(52, 71, 103)] font-semibold'>
+																		{date.day}
+																	</Typography>
+																	<Typography
+																		variant='h6'
+																		color='blue-gray'
+																		className='font-poppins text-xs text-[rgb(52, 71, 103)] font-semibold'>
+																		{`Slots: ${date.slots.length}`}
+																	</Typography>
+																</div>
+															</>
+														);
+													})}
+												</div>
+											) : (
+												''
+											)}
+										</div>
 									</div>
 								</div>
 							</form>
@@ -257,7 +474,7 @@ const ScheduleAppointments = () => {
 							<div className='flex mt-4 items-center justify-end gap-2'>
 								<Button
 									variant='text'
-									onClick={handleOpenPersonal}
+									onClick={handleOpenOnsiteSchedule}
 									className='!text-gray-800 flex items-center justify-center font-poppins'>
 									Cancel
 								</Button>
@@ -266,9 +483,9 @@ const ScheduleAppointments = () => {
 									color='blue'
 									className='ml-0 font-poppins'
 									onClick={() => {
-										handleUpdate(user._id);
+										handleOnsiteScheduleSubmit(user._id);
 									}}>
-									Update Details
+									Update Schedule
 								</Button>
 							</div>
 						</DialogFooter>
@@ -279,11 +496,42 @@ const ScheduleAppointments = () => {
 	};
 	const OnlineAppointments = ({ user }) => {
 		const [onlineFee, setOnlineFee] = useState(user.onlineAppointment.fee);
-		const handleOnlineUpdate = async (id) => {
+		const [onlineSlotsData, setOnlineSlotsData] = useState({
+			available: true,
+			start: '',
+			end: '',
+		});
+
+		const [slotsArray, setslotsArray] = useState([]);
+		const slotsArrayHandle = (e) => {
+			e.preventDefault();
+			setslotsArray([...slotsArray, { ...onlineSlotsData }]);
+			setOnlineSlotsData({ start: '', end: '', available: true });
+		};
+		const [onlineScheduleData, setOnlineScheduleData] = useState({
+			day: 'Monday',
+			slots: slotsArray,
+		});
+
+		const [scheduleArray, setScheduleArray] = useState([]);
+		const scheduleArrayHandle = (e) => {
+			e.preventDefault();
+			const newSchedule = {
+				day: onlineScheduleData.day,
+				slots: slotsArray,
+			};
+			setScheduleArray([...scheduleArray, newSchedule]);
+			setslotsArray([]);
+
+			setOnlineScheduleData({ day: 'Monday', slots: slotsArray });
+		};
+
+		const handleOnlineScheduleSubmit = async (id) => {
 			const data = {
 				onlineAppointment: {
 					...user,
 					fee: onlineFee,
+					schedule: scheduleArray,
 				},
 			};
 			await psychologistService
@@ -294,7 +542,7 @@ const ScheduleAppointments = () => {
 						res
 					);
 					message.success('Data updated Successfully');
-					setOpenOnsite(false);
+					setOpenOnlineSchedule(false);
 				})
 				.catch((err) => {
 					console.log(
@@ -303,6 +551,13 @@ const ScheduleAppointments = () => {
 					);
 				});
 		};
+
+		useEffect(() => {
+			setOnlineScheduleData({
+				...onlineScheduleData,
+				slots: slotsArray,
+			});
+		}, [slotsArray, scheduleArray]);
 		return (
 			<>
 				<div className='mt-8'>
@@ -337,7 +592,7 @@ const ScheduleAppointments = () => {
 								<Typography
 									variant='h6'
 									className='font-poppins mt-2  font-[500] flex  items-start justify-between px-6 gap-2 w-full text-sm'>
-									{data.day}, 23 May{' '}
+									{data.day},{' '}
 									<span>
 										{data.slots.map((ed) =>
 											ed.available ? (
@@ -353,18 +608,20 @@ const ScheduleAppointments = () => {
 							))}
 					</Typography>
 				</div>
+
 				<div>
 					<Dialog
-						open={openOnsite}
-						handler={handleOpenOnsite}
+						className='h-[95vh]'
+						open={openOnlineSchedule}
+						handler={handleOpenOnlineSchedule}
 						animate={{
 							mount: { scale: 1, y: 0 },
-							unmount: { scale: 0.9, y: -100 },
+							unmount: { scale: 0.9, y: -200 },
 						}}>
-						<DialogBody>
+						<DialogBody className='overflow-y-scroll h-[80vh]'>
 							<form action=''>
-								<div className='flex gap-6 items-center mt-6'>
-									<div className=''>
+								<div className='px-2 pb-4 mt-4 '>
+									<div className='mb-2'>
 										<Typography
 											variant='h6'
 											color='blue-gray'
@@ -384,6 +641,168 @@ const ScheduleAppointments = () => {
 											placeholder={PKR.format(user.onlineAppointment.fee)}
 										/>
 									</div>
+									<div className='flex p-4 items-start justify-start border border-gray-100  rounded-lg'>
+										<div>
+											<Typography
+												variant='h6'
+												color='blue-gray'
+												className='font-poppins text-base w-full text-[rgb(52, 71, 103)] font-semibold'>
+												Input Weekly Schedule
+											</Typography>
+											<div className='mt-8 flex flex-col gap-2 items-start justify-start'>
+												<Typography
+													variant='h6'
+													color='blue-gray'
+													className='font-poppins text-xs w-full text-[rgb(52, 71, 103)] font-semibold'>
+													Select Day
+												</Typography>
+												<select
+													label='Select Day'
+													variant='outlined'
+													value={onlineScheduleData.day}
+													onChange={(e) =>
+														setOnlineScheduleData({
+															...onlineScheduleData,
+															day: e.target.value,
+														})
+													}
+													className='rounded-lg border-gray-200 font-poppins text-sm font-medium '>
+													<option value='Monday'>Monday</option>
+													<option value='Tuesday'>Tuesday</option>
+													<option value='Wednesday'>Wednesday</option>
+													<option value='Thursday'>Thursday</option>
+													<option value='Friday'>Friday</option>
+													<option value='Saturday'>Saturday</option>
+													<option value='Sunday'>Sunday</option>
+												</select>
+											</div>
+											{onlineScheduleData.day.length !== 0 ? (
+												<div className='mt-8 flex flex-col gap-2 items-start justify-start'>
+													<Typography
+														variant='h6'
+														color='blue-gray'
+														className='font-poppins text-xs w-full text-[rgb(52, 71, 103)] font-semibold'>
+														Select Time Slots
+													</Typography>
+													<div className='flex items-center justify-start gap-4 mt-4'>
+														<Typography
+															variant='h6'
+															color='blue-gray'
+															className='font-poppins text-xs text-[rgb(52, 71, 103)] font-semibold'>
+															From
+														</Typography>
+														<input
+															className='m-0 rounded-lg border-gray-200 font-poppins text-sm w-full font-medium '
+															type='time'
+															step='60'
+															timeFormat='24'
+															value={onlineSlotsData.start}
+															onChange={(e) =>
+																setOnlineSlotsData({
+																	...onlineSlotsData,
+																	start: e.target.value,
+																})
+															}
+														/>
+
+														<Typography
+															variant='h6'
+															color='blue-gray'
+															className='font-poppins text-xs text-[rgb(52, 71, 103)] font-semibold'>
+															Till
+														</Typography>
+														<input
+															className='rounded-lg w-full border-gray-200 font-poppins text-sm font-medium '
+															step='60'
+															type='time'
+															timeFormat='24'
+															value={onlineSlotsData.end}
+															onChange={(e) =>
+																setOnlineSlotsData({
+																	...onlineSlotsData,
+																	end: e.target.value,
+																})
+															}
+														/>
+														<Button
+															size='sm'
+															onClick={slotsArrayHandle}
+															type='gradient'
+															className='font-poppins ml-0'>
+															Add
+														</Button>
+													</div>
+													{slotsArray.map((info, idx) => {
+														return (
+															<>
+																<div
+																	key={idx}
+																	className='flex items-center justify-start gap-4 mt-4'>
+																	<Typography
+																		variant='h6'
+																		color='blue-gray'
+																		className='font-poppins text-xs text-[rgb(52, 71, 103)] font-semibold'>
+																		{`Slot [${idx}] :`}
+																	</Typography>
+																	<Typography
+																		variant='h6'
+																		color='blue-gray'
+																		className='font-poppins text-xs text-[rgb(52, 71, 103)] font-semibold'>
+																		{info.start}
+																	</Typography>
+																	<Typography
+																		variant='h6'
+																		color='blue-gray'
+																		className='font-poppins text-xs text-[rgb(52, 71, 103)] font-semibold'>
+																		till
+																	</Typography>
+
+																	<Typography
+																		variant='h6'
+																		color='blue-gray'
+																		className='font-poppins text-xs text-[rgb(52, 71, 103)] font-semibold'>
+																		{info.end}
+																	</Typography>
+																</div>
+															</>
+														);
+													})}
+													<Button
+														size='sm'
+														onClick={scheduleArrayHandle}
+														// onClick={handleScheduleSubmit}
+														type='gradient'
+														className='font-poppins ml-0 mt-8'>
+														Add Daily Schedule
+													</Button>
+													{scheduleArray.map((date, idx) => {
+														return (
+															<>
+																<div
+																	key={idx}
+																	className='flex items-center justify-start gap-4 '>
+																	<Typography
+																		variant='h6'
+																		color='blue-gray'
+																		className='font-poppins text-xs text-[rgb(52, 71, 103)] font-semibold'>
+																		{date.day}
+																	</Typography>
+																	<Typography
+																		variant='h6'
+																		color='blue-gray'
+																		className='font-poppins text-xs text-[rgb(52, 71, 103)] font-semibold'>
+																		{`Slots: ${date.slots.length}`}
+																	</Typography>
+																</div>
+															</>
+														);
+													})}
+												</div>
+											) : (
+												''
+											)}
+										</div>
+									</div>
 								</div>
 							</form>
 						</DialogBody>
@@ -391,7 +810,7 @@ const ScheduleAppointments = () => {
 							<div className='flex mt-4 items-center justify-end gap-2'>
 								<Button
 									variant='text'
-									onClick={handleOpenOnsite}
+									onClick={handleOpenOnlineSchedule}
 									className='!text-gray-800 flex items-center justify-center font-poppins'>
 									Cancel
 								</Button>
@@ -400,9 +819,9 @@ const ScheduleAppointments = () => {
 									color='blue'
 									className='ml-0 font-poppins'
 									onClick={() => {
-										handleOnlineUpdate(user._id);
+										handleOnlineScheduleSubmit(user._id);
 									}}>
-									Update Details
+									Update Schedule
 								</Button>
 							</div>
 						</DialogFooter>
@@ -438,7 +857,7 @@ const ScheduleAppointments = () => {
 												<OnsiteAppointments user={getUser} />
 											</div>
 											<Button
-												onClick={() => setOpenPersonal(true)}
+												onClick={() => setOpenOnsiteSchedule(true)}
 												className='edit-btn font-poppins flex gap-2 items center justify-center shadow-none hover:shadow-none text-xs '
 												size='sm'
 												color='blue'>
@@ -456,7 +875,7 @@ const ScheduleAppointments = () => {
 												<OnlineAppointments user={getUser} />
 											</div>
 											<Button
-												onClick={() => setOpenOnsite(true)}
+												onClick={() => setOpenOnlineSchedule(true)}
 												className='edit-btn font-poppins flex gap-2 items center justify-center shadow-none hover:shadow-none text-xs '
 												size='sm'
 												color='blue'>

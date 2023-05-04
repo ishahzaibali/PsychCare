@@ -108,12 +108,12 @@ const OnlineAppointmentCard = ({ online }) => {
 								</AccordionHeader>
 								<AccordionBody className='w-full'>
 									{online &&
-										online.onsiteAppointment &&
-										online.onsiteAppointment.schedule.map((data) => (
+										online.onlineAppointment &&
+										online.onlineAppointment.schedule.map((data) => (
 											<Typography
 												variant='h6'
 												className='font-poppins mt-4 font-[500] flex  items-start justify-between px-6 gap-2 w-full text-sm'>
-												{data.day}, 23 May{' '}
+												{data.day},{' '}
 												<span>
 													{data.slots.map((ed) =>
 														ed.available ? (

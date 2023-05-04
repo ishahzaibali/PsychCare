@@ -119,7 +119,7 @@ const AppointmentCard = ({ card }) => {
 											<Typography
 												variant='h6'
 												className='font-poppins mt-4 font-[500] flex  items-start justify-between px-6 gap-2 w-full text-sm'>
-												{data.day}, 23 May{' '}
+												{data.day}, {' '}
 												<span>
 													{data.slots.map((ed) =>
 														ed.available ? (

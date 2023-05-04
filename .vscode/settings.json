@@ -49,6 +49,7 @@
 		"setpracticelocation",
 		"setprescription",
 		"setshow",
+		"setslots",
 		"setstart",
 		"setstatus",
 		"setuser",

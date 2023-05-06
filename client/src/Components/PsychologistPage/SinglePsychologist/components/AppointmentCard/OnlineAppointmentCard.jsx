@@ -11,9 +11,11 @@ import {
 	AccordionBody,
 	Button,
 } from '@material-tailwind/react';
+import { useNavigate } from 'react-router-dom';
 
 const OnlineAppointmentCard = ({ online }) => {
 	const [open, setOpen] = useState(0);
+	const history = useNavigate();
 
 	const handleOpen = (value) => {
 		setOpen(open === value ? 0 : value);
@@ -132,7 +134,13 @@ const OnlineAppointmentCard = ({ online }) => {
 						</div>
 					</CardBody>
 					<CardFooter className='flex items-center justify-between py-3'>
-						<Button className='w-full ml-0 shadow-none font-poppins'>
+						<Button
+							onClick={() => {
+								history('/appointments', {
+									state: { online, onsite: 'online' },
+								});
+							}}
+							className='w-full ml-0 shadow-none font-poppins'>
 							Book Online Appointment
 						</Button>
 					</CardFooter>

@@ -11,9 +11,10 @@ import {
 	AccordionBody,
 	Button,
 } from '@material-tailwind/react';
-import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const AppointmentCard = ({ card }) => {
+	const history = useNavigate();
 	const [open, setOpen] = useState(0);
 
 	const handleOpen = (value) => {
@@ -48,9 +49,9 @@ const AppointmentCard = ({ card }) => {
 		minimumFractionDigits: 0,
 		maximumFractionDigits: 2,
 	});
-	function capitalizeFirstLetter(str) {
-		return str.charAt(0).toUpperCase() + str.slice(1);
-	}
+	// function capitalizeFirstLetter(str) {
+	// 	return str.charAt(0).toUpperCase() + str.slice(1);
+	// }
 	return (
 		<>
 			<div>
@@ -119,7 +120,7 @@ const AppointmentCard = ({ card }) => {
 											<Typography
 												variant='h6'
 												className='font-poppins mt-4 font-[500] flex  items-start justify-between px-6 gap-2 w-full text-sm'>
-												{data.day}, {' '}
+												{data.day},{' '}
 												<span>
 													{data.slots.map((ed) =>
 														ed.available ? (
@@ -138,11 +139,15 @@ const AppointmentCard = ({ card }) => {
 						</div>
 					</CardBody>
 					<CardFooter className='flex items-center justify-between py-3'>
-						<NavLink to={`/appointments`} className='w-full'>
-							<Button className='w-full ml-0 shadow-none font-poppins'>
-								Book Appointment
-							</Button>
-						</NavLink>
+						<Button
+							onClick={() => {
+								history('/appointments', {
+									state: { card, onsite: 'onsite' },
+								});
+							}}
+							className='w-full ml-0 shadow-none font-poppins'>
+							Book Appointment
+						</Button>
 					</CardFooter>
 				</Card>
 			</div>

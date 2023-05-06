@@ -49,6 +49,7 @@ const MinimalPsychologistCard = ({ card }) => {
 	return (
 		<>
 			<div>
+			
 				<Card className='w-80 shadow-3xl crd-grd font-poppins overflow-hidden border-none'>
 					<CardHeader
 						floated={false}
@@ -68,7 +69,7 @@ const MinimalPsychologistCard = ({ card }) => {
 						<Typography
 							variant='h5'
 							className=' font-poppins mt-4 '>
-							Dr. <span>{card.name}</span>
+							{card.gender === 'male' ? `Mr. ${card.user_id.name}` : `Ms. ${card.user_id.name}`}
 						</Typography>
 						<Typography
 							variant='h6'
@@ -111,7 +112,7 @@ const MinimalPsychologistCard = ({ card }) => {
 								<Typography
 									variant='h6'
 									className='mb-2 font-poppins text-sm'>
-									{card.location}
+									{card.onsiteAppointment.location}
 								</Typography>
 							</div>
 						</div>
@@ -152,7 +153,7 @@ const MinimalPsychologistCard = ({ card }) => {
 							<Typography
 								variant='h6'
 								className='mb-2 font-poppins mt-4 text-xs'>
-								{card.clinicname}
+								{card.onsiteAppointment.practicelocation}
 							</Typography>
 						</div>
 						<motion.div

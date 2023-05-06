@@ -1,10 +1,38 @@
 .ab-main {
-   padding: 0 2rem;
-   display: flex;
-   align-items: center;
-   flex-direction: column;
-   justify-content: center;
-   gap: 4rem;
-   width: 100%;
-   margin: 0;
+	padding: 0 2rem;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	gap: 4rem;
+	width: 100%;
+	margin: 0;
+}
+/* @keyframes colorAnimation {
+	0% {
+		background-color: #ffffff;
+		color: #344767;
+      transform: translateY(-100%);
+	}
+	100% {
+		background-color: #418cfd;
+		color: #ffffff;
+      transform: translateY(0%);
+	}
+}
+
+.animation:hover {
+	animation: colorAnimation 2s linear;
+} */
+
+.selected-card {
+	background-color: #17c1e8 !important;
+	color: #ffffff;
+	/* border-top: 0.5rem; */
+	/* border: #17c1e8 !important; */
+	border-top: 4px solid rgb(52, 71, 103, 0.5) !important;
+}
+
+.react-multiple-carousel__arrow {
+	background: rgb(52, 71, 103, 0.5) !important;
 }

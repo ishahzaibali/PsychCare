@@ -33,9 +33,9 @@ const SinglePsychologist = () => {
 			behavior: 'smooth',
 		});
 	}, [path]);
-	function capitalizeFirstLetter(str) {
-		return str.charAt(0).toUpperCase() + str.slice(1);
-	}
+	// function capitalizeFirstLetter(str) {
+	// 	return str.charAt(0).toUpperCase() + str.slice(1);
+	// }
 	return (
 		<>
 			<div className='spy-bg'>

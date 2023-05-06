@@ -12,6 +12,7 @@ import {
 } from '@material-tailwind/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/solid';
 import userService from '../../services/UserService.js';
+import { useSelector, useDispatch } from 'react-redux';
 
 const Login = () => {
 	const [email, setEmail] = useState('');
@@ -20,7 +21,10 @@ const Login = () => {
 	const [loginError, setLoginError] = useState(false);
 	const [errorMessage, setErrorMessage] = useState('');
 	const history = useNavigate();
-
+	
+	const userData = useSelector(state => state.user.userData);
+	const dispatch = useDispatch();
+	
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (email.length === 0 || password.length === 0) {
@@ -56,7 +60,7 @@ const Login = () => {
 				});
 		}
 	};
-
+	
 	return (
 		<>
 			<Navbar />

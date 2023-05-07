@@ -12,6 +12,7 @@ import {
 	Button,
 } from '@material-tailwind/react';
 import { useNavigate } from 'react-router-dom';
+import userService from '../../../../../services/UserService';
 
 const AppointmentCard = ({ card }) => {
 	const history = useNavigate();
@@ -141,9 +142,11 @@ const AppointmentCard = ({ card }) => {
 					<CardFooter className='flex items-center justify-between py-3'>
 						<Button
 							onClick={() => {
-								history('/appointments', {
-									state: { card, onsite: 'onsite' },
-								});
+								userService.isLoggedIn() === true
+									? history('/appointments', {
+											state: { card, onsite: 'onsite' },
+									  })
+									: history('/login');
 							}}
 							className='w-full ml-0 shadow-none font-poppins'>
 							Book Appointment

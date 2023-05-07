@@ -2,13 +2,22 @@ import React, { useState, useEffect } from 'react';
 import './AppointmentBooking.css';
 import { Navbar } from '../../index';
 import 'date-carousel/date-carousel.js';
-import { Card, CardBody, Avatar, CardFooter,Button } from '@material-tailwind/react';
-import { useLocation } from 'react-router-dom';
+import {
+	Card,
+	CardBody,
+	Avatar,
+	CardFooter,
+	Button,
+} from '@material-tailwind/react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import placeholder from '../../../assets/placeholder.png';
 import placeholder_female from '../../../assets/placeholder_female.png';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { motion } from 'framer-motion';
+import appointmentService from '../../../services/AppointmentService';
+import { message } from 'antd';
+import userService from '../../../services/UserService';
 
 const responsive = {
 	superLargeDesktop: {
@@ -37,27 +46,17 @@ const AppointmentBooking = () => {
 	const [selectedSlot, setSelectedSlot] = useState(null);
 	const [selectedDate, setSelectedDate] = useState([]);
 	const [dateCard, setDateCard] = useState([]);
+	const [startTime, setStartTime] = useState('');
 
 	const { state } = useLocation();
+	const history = useNavigate();
 	// const { card } = state;
 	const user = state.card;
 	// console.log("🚀 ~ file: AppointmentBooking.jsx:44 ~ AppointmentBooking ~ user:", user)
 	const online = state.online;
 	const type = state.onsite;
 
-	const handleCardClick = (index) => {
-		setSelectedCard(index);
-		const selectedDate = datesArray[index];
-
-		const year = selectedDate.year;
-		const month = (selectedDate.month < 10 ? '0' : '') + selectedDate.month;
-		const day = (selectedDate.day < 10 ? '0' : '') + selectedDate.day;
-		const formattedDate = `${year}-${month}-${day}`;
-		setSelectedDate(formattedDate);
-		setDateCard(datesArray[index]);
-		console.log('Selected Date:', formattedDate);
-	};
-
+	
 	useEffect(() => {
 		const getDatesArray = () => {
 			const dates = [];
@@ -156,15 +155,86 @@ const AppointmentBooking = () => {
 	const handleSlotClick = (index, start) => {
 		const selectedSlotTime = getSelectedSlotTime(index, start);
 		setSelectedSlot(index, start);
+		setStartTime(selectedSlotTime.start);
 		if (selectedSlotTime) {
 			// Perform any desired operations with the selectedSlotTime, such as storing in state variables or displaying in the UI
 			console.log(selectedSlotTime.start, selectedSlotTime.end);
 		}
 	};
+	const loggedIn = userService.getLoggedInUser();
+	const userData = userService.getLoggedInUserData();
+	console.log(
+		'🚀 ~ file: AppointmentBooking.jsx:178 ~ AppointmentBooking ~ userData:',
+		userData
+	);
+	// const id = userData._id
+	const loggedIn_id = loggedIn._id;
+	
+	const handleCardClick = (index) => {
+		setSelectedCard(index);
+		const selectedDate = datesArray[index];
 
-	const handleOnsiteBooking = () => {
-		
-	}
+		const year = selectedDate.year;
+		const month = (selectedDate.month < 10 ? '0' : '') + selectedDate.month;
+		const day = (selectedDate.day < 10 ? '0' : '') + selectedDate.day;
+		const formattedDate = `${year}-${month}-${day}`;
+		setSelectedDate(formattedDate);
+		setDateCard(datesArray[index]);
+		console.log('Selected Date:', formattedDate);
+	};
+
+	const handleOnsiteBooking = async (e) => {
+		e.preventDefault();
+		const data = {
+			appointmenttype: 'onsite',
+			datetime: {
+				time: startTime,
+				day: dateCard.dayname,
+				date: selectedDate,
+			},
+			fee: user.onsiteAppointment.fee,
+			location: user.onsiteAppointment.location,
+			patient_id: {
+				_id: userData?._id,
+				age: userData.age,
+				contact_number: userData?.contact_number,
+				gender: userData?.gender,
+				occupation: '',
+				patient_name: loggedIn.name,
+				user_id: {
+					_id: loggedIn_id,
+					name: loggedIn.name,
+					email: loggedIn.email,
+				},
+			},
+			psychologist_id: user._id,
+			reschedule_count: 0,
+			reviewed: false,
+			status: 'upcoming',
+		};
+
+		const addAppointmentAsync = async (data) => {
+			return new Promise((resolve, reject) => {
+				appointmentService
+					.addAppointment(data)
+					.then((res) => {
+						resolve(res);
+					})
+					.catch((err) => {
+						reject(err);
+					});
+			});
+		};
+
+		try {
+			const res = await addAppointmentAsync(data);
+			console.log('Appointment added successfully:', res);
+			message.success('Appointment booked successfully!');
+			history('/users/psychologists/' + user._id);
+		} catch (err) {
+			console.log('Error adding appointment:', err);
+		}
+	};
 
 	const OnsiteData = () => {
 		return (
@@ -316,7 +386,9 @@ const AppointmentBooking = () => {
 							</CardBody>
 							<CardFooter className='flex items-end justify-end'>
 								<div>
-									<Button className=' ml-0 shadow-none bg-[#17c1e8]  font-poppins'>
+									<Button
+										onClick={handleOnsiteBooking}
+										className=' ml-0 shadow-none bg-[#17c1e8]  font-poppins'>
 										Book Appointment
 									</Button>
 								</div>

@@ -60,7 +60,7 @@ export default function Day({ day, rowIdx, event }) {
 						<Typography
 							variant='p'
 							className='font-poppins font-medium text-xs'>
-							{evt.datetime.day}
+							{evt.patient_id.patient_name}
 						</Typography>
 						<Typography
 							variant='p'

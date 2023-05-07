@@ -2,7 +2,15 @@ import GenericService from './GenericService';
 
 class AppointmentService extends GenericService {
 	addAppointment = (data) => {
-		this.post('appointments', data);
+		return new Promise((resolve, reject) => {
+			this.post('appointments', data)
+				.then((response) => {
+					resolve(response);
+				})
+				.catch((error) => {
+					reject(error);
+				});
+		});
 	};
 	deleteAppointment = (_id) => {
 		this.delete('appointments/' + _id);

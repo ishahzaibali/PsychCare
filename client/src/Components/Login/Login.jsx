@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Login.css';
 import Navbar from '../Navbar/Navbar';
 import { useNavigate, NavLink } from 'react-router-dom';
@@ -21,10 +21,9 @@ const Login = () => {
 	const [loginError, setLoginError] = useState(false);
 	const [errorMessage, setErrorMessage] = useState('');
 	const history = useNavigate();
-	
-	const userData = useSelector(state => state.user.userData);
-	const dispatch = useDispatch();
-	
+	const userData = useSelector((state) => state.user.userData);
+	const dispatch = useDispatch();
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (email.length === 0 || password.length === 0) {
@@ -32,15 +31,16 @@ const Login = () => {
 			setLoginError(false);
 		} else {
 			userService
-				.login(email, password)
-				.then((data) => {
+				.login(email, password, dispatch)
+				.then(({ token, user }) => {
 					// console.log(data);
+					dispatch({ type: 'SET_USER_DATA', payload: { user } });
+					localStorage.setItem('token', token);
+					localStorage.setItem('user', JSON.stringify(user));
+					// console.log('User Data:', userData);
 					const LoggedInUser = userService.getLoggedInUser();
-					console.log(
-						'🚀 ~ file: Login.jsx:37 ~ .then ~ LoggedInUser:',
-						LoggedInUser
-					);
-					console.log('🚀 ~ file: Login.jsx:36 ~ .then ~ data:', data);
+
+					// console.log('🚀 ~ file: Login.jsx:36 ~ .then ~ data:', data);
 
 					if (LoggedInUser.role === 'admin') {
 						e.preventDefault();
@@ -60,7 +60,12 @@ const Login = () => {
 				});
 		}
 	};
-	
+
+	useEffect(() => {
+		console.log('User Data:', userData);
+		// Perform further actions or checks with the updated userData
+	}, [userData]);
+
 	return (
 		<>
 			<Navbar />

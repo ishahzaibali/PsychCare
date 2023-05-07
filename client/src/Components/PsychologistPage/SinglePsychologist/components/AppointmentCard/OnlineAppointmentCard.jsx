@@ -12,6 +12,7 @@ import {
 	Button,
 } from '@material-tailwind/react';
 import { useNavigate } from 'react-router-dom';
+import userService from '../../../../../services/UserService';
 
 const OnlineAppointmentCard = ({ online }) => {
 	const [open, setOpen] = useState(0);
@@ -136,9 +137,11 @@ const OnlineAppointmentCard = ({ online }) => {
 					<CardFooter className='flex items-center justify-between py-3'>
 						<Button
 							onClick={() => {
-								history('/appointments', {
-									state: { online, onsite: 'online' },
-								});
+								userService.isLoggedIn === true
+									? history('/appointments', {
+											state: { online, onsite: 'online' },
+									  })
+									: history('/login');
 							}}
 							className='w-full ml-0 shadow-none font-poppins'>
 							Book Online Appointment

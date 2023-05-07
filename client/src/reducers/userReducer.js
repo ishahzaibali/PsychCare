@@ -1,5 +1,10 @@
+import { UPDATE_USER } from '../actions/userActions';
+
 const INITIAL_STATE = {
-	userData: null,
+	userData: {
+		user: null,
+		
+	},
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -7,7 +12,18 @@ const userReducer = (state = INITIAL_STATE, action) => {
 		case 'SET_USER_DATA':
 			return {
 				...state,
-				userData: action.payload,
+				userData: {
+					...state.userData,
+					user: {
+						...state.userData.user,
+						...action.payload.user, // Update the user data fields
+					},
+				},
+			};
+		case UPDATE_USER:
+			return {
+				...state,
+				userData: action.payload, // Update user data
 			};
 		default:
 			return state;

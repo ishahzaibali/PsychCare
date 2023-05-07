@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './PsychologistDashboardProfile.css';
+import { useSelector } from 'react-redux';
+import { updateUser } from '../../../../actions/userActions';
 import {
 	Card,
 	CardBody,
@@ -16,20 +18,22 @@ import placeholder_female from '../../../../assets/placeholder_female.png';
 import userService from '../../../../services/UserService';
 import { Input, message } from 'antd';
 import psychologistService from '../../../../services/PsychologistService';
+import { useDispatch } from 'react-redux';
 
 const DashboardProfile = () => {
 	const [user, setUser] = useState([]);
 	const [openPersonal, setOpenPersonal] = useState(false);
-
+	const userData = useSelector((state) => state.user.userData);
 	const getUser = async () => {
 		const userValue = await userService.getLoggedInUserData();
 		setUser(userValue);
 	};
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		getUser();
 	}, []);
-	
+
 	const handleOpenPersonal = () => {
 		setOpenPersonal(!openPersonal);
 	};
@@ -39,8 +43,8 @@ const DashboardProfile = () => {
 				<div className='flex my-8 p-4 items-center border border-gray-100  rounded-xl justify-between'>
 					<div className='flex gap-6 items-center'>
 						<div>
-							{!user?.image ? (
-								user.gender === 'male' ? (
+							{!userData?.user?.image ? (
+								userData?.user?.gender === 'male' ? (
 									<Avatar
 										size='lg'
 										variant='circular'
@@ -48,7 +52,7 @@ const DashboardProfile = () => {
 										src={placeholder}
 										alt='candice wu'
 									/>
-								) : user.gender === 'female' ? (
+								) : userData.user.gender === 'female' ? (
 									<Avatar
 										size='lg'
 										variant='circular'
@@ -70,7 +74,7 @@ const DashboardProfile = () => {
 									size='lg'
 									variant='circular'
 									className='object-cover rounded-lg'
-									src={user?.image}
+									src={userData.user?.image}
 									alt='candice wu'
 								/>
 							)}
@@ -80,13 +84,13 @@ const DashboardProfile = () => {
 								variant='h6'
 								color='blue-gray'
 								className='font-poppins text-[rgb(52, 71, 103)] font-semibold'>
-								{user?.user_id?.name}
+								{userData.user.user_id?.name}
 							</Typography>
 							<Typography
 								variant='h6'
 								color='blue-gray'
 								className='font-poppins text-[rgb(52, 71, 103)] font-normal text-sm'>
-								{user?.user_id?.role}
+								{userData.user.user_id?.role}
 							</Typography>
 						</div>
 					</div>
@@ -99,14 +103,20 @@ const DashboardProfile = () => {
 		const name = userService.getLoggedInUser().name;
 		const parts = name.split(' ');
 		const username = parts[0].concat(parts[1]).toLowerCase();
-		const [userAbout, setUserAbout] = useState(user?.about);
-		const [userContact, setuserContact] = useState(user?.contactnumber);
-
+		const [userAbout, setUserAbout] = useState(userData.user?.about);
+		const [userContact, setuserContact] = useState(
+			userData.user?.contactnumber
+		);
+		
 		const handleUpdate = async (id) => {
 			const data = {
 				about: userAbout,
 				contactnumber: userContact,
 			};
+			const newData = {
+				...userData, // Spread the previous data
+				...data, // Spread the updated values
+			 };
 			await psychologistService
 				.updatePsychologist(id, data)
 				.then((res) => {
@@ -114,6 +124,7 @@ const DashboardProfile = () => {
 						'🚀 ~ file: Profile.jsx:115 ~ psychologistService.updatePsychologist ~ res:',
 						res
 					);
+					dispatch(updateUser(newData));
 					message.success('Data updated Successfully');
 					setOpenPersonal(false);
 				})
@@ -154,7 +165,7 @@ const DashboardProfile = () => {
 							variant='h6'
 							color='blue-gray'
 							className='font-poppins text-[rgb(52, 71, 103)] font-medium text-sm'>
-							{user?.user_id?.email}
+							{userData.user.user_id?.email}
 						</Typography>
 					</div>
 					<div>
@@ -168,7 +179,7 @@ const DashboardProfile = () => {
 							variant='h6'
 							color='blue-gray'
 							className='font-poppins text-[rgb(52, 71, 103)] font-medium text-sm'>
-							{user.contactnumber}
+							{userData.user.contactnumber}
 						</Typography>
 					</div>
 				</div>
@@ -183,7 +194,7 @@ const DashboardProfile = () => {
 						variant='h6'
 						color='blue-gray'
 						className='font-poppins text-[rgb(52, 71, 103)] font-medium text-sm'>
-						{user?.about}
+						{userData.user?.about}
 					</Typography>
 				</div>
 				<div>
@@ -223,7 +234,7 @@ const DashboardProfile = () => {
 											variant='h6'
 											color='blue-gray'
 											className='font-poppins text-[rgb(52, 71, 103)] font-medium text-sm'>
-											{user?.user_id?.email}
+											{userData.user.user_id?.email}
 										</Typography>
 									</div>
 									<div>
@@ -241,7 +252,7 @@ const DashboardProfile = () => {
 												e.preventDefault();
 												setuserContact(e.target.value);
 											}}
-											placeholder={user.contactnumber}
+											placeholder={userData.user.contactnumber}
 										/>
 									</div>
 								</div>
@@ -259,7 +270,7 @@ const DashboardProfile = () => {
 											e.preventDefault();
 											setUserAbout(e.target.value);
 										}}
-										placeholder={user.about}
+										placeholder={userData.user.about}
 									/>
 								</div>
 							</form>
@@ -277,7 +288,7 @@ const DashboardProfile = () => {
 									color='blue'
 									className='ml-0 font-poppins'
 									onClick={() => {
-										handleUpdate(user._id);
+										handleUpdate(userData.user._id);
 									}}>
 									Update Details
 								</Button>
@@ -303,11 +314,25 @@ const DashboardProfile = () => {
 						variant='h6'
 						color='blue-gray'
 						className='font-poppins text-[rgb(52, 71, 103)] font-medium text-sm'>
-						{user?.onsiteAppointment?.location}
+						{userData.user.onsiteAppointment?.location}
 					</Typography>
 				</div>
 
 				<div className='flex gap-12 items-center mt-6'>
+					<div>
+						<Typography
+							variant='h6'
+							color='blue-gray'
+							className='font-poppins text-[rgb(52, 71, 103)] font-medium text-xs uppercase opacity-[0.5]'>
+							Clinic Name
+						</Typography>
+						<Typography
+							variant='h6'
+							color='blue-gray'
+							className='font-poppins text-[rgb(52, 71, 103)] font-medium text-sm'>
+							{userData.user.onsiteAppointment?.practicelocation}
+						</Typography>
+					</div>
 					<div>
 						<Typography
 							variant='h6'
@@ -320,20 +345,6 @@ const DashboardProfile = () => {
 							color='blue-gray'
 							className='font-poppins text-[rgb(52, 71, 103)] font-medium text-sm'>
 							{user?.onsiteAppointment?.city}
-						</Typography>
-					</div>
-					<div>
-						<Typography
-							variant='h6'
-							color='blue-gray'
-							className='font-poppins text-[rgb(52, 71, 103)] font-medium text-xs uppercase opacity-[0.5]'>
-							postal code
-						</Typography>
-						<Typography
-							variant='h6'
-							color='blue-gray'
-							className='font-poppins text-[rgb(52, 71, 103)] font-medium text-sm'>
-							39350
 						</Typography>
 					</div>
 				</div>

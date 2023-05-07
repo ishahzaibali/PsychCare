@@ -1,18 +1,21 @@
 import GenericService from './GenericService';
 import jwtDecode from 'jwt-decode';
+// import { useDispatch } from 'react-redux';
 
 class UserService extends GenericService {
 	constructor() {
 		super();
 	}
-	login = (email, password) =>
+
+	login = (email, password, dispatch) =>
 		new Promise((resolve, reject) => {
 			this.post('users/login', { email, password })
 				.then(({ token, user }) => {
+					dispatch({ type: 'SET_USER_DATA', payload: { user } });
 					localStorage.setItem('token', token);
 					localStorage.setItem('user', JSON.stringify(user));
 
-					resolve(token, user);
+					resolve({ token, user });
 				})
 				.catch((err) => {
 					reject(err);

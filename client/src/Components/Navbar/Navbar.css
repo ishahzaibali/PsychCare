@@ -80,6 +80,7 @@ button span {
 
 .active {
 	color: #418cfd;
+	font-weight: 600;
 }
 
 @media (max-width: 960px) {
@@ -126,7 +127,7 @@ button span {
 		color: #e7f1f9;
 		margin-left: auto;
 		justify-content: flex-start;
-		z-index: 100;
+		z-index: 1000;
 	}
 	.navlist li {
 		padding: 6px;
@@ -136,5 +137,13 @@ button span {
 		border-radius: 5px;
 		color: #3d4146;
 	}
-	
+	.navlist li .active {
+		background-color: #e7f1f9;
+		display: flex;
+		width: 100%;
+		margin: 0;
+		height: 100%;
+		border-radius: 5px;
+		padding: 6px;
+	}
 }

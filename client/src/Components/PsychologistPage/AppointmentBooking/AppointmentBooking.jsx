@@ -56,7 +56,6 @@ const AppointmentBooking = () => {
 	const online = state.online;
 	const type = state.onsite;
 
-	
 	useEffect(() => {
 		const getDatesArray = () => {
 			const dates = [];
@@ -151,9 +150,31 @@ const AppointmentBooking = () => {
 		// If the slot end time is not available or any other error occurs, return null or handle the error appropriately
 		return null;
 	};
+	const getOnlineSelectedSlotTime = (index, start) => {
+		const selectedSlot = online.onlineAppointment.schedule.find(
+			(slot) => slot.day === dateCard.dayname
+		);
+
+		if (selectedSlot && selectedSlot.slots && selectedSlot.slots[index]) {
+			const end = selectedSlot.slots[index].end;
+			return { start, end };
+		}
+
+		// If the slot end time is not available or any other error occurs, return null or handle the error appropriately
+		return null;
+	};
 
 	const handleSlotClick = (index, start) => {
 		const selectedSlotTime = getSelectedSlotTime(index, start);
+		setSelectedSlot(index, start);
+		setStartTime(selectedSlotTime.start);
+		if (selectedSlotTime) {
+			// Perform any desired operations with the selectedSlotTime, such as storing in state variables or displaying in the UI
+			console.log(selectedSlotTime.start, selectedSlotTime.end);
+		}
+	};
+	const handleOnlineSlotClick = (index, start) => {
+		const selectedSlotTime = getOnlineSelectedSlotTime(index, start);
 		setSelectedSlot(index, start);
 		setStartTime(selectedSlotTime.start);
 		if (selectedSlotTime) {
@@ -169,7 +190,7 @@ const AppointmentBooking = () => {
 	);
 	// const id = userData._id
 	const loggedIn_id = loggedIn._id;
-	
+
 	const handleCardClick = (index) => {
 		setSelectedCard(index);
 		const selectedDate = datesArray[index];
@@ -231,6 +252,58 @@ const AppointmentBooking = () => {
 			console.log('Appointment added successfully:', res);
 			message.success('Appointment booked successfully!');
 			history('/users/psychologists/' + user._id);
+		} catch (err) {
+			console.log('Error adding appointment:', err);
+		}
+	};
+	const handleOnlineBooking = async (e) => {
+		e.preventDefault();
+		const data = {
+			appointmenttype: 'online',
+			datetime: {
+				time: startTime,
+				day: dateCard.dayname,
+				date: selectedDate,
+			},
+			fee: online.onlineAppointment.fee,
+			// location: user.onsiteAppointment.location,
+			patient_id: {
+				_id: userData?._id,
+				age: userData.age,
+				contact_number: userData?.contact_number,
+				gender: userData?.gender,
+				occupation: '',
+				patient_name: loggedIn.name,
+				user_id: {
+					_id: loggedIn_id,
+					name: loggedIn.name,
+					email: loggedIn.email,
+				},
+			},
+			psychologist_id: online._id,
+			reschedule_count: 0,
+			reviewed: false,
+			status: 'upcoming',
+		};
+
+		const addAppointmentAsync = async (data) => {
+			return new Promise((resolve, reject) => {
+				appointmentService
+					.addAppointment(data)
+					.then((res) => {
+						resolve(res);
+					})
+					.catch((err) => {
+						reject(err);
+					});
+			});
+		};
+
+		try {
+			const res = await addAppointmentAsync(data);
+			console.log('Appointment added successfully:', res);
+			message.success('Appointment booked successfully!');
+			history('/users/psychologists/' + online._id);
 		} catch (err) {
 			console.log('Error adding appointment:', err);
 		}
@@ -403,71 +476,162 @@ const AppointmentBooking = () => {
 	const OnlineData = () => {
 		return (
 			<>
-				<div className='w-full flex items-center justify-center'>
-					<Card className='w-[60%] shadow-3xl '>
-						<CardBody className='flex gap-4'>
-							<div>
-								{!online?.image ? (
-									online.gender === 'male' ? (
-										<Avatar
-											size='xl'
-											variant='circular'
-											className='object-cover'
-											src={placeholder}
-											alt='candice wu'
-										/>
-									) : online.gender === 'female' ? (
-										<Avatar
-											size='xl'
-											variant='circular'
-											className='object-cover rounded-lg'
-											src={placeholder_female}
-											alt='candice wu'
-										/>
+				<div className='flex flex-col gap-8 w-full'>
+					<div className='w-full flex items-center justify-center'>
+						<Card className='w-[70%] shadow-3xl '>
+							<CardBody className='flex gap-4'>
+								<div>
+									{!online?.image ? (
+										online.gender === 'male' ? (
+											<Avatar
+												size='xl'
+												variant='circular'
+												className='object-cover'
+												src={placeholder}
+												alt='candice wu'
+											/>
+										) : online.gender === 'female' ? (
+											<Avatar
+												size='xl'
+												variant='circular'
+												className='object-cover rounded-lg'
+												src={placeholder_female}
+												alt='candice wu'
+											/>
+										) : (
+											<Avatar
+												size='xl'
+												variant='circular'
+												className='object-cover rounded-lg'
+												src={placeholder}
+												alt='candice wu'
+											/>
+										)
 									) : (
 										<Avatar
 											size='xl'
 											variant='circular'
 											className='object-cover rounded-lg'
-											src={placeholder}
+											src={online.image}
 											alt='candice wu'
 										/>
-									)
-								) : (
-									<Avatar
-										size='xl'
-										variant='circular'
-										className='object-cover rounded-lg'
-										src={online.image}
-										alt='candice wu'
-									/>
-								)}
-							</div>
-							<div className='flex flex-col justify-start'>
-								<h6 className='text-2xl text-[#344767] font-poppins font-medium '>
-									{online.user_id.name}
-								</h6>
-								<h6 className='text-base text-[#344767] font-poppins font-medium '>
-									Online Video Consultation({type})
-								</h6>
-								<h6 className='text-base text-[#344767] font-poppins font-bold '>
-									{PKR.format(online?.onlineAppointment?.['fee'])}
-								</h6>
-							</div>
-						</CardBody>
-					</Card>
-				</div>
-				<div className='w-full flex items-center justify-center'>
-					<Card className='w-[80%] shadow-3xl '>
-						<CardBody className=''>
-							<div></div>
-							<div>
-								<h6 className='text-base text-[#344767] font-poppins font-medium '>
-									Date Picker
-								</h6>
-							</div>
-						</CardBody>
-					</Card>
+									)}
+								</div>
+								<div className='flex flex-col justify-start'>
+									<h6 className='text-2xl text-[#344767] font-poppins font-medium '>
+										{online.user_id.name}
+									</h6>
+									<h6 className='text-base text-[#344767] font-poppins font-medium '>
+										Online Video Consultation({type})
+									</h6>
+									<h6 className='text-base text-[#344767] font-poppins font-bold '>
+										{PKR.format(online?.onlineAppointment?.['fee'])}
+									</h6>
+								</div>
+							</CardBody>
+						</Card>
+					</div>
+					<div className='w-full flex items-center justify-center mb-4'>
+						<Card className='w-[70%] shadow-3xl min-h-[380px]'>
+							<CardBody className=''>
+								<div>
+									<h6 className='text-sm text-[#344767] font-poppins font-semibold pl-8 '>
+										Select Date
+									</h6>
+								</div>
+								<div className=''>
+									<Carousel
+										responsive={responsive}
+										className='z-20 flex gap-2 h-[8rem] '>
+										{datesArray.map((date, index) => (
+											<motion.div
+												whileTap={{ scale: 0.9 }}
+												className='mx-8 w-36'>
+												<form onSubmit={handleFormSubmit}>
+													<Card
+														key={date.index}
+														onClick={() => {
+															handleCardClick(index);
+														}}
+														className={`shadow-md cursor-pointer text-[#344767] z-30 border-t-4  p-4 flex items-center justify-center w-full  ${
+															selectedCard === index
+																? 'selected-card '
+																: 'border-[#17c1e8]'
+														}`}>
+														<CardBody className='w-full p-0'>
+															<h6 className='text-base w-full  font-poppins font-medium '>
+																{monthName}, {date.day}
+															</h6>
+															<h6 className='text-xs  font-poppins font-normal '>
+																{date.dayname}
+															</h6>
+														</CardBody>
+													</Card>
+												</form>
+											</motion.div>
+										))}
+									</Carousel>
+								</div>
+								<div>
+									<div>
+										<h6 className='text-sm mt-8 text-[#344767] font-poppins font-semibold pl-8 '>
+											Select Time Slot
+										</h6>
+									</div>
+									<div className='mt-4 pl-8 min-h-[5rem]'>
+										{online.onlineAppointment.schedule !== [] ? (
+											online.onlineAppointment.schedule.map((slot) =>
+												slot.day === dateCard.dayname ? (
+													slot.slots !== [] ? (
+														<div className='flex flex-wrap gap-4 '>
+															{slot.slots.map((ed, index) =>
+																ed.available ? (
+																	<Card
+																		onClick={() => {
+																			handleOnlineSlotClick(index, ed.start);
+																		}}
+																		className={`shadow-md cursor-pointer text-[#344767] z-30 border-t-4  p-4 flex items-center justify-center w-28 h-12  ${
+																			selectedSlot === index
+																				? 'selected-card '
+																				: 'border-[#17c1e8]'
+																		}`}>
+																		<CardBody className='w-full p-0 m-0 flex items-center justify-center text-xs font-semibold'>
+																			{ed.start} - {ed.end}
+																		</CardBody>
+																	</Card>
+																) : (
+																	''
+																)
+															)}
+														</div>
+													) : (
+														<h6 className='text-sm mt-8 text-[#344767] font-poppins font-semibold pl-8 '>
+															No slot available on {selectedDate.dayname}
+														</h6>
+													)
+												) : (
+													''
+												)
+											)
+										) : (
+											<h6 className='text-sm mt-8 text-[#344767] font-poppins font-semibold pl-8 '>
+												No slot available on {selectedDate.dayname}
+											</h6>
+										)}
+									</div>
+								</div>
+							</CardBody>
+							<CardFooter className='flex items-end justify-end'>
+								<div>
+									<Button
+										onClick={handleOnlineBooking}
+										className=' ml-0 shadow-none bg-[#17c1e8]  font-poppins'>
+										Book Appointment
+									</Button>
+								</div>
+							</CardFooter>
+						</Card>
+					</div>
 				</div>
 			</>
 		);

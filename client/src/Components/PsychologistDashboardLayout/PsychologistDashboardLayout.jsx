@@ -10,6 +10,7 @@ import {
 	PsychologistDashboardVideo,
 	PsychologistDashboardProfile,
 	ScheduleAppointments,
+	AllAppointments,
 } from '../PsychologistDashboard/index';
 import PsychologistDashboard from '../PsychologistDashboard/PsychologistDashboard';
 import { Route, Routes } from 'react-router-dom';
@@ -45,6 +46,10 @@ const PsychologistDashboardLayout = () => {
 							<Route
 								path='/schedule_appointments'
 								element={<ScheduleAppointments />}
+							/>
+							<Route
+								path='/all_appointments'
+								element={<AllAppointments />}
 							/>
 							<Route
 								path='/psychologist_messages'

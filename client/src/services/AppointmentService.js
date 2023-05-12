@@ -15,8 +15,19 @@ class AppointmentService extends GenericService {
 	deleteAppointment = (_id) => {
 		this.delete('appointments/' + _id);
 	};
+	// updateAppointment = (_id, data) => {
+	// 	this.put('appointments/' + _id, data);
+	// };
 	updateAppointment = (_id, data) => {
-		this.put('appointments/' + _id, data);
+		return new Promise((resolve, reject) => {
+			this.put('appointments/' + _id, data)
+				.then((response) => {
+					resolve(response); // Resolve the promise with the response data
+				})
+				.catch((error) => {
+					reject(error); // Reject the promise with the error
+				});
+		});
 	};
 	getAppointments = () => {
 		this.get('appointments');

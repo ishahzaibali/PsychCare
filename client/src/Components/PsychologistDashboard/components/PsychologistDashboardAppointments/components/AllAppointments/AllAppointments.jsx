@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './DashboardUsers.css';
+import './AllAppointments.css';
 import axios from 'axios';
 import { Table } from '@mui/material';
 import TableBody from '@mui/material/TableBody';
@@ -7,7 +7,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import TableHead from '@mui/material/TableHead';
 import TableCell from '@mui/material/TableCell';
-import { tableData } from '../DashboardPsychologists/AllPsychologists/tableData';
 import {
 	Card,
 	CardBody,
@@ -15,29 +14,42 @@ import {
 	Menu,
 	MenuHandler,
 	MenuList,
-	Avatar,
 	MenuItem,
 } from '@material-tailwind/react';
+import { useSelector } from 'react-redux';
 
 const columns = [
 	{
-		field: 'user',
-		headerName: 'Users',
+		field: 'type',
+		headerName: 'Appointment Type',
 		align: 'left',
 		className: 'table-head font-[poppins] font-[800] uppercase text-sm',
 	},
 	{
-		field: 'user_contact',
-		headerName: 'Contact',
+		field: 'patient_details',
+		headerName: 'Patient Details',
 		align: 'left',
 		className: 'table-head font-[poppins] font-[800] uppercase text-sm',
 	},
 	{
-		field: 'user_address',
-		headerName: 'Address',
+		field: 'reschedule_count',
+		headerName: 'Reschedule Count',
 		align: 'left',
 		className: 'table-head font-[poppins] font-[800] uppercase text-sm',
 	},
+	{
+		field: 'date_and_time',
+		headerName: 'Date and Time',
+		align: 'left',
+		className: 'table-head font-[poppins] font-[800] uppercase text-sm',
+	},
+	{
+		field: 'appointment_status',
+		headerName: 'Status',
+		align: 'left',
+		className: 'table-head font-[poppins] font-[800] uppercase text-sm',
+	},
+
 	{
 		field: 'action',
 		headerName: 'Action',
@@ -46,35 +58,46 @@ const columns = [
 	},
 ];
 
-const DashboardUsers = () => {
-	const [showUsers, setShowUsers] = useState([]);
-	const [loading, setLoading] = useState(false);
+const AllAppointments = () => {
+	const userData = useSelector((state) => state.user.userData);
 
-	const getUsers = async () => {
-		try {
-			const res = await axios.get('/users/patients/allpatients');
-			setLoading(true);
+	const [appointments, setAppointments] = useState([]);
 
-			if (res.status !== 200) {
-				window.alert('Invalid Information');
-			} else {
-				setShowUsers(res.data);
-				console.log(
-					'🚀 ~ file: PsychologistPage.jsx:55 ~ getUsers ~ data:',
-					res.data
-				);
-			}
-		} catch (error) {
-			console.log(
-				'🚀 ~ file: PsychologistPage.jsx:56 ~ getUsers ~ error:',
-				error
-			);
-		}
+	const psychologistID = userData.user._id;
+
+	const getAppointments = async () => {
+		const res = await axios.get(`/appointments/psychologist/` + psychologistID);
+
+		setAppointments(res.data);
+		console.log(
+			'🚀 ~ file: PsychologistDashboardAppointments.jsx:24 ~ getAppointment ~ data:',
+			res.data
+		);
 	};
 
 	useEffect(() => {
-		getUsers();
+		getAppointments();
 	}, []);
+
+	function formatDate(dateString) {
+		const options = { year: 'numeric', month: 'long', day: 'numeric' };
+		const date = new Date(dateString);
+		return date.toLocaleDateString('en-US', options);
+	}
+
+	function convertTo12HourFormat(timeString) {
+		const [hours, minutes] = timeString.split(':');
+		let formattedTime = '';
+
+		if (Number(hours) < 12) {
+			formattedTime = `${hours}:${minutes} AM`;
+		} else {
+			const twelveHourFormat = Number(hours) % 12 || 12;
+			formattedTime = `${twelveHourFormat}:${minutes} PM`;
+		}
+
+		return formattedTime;
+	}
 
 	return (
 		<>
@@ -86,43 +109,16 @@ const DashboardUsers = () => {
 								className='pt-5 pl-5 h2'
 								color='blue-gray'
 								as='h2'>
-								Users
+								All Appointments
 							</Typography>
 							<Typography
 								className='pl-5 p'
 								color='blue-gray'
 								as='p'>
-								List of all Users
+								List of all Appointments
 							</Typography>
 						</div>
-						<div className='action-menu'>
-							<Menu placement='left-start'>
-								<MenuHandler>
-									<svg
-										xmlns='http://www.w3.org/2000/svg'
-										fill='none'
-										viewBox='0 0 24 24'
-										stroke-width='2.5'
-										stroke='currentColor'
-										class='w-6 h-6 cursor-pointer'>
-										<path
-											stroke-linecap='round'
-											stroke-linejoin='round'
-											d='M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z'
-										/>
-									</svg>
-								</MenuHandler>
-								<MenuList className='menu-list'>
-									<MenuItem className='ml-0 menu-list-item'>
-										Search Users
-									</MenuItem>
-									<MenuItem className='ml-0 menu-list-item'>Add Users</MenuItem>
-									<MenuItem className='ml-0 menu-list-item'>
-										Delete Users
-									</MenuItem>
-								</MenuList>
-							</Menu>
-						</div>
+						{/*  */}
 					</div>
 
 					<CardBody
@@ -146,49 +142,63 @@ const DashboardUsers = () => {
 								</TableHead>
 
 								<TableBody className='font-[poppins] font-[500] text-sm'>
-									{tableData.map((row) => (
+									{appointments.map((row) => (
 										<TableRow
-											key={row.Name}
+											key={row._id}
 											sx={{
 												'&:last-child td, &:last-child th': { border: 0 },
 											}}>
 											<TableCell
+												className='table-row-2 '
+												align='left'>
+												<span>{row.appointmenttype}</span> Appointments
+											</TableCell>
+											<TableCell
 												component='th'
 												className='table-row '
 												scope='row'>
-												<div className='flex flex-row gap-4'>
-													<span className='flex gap-2 flex-row'>
-														<Avatar
-															src={row.avatar}
-															size='sm'
-															className='rounded-xl'
-															alt='avatar'
-														/>
+												<div className='flex flex-col'>
+													{row.patient_id.patient_name}
+													<span className='opacity-[0.6] font-[400]'>
+														{row.patient_id.contact_number}
 													</span>
-													<div className='flex flex-col'>
-														{row.Name}
-														<span className='opacity-[0.6] font-[400]'>
-															{row.Email}
-														</span>
-													</div>
 												</div>
+											</TableCell>
+											<TableCell
+												className='table-row-2 '
+												align='left'>
+												{row.reschedule_count}
 											</TableCell>
 
 											<TableCell
 												className='table-row-2 '
 												align='left'>
-												{row.Contact}
-											</TableCell>
-											<TableCell
-												className='table-row-2 '
-												align='left'>
 												<div className='flex flex-col'>
-													{row.Clinic}
+													{formatDate(row.datetime.date)}
 													<span className='opacity-[0.6] font-[400]'>
-														{row.Address}
+														{convertTo12HourFormat(row.datetime.time)}
 													</span>
 												</div>
 											</TableCell>
+											{row.status === 'upcoming' ? (
+												<TableCell
+													className='table-row-2 upcoming'
+													align='left'>
+													{row.status}
+												</TableCell>
+											) : row.status === 'cancelled' ? (
+												<TableCell
+													className='table-row-2 cancelled'
+													align='left'>
+													{row.status}
+												</TableCell>
+											) : (
+												<TableCell
+													className='table-row-2 completed'
+													align='left'>
+													{row.status}
+												</TableCell>
+											)}
 
 											<Menu placement='left-start'>
 												<MenuHandler>
@@ -219,4 +229,4 @@ const DashboardUsers = () => {
 	);
 };
 
-export default DashboardUsers;
+export default AllAppointments;

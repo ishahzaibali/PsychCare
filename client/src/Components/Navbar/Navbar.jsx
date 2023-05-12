@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import './Navbar.css';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate,Link } from 'react-router-dom';
 import {
 	MobileNav,
 	IconButton,
@@ -310,9 +310,9 @@ const Navbar = () => {
 			<div className='mx-auto max-w-screen-xl py-5 px-10 lg:px-5 lg:py-10'>
 				<div className='container mx-auto flex items-center justify-between '>
 					<div className='logo cursor-pointer'>
-						<NavLink to='/'>
+						<Link to='/'>
 							Psych<span>Care.</span>
-						</NavLink>
+						</Link>
 					</div>
 
 					<div className='menu'>{navList}</div>

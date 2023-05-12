@@ -587,7 +587,7 @@ const ScheduleAppointments = () => {
 						color='blue-gray'
 						className='font-poppins text-[rgb(52, 71, 103)] w-full font-medium text-sm'>
 						{user &&
-							user.onsiteAppointment &&
+							user.onlineAppointment &&
 							user.onlineAppointment.schedule.map((data) => (
 								<Typography
 									variant='h6'

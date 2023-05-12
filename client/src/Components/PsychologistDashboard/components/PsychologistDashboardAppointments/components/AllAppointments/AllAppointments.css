@@ -1,0 +1,18 @@
+.cancelled {
+	background: #ea0606;
+	background: linear-gradient(to left, #ea0606 0%, #ff667c 100%);
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+.completed {
+	background: #ea0606;
+	background: linear-gradient(310deg, rgb(23, 173, 55), rgb(152, 236, 45));
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+.upcoming {
+   background: #ea0606;
+	background: linear-gradient(310deg, #21467e, #1bd5ff);
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+}

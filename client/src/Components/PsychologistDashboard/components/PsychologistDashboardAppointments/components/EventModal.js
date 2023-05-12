@@ -9,11 +9,10 @@ import {
 	Button,
 } from '@material-tailwind/react';
 import { Input, message } from 'antd';
-import axios from 'axios';
 import appointmentService from '../../../../../services/AppointmentService';
 
 export default function EventModal() {
-	const { setShowEventModal, daySelected, dispatchCalEvent, selectedEvent } =
+	const { setShowEventModal, daySelected, selectedEvent } =
 		useContext(GlobalContext);
 
 	const [notes, setnotes] = useState(selectedEvent ? selectedEvent.notes : '');

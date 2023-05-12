@@ -137,7 +137,7 @@ const OnlineAppointmentCard = ({ online }) => {
 					<CardFooter className='flex items-center justify-between py-3'>
 						<Button
 							onClick={() => {
-								userService.isLoggedIn === true
+								userService.isLoggedIn() === true
 									? history('/appointments', {
 											state: { online, onsite: 'online' },
 									  })

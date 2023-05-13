@@ -89,6 +89,7 @@ class UserService extends GenericService {
 			return userID;
 		} else return false;
 	};
+	getUser = (id) => this.get('users/' + id);
 }
 
 let userService = new UserService();

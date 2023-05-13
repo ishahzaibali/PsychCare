@@ -1,10 +1,13 @@
 import React from 'react';
 import './PsychologistDashboardMessages.css';
+import Messenger from './components/Messenger/Messenger';
 
 const PsychologistDashboardMessages = () => {
 	return (
 		<>
-			<div>PsychologistDashboardMessages</div>
+			<div>
+				<Messenger />
+			</div>
 		</>
 	);
 };

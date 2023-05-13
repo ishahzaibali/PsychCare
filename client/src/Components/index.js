@@ -25,3 +25,4 @@ export { default as MinimalPsychologistCard } from './PsychologistCard/MinimalPs
 export { default as SinglePsychologist } from './PsychologistPage/SinglePsychologist/SinglePsychologist';
 export { default as MinimalPsychologistCards } from './PsychologistCard/MinimalPsychologistCard/MinimalPsychologistCards';
 export { default as AppointmentBooking } from './PsychologistPage/AppointmentBooking/AppointmentBooking';
+export { default as RoomPage } from './RoomPage/RoomPage';

@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Provider } from 'react-redux';
 import store from './store.js';
+import userService from './services/UserService';
+import socket from './socket';
 
 import {
 	Contact,
@@ -22,6 +24,7 @@ import {
 	CTA,
 	SinglePsychologist,
 	AppointmentBooking,
+	RoomPage,
 } from './Components';
 import {
 	DashboardDiscussions,
@@ -41,6 +44,26 @@ import {
 } from './Components/PsychologistDashboard';
 
 const App = () => {
+	const [user, setUser] = useState({});
+	useEffect(() => {
+		const fetchUser = async () => {
+			try {
+				const loggedInUser = await userService.getLoggedInUser();
+				setUser(loggedInUser);
+				console.log(loggedInUser);
+			} catch (err) {
+				console.error(err);
+			}
+		};
+		fetchUser();
+	}, []);
+
+	useEffect(() => {
+		if (user) {
+			socket.emit('addUser', user._id);
+		}
+	}, [user]);
+
 	return (
 		<>
 			<ToastContainer />
@@ -54,6 +77,10 @@ const App = () => {
 						<Route
 							path='/contact'
 							element={<Contact />}
+						/>
+						<Route
+							path='/room/:roomId'
+							element={<RoomPage />}
 						/>
 						<Route element={<DashboardLayout />}>
 							<Route

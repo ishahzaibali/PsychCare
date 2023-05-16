@@ -25,6 +25,7 @@ const Signup = () => {
 
 	const handleRegister = (e) => {
 		e.preventDefault();
+
 		if (name.length === 0 || email.length === 0 || password.length === 0) {
 			setError(true);
 		} else {
@@ -68,7 +69,7 @@ const Signup = () => {
 					</Typography>
 					<Typography
 						color='gray'
-						className='mt-1 font-normal font-poppins '> 
+						className='mt-1 font-normal font-poppins '>
 						Enter your details to register.
 					</Typography>
 					<form className='mt-8 mb-2 w-80 max-w-screen-lg sm:w-96'>

@@ -151,7 +151,7 @@ const AllAppointments = () => {
 											<TableCell
 												className='table-row-2 '
 												align='left'>
-												<span>{row.appointmenttype}</span> Appointments
+												<span>{row.appointmenttype}</span> Appointment
 											</TableCell>
 											<TableCell
 												component='th'

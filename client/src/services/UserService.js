@@ -22,7 +22,7 @@ class UserService extends GenericService {
 				});
 		});
 	register = (name, email, password) =>
-		this.post('users/register', { password, email, name });
+		this.post('users/register', { password, email, name, role: 'patient' });
 	registerPsychologist = (name, email, password) =>
 		new Promise((resolve, reject) => {
 			this.post('users/register', {

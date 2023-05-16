@@ -29,6 +29,22 @@ export default function Day({ day, rowIdx, event }) {
 	const hasMoreEvents = totalEvents > maxEventsToShow;
 
 	const displayedEvents = dayEvents.slice(0, maxEventsToShow);
+
+
+	function convertTo12HourFormat(timeString) {
+		const [hours, minutes] = timeString.split(':');
+		let formattedTime = '';
+
+		if (Number(hours) < 12) {
+			formattedTime = `${hours}:${minutes} AM`;
+		} else {
+			const twelveHourFormat = Number(hours) % 12 || 12;
+			formattedTime = `${twelveHourFormat}:${minutes} PM`;
+		}
+
+		return formattedTime;
+	}
+
 	return (
 		<div className='border border-gray-200 flex flex-col h-full items-center justify-center'>
 			<header className='flex flex-col items-center'>
@@ -60,12 +76,12 @@ export default function Day({ day, rowIdx, event }) {
 						<Typography
 							variant='p'
 							className='font-poppins font-medium text-xs'>
-							{evt.patient_id.patient_name}
+							{evt.patient_id.user_id.name}
 						</Typography>
 						<Typography
 							variant='p'
 							className='font-poppins font-medium  text-xs'>
-							{evt.datetime.time}
+							{convertTo12HourFormat(evt.datetime.time)}
 						</Typography>
 					</div>
 				))}

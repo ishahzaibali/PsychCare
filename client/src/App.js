@@ -25,6 +25,7 @@ import {
 	SinglePsychologist,
 	AppointmentBooking,
 	RoomPage,
+	UserAppointments,
 } from './Components';
 import {
 	DashboardDiscussions,
@@ -77,6 +78,10 @@ const App = () => {
 						<Route
 							path='/contact'
 							element={<Contact />}
+						/>
+						<Route
+							path='/:username/appointments'
+							element={<UserAppointments />}
 						/>
 						<Route
 							path='/room/:roomId'

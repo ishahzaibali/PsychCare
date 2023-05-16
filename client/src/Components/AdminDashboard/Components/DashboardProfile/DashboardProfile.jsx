@@ -9,8 +9,12 @@ import {
 } from '@material-tailwind/react';
 import { PencilSquareIcon } from '@heroicons/react/24/outline';
 import avatar from '../../../../assets/team-3.jpg';
+import userService from '../../../../services/UserService'
 
 const UserSection = () => {
+	
+	const user = userService.getLoggedInUser()
+
 	return (
 		<>
 			<div className='flex my-8 p-4 items-center border border-gray-100  rounded-xl justify-between'>
@@ -28,7 +32,7 @@ const UserSection = () => {
 							variant='h6'
 							color='blue-gray'
 							className='font-poppins text-[rgb(52, 71, 103)] font-semibold'>
-							Shaheer Hassan
+							{user.name}
 						</Typography>
 						<Typography
 							variant='h6'
@@ -43,10 +47,8 @@ const UserSection = () => {
 						className='edit-btn font-poppins flex gap-2 items center justify-center shadow-none hover:shadow-none text-xs '
 						size='sm'
 						color='blue'>
-						Edit
-						<div>
-							<PencilSquareIcon className='w-3 h-3 stroke-[3]' />
-						</div>
+						Upload Picture
+						
 					</Button>
 				</div>
 			</div>

@@ -7,19 +7,16 @@ import chatService from '../../../../../../services/ChatService';
 import messageService from '../../../../../../services/MessageService';
 import userService from '../../../../../../services/UserService';
 import socket from '../../../../../../socket';
-import { io } from 'socket.io-client';
-import { useNavigate } from 'react-router-dom';
+// import { io } from 'socket.io-client';
 import { Card, CardBody } from '@material-tailwind/react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import {
 	ChatBubbleOvalLeftIcon,
 	ExclamationCircleIcon,
-	PhoneIcon,
 	VideoCameraIcon,
 } from '@heroicons/react/24/solid';
 
 const Messenger = () => {
-	const history = useNavigate();
 	const [conversations, setConversations] = useState([]);
 	const [currentChat, setCurrentChat] = useState(null);
 	const [messages, setMessages] = useState([]);
@@ -29,10 +26,7 @@ const Messenger = () => {
 	const scrollRef = useRef();
 
 	const [notifications, setNotifications] = useState([]);
-	const handleClick = () => {
-		// Use history.push to navigate to a new page
-		// history('/n');
-	};
+
 	const [user, setUser] = useState({});
 	useEffect(() => {
 		const fetchUser = async () => {
@@ -91,6 +85,7 @@ const Messenger = () => {
 				.catch((err) => {
 					console.log(err);
 				});
+			console.log('backend called');
 		};
 		getConversations();
 	}, [user]);
@@ -140,9 +135,9 @@ const Messenger = () => {
 			});
 	};
 
-	// useEffect(() => {
-	// 	scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
-	// }, [messages]);
+	useEffect(() => {
+		scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
+	}, [messages]);
 
 	return (
 		<>
@@ -150,14 +145,14 @@ const Messenger = () => {
 				<h1 className='font-semibold text-xl'>Chats</h1>
 				<h1 className='text-xs'>Chats with Patients</h1>
 			</div> */}
-			<Card className='mr-4 shadow-3xl min-h-[70vh]'>
+			<Card className='mr-4 shadow-3xl h-[90vh]'>
 				<CardBody className='m-0 p-0'>
-					<div className='flex items-center justify-center border-b border-b-gray-200 '>
-						<div className='border-r-gray-200 border-r mx-0'>
-							<div className='flex-[1] p-5 flex items-center gap-3  mb-6 '>
+					<div className='flex items-center justify-center border-b h-16 border-b-gray-200 '>
+						<div className='px-4'>
+							<div className='flex-[1]  flex items-center justify-center gap-3   '>
 								<MagnifyingGlassIcon className='w-6 h-6 text-gray-200' />
 								<Input
-									className='rounded-lg  border-gray-200 font-poppins text-sm font-medium mt-2'
+									className='rounded-lg  border-gray-200 font-poppins text-sm font-medium '
 									placeholder='Search Chats'
 								/>
 							</div>
@@ -176,7 +171,7 @@ const Messenger = () => {
 					</div>
 
 					<div className='flex items-start justify-start  '>
-						<div className=' flex-[1] border-r border-r-gray-200 p-4'>
+						<div className=' flex-[1] border-r border-r-gray-200 '>
 							<div className='chatMenuWrapper'>
 								{conversations.map((c) => (
 									<div onClick={() => setCurrentChat(c)}>
@@ -190,7 +185,7 @@ const Messenger = () => {
 							</div>
 						</div>
 						<div className='flex flex-[3] w-full h-full items-center justify-end p-4'>
-							<div className=' '>
+							<div className='h-[65vh] '>
 								{currentChat ? (
 									<>
 										<div className='flex flex-col gap-12 justify-between h-full w-full'>

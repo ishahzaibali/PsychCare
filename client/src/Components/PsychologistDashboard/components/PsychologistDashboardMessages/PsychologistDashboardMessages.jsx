@@ -5,7 +5,7 @@ import Messenger from './components/Messenger/Messenger';
 const PsychologistDashboardMessages = () => {
 	return (
 		<>
-			<div>
+			<div className=''>
 				<Messenger />
 			</div>
 		</>

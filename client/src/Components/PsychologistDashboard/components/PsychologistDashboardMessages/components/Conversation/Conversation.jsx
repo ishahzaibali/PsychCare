@@ -27,7 +27,7 @@ const Conversation = ({ conversation, currentUser }) => {
 
 	return (
 		<>
-			<div className='conversation flex items-center gap-6 justify-start bg-[white]'>
+			<div className='conversation flex p-8 m-0 items-center gap-6 border-b border-b-gray-200 justify-start bg-[white]'>
 				{!user?.image ? (
 					user?.gender === 'male' ? (
 						<Avatar

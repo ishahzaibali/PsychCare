@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import './Navbar.css';
-import { NavLink, useNavigate,Link } from 'react-router-dom';
+import { NavLink, useNavigate, Link } from 'react-router-dom';
 import {
 	MobileNav,
 	IconButton,
@@ -19,6 +19,8 @@ import {
 	ChevronDownIcon,
 	Cog6ToothIcon,
 	PowerIcon,
+	BellIcon,
+	CalendarIcon,
 } from '@heroicons/react/24/outline';
 import { menuData } from './menuData';
 import userService from '../../services/UserService';
@@ -32,6 +34,14 @@ const Navbar = () => {
 			() => window.innerWidth >= 960 && setOpenNav(false)
 		);
 	}, []);
+	const [user, setUser] = useState(null);
+	useEffect(() => {
+		const loggedInUser = userService.getLoggedInUser();
+		if (loggedInUser) {
+			setUser(loggedInUser);
+		}
+	}, []);
+
 	const handleLogout = (e) => {
 		e.preventDefault();
 		userService.logout();
@@ -53,13 +63,18 @@ const Navbar = () => {
 
 	const userProfileItems = [
 		{
-			label: 'My Profile',
-			icon: UserCircleIcon,
+			label: 'My Appointments',
+			icon: CalendarIcon,
+			url: `/${user?.name}/appointments`,
+		},
+		{
+			label: 'Notifications',
+			icon: BellIcon,
 			url: '#',
 		},
 		{
-			label: 'Edit Profile',
-			icon: Cog6ToothIcon,
+			label: 'My Account',
+			icon: UserCircleIcon,
 			url: '#',
 		},
 
@@ -106,13 +121,6 @@ const Navbar = () => {
 	function ProfileMenu() {
 		const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 		const closeMenu = () => setIsMenuOpen(false);
-		const [user, setUser] = useState(null);
-		useEffect(() => {
-			const loggedInUser = userService.getLoggedInUser();
-			if (loggedInUser) {
-				setUser(loggedInUser);
-			}
-		}, []);
 
 		return (
 			<Menu
@@ -277,7 +285,7 @@ const Navbar = () => {
 											<MenuItem
 												key={label}
 												onClick={isLastItem ? handleLogout : closeMenu}
-												className={`flex font-[poppins] ml-0 bg-transparent text-gray-600 border-none items-center gap-2 rounded ${
+												className={`flex font-poppins ml-0 bg-transparent text-gray-600 border-none items-center justify-start gap-2 rounded ${
 													isLastItem
 														? 'hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10'
 														: ''

@@ -3,16 +3,22 @@
 	background: linear-gradient(to left, #ea0606 0%, #ff667c 100%);
 	background-clip: text;
 	-webkit-text-fill-color: transparent;
+	font-weight: 600 !important;
+	text-transform: uppercase;
 }
 .completed {
 	background: #ea0606;
 	background: linear-gradient(310deg, rgb(23, 173, 55), rgb(152, 236, 45));
 	background-clip: text;
 	-webkit-text-fill-color: transparent;
+	font-weight: 600 !important;
+	text-transform: uppercase;
 }
 .upcoming {
    background: #ea0606;
 	background: linear-gradient(310deg, #21467e, #1bd5ff);
 	background-clip: text;
 	-webkit-text-fill-color: transparent;
+	font-weight: 600 !important;
+	text-transform: uppercase;
 }

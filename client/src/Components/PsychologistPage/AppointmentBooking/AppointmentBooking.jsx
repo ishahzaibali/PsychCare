@@ -19,25 +19,25 @@ import appointmentService from '../../../services/AppointmentService';
 import { message } from 'antd';
 import userService from '../../../services/UserService';
 
-const responsive = {
-	superLargeDesktop: {
-		// the naming can be any, depends on you.
-		breakpoint: { max: 4000, min: 3000 },
-		items: 5,
-	},
-	desktop: {
-		breakpoint: { max: 3000, min: 1024 },
-		items: 5,
-	},
-	tablet: {
-		breakpoint: { max: 1024, min: 464 },
-		items: 2,
-	},
-	mobile: {
-		breakpoint: { max: 464, min: 0 },
-		items: 1,
-	},
-};
+// const responsive = {
+// 	superLargeDesktop: {
+// 		// the naming can be any, depends on you.
+// 		breakpoint: { max: 4000, min: 3000 },
+// 		items: 5,
+// 	},
+// 	desktop: {
+// 		breakpoint: { max: 3000, min: 1024 },
+// 		items: 5,
+// 	},
+// 	tablet: {
+// 		breakpoint: { max: 1024, min: 464 },
+// 		items: 2,
+// 	},
+// 	mobile: {
+// 		breakpoint: { max: 464, min: 0 },
+// 		items: 1,
+// 	},
+// };
 
 const AppointmentBooking = () => {
 	const [datesArray, setDatesArray] = useState([]);
@@ -52,7 +52,10 @@ const AppointmentBooking = () => {
 	const history = useNavigate();
 	// const { card } = state;
 	const user = state.card;
-	// console.log("🚀 ~ file: AppointmentBooking.jsx:44 ~ AppointmentBooking ~ user:", user)
+	// console.log(
+	// 	'🚀 ~ file: AppointmentBooking.jsx:44 ~ AppointmentBooking ~ user:',
+	// 	user
+	// );
 	const online = state.online;
 	const type = state.onsite;
 
@@ -309,6 +312,65 @@ const AppointmentBooking = () => {
 		}
 	};
 
+	const CarouselComponent = React.memo(
+		({ datesArray, selectedCard, handleCardClick }) => {
+			const responsive = {
+				superLargeDesktop: {
+					// the naming can be any, depends on you.
+					breakpoint: { max: 4000, min: 3000 },
+					items: 5,
+				},
+				desktop: {
+					breakpoint: { max: 3000, min: 1024 },
+					items: 5,
+				},
+				tablet: {
+					breakpoint: { max: 1024, min: 464 },
+					items: 2,
+				},
+				mobile: {
+					breakpoint: { max: 464, min: 0 },
+					items: 1,
+				},
+			};
+
+			return (
+				<Carousel
+					responsive={responsive}
+					className='z-20 flex gap-2 h-[8rem] '>
+					{datesArray.map((date, index) => (
+						<motion.div
+							key={index}
+							whileTap={{ scale: 0.9 }}
+							className='mx-8 w-36'>
+							<form onSubmit={handleFormSubmit}>
+								<Card
+									key={date.index}
+									onClick={() => {
+										handleCardClick(index);
+									}}
+									className={`shadow-md cursor-pointer text-[#344767] z-30 border-t-4  p-4 flex items-center justify-center w-full  ${
+										selectedCard === index
+											? 'selected-card '
+											: 'border-[#17c1e8]'
+									}`}>
+									<CardBody className='w-full p-0'>
+										<h6 className='text-base w-full  font-poppins font-medium '>
+											{monthName}, {date.day}
+										</h6>
+										<h6 className='text-xs  font-poppins font-normal '>
+											{date.dayname}
+										</h6>
+									</CardBody>
+								</Card>
+							</form>
+						</motion.div>
+					))}
+				</Carousel>
+			);
+		}
+	);
+
 	const OnsiteData = () => {
 		return (
 			<>
@@ -376,37 +438,11 @@ const AppointmentBooking = () => {
 									</h6>
 								</div>
 								<div className=''>
-									<Carousel
-										responsive={responsive}
-										className='z-20 flex gap-2 h-[8rem] '>
-										{datesArray.map((date, index) => (
-											<motion.div
-												whileTap={{ scale: 0.9 }}
-												className='mx-8 w-36'>
-												<form onSubmit={handleFormSubmit}>
-													<Card
-														key={date.index}
-														onClick={() => {
-															handleCardClick(index);
-														}}
-														className={`shadow-md cursor-pointer text-[#344767] z-30 border-t-4  p-4 flex items-center justify-center w-full  ${
-															selectedCard === index
-																? 'selected-card '
-																: 'border-[#17c1e8]'
-														}`}>
-														<CardBody className='w-full p-0'>
-															<h6 className='text-base w-full  font-poppins font-medium '>
-																{monthName}, {date.day}
-															</h6>
-															<h6 className='text-xs  font-poppins font-normal '>
-																{date.dayname}
-															</h6>
-														</CardBody>
-													</Card>
-												</form>
-											</motion.div>
-										))}
-									</Carousel>
+									<CarouselComponent
+										datesArray={datesArray}
+										selectedCard={selectedCard}
+										handleCardClick={handleCardClick}
+									/>
 								</div>
 								<div>
 									<div>
@@ -540,37 +576,11 @@ const AppointmentBooking = () => {
 									</h6>
 								</div>
 								<div className=''>
-									<Carousel
-										responsive={responsive}
-										className='z-20 flex gap-2 h-[8rem] '>
-										{datesArray.map((date, index) => (
-											<motion.div
-												whileTap={{ scale: 0.9 }}
-												className='mx-8 w-36'>
-												<form onSubmit={handleFormSubmit}>
-													<Card
-														key={date.index}
-														onClick={() => {
-															handleCardClick(index);
-														}}
-														className={`shadow-md cursor-pointer text-[#344767] z-30 border-t-4  p-4 flex items-center justify-center w-full  ${
-															selectedCard === index
-																? 'selected-card '
-																: 'border-[#17c1e8]'
-														}`}>
-														<CardBody className='w-full p-0'>
-															<h6 className='text-base w-full  font-poppins font-medium '>
-																{monthName}, {date.day}
-															</h6>
-															<h6 className='text-xs  font-poppins font-normal '>
-																{date.dayname}
-															</h6>
-														</CardBody>
-													</Card>
-												</form>
-											</motion.div>
-										))}
-									</Carousel>
+									<CarouselComponent
+										datesArray={datesArray}
+										selectedCard={selectedCard}
+										handleCardClick={handleCardClick}
+									/>
 								</div>
 								<div>
 									<div>

@@ -12,10 +12,10 @@ import { AppointmentCard, OnlineAppointmentCard } from './components';
 
 const SinglePsychologist = () => {
 	const [loading, setLoading] = useState(false);
-
 	const location = useLocation();
 	const path = location.pathname.split('/')[3];
 	const [post, setPost] = useState([]);
+
 	const getPost = async () => {
 		const res = await axios.get(`/users/psychologists/` + path);
 		setLoading(true);
@@ -36,6 +36,10 @@ const SinglePsychologist = () => {
 	// function capitalizeFirstLetter(str) {
 	// 	return str.charAt(0).toUpperCase() + str.slice(1);
 	// }
+
+	const formatRating = (rating) => {
+		return rating.toFixed(1);
+	};
 	return (
 		<>
 			<div className='spy-bg'>
@@ -104,9 +108,8 @@ const SinglePsychologist = () => {
 													className='font-poppins text-[#344767] font-medium text-base pt-4'
 													color='blue-gray'>
 													{post?.user_id?.['name']} is one of the best
-													psychologists in{' '}
-													{post.onsiteAppointment.city}{' '}
-													<br /> with a high patient satisfaction rate.
+													psychologists in {post.onsiteAppointment.city} <br />{' '}
+													with a high patient satisfaction rate.
 												</Typography>
 											</div>
 											<div className='spy-spy-pd-times'>
@@ -157,7 +160,7 @@ const SinglePsychologist = () => {
 															className='font-poppins flex gap-1 items-center text-[#344767] text-lg'
 															variant='h6'>
 															<StarIcon className='w-5 h-5 pb-1 text-yellow-300' />
-															{post.rating}
+															{formatRating(post.rating)}
 														</Typography>
 													</div>
 												</div>

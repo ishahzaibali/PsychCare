@@ -1,130 +1,80 @@
-import React from 'react';
-import { Card, CardBody } from '@material-tailwind/react';
+import React, { useState, useEffect } from 'react';
+import { Card, CardBody, Typography } from '@material-tailwind/react';
 import dayjs from 'dayjs';
-import PropTypes from 'prop-types';
-import Badge from '@mui/material/Badge';
 import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { DayCalendarSkeleton } from '@mui/x-date-pickers/DayCalendarSkeleton';
-import { PickersDay } from '@mui/x-date-pickers/PickersDay';
 import './DashboardCalendar.css';
-import moment from 'moment';
-import axios from 'axios';
 import userService from '../../../../services/UserService';
+import axios from 'axios';
 
 const initialValue = dayjs(new Date());
 
 const DashboardCalendar = () => {
-	const [value, setValue] = React.useState(dayjs(new Date()));
-	const requestAbortController = React.useRef(null);
-	const [isLoading, setIsLoading] = React.useState(false);
-	const [highlightedDays, setHighlightedDays] = React.useState([]);
-	if (userService.isLoggedIn() === true) {
-		const user = userService.getLoggedInUserData();
-		const psychologistID = user._id;
-		const fakeFetch = async (date, { signal }) => {
-			try {
-				const daysInMonth = date.daysInMonth();
-				const res = await axios.get(
-					`/appointments/psychologist/${psychologistID}?month=${
-						date.month() + 1
-					}&year=${date.year()}`,
-					{ signal }
-				);
-				const appointments = res.data;
-				const daysToHighlight = appointments.map((appointment) =>
-					moment(appointment.datetime.date).day()
-				);
+	const [selectedDate, setSelectedDate] = useState(dayjs());
+	const [appointments, setAppointments] = useState([]);
+	const [isDataFetched, setIsDataFetched] = useState(false);
+	const user = userService.getLoggedInUserData();
+	const psychologistID = user._id;
 
-				return { daysInMonth, daysToHighlight };
-			} catch (error) {
-				if (error.name === 'AbortError') {
-					console.log('Fetch aborted');
-				} else {
-					console.error(error);
-				}
-			}
-		};
-		function ServerDay(props) {
-			const {
-				highlightedDays = [],
-				day,
-				outsideCurrentMonth,
-				...other
-			} = props;
+	useEffect(() => {
+		if (!isDataFetched) {
+			getAppointment(selectedDate);
+			setIsDataFetched(true);
+		}
+	}, [isDataFetched, selectedDate]);
 
-			const isSelected = highlightedDays.includes(moment(day.date).day());
+	const handleDateChange = (date) => {
+		setSelectedDate(date);
+	};
 
-			return (
-				<Badge
-					key={day.toString()}
-					overlap='circular'
-					badgeContent={isSelected ? '🟢' : undefined}>
-					<PickersDay
-						{...other}
-						outsideCurrentMonth={outsideCurrentMonth}
-						day={day}
-					/>
-				</Badge>
+	const getAppointment = async (selectedDate) => {
+		const startOfDay = selectedDate.startOf('day');
+
+		try {
+			const res = await axios.get(
+				`/appointments/psychologist/${psychologistID}`
 			);
+			setAppointments(res.data);
+			console.log(
+				'Appointments on',
+				startOfDay.format('YYYY-MM-DD'),
+				':',
+				res.data
+			);
+		} catch (error) {
+			console.error('Error fetching appointments:', error);
+		}
+	};
+
+	const filteredAppointments = appointments.filter((appointment) => {
+		const appointmentDate = dayjs(appointment.datetime.date).startOf('day');
+		return (
+			appointmentDate.isSame(selectedDate, 'day') &&
+			appointment.status === 'upcoming'
+		);
+	});
+
+	function convertTo12HourFormat(timeString) {
+		const [hours, minutes] = timeString.split(':');
+		let formattedTime = '';
+
+		if (Number(hours) < 12) {
+			formattedTime = `${hours}:${minutes} AM`;
+		} else {
+			const twelveHourFormat = Number(hours) % 12 || 12;
+			formattedTime = `${twelveHourFormat}:${minutes} PM`;
 		}
 
-		ServerDay.propTypes = {
-			day: PropTypes.instanceOf(moment).isRequired,
-			highlightedDays: PropTypes.arrayOf(PropTypes.number),
-			outsideCurrentMonth: PropTypes.bool.isRequired,
-		};
+		return formattedTime;
 	}
-
-	const fetchHighlightedDays = (date) => {
-		const controller = new AbortController();
-		axios
-			.get(
-				`/appointments/psychologist/?month=${
-					date.month() + 1
-				}&year=${date.year()}`,
-				{
-					signal: controller.signal,
-				}
-			)
-			.then((res) => {
-				const appointments = res.data;
-				const daysToHighlight = appointments.map((appointment) =>
-					moment(appointment.datetime.date).day()
-				);
-				setHighlightedDays(daysToHighlight);
-				setIsLoading(false);
-			})
-			.catch((error) => {
-				if (error.name !== 'AbortError') {
-					throw error;
-				}
-			});
-
-		requestAbortController.current = controller;
-	};
-
-	React.useEffect(() => {
-		fetchHighlightedDays(initialValue);
-		return () => requestAbortController.current?.abort();
-	}, [initialValue]);
-
-	const handleMonthChange = (date) => {
-		if (requestAbortController.current) {
-			requestAbortController.current.abort();
-		}
-
-		setIsLoading(true);
-		setHighlightedDays([]);
-		fetchHighlightedDays(date);
-	};
 
 	return (
 		<>
-			<div className='w-full '>
-				<Card className='w-72 h-[62vh] mt-4 ml-12  shadow-none'>
+			<div className='w-full h-auto z-100 '>
+				<Card className='w-72 h-full mt-4 ml-12  shadow-none'>
 					<CardBody className='w-full text-center flex flex-col items-center justify-center'>
 						<div className='px-8 -mt-10 mb-4'>
 							<LocalizationProvider
@@ -135,38 +85,56 @@ const DashboardCalendar = () => {
 										<DateCalendar
 											className='px-5 pb-4'
 											defaultValue={initialValue}
-											loading={isLoading}
-											onMonthChange={handleMonthChange}
 											renderLoading={() => <DayCalendarSkeleton />}
-											slots={{
-												// day: ServerDay,
-											}}
-											slotProps={{
-												day: {
-													highlightedDays,
-												},
-											}}
-											value={value}
-											onChange={(newValue) => setValue(newValue)}
+											value={selectedDate}
+											onChange={handleDateChange}
 										/>
 									</DemoItem>
 								</DemoContainer>
 							</LocalizationProvider>
 						</div>
 						<hr className='bottom' />
-						<div className='flex flex-col p-6 gap-1 -mt-16 border-t-2  w-full'>
-							<div className='flex justify-between gap-2 '>
-								<p className='text-sm font-semibold opacity-[0.6]'>
-									Appointments
-								</p>
-								<p className='text-md font-semibold '>5</p>
-							</div>
-							<div className='flex justify-between gap-2 '>
-								<p className='text-sm font-semibold opacity-[0.6]'>
-									Video Calls
-								</p>
-								<p className='text-md font-semibold '>2</p>
-							</div>
+						<div className='-mt-12'>
+							{filteredAppointments.length > 0 ? (
+								<div>
+									<ul>
+										{filteredAppointments.map((appointment) => (
+											<li
+												key={appointment._id}
+												className='p-2'>
+												<Card
+													className={`w-full h-12 flex items-center justify-center rounded-none  shadow-none border-l-4  ${
+														appointment.appointmenttype === 'onsite'
+															? 'border-l-[#418cfd]'
+															: 'border-l-[#344767]'
+													}`}>
+													<CardBody className='flex items-start flex-col'>
+														<Typography
+															variant='h6'
+															color='blue-gray'
+															className='  text-[#344767] opacity-60 text-sm font-medium font-poppins'>
+															{convertTo12HourFormat(appointment.datetime.time)}
+														</Typography>
+														<Typography
+															variant='h6'
+															color='blue-gray'
+															className='  text-[#344767] opacity-90 text-sm font-semibold font-poppins'>
+															{appointment.appointmenttype} Consultation
+														</Typography>
+													</CardBody>
+												</Card>
+											</li>
+										))}
+									</ul>
+								</div>
+							) : (
+								<Typography
+									variant='h6'
+									color='blue-gray'
+									className='  text-[#344767] opacity-60 text-sm font-medium font-poppins'>
+									No Appointments
+								</Typography>
+							)}
 						</div>
 					</CardBody>
 				</Card>

@@ -2,8 +2,8 @@ import React from 'react';
 import './PsychologistCard.css';
 import placeholder from '../../assets/placeholder.png';
 import placeholder_female from '../../assets/placeholder_female.png';
-import { NavLink } from 'react-router-dom';
-
+import { NavLink, useNavigate } from 'react-router-dom';
+import userService from '../../services/UserService';
 import {
 	Card,
 	CardBody,
@@ -13,11 +13,17 @@ import {
 	Avatar,
 } from '@material-tailwind/react';
 import { StarIcon, VideoCameraIcon } from '@heroicons/react/24/solid';
+
 const PsychologistCard = ({ Psychologist }) => {
+	const history = useNavigate();
+
 	let PKR = new Intl.NumberFormat('ur-PK', {
 		style: 'currency',
 		currency: 'PKR',
 	});
+	const formatRating = (rating) => {
+		return rating.toFixed(1);
+	};
 
 	return (
 		<>
@@ -30,7 +36,7 @@ const PsychologistCard = ({ Psychologist }) => {
 						<div className='card-data'>
 							<NavLink to={'/users/psychologists/' + Psychologist._id}>
 								{!Psychologist.image ? (
-									Psychologist.gender === 'male' ? (
+									Psychologist?.gender === 'male' ? (
 										<Avatar
 											size='xxl'
 											variant='circular'
@@ -38,7 +44,7 @@ const PsychologistCard = ({ Psychologist }) => {
 											src={placeholder}
 											alt='candice wu'
 										/>
-									) : Psychologist.gender === 'female' ? (
+									) : Psychologist?.gender === 'female' ? (
 										<Avatar
 											size='xxl'
 											variant='circular'
@@ -126,7 +132,7 @@ const PsychologistCard = ({ Psychologist }) => {
 											className='font-poppins flex gap-1 items-center'
 											variant='h6'>
 											<StarIcon className='w-5 h-5 pb-1 text-yellow-300' />
-											{Psychologist.rating}
+											{formatRating(Psychologist.rating)}
 										</Typography>
 										<Typography
 											className='font-[poppins] text-sm'
@@ -139,6 +145,13 @@ const PsychologistCard = ({ Psychologist }) => {
 						</div>
 						<div className='card-btn'>
 							<Button
+								onClick={() => {
+									userService.isLoggedIn() === true
+										? history('/appointments', {
+												state: { online: Psychologist, onsite: 'online' },
+										  })
+										: history('/login');
+								}}
 								className='font-[poppins] text-[#418cfd] w-[234px] h-[50px] rounded'
 								variant='outlined'
 								color=''>
@@ -153,6 +166,13 @@ const PsychologistCard = ({ Psychologist }) => {
 								Video Consultation
 							</Button>
 							<Button
+								onClick={() => {
+									userService.isLoggedIn() === true
+										? history('/appointments', {
+												state: { card: Psychologist, onsite: 'onsite' },
+										  })
+										: history('/login');
+								}}
 								className='font-[poppins] w-[234px] h-[50px] rounded shadow-none'
 								variant='gradient'
 								color='light-blue'
@@ -173,8 +193,8 @@ const PsychologistCard = ({ Psychologist }) => {
 											variant='outlined'
 											color='gray'>
 											<span className='text-[#3d4146] w-full text-start text-[0.875rem]'>
-												{Psychologist?.onsiteAppointment?.['practicelocation']} (
-												{Psychologist?.onsiteAppointment?.['city']})
+												{Psychologist?.onsiteAppointment?.['practicelocation']}{' '}
+												({Psychologist?.onsiteAppointment?.['city']})
 											</span>
 											<div className='flex  w-full font-[500] justify-between'>
 												<h4 className='text-[#2db934]'>Available {data.day}</h4>

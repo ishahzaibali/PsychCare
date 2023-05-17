@@ -45,18 +45,22 @@ const MinimalPsychologistCard = ({ card }) => {
 			</svg>
 		);
 	}
+	const formatRating = (rating) => {
+		return rating.toFixed(1);
+	};
 
 	return (
 		<>
 			<div>
-			
 				<Card className='w-80 shadow-3xl crd-grd font-poppins overflow-hidden border-none'>
 					<CardHeader
 						floated={false}
 						className='shadow-none bg-transparent mt-4 rounded-none flex items-end w-full '>
 						<div className='font-poppins flex items-center gap-1 w-16 h-8 m-0 p-0 grd justify-center rounded-lg '>
 							<StarIcon className='w-4 h-4 text-white' />
-							<h6 className='text-sm font-bold text-white'>{card.rating}</h6>
+							<h6 className='text-sm font-bold text-white'>
+								{formatRating(card.rating)}
+							</h6>
 						</div>
 					</CardHeader>
 					<CardBody className='flex items-center flex-col'>
@@ -69,7 +73,9 @@ const MinimalPsychologistCard = ({ card }) => {
 						<Typography
 							variant='h5'
 							className=' font-poppins mt-4 '>
-							{card.gender === 'male' ? `Mr. ${card.user_id.name}` : `Ms. ${card.user_id.name}`}
+							{card.gender === 'male'
+								? `Mr. ${card.user_id.name}`
+								: `Ms. ${card.user_id.name}`}
 						</Typography>
 						<Typography
 							variant='h6'

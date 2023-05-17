@@ -1,10 +1,10 @@
 import {
 	CalendarIcon,
 	ChatBubbleOvalLeftIcon,
-	Cog6ToothIcon,
 	CreditCardIcon,
 	Squares2X2Icon,
 	UserCircleIcon,
+	UserGroupIcon,
 	VideoCameraIcon,
 } from '@heroicons/react/24/solid';
 
@@ -41,17 +41,18 @@ export const navData = [
 		cName: 'nav-links',
 	},
 	{
+		title: 'Treated Patients',
+		url: '/treated_patients',
+		icon: <UserGroupIcon className='w-5 h-5' />,
+		cName: 'nav-links',
+	},
+	{
 		title: 'Profile',
 		url: '/psychologist_profile',
 		icon: <UserCircleIcon className='w-5 h-5' />,
 		cName: 'nav-links',
 	},
-	{
-		title: 'Settings',
-		url: '/',
-		icon: <Cog6ToothIcon className='w-5 h-5' />,
-		cName: 'nav-links',
-	},
+	
 ];
 export const subMenu = [
 	{

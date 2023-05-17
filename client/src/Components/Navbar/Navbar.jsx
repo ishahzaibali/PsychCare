@@ -21,6 +21,7 @@ import {
 	PowerIcon,
 	BellIcon,
 	CalendarIcon,
+	ChatBubbleOvalLeftEllipsisIcon,
 } from '@heroicons/react/24/outline';
 import { menuData } from './menuData';
 import userService from '../../services/UserService';
@@ -90,9 +91,14 @@ const Navbar = () => {
 			url: '/psychologist_dashboard',
 		},
 		{
-			label: 'Settings',
-			icon: Cog6ToothIcon,
-			url: '#',
+			label: 'Appointments',
+			icon: CalendarIcon,
+			url: '/upcoming_appointments',
+		},
+		{
+			label: 'Messages',
+			icon: ChatBubbleOvalLeftEllipsisIcon,
+			url: '/psychologist_messages',
 		},
 
 		{
@@ -222,7 +228,7 @@ const Navbar = () => {
 											<MenuItem
 												key={label}
 												onClick={isLastItem ? handleLogout : closeMenu}
-												className={`flex font-[poppins] ml-0 bg-transparent text-gray-600 border-none items-center gap-2 rounded ${
+												className={`flex font-[poppins] ml-0 bg-transparent text-gray-600 border-none items-center justify-start gap-2 rounded ${
 													isLastItem
 														? 'hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10'
 														: ''

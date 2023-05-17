@@ -158,9 +158,9 @@ const AllAppointments = () => {
 												className='table-row '
 												scope='row'>
 												<div className='flex flex-col'>
-													{row.patient_id.patient_name}
+													{row.patient_id.user_id.name}
 													<span className='opacity-[0.6] font-[400]'>
-														{row.patient_id.contact_number}
+														{row.patient_id.user_id.email}
 													</span>
 												</div>
 											</TableCell>

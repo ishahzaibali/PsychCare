@@ -79,7 +79,7 @@ const ProfileCard = () => {
 								<p className='text-sm font-semibold opacity-[0.6]'>
 									Total Patients
 								</p>
-								<p className='text-md font-semibold '>246</p>
+								<p className='text-md font-semibold '>{user.patientstreated}</p>
 							</div>
 						</div>
 					</CardBody>

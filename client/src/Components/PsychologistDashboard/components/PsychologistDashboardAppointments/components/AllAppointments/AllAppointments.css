@@ -14,6 +14,14 @@
 	font-weight: 600 !important;
 	text-transform: uppercase;
 }
+.reschedule {
+   background: #ea0606;
+	background: linear-gradient(310deg, #ff930f, #fff95b);
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	font-weight: 600 !important;
+	text-transform: uppercase;
+}
 .upcoming {
    background: #ea0606;
 	background: linear-gradient(310deg, #21467e, #1bd5ff);

@@ -5,7 +5,6 @@ import Psychologists from './Components/DashboardPsychologists/AllPsychologists/
 import ApprovePsychologists from './Components/DashboardPsychologists/ApprovePsychologists/ApprovePsychologists';
 
 const Dashboard = () => {
-
 	return (
 		<>
 			<div className='dashboard-main'>
@@ -21,7 +20,7 @@ const Dashboard = () => {
 							<Psychologists />
 						</div>
 						<div className='approve-list'>
-							<ApprovePsychologists  />
+							<ApprovePsychologists />
 						</div>
 					</div>
 				</div>

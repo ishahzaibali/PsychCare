@@ -1,7 +1,7 @@
 .user-appointment {
    padding: 0 2rem;
    display: flex;
-   align-items: start;
+   align-items: flex-start;
    justify-content: center;
    gap: 2rem;
 }

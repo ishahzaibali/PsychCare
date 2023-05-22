@@ -19,6 +19,7 @@ const Login = () => {
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState(false);
 	const [loginError, setLoginError] = useState(false);
+
 	const [errorMessage, setErrorMessage] = useState('');
 	const history = useNavigate();
 	const userData = useSelector((state) => state.user.userData);
@@ -34,6 +35,7 @@ const Login = () => {
 				.login(email, password, dispatch)
 				.then(({ token, user }) => {
 					// console.log(data);
+
 					dispatch({ type: 'SET_USER_DATA', payload: { user } });
 					localStorage.setItem('token', token);
 					localStorage.setItem('user', JSON.stringify(user));

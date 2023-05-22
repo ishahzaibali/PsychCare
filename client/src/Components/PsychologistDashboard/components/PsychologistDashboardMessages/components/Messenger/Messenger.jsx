@@ -70,6 +70,12 @@ const Messenger = () => {
 			setMessages((prev) => [...prev, arrivalMessage]);
 	}, [arrivalMessage, currentChat]);
 
+	useEffect(() => {
+		if (user) {
+		  socket.emit("addUser", user._id);
+	  }
+  }, [user]);
+
 	// useEffect(() => {
 	//   socketRef.current.emit("addUser", user._id);
 	// }, [user]);

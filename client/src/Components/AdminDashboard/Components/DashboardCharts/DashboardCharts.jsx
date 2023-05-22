@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './DashboardCharts.css';
 
 import {
@@ -20,6 +20,7 @@ import {
 	Legend,
 } from 'chart.js';
 import { Bar, Line } from 'react-chartjs-2';
+import axios from 'axios';
 
 ChartJS.register(
 	CategoryScale,
@@ -135,52 +136,161 @@ export const lineoptions = {
 	},
 };
 
-export const bardata = {
-	labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-	datasets: [
-		{
-			label: 'Sales',
-			tension: 0.4,
-			borderWidth: 0,
-			borderRadius: 4,
-			borderSkipped: false,
-			backgroundColor: '#fff',
-			data: [400, 200, 400, 220, 500, 100, 400, 230, 500],
-			maxBarThickness: 6,
-		},
-	],
-};
-export const linedata = {
-	labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-	datasets: [
-		{
-			label: 'Mobile apps',
-			tension: 0.4,
-			fill: true,
-			pointRadius: 0,
-			borderColor: '#17c1e8',
-			borderWidth: 3,
-			backgroundColor: 'rgba(72,72,176,0)',
-
-			data: [50, 40, 300, 200, 450, 250, 400, 230, 400],
-			maxBarThickness: 6,
-		},
-		{
-			label: 'Websites',
-			tension: 0.4,
-			pointRadius: 0,
-			borderColor: '#3A416F',
-			borderWidth: 3,
-			backgroundColor:
-				'bg-gradient-to-r from-blue-500 via-purple-500 to-pink-100',
-			fill: true,
-			data: [70, 90, 40, 140, 290, 290, 340, 230, 500],
-			maxBarThickness: 6,
-		},
-	],
-};
-
 const DashboardCharts = () => {
+	const [analytics, setAnalytics] = useState(null);
+
+	const getAnalytics = async () => {
+		try {
+			console.log('🚀: GetAnalytics');
+			const res = await axios.get('analytics/appointmentanalytics');
+
+			if (res.status !== 200) {
+				window.alert('Invalid Information');
+			} else {
+				setAnalytics(res.data);
+				console.log(
+					'🚀 ~ file: PsychologistPage.jsx:55 ~ getAnalytics ~ data:',
+					res.data
+				);
+			}
+		} catch (error) {
+			console.log(
+				'🚀 ~ file: PsychologistPage.jsx:56 ~ getAnalytics ~ error:',
+				error
+			);
+			console.log('🚀: Error');
+		}
+	};
+
+	useEffect(() => {
+		getAnalytics();
+		console.log('🚀: Error');
+	}, []);
+
+	const monthlyappointments = analytics?.monthlyappointments;
+	const totalRupeesSpentArray =
+		monthlyappointments && monthlyappointments.length
+			? monthlyappointments.map((appointment) => appointment.totalRupeesSpent)
+			: null;
+
+	// const totalRupeesSpentArray = null;
+	const getMonthNameFromId = (id) => {
+		const monthNames = [
+			'Jan',
+			'Feb',
+			'Mar',
+			'Apr',
+			'May',
+			'Jun',
+			'Jul',
+			'Aug',
+			'Sep',
+			'Oct',
+			'Nov',
+			'Dec',
+		];
+		const monthIndex = id - 1;
+		return monthNames[monthIndex];
+	};
+	const labelsArray =
+		monthlyappointments && monthlyappointments.length
+			? monthlyappointments.map((appointment) =>
+					getMonthNameFromId(appointment._id)
+			  )
+			: null;
+
+	const bardata = {
+		labels: labelsArray,
+		datasets: [
+			{
+				label: 'Sales',
+				tension: 0.4,
+				borderWidth: 0,
+				borderRadius: 4,
+				borderSkipped: false,
+				backgroundColor: '#fff',
+				data: totalRupeesSpentArray,
+				maxBarThickness: 6,
+			},
+		],
+	};
+	const linedata = {
+		labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+		datasets: [
+			{
+				label: 'Mobile apps',
+				tension: 0.4,
+				fill: true,
+				pointRadius: 0,
+				borderColor: '#17c1e8',
+				borderWidth: 3,
+				backgroundColor: 'rgba(72,72,176,0)',
+
+				data: [50, 40, 300, 200, 450, 250, 400, 230, 400],
+				maxBarThickness: 6,
+			},
+			{
+				label: 'Websites',
+				tension: 0.4,
+				pointRadius: 0,
+				borderColor: '#3A416F',
+				borderWidth: 3,
+				backgroundColor:
+					'bg-gradient-to-r from-blue-500 via-purple-500 to-pink-100',
+				fill: true,
+				data: [70, 90, 40, 140, 290, 290, 340, 230, 500],
+				maxBarThickness: 6,
+			},
+		],
+	};
+
+	// const updateBardataWithMonthlyAppointments = () => {
+	// 	try {
+	// 		const monthlyappointments = charts.monthlyappointments;
+	// 		console.log("🚀 ~ file: DashboardCharts.jsx:192 ~ updateBardataWithMonthlyAppointments ~ monthlyappointments:", monthlyappointments)
+
+	// 		const monthLabels = [
+	// 			'Jan',
+	// 			'Feb',
+	// 			'Mar',
+	// 			'Apr',
+	// 			'May',
+	// 			'Jun',
+	// 			'Jul',
+	// 			'Aug',
+	// 			'Sep',
+	// 			'Oct',
+	// 			'Nov',
+	// 			'Dec',
+	// 		];
+
+	// 		const monthlyData = monthLabels.map((month) => {
+	// 			const appointment = monthlyappointments.find(
+	// 				(item) => item._id === monthLabels.indexOf(month) + 1
+	// 			);
+	// 			return appointment ? appointment.totalRupeesSpent : 0;
+	// 		});
+
+	// 		const updatedBardata = {
+	// 			...bardata,
+	// 			labels: monthLabels,
+	// 			datasets: [
+	// 				{
+	// 					...bardata.datasets[0],
+	// 					data: monthlyData,
+	// 				},
+	// 			],
+	// 		};
+
+	// 		// Use the updatedBardata for your chart
+	// 		console.log(updatedBardata);
+	// 	} catch (error) {
+	// 		// Handle error
+	// 		console.error('Error updating bardata with monthly appointments:', error);
+	// 	}
+	// };
+	// const updatedBardata = updateBardataWithMonthlyAppointments();
+
 	return (
 		<>
 			<div className='charts-main'>
@@ -201,14 +311,14 @@ const DashboardCharts = () => {
 									variant='h6'
 									color='blue-gray'
 									className='font-[600] font-[poppins] leading-tight'>
-									Active Users
+									Monthly Appointments
 								</Typography>
 							</div>
-							<Typography
+							{/* <Typography
 								color='gray'
 								className='font-[poppins] text-sm font-[400] leading-tight'>
 								(<span className='font-[600]'>+23%</span>) than last week
-							</Typography>
+							</Typography> */}
 							<div className='group justify-around mt-8 flex flex-wrap items-center gap-3'>
 								<div>
 									<span className='flex gap-2 items-center text-xs font-[500] font-[poppins]'>

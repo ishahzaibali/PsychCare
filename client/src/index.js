@@ -6,8 +6,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@material-tailwind/react';
 import ContextWrapper from './context/ContextWrapper';
 
-// import { SoftUIControllerProvider } from "./context";
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<BrowserRouter>

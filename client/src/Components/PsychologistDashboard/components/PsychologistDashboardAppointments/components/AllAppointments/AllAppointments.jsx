@@ -192,6 +192,12 @@ const AllAppointments = () => {
 													align='left'>
 													{row.status}
 												</TableCell>
+											) : row.status === 'reschedule' ? (
+												<TableCell
+													className='table-row-2 reschedule'
+													align='left'>
+													{row.status}
+												</TableCell>
 											) : (
 												<TableCell
 													className='table-row-2 completed'

@@ -7,6 +7,50 @@ const BasicInformation = ({ formData, setformData, handleNext }) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState(false);
+	const [isValid, setIsValid] = useState(false);
+	const [isValidPassword, setIsValidPassword] = useState(false);
+	const [isFocused, setIsFocused] = useState(false);
+	const [isFocusedEmail, setIsFocusedEmail] = useState(false);
+
+	const validateEmail = (input) => {
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		const domainRegex = /^[a-z0-9.-]+\.[a-z]{2,}$/i;
+
+		const isValidEmailFormat = emailRegex.test(input);
+		const isValidDomain = domainRegex.test(input.split('@')[1]);
+
+		setIsValid(isValidEmailFormat && isValidDomain);
+	};
+
+	const validatePassword = (input) => {
+		const passwordRegex =
+			/^(?=.*\d)(?=.*[@._])[a-zA-Z0-9@._*!#$%^&()\-+=<>?/[\]{|}~\\]{8,}$/;
+		return passwordRegex.test(input);
+	};
+
+	const handlePasswordChange = (e) => {
+		const inputValue = e.target.value;
+		setPassword(inputValue);
+		setIsValidPassword(validatePassword(inputValue));
+	};
+
+	const handleEmailChange = (e) => {
+		const inputValue = e.target.value;
+		setEmail(inputValue);
+		validateEmail(inputValue);
+	};
+
+	const handleFocus = () => {
+		setIsFocused(true);
+	};
+	const handleFocusEmail = () => {
+		setIsFocusedEmail(true);
+	};
+
+	const handleBlur = () => {
+		setIsFocused(false);
+		setIsFocusedEmail(false);
+	};
 
 	const handleRegister = (e) => {
 		e.preventDefault();
@@ -73,9 +117,17 @@ const BasicInformation = ({ formData, setformData, handleNext }) => {
 							<Input
 								size='lg'
 								label='Email'
+								onFocus={handleFocusEmail}
+								onBlur={handleBlur}
 								value={email}
-								onChange={(e) => setEmail(e.target.value)}
+								onChange={handleEmailChange}
 							/>
+							{!isValid &&
+								isFocusedEmail && ( // Show message only when isValid is false
+									<p className='text-red-500 text-xs -mt-5'>
+										Email is not valid or domain is incorrect.
+									</p>
+								)}
 							{error && email.length === 0 ? (
 								<label className='text-red-500 text-sm -mt-5'>
 									Email could not be empty!
@@ -88,9 +140,17 @@ const BasicInformation = ({ formData, setformData, handleNext }) => {
 								type='password'
 								size='lg'
 								label='Password'
+								onFocus={handleFocus}
+								onBlur={handleBlur}
 								value={password}
-								onChange={(e) => setPassword(e.target.value)}
+								onChange={handlePasswordChange}
 							/>
+							{!isValidPassword && isFocused && (
+								<p className='text-red-500 text-xs -mt-5'>
+									Password must contain at least 8 characters, including numbers
+									and at least one special character.
+								</p>
+							)}
 							{error && password.length === 0 ? (
 								<label className='text-red-500 text-sm -mt-5'>
 									Password could not be empty!

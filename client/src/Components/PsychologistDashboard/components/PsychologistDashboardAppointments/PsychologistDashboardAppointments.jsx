@@ -8,10 +8,11 @@ import EventModal from './components/EventModal';
 import './PsychologistDashboardAppointments.css';
 import axios from 'axios';
 import userService from '../../../../services/UserService';
+import EventDrawer from './components/EventDrawer';
 
 const PsychologistDashboardAppointments = () => {
 	const [currenMonth, setCurrentMonth] = useState(getMonth());
-	const { monthIndex, showEventModal } = useContext(GlobalContext);
+	const { monthIndex, showEventModal, openRight } = useContext(GlobalContext);
 	const [appointment, setAppointment] = useState([]);
 	const user = userService.getLoggedInUserData();
 	const psychologistID = user._id;
@@ -38,6 +39,7 @@ const PsychologistDashboardAppointments = () => {
 	return (
 		<>
 			{showEventModal && <EventModal />}
+			{openRight && <EventDrawer />}
 			<div className='ap-main'>
 				<div className='timeline'>
 					<div className='h-screen w-full flex flex-col mb-4'>

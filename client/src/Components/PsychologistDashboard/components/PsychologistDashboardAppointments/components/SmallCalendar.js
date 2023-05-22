@@ -40,6 +40,7 @@ export default function SmallCalendar() {
 	}
 	return (
 		<div className='mt-9'>
+			{/* <CreateEventButton /> */}
 			<header className='flex justify-between items-center mb-2'>
 				<p className='text-gray-500 font-bold'>
 					{dayjs(new Date(dayjs().year(), currentMonthIdx)).format('MMMM YYYY')}
@@ -47,13 +48,11 @@ export default function SmallCalendar() {
 				<div className='flex gap-2'>
 					<Button
 						className='m-0 w-7 h-7 cursor-pointer rounded-lg p-2'
-						
 						size='sm'
 						onClick={handlePrevMonth}>
 						<ChevronLeftIcon className='w-4 h-4' />
 					</Button>
 					<Button
-						
 						size='sm'
 						className='m-0 w-7 h-7 cursor-pointer rounded-lg p-2'
 						onClick={handleNextMonth}>

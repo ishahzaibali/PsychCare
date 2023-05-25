@@ -1,7 +1,7 @@
 import React from 'react';
 import './Hero.css';
 import { motion } from 'framer-motion';
-import { smile, heart, doctor, name, timing, rectangles } from '../../assets';
+import { smile, heart, doctor, name, timing, rectangles,PsychologistHero, Psychologist1 } from '../../assets';
 import { heroData } from './heroData';
 import { NavLink } from 'react-router-dom';
 const Hero = () => {
@@ -64,7 +64,7 @@ const Hero = () => {
 					</div>
 					<div className='doctor'>
 						<img
-							src={doctor}
+							src={Psychologist1}
 							alt='doctor'
 						/>
 					</div>

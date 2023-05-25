@@ -98,18 +98,19 @@
 	z-index: 20;
 }
 .img-area .doctor {
-	position: absolute;
-	width: 531px;
-	height: 590px;
-	left: 780px;
-	top: 190px;
+	
+	width: 100%;
+	height: 100%;
+	/* margin-top: -2%; */
+	z-index: 1;
+	
 }
 .img-area .doctor-name {
 	position: absolute;
 	width: 212px;
 	height: 81px;
-	left: 1140px;
-	top: 450px;
+	left: 1050px;
+	top: 480px;
 	z-index: 20;
 }
 .img-area .sleep-timing {

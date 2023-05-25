@@ -9,3 +9,5 @@ export { default as rectangles } from './rectangles.png';
 export { default as messages } from './messages.png';
 export { default as consultationImage } from './consultation-image.png';
 export { default as avatar1 } from './avatar-1.jpg';
+export { default as PsychologistHero } from './PsychologistHero.png';
+export { default as Psychologist1 } from './Psychologist1.png';

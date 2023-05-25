@@ -4,7 +4,7 @@ import GlobalContext from '../../../../../context/GlobalContext';
 import UpcomingAppointmentsCards from './UpcomingAppointmentCard/UpcomingAppointmentsCards';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import { Typography, IconButton } from '@material-tailwind/react';
+import {  IconButton } from '@material-tailwind/react';
 
 export default function EventDrawer() {
 	const { openRight, setOpenRight } = useContext(GlobalContext);
@@ -16,10 +16,10 @@ export default function EventDrawer() {
 		const res = await axios.get(`/appointments/psychologist/` + psychologistID);
 
 		setAppointments(res.data);
-		console.log(
-			'🚀 ~ file: PsychologistDashboardAppointments.jsx:24 ~ getAppointment ~ data:',
-			res.data
-		);
+		// console.log(
+		// 	'🚀 ~ file: PsychologistDashboardAppointments.jsx:24 ~ getAppointment ~ data:',
+		// 	res.data
+		// );
 	};
 
 	useEffect(() => {
@@ -77,29 +77,9 @@ export default function EventDrawer() {
 
 	const categorizedAppointments = getAppointmentsByDate(appointments);
 
-	console.log('Category:', categorizedAppointments);
+	// console.log('Category:', categorizedAppointments);
 
 	return (
-		// <div>
-		// 	<Drawer
-		// 		placement='right'
-		// 		onClose={() => {
-		// 			setOpenRight(false);
-		// 		}}
-		// 		bodyStyle={{
-		// 			background: 'rgb(248,249,254)',
-		// 		}}
-		// 		closable={false}
-		// 		className=' flex font-poppins'
-		// 		open={openRight}>
-		// 		<h5 className='text-lg text-[#344767] font-medium'>
-		// 			Upcoming Appointments
-		// 		</h5>
-		// 		<div className='mt-8'>
-		// 			<UpcomingAppointmentsCards cards={appointments} />
-		// 		</div>
-		// 	</Drawer>
-		// </div>
 		<div>
 			<Drawer
 				placement='right'
@@ -120,8 +100,10 @@ export default function EventDrawer() {
 						<div key={date}>
 							<div className='flex items-center justify-start gap-4'>
 								<h6 className='text-base text-[#344767] font-medium'>{date}</h6>
-								<IconButton  className='!h-6 ml-0 !w-6 bg-[#fff] rounded-full shadow-none hover:shadow-none'>
-									<span className='font-bold !text-[#344767] font-[Helvetica]'>{categorizedAppointments[date].count}</span>
+								<IconButton className='!h-6 ml-0 !w-6 bg-[#fff] rounded-full shadow-none hover:shadow-none'>
+									<span className='font-bold !text-[#344767] font-[Helvetica]'>
+										{categorizedAppointments[date].count}
+									</span>
 								</IconButton>
 							</div>
 							<div>

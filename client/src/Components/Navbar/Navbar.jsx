@@ -28,6 +28,7 @@ import userService from '../../services/UserService';
 
 const Navbar = () => {
 	const [openNav, setOpenNav] = useState(false);
+
 	const history = useNavigate();
 	useEffect(() => {
 		window.addEventListener(
@@ -42,6 +43,9 @@ const Navbar = () => {
 			setUser(loggedInUser);
 		}
 	}, []);
+
+	const loggedInUserData = userService.getLoggedInUserData();
+	console.log('Navbar loggedInUserData:', loggedInUserData);
 
 	const handleLogout = (e) => {
 		e.preventDefault();
@@ -88,17 +92,26 @@ const Navbar = () => {
 		{
 			label: 'Dashboard',
 			icon: UserCircleIcon,
-			url: '/psychologist_dashboard',
+			url:
+				loggedInUserData?.approved === true
+					? '/psychologist_dashboard'
+					: '/unapproved-psychologist',
 		},
 		{
 			label: 'Appointments',
 			icon: CalendarIcon,
-			url: '/upcoming_appointments',
+			url:
+				loggedInUserData?.approved === true
+					? '/upcoming_appointments'
+					: '/unapproved-psychologist',
 		},
 		{
 			label: 'Messages',
 			icon: ChatBubbleOvalLeftEllipsisIcon,
-			url: '/psychologist_messages',
+			url:
+				loggedInUserData?.approved === true
+					? '/psychologist_messages'
+					: '/unapproved-psychologist',
 		},
 
 		{

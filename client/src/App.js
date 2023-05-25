@@ -26,6 +26,7 @@ import {
 	AppointmentBooking,
 	RoomPage,
 	UserAppointments,
+	UnApprovedPsychologist,
 } from './Components';
 import {
 	DashboardDiscussions,
@@ -79,6 +80,10 @@ const App = () => {
 						<Route
 							path='/contact'
 							element={<Contact />}
+						/>
+						<Route
+							path='/unapproved-psychologist'
+							element={<UnApprovedPsychologist />}
 						/>
 						<Route
 							path='/:username/appointments'

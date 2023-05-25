@@ -41,6 +41,7 @@ const Login = () => {
 					localStorage.setItem('user', JSON.stringify(user));
 					// console.log('User Data:', userData);
 					const LoggedInUser = userService.getLoggedInUser();
+					const LoggedInUserData = userService.getLoggedInUserData();
 
 					// console.log('🚀 ~ file: Login.jsx:36 ~ .then ~ data:', data);
 
@@ -49,7 +50,9 @@ const Login = () => {
 						history('/Dashboard');
 					} else if (LoggedInUser.role === 'psychologist') {
 						e.preventDefault();
-						history('/psychologist_dashboard');
+						LoggedInUserData?.approved === true
+							? history('/psychologist_dashboard')
+							: history('/unapproved-psychologist');
 					} else if (LoggedInUser.role === 'patient') {
 						e.preventDefault();
 						history('/');

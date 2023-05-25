@@ -14,7 +14,7 @@ const Home = () => {
 			<div className='hero'>
 				<Hero />
 			</div>
-			<div className='search'>
+			<div className='search md:-mt-[2.75rem]'>
 				<Search />
 			</div>
 			<div className='issues'>

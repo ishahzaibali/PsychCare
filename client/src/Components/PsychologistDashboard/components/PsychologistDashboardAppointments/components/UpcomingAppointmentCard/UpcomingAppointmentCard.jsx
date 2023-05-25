@@ -38,9 +38,12 @@ const UpcomingAppointmentCard = ({ card }) => {
 				const timeDifference = inputTime.getTime() - currentTime.getTime();
 				const minutesDifference = Math.floor(timeDifference / 1000 / 60);
 
-				if (minutesDifference <= 0) {
+				if (minutesDifference === 0) {
 					return <div className='text-[#8ac926]'>Appointment Now</div>;
-				} else if (minutesDifference <= 60) {
+				} else if (
+					minutesDifference <= 60 &&
+					inputTime.getHours() === currentTime.getHours()
+				) {
 					return <div className='text-[#8ac926]'>Appointment Now</div>;
 				} else {
 					const daysDifference = Math.floor(minutesDifference / (24 * 60));
@@ -115,7 +118,9 @@ const UpcomingAppointmentCard = ({ card }) => {
 							variant='h5'
 							color='blue-gray'
 							className='mb-2 mt-4 font-poppins font-medium text-sm'>
-							{card.location}
+							{card.appointmenttype === 'onsite'
+								? card.location
+								: 'use phone / laptop for video call'}
 						</Typography>
 					</CardBody>
 					<CardFooter className='pt-0'>

@@ -27,3 +27,4 @@ export { default as MinimalPsychologistCards } from './PsychologistCard/MinimalP
 export { default as AppointmentBooking } from './PsychologistPage/AppointmentBooking/AppointmentBooking';
 export { default as RoomPage } from './RoomPage/RoomPage';
 export { default as UserAppointments } from './UserProfilePages/MyAppointments/UserAppointments';
+export { default as UnApprovedPsychologist } from './PsychologistProfilePages/UnApprovedPsychologist/UnApprovedPsychologist';

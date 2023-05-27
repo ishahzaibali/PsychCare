@@ -1,19 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './ProfileCard.css';
 import { Card, CardBody, Typography, Avatar } from '@material-tailwind/react';
 import placeholder from '../../../../../assets/placeholder.png';
 import placeholder_female from '../../../../../assets/placeholder_female.png';
 import userService from '../../../../../services/UserService';
+import { storage } from '../../../../../firebase';
+import { ref, getDownloadURL } from 'firebase/storage';
 
 const ProfileCard = () => {
 	const user = userService.getLoggedInUserData();
+	const [imageUrl, setImageUrl] = useState('');
+	const imageName = user?.user_id?._id;
+
+	useEffect(() => {
+		const fetchUserAvatar = async () => {
+			try {
+				const storageRef = ref(storage, `images/${imageName}`);
+				const url = await getDownloadURL(storageRef);
+				setImageUrl(url);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		fetchUserAvatar();
+	}, []);
+
 	return (
 		<>
 			<div className='w-full '>
 				<Card className='w-72 h-[50vh]  shadow-none'>
 					<CardBody className='w-full text-center flex flex-col items-center justify-center'>
 						<div>
-							{!user.image ? (
+							{!imageUrl ? (
 								user.gender === 'male' ? (
 									<Avatar
 										size='xl'
@@ -44,7 +63,7 @@ const ProfileCard = () => {
 									size='xl'
 									variant='circular'
 									className='object-cover rounded-lg'
-									src={user.image}
+									src={imageUrl}
 									alt='candice wu'
 								/>
 							)}

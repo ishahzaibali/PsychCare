@@ -19,11 +19,16 @@ import userService from '../../../../services/UserService';
 import { Input, message } from 'antd';
 import psychologistService from '../../../../services/PsychologistService';
 import { useDispatch } from 'react-redux';
+import PsychologistAvatar from './components/PsychologistAvatar';
+import { storage } from '../../../../firebase';
+import { ref, getDownloadURL } from 'firebase/storage';
 
 const DashboardProfile = () => {
 	const [user, setUser] = useState([]);
 	const [openPersonal, setOpenPersonal] = useState(false);
 	const userData = useSelector((state) => state.user.userData);
+	const [imageUrl, setImageUrl] = useState('');
+
 	const getUser = async () => {
 		const userValue = await userService.getLoggedInUserData();
 		setUser(userValue);
@@ -32,6 +37,29 @@ const DashboardProfile = () => {
 
 	useEffect(() => {
 		getUser();
+	}, []);
+	useEffect(() => {
+		const loggedInUser = userService.getLoggedInUser();
+		console.log(
+			'🚀 ~ file: DashboardNavbar.jsx:39 ~ useEffect ~ loggedInUser:',
+			loggedInUser
+		);
+		if (loggedInUser) {
+			setUser(loggedInUser);
+		}
+		const imageName = loggedInUser?._id;
+
+		const fetchUserAvatar = async () => {
+			try {
+				const storageRef = ref(storage, `images/${imageName}`);
+				const url = await getDownloadURL(storageRef);
+				setImageUrl(url);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		fetchUserAvatar();
 	}, []);
 
 	const handleOpenPersonal = () => {
@@ -43,7 +71,7 @@ const DashboardProfile = () => {
 				<div className='flex my-8 p-4 items-center border border-gray-100  rounded-xl justify-between'>
 					<div className='flex gap-6 items-center'>
 						<div>
-							{!userData?.user?.image ? (
+							{!imageUrl ? (
 								userData?.user?.gender === 'male' ? (
 									<Avatar
 										size='lg'
@@ -52,7 +80,7 @@ const DashboardProfile = () => {
 										src={placeholder}
 										alt='candice wu'
 									/>
-								) : userData.user.gender === 'female' ? (
+								) : userData?.user?.gender === 'female' ? (
 									<Avatar
 										size='lg'
 										variant='circular'
@@ -74,7 +102,7 @@ const DashboardProfile = () => {
 									size='lg'
 									variant='circular'
 									className='object-cover rounded-lg'
-									src={userData.user?.image}
+									src={imageUrl}
 									alt='candice wu'
 								/>
 							)}
@@ -84,15 +112,18 @@ const DashboardProfile = () => {
 								variant='h6'
 								color='blue-gray'
 								className='font-poppins text-[rgb(52, 71, 103)] font-semibold'>
-								{userData.user.user_id?.name}
+								{userData?.user?.user_id?.name}
 							</Typography>
 							<Typography
 								variant='h6'
 								color='blue-gray'
 								className='font-poppins text-[rgb(52, 71, 103)] font-normal text-sm'>
-								{userData.user.user_id?.role}
+								{userData?.user?.user_id?.role}
 							</Typography>
 						</div>
+					</div>
+					<div>
+						<PsychologistAvatar />
 					</div>
 				</div>
 			</>
@@ -107,7 +138,7 @@ const DashboardProfile = () => {
 		const [userContact, setuserContact] = useState(
 			userData.user?.contactnumber
 		);
-		
+
 		const handleUpdate = async (id) => {
 			const data = {
 				about: userAbout,
@@ -116,7 +147,7 @@ const DashboardProfile = () => {
 			const newData = {
 				...userData, // Spread the previous data
 				...data, // Spread the updated values
-			 };
+			};
 			await psychologistService
 				.updatePsychologist(id, data)
 				.then((res) => {
@@ -165,7 +196,7 @@ const DashboardProfile = () => {
 							variant='h6'
 							color='blue-gray'
 							className='font-poppins text-[rgb(52, 71, 103)] font-medium text-sm'>
-							{userData.user.user_id?.email}
+							{userData?.user?.user_id?.email}
 						</Typography>
 					</div>
 					<div>
@@ -179,7 +210,7 @@ const DashboardProfile = () => {
 							variant='h6'
 							color='blue-gray'
 							className='font-poppins text-[rgb(52, 71, 103)] font-medium text-sm'>
-							{userData.user.contactnumber}
+							{userData?.user?.contactnumber}
 						</Typography>
 					</div>
 				</div>
@@ -194,7 +225,7 @@ const DashboardProfile = () => {
 						variant='h6'
 						color='blue-gray'
 						className='font-poppins text-[rgb(52, 71, 103)] font-medium text-sm'>
-						{userData.user?.about}
+						{userData?.user?.about}
 					</Typography>
 				</div>
 				<div>
@@ -234,7 +265,7 @@ const DashboardProfile = () => {
 											variant='h6'
 											color='blue-gray'
 											className='font-poppins text-[rgb(52, 71, 103)] font-medium text-sm'>
-											{userData.user.user_id?.email}
+											{userData?.user?.user_id?.email}
 										</Typography>
 									</div>
 									<div>
@@ -252,7 +283,7 @@ const DashboardProfile = () => {
 												e.preventDefault();
 												setuserContact(e.target.value);
 											}}
-											placeholder={userData.user.contactnumber}
+											placeholder={userData?.user?.contactnumber}
 										/>
 									</div>
 								</div>
@@ -270,7 +301,7 @@ const DashboardProfile = () => {
 											e.preventDefault();
 											setUserAbout(e.target.value);
 										}}
-										placeholder={userData.user.about}
+										placeholder={userData?.user?.about}
 									/>
 								</div>
 							</form>
@@ -288,7 +319,7 @@ const DashboardProfile = () => {
 									color='blue'
 									className='ml-0 font-poppins'
 									onClick={() => {
-										handleUpdate(userData.user._id);
+										handleUpdate(userData?.user?._id);
 									}}>
 									Update Details
 								</Button>
@@ -314,7 +345,7 @@ const DashboardProfile = () => {
 						variant='h6'
 						color='blue-gray'
 						className='font-poppins text-[rgb(52, 71, 103)] font-medium text-sm'>
-						{userData.user.onsiteAppointment?.location}
+						{userData?.user?.onsiteAppointment?.location}
 					</Typography>
 				</div>
 
@@ -330,7 +361,7 @@ const DashboardProfile = () => {
 							variant='h6'
 							color='blue-gray'
 							className='font-poppins text-[rgb(52, 71, 103)] font-medium text-sm'>
-							{userData.user.onsiteAppointment?.practicelocation}
+							{userData?.user?.onsiteAppointment?.practicelocation}
 						</Typography>
 					</div>
 					<div>

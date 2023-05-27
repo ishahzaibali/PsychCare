@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './DashboardProfile.css';
 import {
 	Card,
@@ -8,24 +8,44 @@ import {
 	Button,
 } from '@material-tailwind/react';
 import { PencilSquareIcon } from '@heroicons/react/24/outline';
-import avatar from '../../../../assets/team-3.jpg';
-import userService from '../../../../services/UserService'
+import userService from '../../../../services/UserService';
+import UploadAvatar from './components/UploadAvatar/UploadAvatar';
+import { storage } from '../../../../firebase';
+import { ref, getDownloadURL } from 'firebase/storage';
 
 const UserSection = () => {
-	
-	const user = userService.getLoggedInUser()
+	const [imageUrl, setImageUrl] = useState('');
+	const user = userService.getLoggedInUser();
+	const imageName = user._id;
+
+	useEffect(() => {
+		const fetchUserAvatar = async () => {
+			try {
+				const storageRef = ref(storage, `images/${imageName}`);
+				const url = await getDownloadURL(storageRef);
+				setImageUrl(url);
+				console.log('image url:', imageUrl);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		fetchUserAvatar();
+	}, []);
 
 	return (
 		<>
 			<div className='flex my-8 p-4 items-center border border-gray-100  rounded-xl justify-between'>
 				<div className='flex gap-6 items-center'>
 					<div>
-						<Avatar
-							src={avatar}
-							variant='circular'
-							alt='avatar'
-							size='lg'
-						/>
+						{imageUrl && (
+							<Avatar
+								src={imageUrl}
+								variant='circular'
+								alt='avatar'
+								size='lg'
+							/>
+						)}
 					</div>
 					<div>
 						<Typography
@@ -43,13 +63,7 @@ const UserSection = () => {
 					</div>
 				</div>
 				<div>
-					<Button
-						className='edit-btn font-poppins flex gap-2 items center justify-center shadow-none hover:shadow-none text-xs '
-						size='sm'
-						color='blue'>
-						Upload Picture
-						
-					</Button>
+					<UploadAvatar />
 				</div>
 			</div>
 		</>

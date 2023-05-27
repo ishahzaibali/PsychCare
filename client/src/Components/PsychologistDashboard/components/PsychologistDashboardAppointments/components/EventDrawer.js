@@ -2,18 +2,20 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Drawer } from 'antd';
 import GlobalContext from '../../../../../context/GlobalContext';
 import UpcomingAppointmentsCards from './UpcomingAppointmentCard/UpcomingAppointmentsCards';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import axios from 'axios';
-import {  IconButton } from '@material-tailwind/react';
+import { IconButton } from '@material-tailwind/react';
+import userService from '../../../../../services/UserService';
 
 export default function EventDrawer() {
 	const { openRight, setOpenRight } = useContext(GlobalContext);
 	const [appointments, setAppointments] = useState([]);
-	const userData = useSelector((state) => state.user.userData);
-	const psychologistID = userData.user._id;
+	const ID = userService.getLoggedInUserData();
+	// const userData = useSelector((state) => state.user.userData);
+	// const psychologistID = userData.user._id;
 
 	const getAppointments = async () => {
-		const res = await axios.get(`/appointments/psychologist/` + psychologistID);
+		const res = await axios.get(`/appointments/psychologist/` + ID);
 
 		setAppointments(res.data);
 		// console.log(

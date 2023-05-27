@@ -26,6 +26,9 @@ import { BellIcon, EnvelopeIcon } from '@heroicons/react/24/solid';
 import userService from '../../../../services/UserService';
 import { useNavigate } from 'react-router-dom';
 import { PsychologistDashboardSidebar } from '../../index';
+import { storage } from '../../../../firebase';
+import { ref, getDownloadURL } from 'firebase/storage';
+import placeholder from '../../../../assets/placeholder.png'
 
 // profile menu component
 const profileMenuItems = [
@@ -49,6 +52,8 @@ const profileMenuItems = [
 const PsychologistDashboardNavbar = () => {
 	const [user, setUser] = useState(null);
 	const [open, setOpen] = useState(false);
+	const [imageUrl, setImageUrl] = useState('');
+
 	const showDrawer = () => {
 		setOpen(true);
 	};
@@ -57,9 +62,27 @@ const PsychologistDashboardNavbar = () => {
 	};
 	useEffect(() => {
 		const loggedInUser = userService.getLoggedInUser();
+		console.log(
+			'🚀 ~ file: DashboardNavbar.jsx:39 ~ useEffect ~ loggedInUser:',
+			loggedInUser
+		);
 		if (loggedInUser) {
 			setUser(loggedInUser);
 		}
+		const imageName = loggedInUser?._id;
+
+		const fetchUserAvatar = async () => {
+			try {
+				const storageRef = ref(storage, `images/${imageName}`);
+				const url = await getDownloadURL(storageRef);
+				setImageUrl(url);
+				console.log('image url:', imageUrl);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		fetchUserAvatar();
 	}, []);
 
 	function ProfileMenu() {
@@ -86,13 +109,23 @@ const PsychologistDashboardNavbar = () => {
 						variant='text'
 						color='blue-gray'
 						className='flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto'>
-						<Avatar
-							variant='circular'
-							size='sm'
-							alt='candice wu'
-							className='border border-blue-500 p-0.5'
-							src='https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80'
-						/>
+						{imageUrl ? (
+							<Avatar
+								variant='circular'
+								size='sm'
+								alt='candice wu'
+								className='border border-blue-500 p-0.5'
+								src={imageUrl}
+							/>
+						) : (
+							<Avatar
+								variant='circular'
+								size='sm'
+								alt='candice wu'
+								className='border border-blue-500 p-0.5'
+								src={placeholder}
+							/>
+						)}
 						<ChevronDownIcon
 							strokeWidth={2.5}
 							className={`h-3 w-3 transition-transform ${

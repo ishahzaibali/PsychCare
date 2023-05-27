@@ -25,9 +25,13 @@ import {
 } from '@heroicons/react/24/outline';
 import { menuData } from './menuData';
 import userService from '../../services/UserService';
+import { storage } from '../../firebase';
+import { ref, getDownloadURL } from 'firebase/storage';
+import placeholder from '../../assets/placeholder.png'
 
 const Navbar = () => {
 	const [openNav, setOpenNav] = useState(false);
+	const [imageUrl, setImageUrl] = useState('');
 
 	const history = useNavigate();
 	useEffect(() => {
@@ -37,11 +41,29 @@ const Navbar = () => {
 		);
 	}, []);
 	const [user, setUser] = useState(null);
+	const loggedInUser = userService.getLoggedInUser();
 	useEffect(() => {
-		const loggedInUser = userService.getLoggedInUser();
+		console.log(
+			'🚀 ~ file: DashboardNavbar.jsx:39 ~ useEffect ~ loggedInUser:',
+			loggedInUser
+		);
 		if (loggedInUser) {
 			setUser(loggedInUser);
 		}
+		const imageName = loggedInUser?._id;
+
+		const fetchUserAvatar = async () => {
+			try {
+				const storageRef = ref(storage, `images/${imageName}`);
+				const url = await getDownloadURL(storageRef);
+				setImageUrl(url);
+				console.log('image url:', imageUrl);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		fetchUserAvatar();
 	}, []);
 
 	const loggedInUserData = userService.getLoggedInUserData();
@@ -153,13 +175,23 @@ const Navbar = () => {
 						className='flex font-poppins items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto'>
 						{user ? (
 							<>
-								<Avatar
-									variant='circular'
-									size='sm'
-									alt='candice wu'
-									className='border border-blue-500 p-0.5'
-									src='https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80'
-								/>
+								{imageUrl ? (
+									<Avatar
+										variant='circular'
+										size='sm'
+										alt='candice wu'
+										className='border border-blue-500 p-0.5'
+										src={imageUrl}
+									/>
+								) : (
+									<Avatar
+										variant='circular'
+										size='sm'
+										alt='candice wu'
+										className='border border-blue-500 p-0.5'
+										src={placeholder}
+									/>
+								)}
 								<ChevronDownIcon
 									strokeWidth={2.5}
 									className={`h-3 w-3 transition-transform ${
@@ -201,37 +233,7 @@ const Navbar = () => {
 					) : (
 						''
 					)}
-					{/* {userProfileItems.map(({ label, icon, url }, key) => {
-								const isLastItem = key === userProfileItems.length - 1;
-								return (
-									<>
-										<NavLink to={url}>
-											<MenuItem
-												key={label}
-												onClick={isLastItem ? handleLogout : closeMenu}
-												className={`flex font-[poppins] ml-0 bg-transparent text-gray-600 border-none items-center gap-2 rounded ${
-													isLastItem
-														? 'hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10'
-														: ''
-												}`}>
-												{React.createElement(icon, {
-													className: `h-4 w-4 ${
-														isLastItem ? 'text-red-500' : ''
-													}`,
-													strokeWidth: 2,
-												})}
-												<Typography
-													as='span'
-													variant='small'
-													className='font-normal font-[poppins]'
-													color={isLastItem ? 'red' : 'inherit'}>
-													{label}
-												</Typography>
-											</MenuItem>
-										</NavLink>
-									</>
-								);
-						  })} */}
+					
 					{userService.isPsychologist()
 						? psychologistProfile.map(({ label, icon, url }, key) => {
 								const isLastItem = key === psychologistProfile.length - 1;

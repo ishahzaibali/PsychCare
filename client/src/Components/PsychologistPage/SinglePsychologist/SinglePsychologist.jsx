@@ -9,25 +9,31 @@ import { Typography, Avatar } from '@material-tailwind/react';
 import { CheckBadgeIcon, StarIcon } from '@heroicons/react/24/solid';
 import DetailsTab from './components/DetailsTab';
 import { AppointmentCard, OnlineAppointmentCard } from './components';
+import { storage } from '../../../firebase';
+import { ref, getDownloadURL } from 'firebase/storage';
 
 const SinglePsychologist = () => {
 	const [loading, setLoading] = useState(false);
 	const location = useLocation();
 	const path = location.pathname.split('/')[3];
 	const [post, setPost] = useState([]);
+	const [imageUrl, setImageUrl] = useState('');
 
 	const getPost = async () => {
 		const res = await axios.get(`/users/psychologists/` + path);
 		setLoading(true);
 		setPost(res.data);
+
 		console.log(
 			'🚀 ~ file: SinglePost.jsx ~ line 26 ~ getPost ~ res',
 			res.data
 		);
 	};
+	const imageName = post?.user_id?._id;
 
 	useEffect(() => {
 		getPost();
+
 		window.scrollTo({
 			top: 0,
 			behavior: 'smooth',
@@ -36,6 +42,19 @@ const SinglePsychologist = () => {
 	// function capitalizeFirstLetter(str) {
 	// 	return str.charAt(0).toUpperCase() + str.slice(1);
 	// }
+	useEffect(() => {
+		const fetchUserAvatar = async () => {
+			try {
+				const storageRef = ref(storage, `images/${imageName}`);
+				const url = await getDownloadURL(storageRef);
+				setImageUrl(url);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		fetchUserAvatar();
+	}, [imageName]);
 
 	const formatRating = (rating) => {
 		return rating.toFixed(1);
@@ -51,7 +70,7 @@ const SinglePsychologist = () => {
 								<div className='spy-spy-pd'>
 									<div className='spy-spy-pd-user'>
 										<div>
-											{!post.image ? (
+											{!imageUrl ? (
 												post.gender === 'male' ? (
 													<Avatar
 														size='xxl'
@@ -82,7 +101,7 @@ const SinglePsychologist = () => {
 													size='xxl'
 													variant='circular'
 													className='object-cover rounded-lg'
-													src={post.image}
+													src={imageUrl}
 													alt='candice wu'
 												/>
 											)}

@@ -6,29 +6,53 @@ import {
 	Dialog,
 	DialogBody,
 	DialogFooter,
+	Progress,
 } from '@material-tailwind/react';
 import { storage } from '../../../../../firebase';
-import { ref, uploadBytes } from 'firebase/storage';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import userService from '../../../../../services/UserService';
 
 const PsychologistAvatar = () => {
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(!open);
-
+	const [uploadProgress, setUploadProgress] = useState(0);
 	const [imageUpload, setImageUpload] = useState(null);
+	const [isUploadClicked, setIsUploadClicked] = useState(false);
 
 	const imageName = userService.getLoggedInUser()._id;
 
-	const handleUpload = () => {
+	const handleUpload = async () => {
 		if (imageUpload === null) {
 			return;
 		}
+		setIsUploadClicked(true);
 		const imageRef = ref(storage, `images/${imageName}`);
-		uploadBytes(imageRef, imageUpload).then(() => {
-			message.success('Image Uploaded');
-			setOpen(false);
-		});
+		const uploadTask = uploadBytesResumable(imageRef, imageUpload);
+
+		uploadTask.on(
+			'state_changed',
+			(snapshot) => {
+				const progress = Math.round(
+					(snapshot.bytesTransferred / snapshot.totalBytes) * 100
+				);
+				setUploadProgress(progress);
+			},
+			(error) => {
+				console.error(error);
+			},
+			() => {
+				getDownloadURL(uploadTask.snapshot.ref)
+					.then((downloadURL) => {
+						message.success('Image Uploaded');
+						setOpen(false);
+					})
+					.catch((error) => {
+						console.error(error);
+					});
+			}
+		);
 	};
+
 	return (
 		<div>
 			<Button
@@ -52,6 +76,14 @@ const PsychologistAvatar = () => {
 							setImageUpload(e.target.files[0]);
 						}}
 					/>
+					{isUploadClicked && (
+						<Progress
+							color='blue'
+							value={uploadProgress}
+							label='Completed'
+							className='text-white mt-4 font-poppins rounded-full text-xs'
+						/>
+					)}
 				</DialogBody>
 				<DialogFooter className='flex items-center justify-end gap-2'>
 					<Button

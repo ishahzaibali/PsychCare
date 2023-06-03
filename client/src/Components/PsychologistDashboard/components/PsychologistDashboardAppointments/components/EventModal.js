@@ -90,40 +90,7 @@ export default function EventModal() {
 									</div>
 								</div>
 
-								{/* <div className='flex flex-col p-4 items-start justify-between border border-gray-100  rounded-lg'>
-									<Typography
-										variant='h6'
-										color='blue-gray'
-										className='font-poppins text-[rgb(52, 71, 103)] font-medium uppercase text-xs '>
-										Time Slot & Date
-									</Typography>
-									<div className='mt-4 w-full flex items-center justify-between gap-2'>
-										<div className='flex gap-2 items-center'>
-											<Typography
-												variant='h6'
-												color='blue-gray'
-												className='font-poppins text-[rgb(52, 71, 103)] font-medium uppercase text-xs '>
-												from
-											</Typography>
-											<input
-												defaultValue={dayjs('10:00', format)}
-												value={startTime}
-												type='time'
-												onChange={(e) => setstartTime(e.target.value)}
-												format={format}
-												className='font-poppins rounded-lg border-gray-200 text-sm font-normal'
-											/>
-										</div>
-										<div className='flex gap-4 mt-4 font-poppins items-center'>
-											<span className=' text-gray-400'>
-												<ClockIcon className='w-5 h-5' />
-											</span>
-											<p className='font-medium text-sm'>
-												{daySelected.format('dddd, MMMM DD')}
-											</p>
-										</div>
-									</div>
-								</div> */}
+								
 								<div className='flex flex-col p-4 items-start justify-between border border-gray-100  rounded-lg'>
 									<Typography
 										variant='h6'

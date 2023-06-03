@@ -78,7 +78,7 @@ const UserAppointments = () => {
 		<>
 			<Navbar />
 			<div className='user-appointment'>
-				<div className='flex-[1]'>
+				<div className='flex-[1] sticky top-0'>
 					<Card className=' w-full h-[70vh] shadow-none font-poppins'>
 						<CardBody className='flex flex-col items-center justify-start'>
 							<Avatar
@@ -105,7 +105,7 @@ const UserAppointments = () => {
 				</div>
 				<div className='flex-[3] flex items-center justify-start'>
 					<Tabs value='upcoming'>
-						<TabsHeader className='w-[60rem]'>
+						<TabsHeader className='w-[60rem] !sticky !top-0'>
 							{data.map(({ label, value, icon }) => (
 								<Tab
 									className='font-poppins text-[#344767] font-[600] uppercase text-xs opacity-70'

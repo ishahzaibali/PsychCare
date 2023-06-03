@@ -15,7 +15,6 @@ import {
 	CalendarIcon,
 	ChatBubbleOvalLeftEllipsisIcon,
 	HandThumbUpIcon,
-	MapPinIcon,
 	ShieldCheckIcon,
 	UserIcon,
 	VideoCameraIcon,
@@ -48,26 +47,31 @@ const PsychologistPage = () => {
 	const [showPsychologists, setshowPsychologists] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [postsPerPage] = useState(4);
+	const [appliedFilters, setAppliedFilters] = useState({});
 
-	const getPsychologists = async () => {
+	const getPsychologists = async (filters) => {
 		try {
-			const res = await axios.get('users/psychologists/allpsychologists');
+			const queryParams = new URLSearchParams(filters).toString();
+			const res = await axios.get(
+				`users/psychologists/allpsycholocistwithpagination?${queryParams}`
+			);
 			setLoading(true);
 			setshowPsychologists(res.data);
-			console.log(
-				'🚀 ~ file: PsychologistPage.jsx:55 ~ getPsychologists ~ data:',
-				res.data
-			);
+			console.log('🚀 ~ getPsychologists ~ data:', res.data);
 
-			if (!res.status === 200) {
+			if (res.status !== 200) {
 				window.alert('Invalid Information');
 			}
 		} catch (error) {
-			console.log(
-				'🚀 ~ file: PsychologistPage.jsx:56 ~ getPsychologists ~ error:',
-				error
-			);
+			console.log('🚀 ~ getPsychologists ~ error:', error);
 		}
+	};
+
+	const handleFilterSelection = (filter, value) => {
+		const updatedFilters = { ...appliedFilters, [filter]: value };
+		setAppliedFilters(updatedFilters);
+		getPsychologists(updatedFilters);
+		setcurrentPage(1); // Reset the current page to 1 when applying a filter
 	};
 
 	useEffect(() => {
@@ -91,23 +95,27 @@ const PsychologistPage = () => {
 				<Carousel
 					responsive={responsive}
 					className='sticky h-20 top-0 z-20 bg-white flex '>
-					<div className='filter-option'>
-						<div className='icon-section flex-[1]'>
-							<MapPinIcon
-								width='1.75rem'
-								height='1.75rem'
-							/>
-						</div>
-						<h1 className='flex-[2] p-[0.5rem]'>Nearby Psychologists</h1>
-					</div>
-					<div className='filter-option'>
+					<div
+						onClick={() => handleFilterSelection('sortBy', 'onlineFee')}
+						className='filter-option'>
 						<div className='icon-section flex-[1]'>
 							<ShieldCheckIcon
 								width='1.75rem'
 								height='1.75rem'
 							/>
 						</div>
-						<h1 className='flex-[2] p-[0.5rem]'>Lowest Fee</h1>
+						<h1 className='flex-[2] p-[0.5rem]'>Lowest Online Fee</h1>
+					</div>
+					<div
+						onClick={() => handleFilterSelection('sortBy', 'onsiteFee')}
+						className='filter-option'>
+						<div className='icon-section flex-[1]'>
+							<ShieldCheckIcon
+								width='1.75rem'
+								height='1.75rem'
+							/>
+						</div>
+						<h1 className='flex-[2] p-[0.5rem]'>Lowest Onsite Fee</h1>
 					</div>
 					<div className='filter-option'>
 						<div className='icon-section flex-[1]'>
@@ -127,16 +135,20 @@ const PsychologistPage = () => {
 						</div>
 						<h1 className='flex-[2] p-[0.5rem]'>Most Experienced</h1>
 					</div>
-					<div className='filter-option'>
+					<div
+						onClick={() => handleFilterSelection('sortBy', 'patientsTreated')}
+						className='filter-option'>
 						<div className='icon-section flex-[1]'>
 							<CalendarIcon
 								width='1.75rem'
 								height='1.75rem'
 							/>
 						</div>
-						<h1 className='flex-[2] p-[0.5rem]'>Available Today</h1>
+						<h1 className='flex-[2] p-[0.5rem]'>Patient Treated</h1>
 					</div>
-					<div className='filter-option'>
+					<div
+						onClick={() => handleFilterSelection('gender', 'female')}
+						className='filter-option'>
 						<div className='icon-section flex-[1]'>
 							<UserIcon
 								width='1.75rem'
@@ -145,7 +157,9 @@ const PsychologistPage = () => {
 						</div>
 						<h1 className='flex-[2] p-[0.5rem]'>Female Doctors</h1>
 					</div>
-					<div className='filter-option'>
+					<div
+						onClick={() => handleFilterSelection('gender', 'male')}
+						className='filter-option'>
 						<div className='icon-section flex-[1]'>
 							<UserIcon
 								width='1.75rem'
@@ -163,7 +177,9 @@ const PsychologistPage = () => {
 						</div>
 						<h1 className='flex-[2] p-[0.5rem]'>Video Consultation</h1>
 					</div>
-					<div className='filter-option'>
+					<div
+						onClick={() => handleFilterSelection('sortBy', 'rating')}
+						className='filter-option'>
 						<div className='icon-section flex-[1]'>
 							<HandThumbUpIcon
 								width='1.75rem'
@@ -195,7 +211,7 @@ const PsychologistPage = () => {
 						<span>Pakistan</span>
 					</h1>
 					<p className='sub-heading'>
-						Mental Health Specialist , Mahir-e-imraz-e- nafsiyat
+						Mental Health Specialist , Mahir-e-imraz-e-nafsiyat
 					</p>
 				</div>
 				<div className='sticky h-20 top-0 z-20 bg-white '>

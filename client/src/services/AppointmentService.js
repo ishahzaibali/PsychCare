@@ -22,10 +22,10 @@ class AppointmentService extends GenericService {
 		return new Promise((resolve, reject) => {
 			this.put('appointments/' + _id, data)
 				.then((response) => {
-					resolve(response); // Resolve the promise with the response data
+					resolve(response); 
 				})
 				.catch((error) => {
-					reject(error); // Reject the promise with the error
+					reject(error); 
 				});
 		});
 	};

@@ -133,16 +133,16 @@ const PsychologistCard = ({ Psychologist }) => {
 											Experience
 										</Typography>
 									</div>
-									<div className='degree mb-2 pl-4 border-l-2'>
+									<div className='degree items-center justify-center flex flex-col mb-2 pl-4 border-l-2'>
 										<Typography
 											className='font-[poppins] text-[#344767] '
 											variant='h6'>
-											98%(300)
+											{Psychologist.patientstreated}
 										</Typography>
 										<Typography
 											className='font-[poppins] text-sm text-[#344767] '
 											color='blue-gray'>
-											Satisfied Patient
+											Patient Treated
 										</Typography>
 									</div>
 									<div className='degree mb-2 pl-4 border-l-2'>

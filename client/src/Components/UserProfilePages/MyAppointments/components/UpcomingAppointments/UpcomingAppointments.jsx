@@ -11,7 +11,9 @@ const UpcomingAppointments = ({ upcoming }) => {
 	};
 
 	const appointmentsByDate = {};
-	const hasUpcomingAppointments = upcoming.some((upcome) => upcome.status === 'upcoming');
+	const hasUpcomingAppointments = upcoming.some(
+		(upcome) => upcome.status === 'upcoming'
+	);
 	if (!hasUpcomingAppointments) {
 		return (
 			<Typography
@@ -22,15 +24,21 @@ const UpcomingAppointments = ({ upcoming }) => {
 			</Typography>
 		);
 	} else {
-		upcoming.forEach((upcome) => {
-			if (upcome.status === 'upcoming') {
-				const date = formatDate(upcome.datetime.date);
-				if (!appointmentsByDate[date]) {
-					appointmentsByDate[date] = [];
+		if (Array.isArray(upcoming) && typeof appointmentsByDate === 'object') {
+			upcoming.forEach((upcome) => {
+				if (upcome && upcome.status === 'upcoming' && upcome.datetime) {
+					const date = formatDate(upcome.datetime.date);
+					if (!appointmentsByDate[date]) {
+						appointmentsByDate[date] = [];
+					}
+					appointmentsByDate[date].push(upcome);
 				}
-				appointmentsByDate[date].push(upcome);
-			}
-		});
+			});
+		} else {
+			console.error(
+				'Error: Invalid data structure for upcoming or appointmentsByDate'
+			);
+		}
 	}
 
 	const uniqueDates = Object.keys(appointmentsByDate);
@@ -40,15 +48,21 @@ const UpcomingAppointments = ({ upcoming }) => {
 		<>
 			<div>
 				{sortedDates.map((date) => (
-					<div key={date}>
-						<Typography
-							variant='h6'
-							color='blue-gray'
-							className='my-2 px-4 text-[#344767] opacity-60 text-lg font-semibold font-poppins'>
-							{date}
-						</Typography>
-						<UserAppointmentCards appointments={appointmentsByDate[date]} />
-					</div>
+					<>
+						<div
+							key={date}
+							className=''>
+							<Typography
+								variant='h6'
+								color='blue-gray'
+								className='my-8 px-4 text-[#344767]  text-xl font-semibold font-poppins'>
+								{date}
+							</Typography>
+							<div className='!flex flex-wrap '>
+								<UserAppointmentCards appointments={appointmentsByDate[date]} />
+							</div>
+						</div>
+					</>
 				))}
 			</div>
 		</>

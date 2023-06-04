@@ -22,7 +22,7 @@ import {
 	PaperAirplaneIcon,
 } from '@heroicons/react/24/solid';
 import appointmentService from '../../../services/AppointmentService';
-import { message, Input } from 'antd';
+import { message } from 'antd';
 import reviewService from '../../../services/ReviewService';
 import Lottie from 'lottie-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -34,9 +34,6 @@ const UserAppointmentCard = ({ appointment }) => {
 	const handleOpenReschedule = () => setOpenReschedule(!openReschedule);
 	const [openReview, setOpenReview] = useState(false);
 	const handleOpenReview = () => setOpenReview(!openReview);
-
-	// const [rating, setRating] = useState('');
-	// const [comment, setComment] = useState('');
 
 	function convertTo12HourFormat(timeString) {
 		const [hours, minutes] = timeString.split(':');
@@ -55,15 +52,6 @@ const UserAppointmentCard = ({ appointment }) => {
 	const handleCancel = async () => {
 		const id = appointment._id;
 		try {
-			//   const appointment = await appointmentService.getAppointment(id);
-			//   const updatedData = {
-			// 	 ...appointment.data,
-			// 	 status: 'cancelled',
-			//   };
-			console.log(
-				'🚀 ~ file: UserAppointmentCard.jsx:42 ~ UserAppointmentCard ~ id:',
-				id
-			);
 			await appointmentService.updateAppointment(id, { status: 'cancelled' });
 			message.success('Appointment cancelled successfully.');
 			setOpen(false);
@@ -169,29 +157,24 @@ const UserAppointmentCard = ({ appointment }) => {
 			5: require('../../../assets/Lottie-Files/emoji-great.json'),
 		};
 
-		const addReview = async (id) => {
-			// const id = appointment._id;
+		const addReview = async () => {
+			const id = appointment._id;
 			const data = {
-				psychologist_id: appointment.psychologist_id._id,
 				rating: rating,
 				comment: comment,
 			};
+
 			await reviewService
 				.addReview(id, data)
 				.then((res) => {
-					console.log(
-						'🚀 ~ file: UserAppointmentCard.jsx:83 ~ .then ~ res:',
-						res
-					);
-
+					console.log('🚀 res:', res);
 					message.success('Appointment Status updated successfully.');
 					setOpenReview(false);
 				})
 				.catch((err) => {
-					console.log(
-						'🚀 ~ file: UserAppointmentCard.jsx:89 ~ addReview ~ err:',
-						err
-					);
+					console.log('addReview ~ err:', err);
+					message.error('An error occurred while adding the review.');
+					setOpenReview(false);
 				});
 		};
 
@@ -255,9 +238,7 @@ const UserAppointmentCard = ({ appointment }) => {
 						<Button
 							variant='gradient'
 							color='blue'
-							onClick={() => {
-								addReview(appointment._id);
-							}}
+							onClick={addReview}
 							disabled={!rating || !comment}
 							className='ml-0 font-poppins'>
 							Add Review

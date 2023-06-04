@@ -8,3 +8,4 @@ export { default as DashboardUsers } from './DashboardUsers/DashboardUsers';
 export { default as DashboardPsychologists } from './DashboardPsychologists/DashboardPsychologists';
 export { default as DashboardDiscussions } from './DashboardDiscussions/DashboardDiscussions';
 export { default as DashboardBilling } from './DashboardBilling/DashboardBilling';
+export { default as DashboardReports } from './DashboardReports/DashboardReports';

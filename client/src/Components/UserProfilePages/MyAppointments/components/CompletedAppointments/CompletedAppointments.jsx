@@ -46,7 +46,7 @@ const CompletedAppointments = ({ completed }) => {
 						<Typography
 							variant='h6'
 							color='blue-gray'
-							className='my-2 px-4 text-[#344767] opacity-60 text-lg font-semibold font-poppins'>
+							className='my-8 px-4 text-[#344767]  text-xl font-semibold font-poppins'>
 							{date}
 						</Typography>
 						<UserAppointmentCards appointments={appointmentsByDate[date]} />

@@ -7,6 +7,7 @@ import {
 	DashboardUsers,
 	DashboardBilling,
 	DashboardProfile,
+	DashboardReports,
 } from '../AdminDashboard/Components';
 import { Box } from '@mui/material';
 import './DashboardLayout.css';
@@ -46,6 +47,10 @@ const DashboardLayout = () => {
 						<Route
 							path='/Discussion'
 							element={<DashboardDiscussions />}
+						/>
+						<Route
+							path='/Reports'
+							element={<DashboardReports />}
 						/>
 						<Route
 							path='/Billing'

@@ -10,18 +10,24 @@ import userService from '../../../../../services/UserService';
 export default function EventDrawer() {
 	const { openRight, setOpenRight } = useContext(GlobalContext);
 	const [appointments, setAppointments] = useState([]);
-	const ID = userService.getLoggedInUserData();
-	// const userData = useSelector((state) => state.user.userData);
-	// const psychologistID = userData.user._id;
+	const LoggedInUserData = userService.getLoggedInUserData();
+	const ID = LoggedInUserData._id;
 
 	const getAppointments = async () => {
-		const res = await axios.get(`/appointments/psychologist/` + ID);
+		try {
+			const res = await axios.get(`/appointments/psychologist/` + ID);
 
-		setAppointments(res.data);
-		// console.log(
-		// 	'🚀 ~ file: PsychologistDashboardAppointments.jsx:24 ~ getAppointment ~ data:',
-		// 	res.data
-		// );
+			setAppointments(res.data);
+			// console.log(
+			// 	'🚀 ~ file: EventDrawer.js:29 ~ getAppointments ~ setAppointments:',
+			// 	appointments
+			// );
+		} catch (error) {
+			console.log(
+				'🚀 ~ file: EventDrawer.js:27 ~ getAppointments ~ error:',
+				error
+			);
+		}
 	};
 
 	useEffect(() => {

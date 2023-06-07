@@ -32,6 +32,8 @@ const SalesCards = () => {
 		getAnalytics();
 	}, []);
 
+	
+
 	function CountTotalRupeesSpent() {
 		const currentDay = new Date().toLocaleString('en-US', { weekday: 'long' }); // Get the current day name
 		const currentDaySpent =

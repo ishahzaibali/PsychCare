@@ -12,7 +12,7 @@ const UpcomingAppointments = ({ upcoming }) => {
 
 	const appointmentsByDate = {};
 	const hasUpcomingAppointments = upcoming.some(
-		(upcome) => upcome.status === 'upcoming'
+		(upcome) => upcome.status === 'upcoming' || upcome.status === 'reschedule'
 	);
 	if (!hasUpcomingAppointments) {
 		return (
@@ -26,7 +26,11 @@ const UpcomingAppointments = ({ upcoming }) => {
 	} else {
 		if (Array.isArray(upcoming) && typeof appointmentsByDate === 'object') {
 			upcoming.forEach((upcome) => {
-				if (upcome && upcome.status === 'upcoming' && upcome.datetime) {
+				if (
+					upcome &&
+					(upcome.status === 'upcoming' || upcome.status === 'reschedule') &&
+					upcome.datetime
+				) {
 					const date = formatDate(upcome.datetime.date);
 					if (!appointmentsByDate[date]) {
 						appointmentsByDate[date] = [];

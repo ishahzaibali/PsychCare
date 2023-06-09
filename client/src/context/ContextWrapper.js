@@ -27,6 +27,7 @@ export default function ContextWrapper(props) {
 	const [showEventModal, setShowEventModal] = useState(false);
 	const [openRight, setOpenRight] = useState(false);
 	const [selectedEvent, setSelectedEvent] = useState(null);
+	const [openReschedule, setOpenReschedule] = useState(false);
 	const [labels, setLabels] = useState([]);
 	const [savedEvents, dispatchCalEvent] = useReducer(
 		savedEventsReducer,
@@ -75,6 +76,11 @@ export default function ContextWrapper(props) {
 			setOpenRight(false);
 		}
 	}, [openRight]);
+	useEffect(() => {
+		if (!openReschedule) {
+			setOpenReschedule(false);
+		}
+	}, [openReschedule]);
 
 	function updateLabel(label) {
 		setLabels(labels.map((lbl) => (lbl.label === label.label ? label : lbl)));
@@ -101,6 +107,8 @@ export default function ContextWrapper(props) {
 				labels,
 				updateLabel,
 				filteredEvents,
+				openReschedule,
+				setOpenReschedule,
 			}}>
 			{props.children}
 		</GlobalContext.Provider>

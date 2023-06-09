@@ -10,7 +10,7 @@ export default function Day({ day, rowIdx, event }) {
 
 	useEffect(() => {
 		const events = event.filter((evt) =>
-			evt.status === 'upcoming'
+			evt.status === 'upcoming' || evt.status === 'reschedule'
 				? dayjs(evt.datetime.date).format('YYYY-MM-DD') ===
 				  day.format('YYYY-MM-DD')
 				: ''
@@ -29,7 +29,6 @@ export default function Day({ day, rowIdx, event }) {
 	const hasMoreEvents = totalEvents > maxEventsToShow;
 
 	const displayedEvents = dayEvents.slice(0, maxEventsToShow);
-
 
 	function convertTo12HourFormat(timeString) {
 		const [hours, minutes] = timeString.split(':');

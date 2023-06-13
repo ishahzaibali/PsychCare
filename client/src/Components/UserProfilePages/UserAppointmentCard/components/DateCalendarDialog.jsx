@@ -44,10 +44,9 @@ const DateCalendarDialog = ({
 	const [updatedFilteredSlots, setUpdatedFilteredSlots] = useState([]);
 
 	const handleDateChange = (date) => {
-		setFilteredSlots([]);
 		setSelectedDate(date);
-		setIsOpen(true);
 		filterSlotsByDate(date);
+		setIsOpen(true);
 		setSlotSelected(false);
 		setSelectedSlotId(null);
 		function formatDate(selectedDate) {
@@ -95,7 +94,14 @@ const DateCalendarDialog = ({
 
 			if (item.day.toLowerCase() === formattedSelectedDay) {
 				console.log(' schedule-abc:', item);
-				setFilteredSlots(item.slots);
+				setFilteredSlots([]);
+				item.slots.map((slot) => {
+					if (slot.available === true) {
+						setFilteredSlots((prev) => [...prev, slot]);
+					}
+					return true;
+				});
+				// setFilteredSlots(item.slots);
 				console.log('filteredSlots', filteredSlots);
 				return true;
 			}
@@ -247,7 +253,7 @@ const DateCalendarDialog = ({
 							animate={{ opacity: 1, height: 'auto' }}
 							exit={{ opacity: 0, height: 0 }}
 							transition={{ duration: 0.3 }}>
-							{updatedFilteredSlots?.length > 0 ? (
+							{filteredSlots?.length > 0 ? (
 								<>
 									<Typography
 										variant='h6'
@@ -258,7 +264,7 @@ const DateCalendarDialog = ({
 									<div
 										// key={filteredSlots.day}
 										className='flex gap-2'>
-										{updatedFilteredSlots?.map((slotItem) => (
+										{filteredSlots?.map((slotItem) => (
 											<Card
 												key={slotItem._id}
 												onClick={(e) =>

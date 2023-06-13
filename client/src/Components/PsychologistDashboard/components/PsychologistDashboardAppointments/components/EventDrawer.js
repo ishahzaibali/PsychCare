@@ -45,7 +45,8 @@ export default function EventDrawer() {
 		// Filter appointments with status "upcoming" and upcoming dates
 		const upcomingAppointments = appointments.filter(
 			(appointment) =>
-				appointment.status === 'upcoming' &&
+				(appointment.status === 'upcoming' ||
+					appointment.status === 'reschedule') &&
 				new Date(appointment.datetime.date) >= today
 		);
 

@@ -3,7 +3,6 @@ import { UPDATE_USER } from '../actions/userActions';
 const INITIAL_STATE = {
 	userData: {
 		user: null,
-		
 	},
 };
 

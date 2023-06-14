@@ -50,7 +50,7 @@ const DateCalendarDialog = ({
 		setIsOpen(true);
 		setSlotSelected(false);
 		setSelectedSlotId(null);
-		function formatDate(date) {
+		function formatDate(selectedDate) {
 			const formattedDate = new Date(date).toISOString().slice(0, 10);
 			const dayName = new Date(date).toLocaleDateString('en-US', {
 				weekday: 'long',
@@ -85,7 +85,6 @@ const DateCalendarDialog = ({
 			});
 			console.log(' slotDate:', slotDate);
 			console.log('item', item, selectedDay);
-			// setFilteredSlots([]);
 
 			if (item.day === slotDate) {
 				console.log(' schedule-abc:', item);
@@ -96,7 +95,7 @@ const DateCalendarDialog = ({
 					}
 					return true;
 				});
-				// setFilteredSlots(item.slots);
+
 				console.log('filteredSlots', filteredSlots);
 				return true;
 			}
@@ -108,67 +107,8 @@ const DateCalendarDialog = ({
 	};
 
 	useEffect(() => {
-		// setUpdatedFilteredSlots(filteredSlots);
 		console.log('Calendar component mounted');
 	}, [filteredSlots]);
-	// useEffect(() => {
-	// 	console.log('updatedFilteredSlots:', updatedFilteredSlots);
-	// }, [updatedFilteredSlots]);
-
-	// const filterSlotsByDate = async (formattedDate) => {
-	// 	let slots = [];
-
-	// 	if (appointment.appointmenttype === 'onsite') {
-	// 		if (post.onsiteAppointment) {
-	// 			slots = post.onsiteAppointment.schedule || [];
-	// 		}
-	// 	} else if (appointment.appointmenttype === 'online') {
-	// 		if (post.onlineAppointment) {
-	// 			slots = post.onlineAppointment.schedule || [];
-	// 		}
-	// 	}
-	// 	console.log(' slots:', slots);
-	// 	// Filter slots based on the selected date, appointment type, and availability
-	// 	const filtered = slots.some((item, index) => {
-	// 		const slotDate = new Date(formattedDate).toLocaleDateString('en-US', {
-	// 			weekday: 'long',
-	// 		});
-	// 		console.log(' slotDate:', slotDate);
-	// 		// console.log(' schedule:', schedule.slots);
-	// 		console.log(
-	// 			'🚀 ~ file: UserAppointmentCard.jsx:210 ~ filtered ~ slotDate:',
-	// 			slotDate
-	// 		);
-	// 		console.log('item', item, selectedDay);
-	// 		setFilteredSlots([]);
-	// 		if (item.day === selectedDay) {
-	// 			console.log(' schedule-abc:', item);
-	// 			setFilteredSlots(item.slots);
-	// 			console.log('filteredSlots', filteredSlots);
-	// 			return true;
-	// 			// const availableSlots = schedule.slots.filter(
-	// 			// 	(slot) => slot.available === true
-	// 			// );
-	// 			// console.log(' availableSlots:', availableSlots);
-
-	// 			// if (availableSlots.length > 0) {
-	// 			// 	filteredSlots.push({
-	// 			// 		day: selectedDay,
-	// 			// 		slots: availableSlots,
-	// 			// 	});
-	// 			// }
-	// 		}
-	// 		// console.log('filteredSlots:', filteredSlots);
-	// 		// return filteredSlots;
-	// 		return false;
-	// 	});
-
-	// 	console.log('filtered:', filtered); // Check the filtered slots here
-
-	// 	// setAppointmentType(appointmentType);
-	// 	// setFilteredSlots(filtered);
-	// };
-
 	const disablePreviousDates = (date) => {
 		const today = new Date();
 		return date < today;

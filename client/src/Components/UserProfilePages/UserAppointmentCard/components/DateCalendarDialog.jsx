@@ -41,15 +41,16 @@ const DateCalendarDialog = ({
 	const handleReasonChange = (event) => {
 		setReason(event.target.value);
 	};
-	const [updatedFilteredSlots, setUpdatedFilteredSlots] = useState([]);
+	// const [updatedFilteredSlots, setUpdatedFilteredSlots] = useState([]);
 
 	const handleDateChange = (date) => {
+		setFilteredSlots([]);
 		setSelectedDate(date);
 		filterSlotsByDate(date);
 		setIsOpen(true);
 		setSlotSelected(false);
 		setSelectedSlotId(null);
-		function formatDate(selectedDate) {
+		function formatDate(date) {
 			const formattedDate = new Date(date).toISOString().slice(0, 10);
 			const dayName = new Date(date).toLocaleDateString('en-US', {
 				weekday: 'long',
@@ -78,21 +79,15 @@ const DateCalendarDialog = ({
 		}
 		console.log(' slots:', slots);
 		// Filter slots based on the selected date, appointment type, and availability
-		const filtered = slots.some((item, index) => {
+		const filtered = slots.forEach((item) => {
 			const slotDate = new Date(formattedDate).toLocaleDateString('en-US', {
 				weekday: 'long',
 			});
 			console.log(' slotDate:', slotDate);
-
-			console.log(
-				'🚀 ~ file: UserAppointmentCard.jsx:210 ~ filtered ~ slotDate:',
-				slotDate
-			);
 			console.log('item', item, selectedDay);
 			// setFilteredSlots([]);
-			const formattedSelectedDay = selectedDay.toLowerCase();
 
-			if (item.day.toLowerCase() === formattedSelectedDay) {
+			if (item.day === slotDate) {
 				console.log(' schedule-abc:', item);
 				setFilteredSlots([]);
 				item.slots.map((slot) => {
@@ -106,19 +101,19 @@ const DateCalendarDialog = ({
 				return true;
 			}
 
-			return false;
+			return true;
 		});
 
 		console.log('filtered:', filtered); // Check the filtered slots here
 	};
 
 	useEffect(() => {
-		setUpdatedFilteredSlots(filteredSlots);
-		console.log('filteredSlots:', filteredSlots);
+		// setUpdatedFilteredSlots(filteredSlots);
+		console.log('Calendar component mounted');
 	}, [filteredSlots]);
-	useEffect(() => {
-		console.log('updatedFilteredSlots:', updatedFilteredSlots);
-	}, [updatedFilteredSlots]);
+	// useEffect(() => {
+	// 	console.log('updatedFilteredSlots:', updatedFilteredSlots);
+	// }, [updatedFilteredSlots]);
 
 	// const filterSlotsByDate = async (formattedDate) => {
 	// 	let slots = [];

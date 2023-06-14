@@ -109,7 +109,7 @@ const Login = () => {
 									size='lg'
 									label='Email'
 									// required='true'
-									className='font-poppins'
+									className='!font-poppins h-full'
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
 								/>
@@ -124,6 +124,7 @@ const Login = () => {
 									type='password'
 									size='lg'
 									label='Password'
+									className='!font-poppins h-full !m-0'
 									// required='true'
 									value={password}
 									onChange={(e) => setPassword(e.target.value)}

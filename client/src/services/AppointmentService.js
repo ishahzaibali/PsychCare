@@ -13,19 +13,24 @@ class AppointmentService extends GenericService {
 		});
 	};
 	deleteAppointment = (_id) => {
-		this.delete('appointments/' + _id);
+		return new Promise((resolve, reject) => {
+			this.delete('appointments/' + _id)
+				.then((response) => {
+					resolve(response);
+				})
+				.catch((error) => {
+					reject(error);
+				});
+		});
 	};
-	// updateAppointment = (_id, data) => {
-	// 	this.put('appointments/' + _id, data);
-	// };
 	updateAppointment = (_id, data) => {
 		return new Promise((resolve, reject) => {
 			this.put('appointments/' + _id, data)
 				.then((response) => {
-					resolve(response); 
+					resolve(response);
 				})
 				.catch((error) => {
-					reject(error); 
+					reject(error);
 				});
 		});
 	};
@@ -35,10 +40,16 @@ class AppointmentService extends GenericService {
 	getPsychologistAppointments = (id) => {
 		this.get('appointments/psychologist/' + id);
 	};
-
 	getPatienttAppointments = (id) => {
 		this.get('appointments/patient/' + id);
 	};
+
+	// deleteAppointment = (_id) => {
+	// 	this.delete('appointments/' + _id);
+	// };
+	// updateAppointment = (_id, data) => {
+	// 	this.put('appointments/' + _id, data);
+	// };
 }
 
 let appointmentService = new AppointmentService();

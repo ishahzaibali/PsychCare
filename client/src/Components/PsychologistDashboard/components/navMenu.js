@@ -52,7 +52,6 @@ export const navData = [
 		icon: <UserCircleIcon className='w-5 h-5' />,
 		cName: 'nav-links',
 	},
-	
 ];
 export const subMenu = [
 	{
@@ -62,10 +61,22 @@ export const subMenu = [
 		cName: 'nav-links',
 	},
 
+	// {
+	// 	title: 'All Appointments',
+	// 	url: '/all_appointments',
+	// 	icon: <CalendarIcon className='w-5 h-5' />,
+	// 	cName: 'nav-links',
+	// },
 	{
-		title: 'All Appointments',
-		url: '/all_appointments',
-		icon: <CalendarIcon className='w-5 h-5' />,
+		title: 'Completed Appointments',
+		url: '/schedule_appointments',
+		icon: <ChatBubbleOvalLeftIcon className='w-5 h-5' />,
+		cName: 'nav-links',
+	},
+	{
+		title: 'Cancelled Appointments',
+		url: '/schedule_appointments',
+		icon: <ChatBubbleOvalLeftIcon className='w-5 h-5' />,
 		cName: 'nav-links',
 	},
 	{

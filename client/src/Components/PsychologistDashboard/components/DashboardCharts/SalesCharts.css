@@ -1,0 +1,6 @@
+.barChart {
+	box-shadow: none;
+	background: linear-gradient(195deg, rgb(66, 66, 74), rgb(25, 25, 25));
+	border-radius: 0.75rem;
+	height: 20rem;
+}

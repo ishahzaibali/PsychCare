@@ -16,7 +16,7 @@ import {
 	MenuList,
 	MenuItem,
 } from '@material-tailwind/react';
-import { useSelector } from 'react-redux';
+import userService from '../../../../../../services/UserService';
 
 const columns = [
 	{
@@ -59,11 +59,9 @@ const columns = [
 ];
 
 const AllAppointments = () => {
-	const userData = useSelector((state) => state.user.userData);
-
+	const loggedInUser = userService.getLoggedInUserData();
 	const [appointments, setAppointments] = useState([]);
-
-	const psychologistID = userData.user._id;
+	const psychologistID = loggedInUser._id;
 
 	const getAppointments = async () => {
 		const res = await axios.get(`/appointments/psychologist/` + psychologistID);
@@ -98,6 +96,12 @@ const AllAppointments = () => {
 
 		return formattedTime;
 	}
+
+	const sortedAppointments = appointments.sort((a, b) => {
+		const dateA = new Date(a.datetime.date);
+		const dateB = new Date(b.datetime.date);
+		return dateB - dateA;
+	});
 
 	return (
 		<>
@@ -142,7 +146,7 @@ const AllAppointments = () => {
 								</TableHead>
 
 								<TableBody className='font-[poppins] font-[500] text-sm'>
-									{appointments.map((row) => (
+									{sortedAppointments.map((row) => (
 										<TableRow
 											key={row._id}
 											sx={{
@@ -216,10 +220,13 @@ const AllAppointments = () => {
 												</MenuHandler>
 												<MenuList className='menu-list'>
 													<MenuItem className='ml-0 menu-list-item'>
-														Edit User Details
+														View Notes
 													</MenuItem>
 													<MenuItem className='ml-0 menu-list-item'>
-														Delete User
+														View prescriptions
+													</MenuItem>
+													<MenuItem className='ml-0 menu-list-item'>
+														Delete Appointment
 													</MenuItem>
 												</MenuList>
 											</Menu>

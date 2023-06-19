@@ -53,7 +53,7 @@ const DashboardCalendar = () => {
 		const appointmentDate = dayjs(appointment.datetime.date).startOf('day');
 		return (
 			appointmentDate.isSame(selectedDate, 'day') &&
-			appointment.status === 'upcoming'
+			(appointment.status === 'upcoming' || appointment.status === 'reschedule')
 		);
 	});
 
@@ -74,7 +74,7 @@ const DashboardCalendar = () => {
 	return (
 		<>
 			<div className='w-full h-auto z-100 '>
-				<Card className='w-72 h-full mt-4 ml-12 z-30  shadow-none'>
+				<Card className='w-72 h-full mt-4  z-30  shadow-none'>
 					<CardBody className='w-full text-center flex flex-col items-center justify-center'>
 						<div className='px-8 -mt-10 mb-4'>
 							<LocalizationProvider

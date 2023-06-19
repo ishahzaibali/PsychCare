@@ -26,6 +26,10 @@ const ProfileCard = () => {
 		fetchUserAvatar();
 	}, []);
 
+	const formatRating = (rating) => {
+		return rating.toFixed(1);
+	};
+
 	return (
 		<>
 			<div className='w-full '>
@@ -72,7 +76,7 @@ const ProfileCard = () => {
 							variant='h5'
 							color='blue-gray'
 							className='mt-2 font-semibold font-poppins'>
-							Dr. <span>{user.user_id.name}</span>
+							{user.user_id.name}
 						</Typography>
 						<Typography
 							color='gray'
@@ -86,7 +90,9 @@ const ProfileCard = () => {
 								<p className='text-sm font-semibold opacity-[0.6]'>
 									Overall Ratings
 								</p>
-								<p className='text-md font-semibold '>{user.rating}</p>
+								<p className='text-md font-semibold '>
+									{formatRating(user.rating)}
+								</p>
 							</div>
 							<div className='flex justify-between gap-2 '>
 								<p className='text-sm font-semibold opacity-[0.6]'>

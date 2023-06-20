@@ -69,13 +69,13 @@ export const subMenu = [
 	// },
 	{
 		title: 'Completed Appointments',
-		url: '/schedule_appointments',
+		url: '/completed_appointments',
 		icon: <ChatBubbleOvalLeftIcon className='w-5 h-5' />,
 		cName: 'nav-links',
 	},
 	{
 		title: 'Cancelled Appointments',
-		url: '/schedule_appointments',
+		url: '/cancelled_appointments',
 		icon: <ChatBubbleOvalLeftIcon className='w-5 h-5' />,
 		cName: 'nav-links',
 	},

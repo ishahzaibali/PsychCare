@@ -11,4 +11,6 @@ export { default as DashboardCalendar } from './components/DashboardCalendar/Das
 export { default as PsychologistDashboardProfile } from './components/PsychologistDashboardProfile/PsychologistDashboardProfile';
 export { default as ScheduleAppointments } from './components/PsychologistDashboardAppointments/components/ScheduleAppointments/ScheduleAppointments';
 export { default as AllAppointments } from './components/PsychologistDashboardAppointments/components/AllAppointments/AllAppointments';
+export { default as CompletedAppointments } from './components/PsychologistDashboardAppointments/components/CompletedAppointments/CompletedAppointments';
+export { default as CancelledAppointments } from './components/PsychologistDashboardAppointments/components/CancelledAppointments/CancelledAppointments';
 export { default as PsychologistTreatedPatients } from './components/PsychologistTreatedPatient/PsychologistTreatedPatients';

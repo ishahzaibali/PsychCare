@@ -1,0 +1,14 @@
+.custom-drawer {
+	.ant-drawer-content-wrapper {
+		background-color: rgba(0, 0, 0, 0);
+	}
+
+	.ant-drawer-body {
+		background-color: rgba(0, 0, 0, 0.1);
+		backdrop-filter: blur(20px);
+	}
+}
+.blur-background {
+	backdrop-filter: blur(90px) !important;
+	background-color: rgba(0, 0, 0, 0) !important;
+}

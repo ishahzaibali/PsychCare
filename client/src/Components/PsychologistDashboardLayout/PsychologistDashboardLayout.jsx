@@ -12,6 +12,8 @@ import {
 	ScheduleAppointments,
 	AllAppointments,
 	PsychologistTreatedPatients,
+	CompletedAppointments,
+	CancelledAppointments,
 } from '../PsychologistDashboard/index';
 import PsychologistDashboard from '../PsychologistDashboard/PsychologistDashboard';
 import { Route, Routes } from 'react-router-dom';
@@ -47,6 +49,14 @@ const PsychologistDashboardLayout = () => {
 							<Route
 								path='/schedule_appointments'
 								element={<ScheduleAppointments />}
+							/>
+							<Route
+								path='/completed_appointments'
+								element={<CompletedAppointments />}
+							/>
+							<Route
+								path='/cancelled_appointments'
+								element={<CancelledAppointments />}
 							/>
 							<Route
 								path='/all_appointments'

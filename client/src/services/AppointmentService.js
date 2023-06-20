@@ -43,6 +43,8 @@ class AppointmentService extends GenericService {
 	getPatienttAppointments = (id) => {
 		this.get('appointments/patient/' + id);
 	};
+	getnoteswithspecificusers = (id, id2) =>
+		this.get('appointments/notes/' + id + '/' + id2); //id= patientid....id2= psychologistid
 
 	// deleteAppointment = (_id) => {
 	// 	this.delete('appointments/' + _id);

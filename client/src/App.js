@@ -45,6 +45,8 @@ import {
 	ScheduleAppointments,
 	AllAppointments,
 	PsychologistTreatedPatients,
+	CompletedAppointments,
+	CancelledAppointments,
 } from './Components/PsychologistDashboard';
 
 const App = () => {
@@ -143,6 +145,14 @@ const App = () => {
 							<Route
 								path='/schedule_appointments'
 								element={<ScheduleAppointments />}
+							/>
+							<Route
+								path='/completed_appointments'
+								element={<CompletedAppointments />}
+							/>
+							<Route
+								path='/cancelled_appointments'
+								element={<CancelledAppointments />}
 							/>
 							<Route
 								path='/all_appointments'

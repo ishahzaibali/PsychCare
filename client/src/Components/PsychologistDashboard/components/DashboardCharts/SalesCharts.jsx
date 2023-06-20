@@ -47,22 +47,28 @@ const baroptions = {
 		y: {
 			grid: {
 				drawBorder: false,
+				borderColor: '#fff',
+				backgroundColor: '#fff',
 				display: false,
 				drawOnChartArea: false,
-				drawTicks: false,
+				drawTicks: true,
+				lineWidth: 0,
 			},
 			ticks: {
+				borderColor: '#fff',
+				backgroundColor: '#fff',
 				suggestedMin: 0,
-				suggestedMax: 500,
+				suggestedMax: 2000,
 				beginAtZero: true,
-				padding: 15,
+				padding: 10,
 				font: {
-					size: 14,
-					family: 'Open Sans',
+					size: 10,
+					family: 'poppins',
 					style: 'normal',
 					lineHeight: 2,
+					weight: 600,
 				},
-				color: '#fff',
+				color: 'linear-gradient(195deg, rgb(66, 66, 74), rgb(25, 25, 25))',
 			},
 		},
 		x: {
@@ -71,6 +77,7 @@ const baroptions = {
 				display: false,
 				drawOnChartArea: false,
 				drawTicks: false,
+				lineWidth: 0,
 			},
 			ticks: {
 				display: true,
@@ -162,7 +169,8 @@ const SalesCharts = () => {
 				borderWidth: 0,
 				borderRadius: 4,
 				borderSkipped: false,
-				backgroundColor: '#fff',
+				backgroundColor:
+					'linear-gradient(195deg, rgb(66, 66, 74), rgb(25, 25, 25))',
 				color: '#fff',
 				data: mappedDataArray,
 				maxBarThickness: 6,
@@ -224,14 +232,14 @@ const SalesCharts = () => {
 		<>
 			<div className='w-full h-full'>
 				<Card className='w-full shadow-3xl rounded-xl '>
-					<CardBody className='barChart flex gap-8 justify-between items-center w-full'>
-						<div className='flex-[3] h-full w-full'>
+					<CardBody className='barChart2 flex gap-8 justify-between items-center w-full'>
+						<div className='flex-[3] h-full w-full z-100'>
 							<Bar
 								options={baroptions}
 								data={bardata}
 							/>
 						</div>
-						<div className='flex flex-col gap-8 flex-[1] text-white items-center justify-center'>
+						<div className='flex flex-col gap-8 flex-[1] text-[rgb(25, 25, 25)] items-center justify-center'>
 							<div className='flex flex-col gap-4 items-center'>
 								<Typography
 									variant='p'
@@ -241,7 +249,7 @@ const SalesCharts = () => {
 								<div className='flex flex-col items-center'>
 									<Typography
 										variant='p'
-										className='font-poppins text-white font-[500] leading-tight text-4xl '>
+										className='font-poppins text-[rgb(25, 25, 25)] font-[500] leading-tight text-4xl '>
 										{formatValue(monthlySales)}
 									</Typography>
 									<div className='flex items-center gap-1'>
@@ -275,7 +283,7 @@ const SalesCharts = () => {
 								<div className='flex flex-col items-center'>
 									<Typography
 										variant='p'
-										className='font-poppins text-white font-[500] leading-tight text-4xl '>
+										className='font-poppins text-[rgb(25, 25, 25)] font-[500] leading-tight text-4xl '>
 										{formatValue(yearlySales)}
 									</Typography>
 									<div className='flex items-center gap-1'>

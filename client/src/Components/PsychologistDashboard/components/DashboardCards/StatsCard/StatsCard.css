@@ -22,7 +22,7 @@
 	justify-content: flex-end;
 }
 
-.iButton {
+.iButton2 {
 	background: linear-gradient(195deg, rgb(66, 66, 74), rgb(25, 25, 25));
 	box-shadow: none;
 	opacity: 1;
@@ -31,5 +31,11 @@
 	border-radius: 8px;
 	display: flex;
 	align-items: center;
+	color: #fff;
 	justify-content: center;
+}
+
+.today-chip {
+	background: linear-gradient(195deg, rgb(66, 66, 74), rgb(25, 25, 25));
+	border-radius: 0.25rem;
 }

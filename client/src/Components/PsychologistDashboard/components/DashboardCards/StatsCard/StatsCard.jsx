@@ -1,7 +1,8 @@
 import React from 'react';
 import './StatsCard.css';
 import { Card, CardBody, Typography } from '@material-tailwind/react';
-import { MoneyIcon, PsychologistIcon, SalesIcon } from './CardsSvg';
+import { MoneyIcon } from './CardsSvg';
+import { CalendarDaysIcon, UsersIcon } from '@heroicons/react/24/solid';
 
 const StatsCard = () => {
 	return (
@@ -14,23 +15,31 @@ const StatsCard = () => {
 								<Typography
 									variant='p'
 									className='font-[poppins] font-[600] leading-tight text-xs opacity-[0.8]'>
-									Today's Sales
+									Appointments
 								</Typography>
-								<div className='moneyData'>
-									{/* <CountTotalRupeesSpent /> */}
+								<div className='flex items-center gap-4'>
+									<Typography
+										variant='h4'
+										className='font-[poppins] text-2xl font-[700]'>
+										7
+									</Typography>
+									<div
+										variant='h4'
+										className='today-chip flex items-center justify-center font-[poppins] px-2 py-1 font-[700] leading-tight text-[8px] text-white opacity-[0.8]'>
+										TODAY
+									</div>
 								</div>
 							</div>
 							<div className='cardButton'>
 								<div
 									size='lg'
-									className='ml-0 iButton'>
-									<MoneyIcon />
+									className='ml-0 iButton2'>
+									<CalendarDaysIcon className='w-5 h-5' />
 								</div>
 							</div>
 						</CardBody>
 					</Card>
 				</div>
-
 				<div className=''>
 					<Card className='card-abc'>
 						<CardBody className='card-main p-[16px] w-full'>
@@ -38,24 +47,21 @@ const StatsCard = () => {
 								<Typography
 									variant='p'
 									className='font-[poppins] font-[600] leading-tight text-xs opacity-[0.8]'>
-									Total Psychologists
+									Patients Treated
 								</Typography>
 								<div className='moneyData'>
 									<Typography
 										variant='h4'
-										className='font-[poppins] text-lg font-[700]'>
-										{/* <span>{analytics?.prefix}</span> {countPsychologists()}{' '} */}
-										<span className={`font-poppins text-xs `}>
-											{/* {analytics?.decreasing} */}
-										</span>
+										className='font-[poppins] text-2xl font-[700]'>
+										26
 									</Typography>
 								</div>
 							</div>
 							<div className='cardButton'>
 								<div
 									size='lg'
-									className='ml-0 iButton'>
-									<PsychologistIcon />
+									className='ml-0 iButton2'>
+									<UsersIcon className='w-5 h-5' />
 								</div>
 							</div>
 						</CardBody>
@@ -68,15 +74,21 @@ const StatsCard = () => {
 								<Typography
 									variant='p'
 									className='font-[poppins] font-[600] leading-tight text-xs opacity-[0.8]'>
-									Monthly Sales
+									Available Balance
 								</Typography>
-								<div className='moneyData'>{/* <CountMonthlySales /> */}</div>
+								<div className='moneyData'>
+									<Typography
+										variant='h4'
+										className='font-[poppins] text-2xl font-[700]'>
+										Rs. <span>2.5K</span>
+									</Typography>
+								</div>
 							</div>
 							<div className='cardButton'>
 								<div
 									size='lg'
-									className='ml-0 iButton'>
-									<SalesIcon />
+									className='ml-0 iButton2'>
+									<MoneyIcon />
 								</div>
 							</div>
 						</CardBody>

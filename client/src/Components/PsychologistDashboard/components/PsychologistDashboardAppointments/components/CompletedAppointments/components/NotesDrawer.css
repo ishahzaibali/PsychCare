@@ -1,14 +1,8 @@
-.custom-drawer {
-	.ant-drawer-content-wrapper {
-		background-color: rgba(0, 0, 0, 0);
-	}
-
-	.ant-drawer-body {
-		background-color: rgba(0, 0, 0, 0.1);
-		backdrop-filter: blur(20px);
-	}
-}
-.blur-background {
-	backdrop-filter: blur(90px) !important;
+.ant-drawer-mask {
+	backdrop-filter: blur(2.5px) !important;
 	background-color: rgba(0, 0, 0, 0) !important;
 }
+/* .ant-drawer-content-wrapper {
+	margin: 1rem 0.5rem;
+	border-radius: 5rem !important;
+} */

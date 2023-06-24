@@ -6,6 +6,7 @@ import placeholder_female from '../../../../../assets/placeholder_female.png';
 import userService from '../../../../../services/UserService';
 import { storage } from '../../../../../firebase';
 import { ref, getDownloadURL } from 'firebase/storage';
+import { Badge } from 'antd';
 
 const ProfileCard = () => {
 	const user = userService.getLoggedInUserData();
@@ -33,8 +34,8 @@ const ProfileCard = () => {
 	return (
 		<>
 			<div className='w-full '>
-				<Card className='w-72 h-[50vh]  shadow-none'>
-					<CardBody className='w-full text-center flex flex-col items-center justify-center'>
+				<Card className='w-72 h-[20vh]  shadow-none'>
+					<CardBody className='w-full text-center flex gap-2  items-center justify-center'>
 						<div>
 							{!imageUrl ? (
 								user.gender === 'male' ? (
@@ -63,48 +64,39 @@ const ProfileCard = () => {
 									/>
 								)
 							) : (
-								<Avatar
-									size='xl'
-									variant='circular'
-									className='object-cover rounded-lg'
-									src={imageUrl}
-									alt='candice wu'
-								/>
+								<Badge
+									color='linear-gradient(195deg, rgb(66, 66, 74), rgb(25, 25, 25))'
+									className='font-[700] leading-tight text-xs text-white '
+									count={formatRating(user.rating)}
+									offset={[-10, 0]}>
+									<Avatar
+										size='xl'
+										variant='circular'
+										className='object-cover rounded-lg'
+										src={imageUrl}
+										alt='candice wu'
+									/>
+								</Badge>
 							)}
 						</div>
-						<Typography
-							variant='h5'
-							color='blue-gray'
-							className='mt-2 font-semibold font-poppins'>
-							{user.user_id.name}
-						</Typography>
-						<Typography
-							color='gray'
-							className='font-medium text-sm font-poppins opacity-[0.7]'
-							textGradient>
-							{user.degree}
-						</Typography>
-						<hr className='bottom' />
-						<div className='flex flex-col p-8 gap-2  w-full'>
-							<div className='flex justify-between gap-2 '>
-								<p className='text-sm font-semibold opacity-[0.6]'>
-									Overall Ratings
-								</p>
-								<p className='text-md font-semibold '>
+
+						<div className='flex flex-col items-start justify-start'>
+							<Typography
+								variant='h5'
+								color='blue-gray'
+								className='font-semibold font-poppins text-base'>
+								{user.user_id.name}
+							</Typography>
+							<div className='flex gap-4 items-center justify-start'>
+								<Typography
+									color='gray'
+									className='font-medium text-xs font-poppins opacity-[0.7]'
+									textGradient>
+									{user.degree}
+								</Typography>
+								{/* <div className='w-10 profile-chip flex items-center justify-center font-[poppins] py-1 font-[700] leading-tight text-xs text-white opacity-[0.8]'>
 									{formatRating(user.rating)}
-								</p>
-							</div>
-							<div className='flex justify-between gap-2 '>
-								<p className='text-sm font-semibold opacity-[0.6]'>
-									Available Slots
-								</p>
-								<p className='text-md font-semibold '>10</p>
-							</div>
-							<div className='flex justify-between gap-2 '>
-								<p className='text-sm font-semibold opacity-[0.6]'>
-									Total Patients
-								</p>
-								<p className='text-md font-semibold '>{user.patientstreated}</p>
+								</div> */}
 							</div>
 						</div>
 					</CardBody>

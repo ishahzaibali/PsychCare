@@ -107,9 +107,12 @@ const Login = () => {
 							<div className='mb-4 flex flex-col gap-6'>
 								<Input
 									size='lg'
-									label='Email'
+									placeholder='Email'
 									// required='true'
-									className='!font-poppins h-full'
+									labelProps={{
+										className: 'hidden',
+									}}
+									className='!font-poppins h-full focus:!border-t-blue-500 focus:!border-blue-500 ring-4 ring-transparent focus:ring-blue-500/20 !border !border-blue-gray-200  shadow-lg shadow-blue-gray-900/5 placeholder:text-blue-gray-500 text-blue-gray-500'
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
 								/>
@@ -123,11 +126,14 @@ const Login = () => {
 								<Input
 									type='password'
 									size='lg'
-									label='Password'
-									className='!font-poppins h-full !m-0'
+									placeholder='Password'
+									className='!font-poppins h-full focus:!border-t-blue-500 focus:!border-blue-500 ring-4 ring-transparent focus:ring-blue-500/20 !border !border-blue-gray-200  shadow-lg shadow-blue-gray-900/5 placeholder:text-blue-gray-500 text-blue-gray-500'
 									// required='true'
 									value={password}
 									onChange={(e) => setPassword(e.target.value)}
+									labelProps={{
+										className: 'hidden',
+									}}
 								/>
 								{error && password.length === 0 ? (
 									<label className='text-red-500 text-sm -mt-5'>

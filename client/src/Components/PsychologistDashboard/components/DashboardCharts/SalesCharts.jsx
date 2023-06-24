@@ -231,7 +231,7 @@ const SalesCharts = () => {
 	return (
 		<>
 			<div className='w-full h-full'>
-				<Card className='w-full shadow-3xl rounded-xl '>
+				<Card className='w-full shadow-none rounded-xl '>
 					<CardBody className='barChart2 flex gap-8 justify-between items-center w-full'>
 						<div className='flex-[3] h-full w-full z-100'>
 							<Bar

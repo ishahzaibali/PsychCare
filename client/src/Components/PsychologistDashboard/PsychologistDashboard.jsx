@@ -8,7 +8,7 @@ import SalesCharts from './components/DashboardCharts/SalesCharts';
 const PsychologistDashboard = () => {
 	return (
 		<>
-			<div className='flex gap-6 pr-8 w-full pb-4 bg-[#fafafa] overflow-hidden overflow-x-hidden'>
+			<div className='flex gap-6 pr-8 w-full pb-4 bg-[#fafafa] '>
 				<div className='flex flex-[2] flex-col gap-8 items-start justify-start w-full'>
 					<StatsCard />
 					<SalesCharts />
@@ -18,6 +18,7 @@ const PsychologistDashboard = () => {
 					<DashboardCalendar />
 				</div>
 			</div>
+			<div className='pr-8 mt-2 w-full pb-4'>{/* <SalesCharts /> */}</div>
 		</>
 	);
 };

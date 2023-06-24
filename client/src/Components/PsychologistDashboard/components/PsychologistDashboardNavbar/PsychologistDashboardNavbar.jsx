@@ -28,7 +28,7 @@ import { useNavigate } from 'react-router-dom';
 import { PsychologistDashboardSidebar } from '../../index';
 import { storage } from '../../../../firebase';
 import { ref, getDownloadURL } from 'firebase/storage';
-import placeholder from '../../../../assets/placeholder.png'
+import placeholder from '../../../../assets/placeholder.png';
 
 // profile menu component
 const profileMenuItems = [

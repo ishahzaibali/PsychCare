@@ -11,3 +11,8 @@
 	border-left: 255px solid rgba(255, 255, 255, 0.08);
 	height: 0.0625rem;
 }
+
+.profile-chip {
+	background: linear-gradient(195deg, rgb(66, 66, 74), rgb(25, 25, 25));
+	border-radius: 8px;
+}

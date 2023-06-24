@@ -193,32 +193,11 @@ const CompletedAppointments = () => {
 														</span>
 													</div>
 												</TableCell>
-												{row.status === 'upcoming' ? (
-													<TableCell
-														className='table-row-2 upcoming'
-														align='left'>
-														{row.status}
-													</TableCell>
-												) : row.status === 'cancelled' ? (
-													<TableCell
-														className='table-row-2 cancelled'
-														align='left'>
-														{row.status}
-													</TableCell>
-												) : row.status === 'reschedule' ? (
-													<TableCell
-														className='table-row-2 reschedule'
-														align='left'>
-														{row.status}
-													</TableCell>
-												) : (
-													<TableCell
-														className='table-row-2 completed'
-														align='left'>
-														{row.status}
-													</TableCell>
-												)}
-
+												<TableCell
+													className='table-row-2 completed'
+													align='left'>
+													{row.status}
+												</TableCell>
 												<Tooltip
 													content='Notes & Prescription'
 													placement='top-start'
@@ -227,12 +206,12 @@ const CompletedAppointments = () => {
 														className='table-row-3 cursor-pointer'
 														align='center'>
 														<DocumentTextIcon
+															className='w-5 h-5 m-0'
 															onClick={() => {
 																setOpen(true);
 																setpatientId(row.patient_id._id);
 																setpsychologistId(row.psychologist_id);
 															}}
-															className='w-5 h-5 m-0'
 														/>
 													</TableCell>
 												</Tooltip>

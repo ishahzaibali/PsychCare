@@ -206,6 +206,10 @@ const PsychologistDashboardNavbar = () => {
 							className='!bg-transparent -ml-8 mt-8 !shadow-none !max-w-[20rem]'
 							autoFocus={true}
 							width={265}
+							style={{
+								background: 'transparent',
+								boxShadow: 'none',
+							}}
 							height='100vh'
 							size='large'
 							placement='left'

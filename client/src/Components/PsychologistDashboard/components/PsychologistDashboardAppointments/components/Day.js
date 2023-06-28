@@ -45,7 +45,7 @@ export default function Day({ day, rowIdx, event }) {
 	}
 
 	return (
-		<div className='border border-gray-200 flex flex-col h-full items-center justify-center'>
+		<div className='border border-gray-200 flex flex-col h-auto items-center justify-center'>
 			<header className='flex flex-col items-center'>
 				{rowIdx === 0 && (
 					<p className='text-sm font-semibold mt-1'>

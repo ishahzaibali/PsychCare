@@ -8,7 +8,7 @@ const StatsCard = () => {
 	return (
 		<>
 			<div className='stats-card-main'>
-				<div className=''>
+				<div className='w-full'>
 					<Card className='card-abc'>
 						<CardBody className='card-main p-[16px] w-full'>
 							<div className='cardData'>
@@ -40,7 +40,7 @@ const StatsCard = () => {
 						</CardBody>
 					</Card>
 				</div>
-				<div className=''>
+				<div className='w-full'>
 					<Card className='card-abc'>
 						<CardBody className='card-main p-[16px] w-full'>
 							<div className='cardData'>
@@ -67,7 +67,7 @@ const StatsCard = () => {
 						</CardBody>
 					</Card>
 				</div>
-				<div className=''>
+				<div className='w-full'>
 					<Card className='card-abc'>
 						<CardBody className='card-main p-[16px] w-full'>
 							<div className='cardData'>

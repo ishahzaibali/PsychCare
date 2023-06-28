@@ -4,3 +4,12 @@
 	border-radius: 0.75rem;
 	height: 24rem;
 }
+@media screen and (max-width: 768px) {
+	.barChart2 {
+		flex-direction: column;
+		height: auto;
+	}
+	.s-chart {
+		padding: 1rem;
+	}
+}

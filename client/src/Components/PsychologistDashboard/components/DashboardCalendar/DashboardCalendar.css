@@ -10,3 +10,17 @@
 	) !important;
 	box-shadow: none !important;
 }
+.css-1hiwve1-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
+	background: linear-gradient(
+		195deg,
+		rgb(66, 66, 74),
+		rgb(25, 25, 25)
+	) !important;
+	box-shadow: none !important;
+}
+
+@media screen and (max-width: 768px) {
+	.dc-aq {
+		width: 100%;
+	}
+}

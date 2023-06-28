@@ -16,3 +16,9 @@
 	background: linear-gradient(195deg, rgb(66, 66, 74), rgb(25, 25, 25));
 	border-radius: 8px;
 }
+
+@media screen and (max-width: 768px) {
+	.pc-aq {
+		width: 100%;
+	}
+}

@@ -13,6 +13,7 @@ module.exports = withMT({
 	theme: {
 		extend: {
 			screens: {
+				base: '768px',
 				'2xl': '1320px',
 				'3xl': '1600px',
 			},
@@ -24,8 +25,8 @@ module.exports = withMT({
 				'1/5': '1fr 5fr',
 			},
 			boxShadow: {
-				'3xl' : 'rgba(0, 0, 0, 0.05) 0rem 1.25rem 1.6875rem 0rem',
-			}
+				'3xl': 'rgba(0, 0, 0, 0.05) 0rem 1.25rem 1.6875rem 0rem',
+			},
 		},
 	},
 	plugins: [require('flowbite/plugin'), require('@tailwindcss/forms')],

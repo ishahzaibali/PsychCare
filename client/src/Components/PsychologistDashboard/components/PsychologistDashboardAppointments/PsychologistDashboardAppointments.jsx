@@ -44,7 +44,7 @@ const PsychologistDashboardAppointments = () => {
 				<div className='timeline'>
 					<div className='h-screen w-full flex flex-col mb-4'>
 						<CalendarHeader />
-						<div className='flex flex-1'>
+						<div className='flex flex-1 ap-mont'>
 							<Month
 								data={appointment}
 								month={currenMonth}

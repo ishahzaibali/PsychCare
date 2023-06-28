@@ -34,7 +34,7 @@ const ProfileCard = () => {
 	return (
 		<>
 			<div className='w-full '>
-				<Card className='w-72 h-[20vh]  shadow-none'>
+				<Card className='w-72 h-[20vh]  shadow-none pc-aq'>
 					<CardBody className='w-full text-center flex gap-2  items-center justify-center'>
 						<div>
 							{!imageUrl ? (

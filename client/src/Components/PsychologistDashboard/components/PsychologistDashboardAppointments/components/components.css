@@ -1,0 +1,36 @@
+.em-d {
+	width: 70% !important;
+	height: 95vh !important;
+}
+
+@media screen and (max-width: 768px) {
+	.sb-cc {
+		width: 100%;
+	}
+	.sb-cm {
+		margin-top: 20rem;
+	}
+	.em-d {
+		width: 100% !important;
+		height: 100vh !important;
+		overflow: scroll;
+		margin: 0;
+		padding: 0;
+	}
+	.em-bt {
+		flex-direction: column;
+		width: 100%;
+		align-items: center;
+		justify-content: center;
+		margin: 0;
+		padding: 0;
+	}
+	.em-mdi {
+		width: 100%;
+		margin: 0;
+		padding: 0;
+	}
+	.em-sbt {
+		width: 95%;
+	}
+}

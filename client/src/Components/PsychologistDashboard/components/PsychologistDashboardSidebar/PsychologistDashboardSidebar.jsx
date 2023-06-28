@@ -38,9 +38,9 @@ const PsychologistDashboardSidebar = () => {
 							className=' text-lg pb-8 font-[poppins] font-semibold text-white mt-3 '>
 							Psych<span className='text-[#418cfd]'>Care.</span>
 						</Typography>
-						<hr className='bottom' />
+						<hr className='bottom z-100' />
 					</CardHeader>
-					<CardBody className='p-6 w-full'>
+					<CardBody className='p-6 w-full overflow-auto h-[75vh] mt-2'>
 						{navData.map((data) => {
 							return (
 								<>

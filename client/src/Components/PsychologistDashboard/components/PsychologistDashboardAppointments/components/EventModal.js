@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import GlobalContext from '../../../../../context/GlobalContext';
 import dayjs from 'dayjs';
+import './components.css';
 import '../PsychologistDashboardAppointments.css';
 import {
 	Typography,
@@ -51,7 +52,7 @@ export default function EventModal() {
 	};
 
 	return (
-		<div className='h-screen z-50 w-full fixed left-0 top-0 flex justify-center items-center'>
+		<div className='h-screen z-50 w-full fixed left-0 top-0 flex justify-center items-center em-mdi'>
 			<div onClick={() => setShowEventModal(false)}></div>
 			<Dialog
 				animate={{
@@ -59,8 +60,8 @@ export default function EventModal() {
 					unmount: { scale: 0.9, y: -100 },
 				}}
 				open={() => setShowEventModal(true)}
-				className='bg-white rounded-lg shadow-3xl w-[70%] h-[95vh]'>
-				<DialogBody>
+				className='bg-white rounded-lg w-full shadow-3xl em-d'>
+				<DialogBody className='w-full'>
 					<form>
 						<div className='p-3'>
 							<div className='flex flex-col gap-4'>
@@ -90,7 +91,6 @@ export default function EventModal() {
 									</div>
 								</div>
 
-								
 								<div className='flex flex-col p-4 items-start justify-between border border-gray-100  rounded-lg'>
 									<Typography
 										variant='h6'
@@ -139,7 +139,7 @@ export default function EventModal() {
 						</div>
 					</form>
 				</DialogBody>
-				<div className='flex gap-2 p-3 justify-end'>
+				<div className='flex gap-2 p-3 justify-end em-bt'>
 					<Button
 						variant='text'
 						className=' ml-0 font-poppins px-6 py-2 rounded text-gray-600 hover:text-white hover:bg-gray-400'
@@ -149,7 +149,7 @@ export default function EventModal() {
 					<Button
 						type='submit'
 						onClick={handleUpdate}
-						className='bg-[#418cfd] hover:bg-blue-600 px-6 py-2 ml-0 font-poppins w-[40%] rounded text-white'>
+						className='bg-[#418cfd] hover:bg-blue-600 px-6 py-2 ml-0 font-poppins w-[40%] rounded text-white em-sbt'>
 						Update Appointment
 					</Button>
 				</div>

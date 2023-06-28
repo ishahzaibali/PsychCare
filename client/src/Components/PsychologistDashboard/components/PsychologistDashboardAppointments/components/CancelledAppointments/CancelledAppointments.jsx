@@ -7,9 +7,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import TableHead from '@mui/material/TableHead';
 import TableCell from '@mui/material/TableCell';
-import { Card, CardBody, Typography, Tooltip } from '@material-tailwind/react';
+import { Card, CardBody, Typography } from '@material-tailwind/react';
 import userService from '../../../../../../services/UserService';
-import { DocumentTextIcon } from '@heroicons/react/24/solid';
+import Loading from '../../../../../Loading/Loading';
 
 const columns = [
 	{
@@ -54,11 +54,12 @@ const columns = [
 const CancelledAppointments = () => {
 	const loggedInUser = userService.getLoggedInUserData();
 	const [appointments, setAppointments] = useState([]);
+	const [loading, setLoading] = useState(false);
 	const psychologistID = loggedInUser._id;
 
 	const getAppointments = async () => {
 		const res = await axios.get(`/appointments/psychologist/` + psychologistID);
-
+		setLoading(true);
 		setAppointments(res.data);
 		console.log(
 			'🚀 ~ file: PsychologistDashboardAppointments.jsx:24 ~ getAppointment ~ data:',
@@ -110,13 +111,13 @@ const CancelledAppointments = () => {
 								className='pt-5 pl-5 h2'
 								color='blue-gray'
 								as='h2'>
-								Completed Appointments
+								Cancelled Appointments
 							</Typography>
 							<Typography
 								className='pl-5 p'
 								color='blue-gray'
 								as='p'>
-								List of all Completed Appointments
+								List of all Cancelled Appointments
 							</Typography>
 						</div>
 						{/*  */}
@@ -141,89 +142,81 @@ const CancelledAppointments = () => {
 										))}
 									</TableRow>
 								</TableHead>
+								{loading ? (
+									<TableBody className='font-[poppins] font-[500] text-sm'>
+										{sortedAppointments.map((row) =>
+											row.status === 'cancelled' ? (
+												<TableRow
+													key={row._id}
+													sx={{
+														'&:last-child td, &:last-child th': { border: 0 },
+													}}>
+													<TableCell
+														className='table-row-2 '
+														align='left'>
+														<span>{row.appointmenttype}</span> Appointment
+													</TableCell>
+													<TableCell
+														component='th'
+														className='table-row '
+														scope='row'>
+														<div className='flex flex-col'>
+															{row.patient_id.user_id.name}
+															<span className='opacity-[0.6] font-[400]'>
+																{row.patient_id.user_id.email}
+															</span>
+														</div>
+													</TableCell>
+													<TableCell
+														className='table-row-2 '
+														align='left'>
+														{row.reschedule_count}
+													</TableCell>
 
-								<TableBody className='font-[poppins] font-[500] text-sm'>
-									{sortedAppointments.map((row) =>
-										row.status === 'cancelled' ? (
-											<TableRow
-												key={row._id}
-												sx={{
-													'&:last-child td, &:last-child th': { border: 0 },
-												}}>
-												<TableCell
-													className='table-row-2 '
-													align='left'>
-													<span>{row.appointmenttype}</span> Appointment
-												</TableCell>
-												<TableCell
-													component='th'
-													className='table-row '
-													scope='row'>
-													<div className='flex flex-col'>
-														{row.patient_id.user_id.name}
-														<span className='opacity-[0.6] font-[400]'>
-															{row.patient_id.user_id.email}
-														</span>
-													</div>
-												</TableCell>
-												<TableCell
-													className='table-row-2 '
-													align='left'>
-													{row.reschedule_count}
-												</TableCell>
-
-												<TableCell
-													className='table-row-2 '
-													align='left'>
-													<div className='flex flex-col'>
-														{formatDate(row.datetime.date)}
-														<span className='opacity-[0.6] font-[400]'>
-															{convertTo12HourFormat(row.datetime.time)}
-														</span>
-													</div>
-												</TableCell>
-												{row.status === 'upcoming' ? (
 													<TableCell
-														className='table-row-2 upcoming'
+														className='table-row-2 '
 														align='left'>
-														{row.status}
+														<div className='flex flex-col'>
+															{formatDate(row.datetime.date)}
+															<span className='opacity-[0.6] font-[400]'>
+																{convertTo12HourFormat(row.datetime.time)}
+															</span>
+														</div>
 													</TableCell>
-												) : row.status === 'cancelled' ? (
-													<TableCell
-														className='table-row-2 cancelled'
-														align='left'>
-														{row.status}
-													</TableCell>
-												) : row.status === 'reschedule' ? (
-													<TableCell
-														className='table-row-2 reschedule'
-														align='left'>
-														{row.status}
-													</TableCell>
-												) : (
-													<TableCell
-														className='table-row-2 completed'
-														align='left'>
-														{row.status}
-													</TableCell>
-												)}
-
-												{/* <Tooltip
-													content='Notes & Prescription'
-													placement='top-start'
-													className='font-poppins text-xs  m-0 font-semibold'>
-													<TableCell
-														className='table-row-3 cursor-pointer'
-														align='center'>
-														<DocumentTextIcon className='w-5 h-5 m-0' />
-													</TableCell>
-												</Tooltip> */}
-											</TableRow>
-										) : (
-											''
-										)
-									)}
-								</TableBody>
+													{row.status === 'upcoming' ? (
+														<TableCell
+															className='table-row-2 upcoming'
+															align='left'>
+															{row.status}
+														</TableCell>
+													) : row.status === 'cancelled' ? (
+														<TableCell
+															className='table-row-2 cancelled'
+															align='left'>
+															{row.status}
+														</TableCell>
+													) : row.status === 'reschedule' ? (
+														<TableCell
+															className='table-row-2 reschedule'
+															align='left'>
+															{row.status}
+														</TableCell>
+													) : (
+														<TableCell
+															className='table-row-2 completed'
+															align='left'>
+															{row.status}
+														</TableCell>
+													)}
+												</TableRow>
+											) : (
+												''
+											)
+										)}
+									</TableBody>
+								) : (
+									<Loading />
+								)}
 							</Table>
 						</TableContainer>
 					</CardBody>

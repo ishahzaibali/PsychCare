@@ -1,15 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 
-const labelsClasses = ['indigo', 'gray', 'green', 'blue', 'red', 'purple'];
 const withMT = require('@material-tailwind/react/utils/withMT');
 
 module.exports = withMT({
 	content: ['./src/**/*.{js,jsx,ts,tsx}'],
-	safelist: [
-		...labelsClasses.map((lbl) => `bg-${lbl}-500`),
-		...labelsClasses.map((lbl) => `bg-${lbl}-200`),
-		...labelsClasses.map((lbl) => `text-${lbl}-400`),
-	],
+
 	theme: {
 		extend: {
 			screens: {
@@ -29,5 +24,9 @@ module.exports = withMT({
 			},
 		},
 	},
-	plugins: [require('flowbite/plugin'), require('@tailwindcss/forms')],
+	plugins: [
+		require('flowbite/plugin'),
+		require('@tailwindcss/forms'),
+		// require('daisyui'),
+	],
 });

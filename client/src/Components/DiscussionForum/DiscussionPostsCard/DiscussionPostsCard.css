@@ -15,8 +15,10 @@
 .post-details {
 	margin: 2rem 2rem 0rem 2rem;
 	display: flex;
-	align-items: center;
-	justify-content: space-between;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+
 	gap: 1rem;
 }
 .title-details {
@@ -71,7 +73,7 @@
 	letter-spacing: 0.03em;
 }
 .comment-container {
-	background: rgba(65, 140, 253, 0.05);
+	background: #418cfd0d;
 	border: none;
 }
 .user-detail {
@@ -85,7 +87,7 @@
 	object-fit: cover;
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width: 768px) {
 	.title-details {
 		flex-direction: column;
 		align-items: flex-start;
@@ -98,5 +100,4 @@
 		flex-direction: column;
 		align-items: flex-start;
 	}
-	
 }

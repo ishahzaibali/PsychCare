@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import GlobalContext from '../../../../../context/GlobalContext';
-import dayjs from 'dayjs';
+
 import './components.css';
 import '../PsychologistDashboardAppointments.css';
 import {
@@ -25,8 +25,8 @@ export default function EventModal() {
 	);
 
 	const appointmenttype = selectedEvent.appointmenttype;
-	const patient_name = selectedEvent.patient_id.patient_name;
-	const contact_number = selectedEvent.patient_id.contact_number;
+	const patient_name = selectedEvent.patient_id.user_id.name;
+	const contact_number = selectedEvent.patient_id.user_id.email;
 	const time = selectedEvent.datetime.time;
 	const id = selectedEvent._id;
 

@@ -34,17 +34,6 @@ const discussion = (
 		))}
 	</ul>
 );
-const MyPins = (
-	<ul>
-		{pins.map((item, index) => (
-			<li key={index}>
-				<div className='text-[#3d4146] flex gap-1 p-1 justify-start items-center ml-3 text-xs w-full opacity-[0.7]'>
-					#<span>{item.title}</span>
-				</div>
-			</li>
-		))}
-	</ul>
-);
 
 const DiscussionForumSidebar = () => {
 	return (
@@ -52,7 +41,7 @@ const DiscussionForumSidebar = () => {
 			<div className='sidebar-container'>
 				<div className='sidebar-menu'>{navList}</div>
 				<div className='tags-menu'>
-					<div className='gap-4 flex flex-col'>
+					<div className='gap-4 flex mb-3 flex-col'>
 						<div className='flex mt-3 gap-3 font-[600]'>
 							<ChatBubbleOvalLeftIcon
 								width='1.25rem'
@@ -62,7 +51,7 @@ const DiscussionForumSidebar = () => {
 						</div>
 						{discussion}
 					</div>
-					<div className='gap-4 flex flex-col mb-4'>
+					{/* <div className='gap-4 flex flex-col mb-4'>
 						<div className='flex gap-3 font-[600]'>
 							<MapPinIcon
 								width='1.25rem'
@@ -71,7 +60,7 @@ const DiscussionForumSidebar = () => {
 							<h2>My Pins</h2>
 						</div>
 						{MyPins}
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</>

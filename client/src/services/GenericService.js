@@ -1,5 +1,6 @@
 import axios from 'axios';
-axios.defaults.baseURL = 'https://backend-ir87-c6yk9jynu-uzairghaffar1144.vercel.app/api/';
+axios.defaults.baseURL =
+	'https://backend-ir87-lt8a3q46m-uzairghaffar1144.vercel.app/api/';
 axios.defaults.headers.common['x-auth-token'] = localStorage.getItem('token');
 class GenericService {
 	constructor() {}

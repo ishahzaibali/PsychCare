@@ -16,3 +16,7 @@
 	backdrop-filter: blur(40px);
 	transition: all 1s ease;
 }
+
+.uploadBtn {
+	background: linear-gradient(195deg, rgb(66, 66, 74), rgb(25, 25, 25));
+}

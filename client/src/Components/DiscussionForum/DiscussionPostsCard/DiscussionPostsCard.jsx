@@ -13,9 +13,15 @@ import {
 import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 import placeholder from '../../../assets/placeholder.png';
 import placeholder_female from '../../../assets/placeholder_female.png';
+import discussionforumService from '../../../services/DiscussionforumService';
+import userService from '../../../services/UserService';
+import { useToast } from '@chakra-ui/react';
 
 const DiscussionPostsCard = ({ discussion }) => {
+	const loggedInUser = userService.getLoggedInUser();
+	const isLoggedInUser = userService.isLoggedIn();
 	const [comment, setComment] = React.useState('');
+	const toast = useToast();
 	const onChange = ({ target }) => setComment(target.value);
 	function getTimeAgo(postTime) {
 		const currentTime = new Date();
@@ -39,6 +45,46 @@ const DiscussionPostsCard = ({ discussion }) => {
 			return postedTime.toLocaleDateString(undefined, options);
 		}
 	}
+	const addComment = async (id) => {
+		const data = {
+			content: comment,
+			user_id: loggedInUser._id,
+		};
+
+		try {
+			await discussionforumService
+				.commentDiscussionforum(id, data)
+				.then((res) => {
+					console.log('DiscussionPostsCard ~ res:', res);
+					toast({
+						title: 'Commented successfully.',
+						status: 'success',
+						duration: 4000,
+						position: 'top-right',
+						isClosable: true,
+					});
+				})
+				.catch((err) => {
+					console.log(
+						'🚀 ~ file: DiscussionPostsCard.jsx:65 ~ ).then ~ err:',
+						err
+					);
+					toast({
+						title: 'Something went wrong.',
+						status: 'error',
+						duration: 4000,
+						position: 'top-right',
+						isClosable: true,
+					});
+				});
+		} catch (error) {
+			console.log(
+				'🚀 ~ file: DiscussionPostsCard.jsx:47 ~ addComment ~ error:',
+				error
+			);
+		}
+	};
+
 	return (
 		<>
 			<div className='d-card'>
@@ -80,96 +126,109 @@ const DiscussionPostsCard = ({ discussion }) => {
 								color='transparent'
 								shadow={false}
 								className='w-full ml-8'>
-								<CardHeader
-									color='transparent'
-									floated={false}
-									shadow={false}
-									className='mx-0 flex items-center gap-4 pt-0 pb-8'>
-									<div className='flex  items-center gap-4'>
-										<span className='flex gap-2 '>
-											{!discussion.image ? (
-												discussion.gender === 'male' ? (
-													<Avatar
-														size='md'
-														variant='circular'
-														className='object-cover max-w-[2rem] max-h-[2rem]'
-														src={placeholder}
-														alt='candice wu'
-													/>
-												) : discussion.gender === 'female' ? (
-													<Avatar
-														size='md'
-														variant='circular'
-														className='object-cover rounded-lg max-w-[2rem] max-h-[2rem]'
-														src={placeholder_female}
-														alt='candice wu'
-													/>
-												) : (
-													<Avatar
-														size='md'
-														variant='circular'
-														className='object-cover rounded-lg max-w-[2rem] max-h-[2rem]'
-														src={placeholder}
-														alt='candice wu'
-													/>
-												)
-											) : (
-												<Avatar
-													size='md'
-													variant='circular'
-													className='object-cover rounded-lg max-w-[2rem] max-h-[2rem]'
-													src={discussion.image}
-													alt='candice wu'
-												/>
-											)}
-										</span>
-									</div>
-									<div className='flex w-full flex-col gap-0.5'>
-										<div className='flex items-center justify-between'>
-											<Typography
-												variant='h5'
-												color='blue-gray'
-												className='comment-user'>
-												<span>@</span>
-												Candice Wu
-											</Typography>
-										</div>
-									</div>
-								</CardHeader>
-								<CardBody className='mb-6 p-0'>
-									<Typography className='comment-syntax'>
-										&quot;I found solution to all my design needs from Creative
-										Tim. I use them as a freelancer in my hobby projects for
-										fun! And its really affordable, very humble guys !!!&quot;
-									</Typography>
-								</CardBody>
+								{discussion &&
+									discussion.comments.slice(0, 1).map((cmnt) => (
+										<>
+											<CardHeader
+												color='transparent'
+												floated={false}
+												shadow={false}
+												className='mx-0 flex items-center gap-4 pt-0 pb-8'>
+												<div className='flex  items-center gap-4'>
+													<span className='flex gap-2 '>
+														{!discussion.image ? (
+															discussion.gender === 'male' ? (
+																<Avatar
+																	size='md'
+																	variant='circular'
+																	className='object-cover max-w-[2rem] max-h-[2rem]'
+																	src={placeholder}
+																	alt='candice wu'
+																/>
+															) : discussion.gender === 'female' ? (
+																<Avatar
+																	size='md'
+																	variant='circular'
+																	className='object-cover rounded-lg max-w-[2rem] max-h-[2rem]'
+																	src={placeholder_female}
+																	alt='candice wu'
+																/>
+															) : (
+																<Avatar
+																	size='md'
+																	variant='circular'
+																	className='object-cover rounded-lg max-w-[2rem] max-h-[2rem]'
+																	src={placeholder}
+																	alt='candice wu'
+																/>
+															)
+														) : (
+															<Avatar
+																size='md'
+																variant='circular'
+																className='object-cover rounded-lg max-w-[2rem] max-h-[2rem]'
+																src={discussion.image}
+																alt='candice wu'
+															/>
+														)}
+													</span>
+												</div>
+												<div className='flex items-start flex-col justify-start'>
+													<Typography
+														variant='h5'
+														color='blue-gray'
+														className=' !text-[#344767] font-poppins text-base font-semibold'>
+														<span>@</span>
+														{cmnt.user_id.name}
+													</Typography>
+													<Typography
+														variant='h6'
+														color='blue-gray'
+														className='comment-syntax !ml-0 !text-xs font-medium'>
+														{getTimeAgo(cmnt.created_at)}
+													</Typography>
+												</div>
+											</CardHeader>
+											<CardBody className='mb-6 p-0'>
+												<Typography className='comment-syntax !text-[#344767] font-semibold'>
+													&quot;{cmnt.content}&quot;
+												</Typography>
+											</CardBody>
+										</>
+									))}
+
 								<CardFooter>
-									<div className='relative -ml-6 flex w-full m-0 '>
-										<Input
-											type='text'
-											placeholder='Write comment'
-											value={comment}
-											onChange={onChange}
-											className='!font-poppins h-full focus:!border-none  ring-4 ring-transparent focus:ring-blue-500/20 bg-[#418cfd0d] !border-none  shadow-none shadow-blue-gray-900/5 placeholder:text-blue-gray-500 text-blue-gray-500'
-											containerProps={{
-												className: 'min-w-0',
-											}}
-											labelProps={{
-												className: 'hidden',
-											}}
-										/>
-										<Button
-											size='sm'
-											color={comment ? 'blue' : 'blue-gray'}
-											disabled={!comment}
-											className='!absolute right-1 top-1 rounded ml-0'>
-											<PaperAirplaneIcon
-												width='2
-                                 1rem'
-												height='1rem'
+									{isLoggedInUser ? (
+										<div className='relative -ml-6 flex w-full m-0 '>
+											<Input
+												type='text'
+												placeholder='Write comment'
+												value={comment}
+												onChange={onChange}
+												className='!font-poppins h-full focus:!border-none  ring-4 ring-transparent focus:ring-blue-500/20 bg-[#418cfd0d] !border-none  shadow-none shadow-blue-gray-900/5 placeholder:text-blue-gray-500 text-blue-gray-500'
+												containerProps={{
+													className: 'min-w-0',
+												}}
+												labelProps={{
+													className: 'hidden',
+												}}
 											/>
-										</Button>
-									</div>
+											<Button
+												size='sm'
+												color={comment ? 'blue' : 'blue-gray'}
+												disabled={!comment}
+												onClick={() => addComment(discussion._id)}
+												className='!absolute right-1 top-1 rounded ml-0'>
+												<PaperAirplaneIcon
+													width='2
+                                 1rem'
+													height='1rem'
+												/>
+											</Button>
+										</div>
+									) : (
+										''
+									)}
 								</CardFooter>
 							</Card>
 						</div>

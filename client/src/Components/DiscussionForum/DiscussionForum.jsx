@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@material-tailwind/react';
 import './DiscussionForum.css';
+import { Link } from 'react-router-dom';
 import DiscussionPostsCards from './DiscussionPostsCards/DiscussionPostsCards';
 import AddPostDialog from './AddPostDialog';
 import axios from 'axios';
 import Loading from '../Loading/Loading';
+import userService from '../../services/UserService';
 
 const DiscussionForum = () => {
 	const [open, setOpen] = useState(false);
@@ -12,6 +14,8 @@ const DiscussionForum = () => {
 
 	const [discussionPost, setDiscussionPost] = useState([]);
 	const [loading, setLoading] = useState(false);
+
+	const isLoggedInUser = userService.isLoggedIn();
 
 	const getDiscussionPosts = async () => {
 		try {
@@ -44,12 +48,22 @@ const DiscussionForum = () => {
 		<>
 			<div>
 				<div className='insertPost'>
-					<Button
-						variant='gradient'
-						onClick={handleOpen}
-						className='ml-0 font-[poppins]  mb-4 w-full !shadow-none'>
-						Add New Discussion Post
-					</Button>
+					{isLoggedInUser ? (
+						<Button
+							variant='gradient'
+							onClick={handleOpen}
+							className='ml-0 font-[poppins]  mb-4 w-full !shadow-none'>
+							Add New Discussion Post
+						</Button>
+					) : (
+						<Link to={'/login'}>
+							<Button
+								variant='gradient'
+								className='ml-0 font-[poppins]  mb-4 w-full !shadow-none'>
+								Login to add new post
+							</Button>
+						</Link>
+					)}
 				</div>
 				{loading ? (
 					<DiscussionPostsCards discussions={discussionPost} />

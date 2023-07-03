@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './SinglePsychologist.css';
 import { useLocation } from 'react-router-dom';
-import { Loading, Navbar } from '../../index';
+import { Footer, Loading, Navbar } from '../../index';
 import placeholder from '../../../assets/placeholder.png';
 import placeholder_female from '../../../assets/placeholder_female.png';
 import { Typography, Avatar } from '@material-tailwind/react';
@@ -11,6 +11,8 @@ import DetailsTab from './components/DetailsTab';
 import { AppointmentCard, OnlineAppointmentCard } from './components';
 import { storage } from '../../../firebase';
 import { ref, getDownloadURL } from 'firebase/storage';
+import reviewService from '../../../services/ReviewService';
+import ReviewCarousel from './components/ReviewCarousel/ReviewCarousel';
 
 const SinglePsychologist = () => {
 	const [loading, setLoading] = useState(false);
@@ -18,6 +20,7 @@ const SinglePsychologist = () => {
 	const path = location.pathname.split('/')[3];
 	const [post, setPost] = useState([]);
 	const [imageUrl, setImageUrl] = useState('');
+	const [review, setReview] = useState([]);
 
 	const getPost = async () => {
 		const res = await axios.get(`/users/psychologists/` + path);
@@ -29,11 +32,36 @@ const SinglePsychologist = () => {
 			res.data
 		);
 	};
+	const getReview = async () => {
+		try {
+			await reviewService
+				.getpsychologistreviews(path)
+				.then((res) => {
+					setReview(res);
+					console.log(
+						'🚀 ~ file: SinglePsychologist.jsx:37 ~ reviewService.getpsychologistreviews ~ res:',
+						res
+					);
+				})
+				.catch((err) => {
+					console.log(
+						'🚀 ~ file: SinglePsychologist.jsx:40 ~ reviewService.getpsychologistreviews ~ err:',
+						err
+					);
+				});
+		} catch (error) {
+			console.log(
+				'🚀 ~ file: SinglePsychologist.jsx:38 ~ getReview ~ error:',
+				error
+			);
+		}
+	};
+
 	const imageName = post?.user_id?._id;
 
 	useEffect(() => {
 		getPost();
-
+		getReview();
 		window.scrollTo({
 			top: 0,
 			behavior: 'smooth',
@@ -58,6 +86,10 @@ const SinglePsychologist = () => {
 
 	const formatRating = (rating) => {
 		return rating.toFixed(1);
+	};
+
+	const calculatePercentage = (rating) => {
+		return (rating / 5) * 100; // Assuming the rating is on a scale of 1 to 5
 	};
 	return (
 		<>
@@ -132,7 +164,7 @@ const SinglePsychologist = () => {
 												</Typography>
 											</div>
 											<div className='spy-spy-pd-times'>
-												<div className='flex gap-8 mt-4 extra-content'>
+												<div className='flex flex-grow flex-wrap gap-8 mt-4 extra-content'>
 													<div className='degree mb-2 pr-4 border-r-2'>
 														<Typography
 															className='font-poppins text-[#344767] font-semibold opacity-60 text-sm'
@@ -166,7 +198,8 @@ const SinglePsychologist = () => {
 														<Typography
 															className='font-poppins text-[#344767] text-lg'
 															variant='h6'>
-															98%(300)
+															{formatRating(calculatePercentage(post.rating))}%(
+															{post.patientstreated})
 														</Typography>
 													</div>
 													<div className='degree mb-2 pl-4 border-l-2'>
@@ -196,11 +229,20 @@ const SinglePsychologist = () => {
 									<OnlineAppointmentCard online={post} />
 								</div>
 							</div>
+							<div className='w-full h-auto'>
+								<Typography
+									className='font-poppins mt-12 mb-8 text-[#344767] font-semibold  text-3xl text-center'
+									color='blue-gray'>
+									What people say about {post?.user_id?.['name']}
+								</Typography>
+								<ReviewCarousel reviews={review} />
+							</div>
 						</>
 					) : (
 						<Loading />
 					)}
 				</div>
+				<Footer />
 			</div>
 		</>
 	);

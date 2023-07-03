@@ -118,7 +118,7 @@ button span {
 		padding: 60px 20px;
 		align-items: center;
 		justify-content: flex-start;
-		z-index: 1000;
+		z-index: 1000 !important;
 		background: #418cfd;
 		border-radius: 13px;
 	}

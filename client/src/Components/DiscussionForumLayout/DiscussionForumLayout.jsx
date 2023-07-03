@@ -8,8 +8,10 @@ import {
 	DiscussionForumSidebarRight,
 	DiscussionForum,
 } from '../DiscussionForum/index';
+import userService from '../../services/UserService';
 
 function DiscussionForumLayout() {
+	const isLoggedInUser = userService.isLoggedIn();
 	return (
 		<>
 			<div className='layout-container'>
@@ -36,11 +38,15 @@ function DiscussionForumLayout() {
 						</Routes>
 					</div>
 					<div className='sticky-user'>
-						<Box
-							top={0}
-							right={0}>
-							<DiscussionForumSidebarRight />
-						</Box>
+						{isLoggedInUser ? (
+							<Box
+								top={0}
+								right={0}>
+								<DiscussionForumSidebarRight />
+							</Box>
+						) : (
+							''
+						)}
 					</div>
 				</div>
 			</div>

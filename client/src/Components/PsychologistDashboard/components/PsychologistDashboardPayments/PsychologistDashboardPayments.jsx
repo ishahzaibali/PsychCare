@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './PsychologistDashboardPayments.css';
 import Transactions from './components/Transactions';
 import { transactionsData } from './components/data/transactionData';
@@ -14,6 +14,8 @@ import {
 import mastercard from '../../../../assets/logos/mastercard.png';
 import visacard from '../../../../assets/logos/visa.png';
 import DashboardCharts from '../DashboardCharts/DashboardCharts';
+import userService from '../../../../services/UserService';
+import axios from 'axios';
 
 const CreditCard = () => {
 	return (
@@ -55,6 +57,36 @@ const CreditCard = () => {
 };
 
 const PsychologistDashboardPayments = () => {
+	const loggedInUserData = userService.getLoggedInUserData();
+	const [billing, setBilling] = useState({});
+
+	const getBalance = async () => {
+		try {
+			await axios
+				.get('/users/psychologists/bill/' + loggedInUserData._id)
+				.then((res) => {
+					setBilling(res.data);
+					console.log('Billing Object', res.data);
+				});
+		} catch (error) {
+			console.log(
+				'🚀 ~ file: PsychologistDashboardPayments.jsx:67 ~ getBalance ~ error:',
+				error
+			);
+		}
+	};
+
+	useEffect(() => {
+		getBalance();
+	}, []);
+
+	let PKR = new Intl.NumberFormat('ur-PK', {
+		style: 'currency',
+		currency: 'PKR',
+		minimumFractionDigits: 0,
+		maximumFractionDigits: 2,
+	});
+
 	return (
 		<>
 			<div className='pmt-main'>
@@ -81,7 +113,9 @@ const PsychologistDashboardPayments = () => {
 
 										<div>
 											<hr className='h-2 my-2' />
-											<h3 className='letter-spacing-mn'>Rs. 5,000</h3>
+											<h3 className='letter-spacing-mn'>
+												{PKR.format(billing.withdrawableBalance)}
+											</h3>
 										</div>
 									</CardBody>
 								</Card>
@@ -103,7 +137,9 @@ const PsychologistDashboardPayments = () => {
 
 										<div>
 											<hr className='h-2 my-2' />
-											<h3 className='letter-spacing-mn'>Rs. 45,000</h3>
+											<h3 className='letter-spacing-mn'>
+												{PKR.format(billing.pendingBalance)}
+											</h3>
 										</div>
 									</CardBody>
 								</Card>

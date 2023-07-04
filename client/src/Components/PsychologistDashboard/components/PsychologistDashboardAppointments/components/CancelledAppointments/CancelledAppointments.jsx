@@ -131,89 +131,91 @@ const CancelledAppointments = () => {
 								sx={{ minWidth: 650 }}
 								className='font-[poppins] table font-[500] text-sm'
 								aria-label='simple table'>
-								<TableHead>
-									<TableRow className='table-head font-[poppins] font-[800] uppercase text-sm'>
-										{columns.map((data) => (
-											<TableCell
-												className={data.className}
-												align={data.align}>
-												{data.headerName}
-											</TableCell>
-										))}
-									</TableRow>
-								</TableHead>
 								{loading ? (
-									<TableBody className='font-[poppins] font-[500] text-sm'>
-										{sortedAppointments.map((row) =>
-											row.status === 'cancelled' ? (
-												<TableRow
-													key={row._id}
-													sx={{
-														'&:last-child td, &:last-child th': { border: 0 },
-													}}>
+									<>
+										<TableHead>
+											<TableRow className='table-head font-[poppins] font-[800] uppercase text-sm'>
+												{columns.map((data) => (
 													<TableCell
-														className='table-row-2 '
-														align='left'>
-														<span>{row.appointmenttype}</span> Appointment
+														className={data.className}
+														align={data.align}>
+														{data.headerName}
 													</TableCell>
-													<TableCell
-														component='th'
-														className='table-row '
-														scope='row'>
-														<div className='flex flex-col'>
-															{row.patient_id.user_id.name}
-															<span className='opacity-[0.6] font-[400]'>
-																{row.patient_id.user_id.email}
-															</span>
-														</div>
-													</TableCell>
-													<TableCell
-														className='table-row-2 '
-														align='left'>
-														{row.reschedule_count}
-													</TableCell>
+												))}
+											</TableRow>
+										</TableHead>
+										<TableBody className='font-[poppins] font-[500] text-sm'>
+											{sortedAppointments.map((row) =>
+												row.status === 'cancelled' ? (
+													<TableRow
+														key={row._id}
+														sx={{
+															'&:last-child td, &:last-child th': { border: 0 },
+														}}>
+														<TableCell
+															className='table-row-2 '
+															align='left'>
+															<span>{row.appointmenttype}</span> Appointment
+														</TableCell>
+														<TableCell
+															component='th'
+															className='table-row '
+															scope='row'>
+															<div className='flex flex-col'>
+																{row.patient_id.user_id.name}
+																<span className='opacity-[0.6] font-[400]'>
+																	{row.patient_id.user_id.email}
+																</span>
+															</div>
+														</TableCell>
+														<TableCell
+															className='table-row-2 '
+															align='left'>
+															{row.reschedule_count}
+														</TableCell>
 
-													<TableCell
-														className='table-row-2 '
-														align='left'>
-														<div className='flex flex-col'>
-															{formatDate(row.datetime.date)}
-															<span className='opacity-[0.6] font-[400]'>
-																{convertTo12HourFormat(row.datetime.time)}
-															</span>
-														</div>
-													</TableCell>
-													{row.status === 'upcoming' ? (
 														<TableCell
-															className='table-row-2 upcoming'
+															className='table-row-2 '
 															align='left'>
-															{row.status}
+															<div className='flex flex-col'>
+																{formatDate(row.datetime.date)}
+																<span className='opacity-[0.6] font-[400]'>
+																	{convertTo12HourFormat(row.datetime.time)}
+																</span>
+															</div>
 														</TableCell>
-													) : row.status === 'cancelled' ? (
-														<TableCell
-															className='table-row-2 cancelled'
-															align='left'>
-															{row.status}
-														</TableCell>
-													) : row.status === 'reschedule' ? (
-														<TableCell
-															className='table-row-2 reschedule'
-															align='left'>
-															{row.status}
-														</TableCell>
-													) : (
-														<TableCell
-															className='table-row-2 completed'
-															align='left'>
-															{row.status}
-														</TableCell>
-													)}
-												</TableRow>
-											) : (
-												''
-											)
-										)}
-									</TableBody>
+														{row.status === 'upcoming' ? (
+															<TableCell
+																className='table-row-2 upcoming'
+																align='left'>
+																{row.status}
+															</TableCell>
+														) : row.status === 'cancelled' ? (
+															<TableCell
+																className='table-row-2 cancelled'
+																align='left'>
+																{row.status}
+															</TableCell>
+														) : row.status === 'reschedule' ? (
+															<TableCell
+																className='table-row-2 reschedule'
+																align='left'>
+																{row.status}
+															</TableCell>
+														) : (
+															<TableCell
+																className='table-row-2 completed'
+																align='left'>
+																{row.status}
+															</TableCell>
+														)}
+													</TableRow>
+												) : (
+													''
+												)
+											)}
+										</TableBody>
+									</>
 								) : (
 									<Loading />
 								)}

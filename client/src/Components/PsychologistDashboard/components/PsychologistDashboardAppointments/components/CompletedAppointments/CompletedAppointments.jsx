@@ -141,88 +141,90 @@ const CompletedAppointments = () => {
 								sx={{ minWidth: 650 }}
 								className='font-[poppins] table font-[500] text-sm'
 								aria-label='simple table'>
-								<TableHead>
-									<TableRow className='table-head font-[poppins] font-[800] uppercase text-sm'>
-										{columns.map((data) => (
-											<TableCell
-												className={data.className}
-												align={data.align}>
-												{data.headerName}
-											</TableCell>
-										))}
-									</TableRow>
-								</TableHead>
 								{loading ? (
-									<TableBody className='font-[poppins] font-[500] w-full text-sm'>
-										{sortedAppointments.map((row) =>
-											row.status === 'completed' ? (
-												<TableRow key={row._id}>
+									<>
+										<TableHead>
+											<TableRow className='table-head font-[poppins] font-[800] uppercase text-sm'>
+												{columns.map((data) => (
 													<TableCell
-														className='table-row-2 '
-														align='left'>
-														<span>{row.appointmenttype}</span> Appointment
+														className={data.className}
+														align={data.align}>
+														{data.headerName}
 													</TableCell>
-													<TableCell
-														component='th'
-														className='table-row '
-														scope='row'>
-														<div className='flex flex-col'>
-															{row.patient_id.user_id.name}
-															<span className='opacity-[0.6] font-[400]'>
-																{row.patient_id.user_id.email}
-															</span>
-														</div>
-													</TableCell>
-													<TableCell
-														className='table-row-2 '
-														align='left'>
-														{row.reschedule_count}
-													</TableCell>
-
-													<TableCell
-														className='table-row-2 '
-														align='left'>
-														<div className='flex flex-col'>
-															{formatDate(row.datetime.date)}
-															<span className='opacity-[0.6] font-[400]'>
-																{convertTo12HourFormat(row.datetime.time)}
-															</span>
-														</div>
-													</TableCell>
-													<TableCell
-														className='table-row-2 completed'
-														align='left'>
-														{row.status}
-													</TableCell>
-													<Tooltip
-														content='Notes & Prescription'
-														placement='top-start'
-														className='font-poppins text-xs  m-0 font-semibold'>
+												))}
+											</TableRow>
+										</TableHead>
+										<TableBody className='font-[poppins] font-[500] w-full text-sm'>
+											{sortedAppointments.map((row) =>
+												row.status === 'completed' ? (
+													<TableRow key={row._id}>
 														<TableCell
-															className='table-row-3 cursor-pointer'
-															align='center'>
-															<DocumentTextIcon
-																className='w-5 h-5 m-0'
-																onClick={() => {
-																	setOpen(true);
-																	setpatientId(row.patient_id._id);
-																	setpsychologistId(row.psychologist_id);
-																}}
-															/>
+															className='table-row-2 '
+															align='left'>
+															<span>{row.appointmenttype}</span> Appointment
 														</TableCell>
-													</Tooltip>
-												</TableRow>
-											) : (
-												''
-											)
-										)}
-										<NotesDrawer
-											psychologistId={psychologistId}
-											patientId={patientId}
-											open={open}
-											onClose={onClose}
-										/>
-									</TableBody>
+														<TableCell
+															component='th'
+															className='table-row '
+															scope='row'>
+															<div className='flex flex-col'>
+																{row.patient_id.user_id.name}
+																<span className='opacity-[0.6] font-[400]'>
+																	{row.patient_id.user_id.email}
+																</span>
+															</div>
+														</TableCell>
+														<TableCell
+															className='table-row-2 '
+															align='left'>
+															{row.reschedule_count}
+														</TableCell>
+
+														<TableCell
+															className='table-row-2 '
+															align='left'>
+															<div className='flex flex-col'>
+																{formatDate(row.datetime.date)}
+																<span className='opacity-[0.6] font-[400]'>
+																	{convertTo12HourFormat(row.datetime.time)}
+																</span>
+															</div>
+														</TableCell>
+														<TableCell
+															className='table-row-2 completed'
+															align='left'>
+															{row.status}
+														</TableCell>
+														<Tooltip
+															content='Notes & Prescription'
+															placement='top-start'
+															className='font-poppins text-xs  m-0 font-semibold'>
+															<TableCell
+																className='table-row-3 cursor-pointer'
+																align='center'>
+																<DocumentTextIcon
+																	className='w-5 h-5 m-0'
+																	onClick={() => {
+																		setOpen(true);
+																		setpatientId(row.patient_id._id);
+																		setpsychologistId(row.psychologist_id);
+																	}}
+																/>
+															</TableCell>
+														</Tooltip>
+													</TableRow>
+												) : (
+													''
+												)
+											)}
+											<NotesDrawer
+												psychologistId={psychologistId}
+												patientId={patientId}
+												open={open}
+												onClose={onClose}
+											/>
+										</TableBody>
+									</>
 								) : (
 									<Loading />
 								)}

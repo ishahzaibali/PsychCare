@@ -1,11 +1,17 @@
 import React from 'react';
 import './PsychologicalIssues.css';
 import { cardsData, cardData } from './cardsData';
+import { motion } from 'framer-motion';
 
 const PsychologicalIssues = () => {
 	return (
 		<div className='main-c'>
-			<div className='content'>
+			<motion.div
+				initial={{ opacity: 0, y: 20 }}
+				whileInView={{ opacity: 1, y: 0 }}
+				transition={{ duration: 0.5 }}
+				viewport={{ once: true }}
+				className='content'>
 				{cardsData.map((item) => {
 					return (
 						<>
@@ -14,13 +20,18 @@ const PsychologicalIssues = () => {
 						</>
 					);
 				})}
-			</div>
+			</motion.div>
 
 			<div className='issue'>
 				{cardData.map((card) => {
 					return (
 						<>
-							<div className='depression'>
+							<motion.div
+								initial={{ opacity: 0, y: 30 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.5, delay: 0.4 }}
+								viewport={{ once: true }}
+								className='depression'>
 								{card.card1.map((item) => {
 									return (
 										<>
@@ -29,8 +40,12 @@ const PsychologicalIssues = () => {
 										</>
 									);
 								})}
-							</div>
-							<div className='special-needs'>
+							</motion.div>
+							<motion.div
+								initial={{ opacity: 0, y: 35 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.5, delay: 0.2 }}
+								className='special-needs'>
 								{card.card2.map((item) => {
 									return (
 										<>
@@ -39,8 +54,12 @@ const PsychologicalIssues = () => {
 										</>
 									);
 								})}
-							</div>
-							<div className='anxiety'>
+							</motion.div>
+							<motion.div
+								initial={{ opacity: 0, y: 20 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.5 }}
+								className='anxiety'>
 								{card.card3.map((item) => {
 									return (
 										<>
@@ -49,8 +68,12 @@ const PsychologicalIssues = () => {
 										</>
 									);
 								})}
-							</div>
-							<div className='memory-lost'>
+							</motion.div>
+							<motion.div
+								initial={{ opacity: 0, y: 40 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.5, delay: 0.6 }}
+								className='memory-lost'>
 								{card.card4.map((item) => {
 									return (
 										<>
@@ -59,7 +82,7 @@ const PsychologicalIssues = () => {
 										</>
 									);
 								})}
-							</div>
+							</motion.div>
 						</>
 					);
 				})}

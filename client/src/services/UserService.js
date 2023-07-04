@@ -10,12 +10,14 @@ class UserService extends GenericService {
 	login = (email, password, dispatch) =>
 		new Promise((resolve, reject) => {
 			this.post('users/login', { email, password })
-				.then(({ token, user }) => {
+				.then(({ token, user, notifications }) => {
 					dispatch({ type: 'SET_USER_DATA', payload: { user } });
+					dispatch({ type: 'ADD_NOTIFICATION', payload: { notifications } });
 					localStorage.setItem('token', token);
 					localStorage.setItem('user', JSON.stringify(user));
+					localStorage.setItem('notification', JSON.stringify(notifications));
 
-					resolve({ token, user });
+					resolve({ token, user, notifications });
 				})
 				.catch((err) => {
 					reject(err);
@@ -43,6 +45,7 @@ class UserService extends GenericService {
 	logout = () => {
 		localStorage.removeItem('token');
 		localStorage.removeItem('user');
+		localStorage.removeItem('notification');
 	};
 	isLoggedIn = () => {
 		return localStorage.getItem('token') ? true : false;

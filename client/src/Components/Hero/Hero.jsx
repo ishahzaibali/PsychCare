@@ -1,7 +1,14 @@
 import React from 'react';
 import './Hero.css';
 import { motion } from 'framer-motion';
-import { smile, heart, doctor, name, timing, rectangles,PsychologistHero, Psychologist1 } from '../../assets';
+import {
+	smile,
+	heart,
+	name,
+	timing,
+	rectangles,
+	Psychologist1,
+} from '../../assets';
 import { heroData } from './heroData';
 import { NavLink } from 'react-router-dom';
 const Hero = () => {
@@ -12,18 +19,37 @@ const Hero = () => {
 					{heroData.map((data) => (
 						<>
 							<span className='ellipse'></span>
-							<button
+							<motion.button
+								initial={{ opacity: 0, y: 30 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.5, delay: 0.2 }}
+								viewport={{ once: true }}
 								className='tag'
 								disabled='disabled'>
 								{data.tag}
-							</button>
-							<h1 className='heading'>
+							</motion.button>
+							<motion.h1
+								initial={{ opacity: 0, y: 30 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.5 }}
+								viewport={{ once: true }}
+								className='heading'>
 								{data.heading} <span>{data.heading_span}</span>
-							</h1>
-							<p>{data.text}</p>
+							</motion.h1>
+							<motion.p
+								initial={{ opacity: 0, y: 30 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.5, delay: 0.2 }}
+								viewport={{ once: true }}>
+								{data.text}
+							</motion.p>
 							<NavLink to='users/psychologists'>
 								<motion.button
 									whileTap={{ scale: 0.9 }}
+									initial={{ opacity: 0, y: 30 }}
+									whileInView={{ opacity: 1, y: 0 }}
+									transition={{ duration: 0.5, delay: 0.6 }}
+									viewport={{ once: true }}
 									className='btn'>
 									{data.btn_title}
 								</motion.button>
@@ -32,42 +58,72 @@ const Hero = () => {
 					))}
 				</div>
 				<div className='img-area'>
-					<div className='smile'>
+					<motion.div
+						initial={{ opacity: 0, y: 30 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.5, delay: 0.8 }}
+						viewport={{ once: true }}
+						className='smile'>
 						<img
 							src={smile}
 							alt=''
 						/>
-					</div>
-					<div className='heart'>
+					</motion.div>
+					<motion.div
+						initial={{ opacity: 0, y: 30 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.5, delay: 0.6 }}
+						viewport={{ once: true }}
+						className='heart'>
 						<img
 							src={heart}
 							alt='heart'
 						/>
-					</div>
-					<div className='doctor-name'>
+					</motion.div>
+					<motion.div
+						initial={{ opacity: 0, y: 30 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.5, delay: 0.4 }}
+						viewport={{ once: true }}
+						className='doctor-name'>
 						<img
 							src={name}
 							alt=''
 						/>
-					</div>
-					<div className='sleep-timing'>
+					</motion.div>
+					<motion.div
+						initial={{ opacity: 0, y: 30 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.5, delay: 0.2 }}
+						viewport={{ once: true }}
+						className='sleep-timing'>
 						<img
 							src={timing}
 							alt=''
 						/>
-					</div>
-					<div className='rectangles'>
+					</motion.div>
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.5, delay: 0.2 }}
+						viewport={{ once: true }}
+						className='rectangles'>
 						<img
 							src={rectangles}
 							alt=''
 						/>
-					</div>
-					<div className='doctor'>
+					</motion.div>
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.5 }}
+						viewport={{ once: true }}
+						className='doctor'>
 						<img
 							src={Psychologist1}
 							alt='doctor'
 						/>
-					</div>
+					</motion.div>
 				</div>
 			</div>
 		</>

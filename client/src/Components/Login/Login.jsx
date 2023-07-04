@@ -7,7 +7,6 @@ import {
 	Typography,
 	Input,
 	Button,
-	Switch,
 	Alert,
 } from '@material-tailwind/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/solid';
@@ -19,7 +18,6 @@ const Login = () => {
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState(false);
 	const [loginError, setLoginError] = useState(false);
-
 	const [errorMessage, setErrorMessage] = useState('');
 	const history = useNavigate();
 	const userData = useSelector((state) => state.user.userData);
@@ -33,12 +31,14 @@ const Login = () => {
 		} else {
 			userService
 				.login(email, password, dispatch)
-				.then(({ token, user }) => {
+				.then(({ token, user, notifications }) => {
 					// console.log(data);
 
 					dispatch({ type: 'SET_USER_DATA', payload: { user } });
+					dispatch({ type: 'ADD_NOTIFICATION', payload: { notifications } });
 					localStorage.setItem('token', token);
 					localStorage.setItem('user', JSON.stringify(user));
+					localStorage.setItem('notification', JSON.stringify(notifications));
 					// console.log('User Data:', userData);
 					const LoggedInUser = userService.getLoggedInUser();
 					const LoggedInUserData = userService.getLoggedInUserData();

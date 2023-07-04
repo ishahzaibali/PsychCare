@@ -29,6 +29,7 @@ import { PsychologistDashboardSidebar } from '../../index';
 import { storage } from '../../../../firebase';
 import { ref, getDownloadURL } from 'firebase/storage';
 import placeholder from '../../../../assets/placeholder.png';
+import { useSelector } from 'react-redux';
 
 // profile menu component
 const profileMenuItems = [
@@ -53,7 +54,13 @@ const PsychologistDashboardNavbar = () => {
 	const [user, setUser] = useState(null);
 	const [open, setOpen] = useState(false);
 	const [imageUrl, setImageUrl] = useState('');
-
+	const notifications = useSelector(
+		(state) => state?.notifications?.notifications || []
+	);
+	console.log(
+		'🚀 ~ file: DashboardNavbar.jsx:44 ~ DashboardNavbar ~ notifications:',
+		notifications
+	);
 	const showDrawer = () => {
 		setOpen(true);
 	};
@@ -84,7 +91,28 @@ const PsychologistDashboardNavbar = () => {
 
 		fetchUserAvatar();
 	}, []);
+	function getTimeAgo(postTime) {
+		const currentTime = new Date();
+		const postedTime = new Date(postTime);
+		const timeDifference = currentTime - postedTime;
+		const seconds = Math.floor(timeDifference / 1000);
+		const minutes = Math.floor(seconds / 60);
+		const hours = Math.floor(minutes / 60);
+		const days = Math.floor(hours / 24);
 
+		if (seconds < 60) {
+			return 'just now';
+		} else if (minutes < 60) {
+			return `${minutes} ${minutes === 1 ? 'minute' : 'minutes'} ago`;
+		} else if (hours < 24) {
+			return `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
+		} else if (days < 7) {
+			return `${days} ${days === 1 ? 'day' : 'days'} ago`;
+		} else {
+			const options = { year: 'numeric', month: 'long', day: 'numeric' };
+			return postedTime.toLocaleDateString(undefined, options);
+		}
+	}
 	function ProfileMenu() {
 		const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 		const closeMenu = () => setIsMenuOpen(false);
@@ -248,125 +276,38 @@ const PsychologistDashboardNavbar = () => {
 								}}
 								placement='bottom-start'>
 								<MenuHandler>
-									<EnvelopeIcon className='w-5 h-5 mr-2 lg:mr-0 cursor-pointer text-blue-gray-700' />
-								</MenuHandler>
-								<MenuList className='mt-4 p-[0.5rem] border-none shadow-xl bg-white'>
-									<MenuItem
-										color='blue-grey'
-										className='m-0  font-[poppins] text-[rgb(52,71,103)] p-[0.7rem]  bg-transparent'>
-										<div className='flex gap-2 items-center justify-center'>
-											<Avatar
-												src={avatar2}
-												alt='avatar'
-												size='sm'
-											/>
-											<div className='flex gap-2 flex-col'>
-												<h4>
-													<span className='font-[700] text-[rgb(52,71,103)]'>
-														New Message
-													</span>{' '}
-													from Shahzaib{' '}
-												</h4>
-												<div className='flex gap-1 opacity-[0.5] font-[poppins] text-xs'>
-													<ClockIcon
-														height='1rem'
-														width='1rem'
-													/>
-													<p>13 minutes ago</p>
-												</div>
-											</div>
-										</div>
-									</MenuItem>
-									<MenuItem
-										color='blue-grey'
-										className='m-0 font-[poppins] text-[rgb(52,71,103)] p-[0.7rem]  bg-transparent'>
-										<div className='flex gap-2 items-center justify-start'>
-											<Avatar
-												src={avatar}
-												alt='avatar'
-												size='sm'
-											/>
-											<div className='flex gap-2 flex-col'>
-												<h4>
-													<span className='font-[700] text-[rgb(52,71,103)]'>
-														New Album
-													</span>{' '}
-													from Uzair{' '}
-												</h4>
-												<div className='flex gap-1 opacity-[0.5] font-[poppins] text-xs'>
-													<ClockIcon
-														height='1rem'
-														width='1rem'
-													/>
-													<p>20 minutes ago</p>
-												</div>
-											</div>
-										</div>
-									</MenuItem>
-								</MenuList>
-							</Menu>
-							<Menu
-								animate={{
-									mount: { scale: 1, y: 0 },
-									unmount: { scale: 0, y: 25 },
-								}}
-								placement='bottom-start'>
-								<MenuHandler>
 									<BellIcon className='w-5 h-5 Menu cursor-pointer text-blue-gray-700' />
 								</MenuHandler>
 								<MenuList className='mt-4 p-[0.5rem] border-none shadow-xl bg-white'>
-									<MenuItem
-										color='blue-grey'
-										className='m-0  font-[poppins] text-[rgb(52,71,103)] p-[0.7rem]  bg-transparent'>
-										<div className='flex gap-2 items-center justify-center'>
-											<Avatar
-												src={avatar2}
-												alt='avatar'
-												size='sm'
-											/>
-											<div className='flex gap-2 flex-col'>
-												<h4>
-													<span className='font-[700] text-[rgb(52,71,103)]'>
-														New Message
-													</span>{' '}
-													from Shahzaib{' '}
-												</h4>
-												<div className='flex gap-1 opacity-[0.5] font-[poppins] text-xs'>
-													<ClockIcon
-														height='1rem'
-														width='1rem'
-													/>
-													<p>13 minutes ago</p>
-												</div>
-											</div>
-										</div>
-									</MenuItem>
-									<MenuItem
-										color='blue-grey'
-										className='m-0 font-[poppins] text-[rgb(52,71,103)] p-[0.7rem]  bg-transparent'>
-										<div className='flex gap-2 items-center justify-start'>
-											<Avatar
-												src={avatar}
-												alt='avatar'
-												size='sm'
-											/>
-											<div className='flex gap-2 flex-col'>
-												<h4>
-													<span className='font-[700] text-[rgb(52,71,103)]'>
-														New Album
-													</span>{' '}
-													from Uzair{' '}
-												</h4>
-												<div className='flex gap-1 opacity-[0.5] font-[poppins] text-xs'>
-													<ClockIcon
-														height='1rem'
-														width='1rem'
-													/>
-													<p>20 minutes ago</p>
-												</div>
-											</div>
-										</div>
-									</MenuItem>
+									{notifications &&
+										notifications.map((notification) =>
+											notification.notifications.map((notify) => (
+												<MenuItem
+													color='blue-grey'
+													className='m-0  font-[poppins] text-[rgb(52,71,103)] p-[0.7rem]  bg-transparent'>
+													<div className='flex gap-2 items-center justify-center'>
+														<Avatar
+															src={avatar2}
+															alt='avatar'
+															size='sm'
+														/>
+														<div className='flex gap-2 flex-col'>
+															<h4>
+																<span className='font-[700] text-[rgb(52,71,103)]'></span>{' '}
+																{notify?.message}
+															</h4>
+															<div className='flex gap-1 opacity-[0.5] font-[poppins] text-xs'>
+																<ClockIcon
+																	height='1rem'
+																	width='1rem'
+																/>
+																<p>{getTimeAgo(notify?.createdAt)}</p>
+															</div>
+														</div>
+													</div>
+												</MenuItem>
+											))
+										)}
 								</MenuList>
 							</Menu>
 							<ProfileMenu />

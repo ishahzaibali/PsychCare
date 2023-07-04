@@ -1,179 +1,145 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './MinimalPsychologistCard.css';
 import {
 	Card,
 	CardBody,
 	Avatar,
-	CardHeader,
+	Button,
 	CardFooter,
 	Typography,
-	Accordion,
-	AccordionHeader,
-	AccordionBody,
 } from '@material-tailwind/react';
-import avatar from '../../../assets/avatar-1.jpg';
-import { StarIcon, BellIcon } from '@heroicons/react/24/solid';
-import { motion } from 'framer-motion';
+import placeholder from '../../../assets/placeholder.png';
+import placeholder_female from '../../../assets/placeholder_female.png';
+import { MapPinIcon } from '@heroicons/react/24/solid';
+import { storage } from '../../../firebase';
+import { ref, getDownloadURL } from 'firebase/storage';
+import { Link, useNavigate } from 'react-router-dom';
+import userService from '../../../services/UserService';
 
 const MinimalPsychologistCard = ({ card }) => {
-	const [open, setOpen] = useState(0);
-
-	const handleOpen = (value) => {
-		setOpen(open === value ? 0 : value);
-	};
-
-	const customAnimation = {
-		mount: { scale: 1 },
-		unmount: { scale: 0.9 },
-	};
-	function Icon({ id, open }) {
-		return (
-			<svg
-				xmlns='http://www.w3.org/2000/svg'
-				className={`${
-					id === open ? 'rotate-180' : ''
-				} h-3 w-3 transition-transform mt-3 -ml-6`}
-				fill='none'
-				viewBox='0 0 24 24'
-				stroke='#3d4146'
-				strokeWidth={4}>
-				<path
-					strokeLinecap='round'
-					strokeLinejoin='round'
-					d='M19 9l-7 7-7-7'
-				/>
-			</svg>
-		);
-	}
 	const formatRating = (rating) => {
 		return rating.toFixed(1);
 	};
+	const [imageUrl, setImageUrl] = useState('');
+	const imageName = card?.user_id?._id;
+	const history = useNavigate();
+	useEffect(() => {
+		const fetchUserAvatar = async () => {
+			try {
+				const storageRef = ref(storage, `images/${imageName}`);
+				const url = await getDownloadURL(storageRef);
+				setImageUrl(url);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		fetchUserAvatar();
+	}, [imageName]);
 
 	return (
 		<>
 			<div>
-				<Card className='w-80 shadow-3xl crd-grd font-poppins overflow-hidden border-none'>
-					<CardHeader
-						floated={false}
-						className='shadow-none bg-transparent mt-4 rounded-none flex items-end w-full '>
-						<div className='font-poppins flex items-center gap-1 w-16 h-8 m-0 p-0 grd justify-center rounded-lg '>
-							<StarIcon className='w-4 h-4 text-white' />
-							<h6 className='text-sm font-bold text-white'>
-								{formatRating(card.rating)}
-							</h6>
-						</div>
-					</CardHeader>
-					<CardBody className='flex items-center flex-col'>
-						<Avatar
-							src={avatar}
-							alt='avatar'
-							size='xl'
-							variant='circular'
-						/>
-						<Typography
-							variant='h5'
-							className=' font-poppins mt-4 '>
-							{card.gender === 'male'
-								? `Mr. ${card.user_id.name}`
-								: `Ms. ${card.user_id.name}`}
-						</Typography>
-						<Typography
-							variant='h6'
-							className='mb-2 font-poppins mt-1 text-xs'>
-							{card.degree}
-						</Typography>
-						<div className='flex justify-start flex-col'>
-							<div className='flex items-center justify-between gap-8'>
-								<div className='flex flex-col items-start justify-start '>
-									<Typography
-										variant='h6'
-										className='font-poppins mt-4 text-xs'>
-										Specialization
-									</Typography>
-									<Typography
-										variant='h6'
-										className='mb-2 font-poppins text-sm'>
-										{card.specialization}
-									</Typography>
-								</div>
-								<div className='flex flex-col items-start justify-start '>
-									<Typography
-										variant='h6'
-										className='font-poppins mt-4 text-xs'>
-										Experience
-									</Typography>
-									<Typography
-										variant='h6'
-										className='mb-2 font-poppins text-sm'>
-										<span>{card.experience}</span> Years
-									</Typography>
+				<Card className='shadow-3xl w-80 flex-wrap'>
+					<CardBody className='flex items-start flex-col'>
+						<div className='flex gap-4 items-center'>
+							<div>
+								<Link to={'/users/psychologists/' + card._id}>
+									{!imageUrl ? (
+										card?.gender === 'male' ? (
+											<Avatar
+												size='md'
+												variant='circular'
+												className='object-cover shadow-3xl'
+												src={placeholder}
+												alt='candice wu'
+											/>
+										) : card?.gender === 'female' ? (
+											<Avatar
+												size='md'
+												variant='circular'
+												className='object-cover'
+												src={placeholder_female}
+												alt='candice wu'
+											/>
+										) : (
+											<Avatar
+												size='md'
+												variant='circular'
+												className='object-cover'
+												src={placeholder}
+												alt='candice wu'
+											/>
+										)
+									) : (
+										<Avatar
+											size='md'
+											variant='circular'
+											className='object-cover'
+											src={imageUrl}
+											alt='candice wu'
+										/>
+									)}
+								</Link>
+								<div className='font-[700] leading-tight text-xs text-white mpsy-rtng p-1 mt-2 rounded-lg flex items-center justify-center'>
+									{formatRating(card.rating)}
 								</div>
 							</div>
-							<div className='flex flex-col items-start justify-start '>
+							<div>
 								<Typography
 									variant='h6'
-									className='font-poppins mt-4 text-xs'>
-									Location
+									className=' font-poppins font-semibold  '>
+									{card.gender === 'male'
+										? `Mr. ${card.user_id.name}`
+										: `Ms. ${card.user_id.name}`}
 								</Typography>
 								<Typography
 									variant='h6'
-									className='mb-2 font-poppins text-sm'>
+									className='mb-2 font-poppins mt-1 text-xs'>
+									{card.specialization}
+								</Typography>
+							</div>
+						</div>
+						<div className='my-6'>
+							<div className='flex  items-start justify-start gap-2'>
+								<MapPinIcon className='w-4 h-4 opacity-40' />
+								<Typography
+									variant='h6'
+									className=' font-poppins text-sm'>
 									{card.onsiteAppointment.location}
 								</Typography>
 							</div>
-						</div>
-						<div className='flex items-center border-none'>
-							<Accordion
-								open={open === 1}
-								icon={
-									<Icon
-										id={1}
-										open={open}
-									/>
-								}
-								className='m-0 p-0 rounded-none border-none'
-								animate={customAnimation}>
-								<AccordionHeader
-									className='m-0 p-0  rounded-none flex items-center border-none'
-									onClick={() => handleOpen(1)}>
-									<Typography
-										variant='h6'
-										className='font-poppins mt-4 text-xs'>
-										Appointment Schedule
-									</Typography>
-								</AccordionHeader>
-								<AccordionBody>
-									<Typography
-										variant='h6'
-										className='font-poppins mt-4 text-xs'>
-										Tuesday, 23 May, 10:00-11:00 PM
-									</Typography>
-								</AccordionBody>
-							</Accordion>
+							<div className='flex flex-col items-center justify-center mt-4 gap-2'>
+								<Typography
+									variant='h6'
+									className='font-poppins text-sm opacity-80'>
+									<span className='opacity-100'>{card.experience}</span> Years
+									of Experience
+								</Typography>
+								<Typography
+									variant='h6'
+									className='font-poppins text-sm opacity-80'>
+									<span className='opacity-100'>{card.patientstreated}+</span>{' '}
+									consultations
+								</Typography>
+							</div>
 						</div>
 					</CardBody>
-					<CardFooter
-						divider
-						className='flex items-center justify-between py-3'>
-						<div className='flex gap-1 items-center justify-center '>
-							<Typography
-								variant='h6'
-								className='mb-2 font-poppins mt-4 text-xs'>
-								{card.onsiteAppointment.practicelocation}
-							</Typography>
-						</div>
-						<motion.div
-							whileTap={{ scale: 0.8 }}
-							className='flex gap-1 cursor-pointer items-center justify-center '>
-							<div className='rounded-full grd w-6 h-6 flex items-center justify-center'>
-								<BellIcon className='w-3 h-3 m-0 p-0 text-white' />
-							</div>
-							<Typography
-								variant='h6'
-								className='mb-2 font-poppins mt-4 text-xs'>
-								Book Appointment
-							</Typography>
-						</motion.div>
+					<CardFooter className='flex items-center py-3'>
+						<Button
+							onClick={() => {
+								userService.isLoggedIn() === true
+									? history('/appointments', {
+											state: { card: card, onsite: 'onsite' },
+									  })
+									: history('/login');
+							}}
+							className='font-[poppins] w-full ml-0 rounded-lg shadow-none'
+							variant='gradient'
+							color='light-blue'
+							size='md'>
+							Book Appointment
+						</Button>
 					</CardFooter>
 				</Card>
 			</div>

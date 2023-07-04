@@ -144,17 +144,16 @@ const Login = () => {
 								)}
 							</div>
 
-							<Switch
-								label={
-									<Typography
-										variant='small'
-										color='gray'
-										className='flex items-center font-poppins font-normal'>
-										Remember me
-									</Typography>
-								}
-								containerProps={{ className: 'ml-2.5' }}
-							/>
+							<Typography
+								color='gray'
+								className='mt-4  font-poppins text-sm font-normal'>
+								Forgot Password?{' '}
+								<NavLink
+									to='/users/reset-password'
+									className='font-medium text-blue-500 transition-colors hover:text-blue-700'>
+									Reset Now
+								</NavLink>
+							</Typography>
 
 							<Button
 								onClick={handleSubmit}

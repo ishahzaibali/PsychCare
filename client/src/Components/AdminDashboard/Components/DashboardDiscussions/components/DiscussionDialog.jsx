@@ -1,21 +1,95 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 	Button,
 	Dialog,
-	DialogHeader,
 	DialogBody,
 	DialogFooter,
 	Card,
-	CardHeader,
 	CardBody,
-	CardFooter,
 	Typography,
-	Avatar,
-	Input,
 } from '@material-tailwind/react';
-import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
+import axios from 'axios';
+import { useToast } from '@chakra-ui/react';
+import discussionforumService from '../../../../../services/DiscussionforumService';
 
-const DiscussionDialog = ({ open, handleOpen, discussion }) => {
+const DiscussionDialog = ({ open, handleOpen, discussionPostId }) => {
+	const [singleDiscussion, setSingleDiscussion] = useState({});
+	const toast = useToast();
+	const getSingleDiscussion = async () => {
+		try {
+			console.log(
+				'🚀 ~ file: DiscussionDialog.jsx:29 ~ getSingleDiscussion ~ discussionPostId:',
+				discussionPostId
+			);
+
+			const res = await axios.get('discussionforums/' + discussionPostId);
+			console.log('getSingleDiscussion ~ res:', res.data);
+			setSingleDiscussion(res.data);
+		} catch (error) {
+			console.log(
+				'🚀 ~ file: DiscussionDialog.jsx:22 ~ getSingleDiscussion ~ error:',
+				error
+			);
+		}
+	};
+
+	const handleDeleteDiscussion = (id) => {
+		discussionforumService
+			.deleteDiscussionforum(id)
+			.then((res) => {
+				console.log('deleteDiscussionforum ~ res:', res);
+				toast({
+					title: 'Post Deleted successfully.',
+					status: 'success',
+					duration: 4000,
+					position: 'top-right',
+					isClosable: true,
+				});
+				handleOpen();
+			})
+			.catch((err) => {
+				console.log(
+					'🚀 ~ file: DiscussionDialog.jsx:48 ~ discussionforumService.deleteDiscussionforum ~ err:',
+					err
+				);
+				toast({
+					title: 'Something went wrong.',
+					status: 'error',
+					duration: 4000,
+					position: 'top-right',
+					isClosable: true,
+				});
+				handleOpen();
+			});
+	};
+
+	useEffect(() => {
+		getSingleDiscussion();
+	}, [discussionPostId]);
+
+	function getTimeAgo(postTime) {
+		const currentTime = new Date();
+		const postedTime = new Date(postTime);
+		const timeDifference = currentTime - postedTime;
+		const seconds = Math.floor(timeDifference / 1000);
+		const minutes = Math.floor(seconds / 60);
+		const hours = Math.floor(minutes / 60);
+		const days = Math.floor(hours / 24);
+
+		if (seconds < 60) {
+			return 'just now';
+		} else if (minutes < 60) {
+			return `${minutes} ${minutes === 1 ? 'minute' : 'minutes'} ago`;
+		} else if (hours < 24) {
+			return `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
+		} else if (days < 7) {
+			return `${days} ${days === 1 ? 'day' : 'days'} ago`;
+		} else {
+			const options = { year: 'numeric', month: 'long', day: 'numeric' };
+			return postedTime.toLocaleDateString(undefined, options);
+		}
+	}
+
 	return (
 		<>
 			<div>
@@ -25,84 +99,54 @@ const DiscussionDialog = ({ open, handleOpen, discussion }) => {
 					className='h-[90vh] !w-[90%]'>
 					<DialogBody>
 						<Card className='w-full shadow-none'>
-							<div className='post-details'>
-								<div className='title-details'>
+							<CardBody>
+								<div className='post-details'>
 									<Typography
 										variant='h5'
 										color='blue-gray'
 										className='title font-medium mt-4'>
-										{discussion?.title}
+										{singleDiscussion?.title}
 									</Typography>
-									<Typography
-										variant='p'
-										color='blue-gray'
-										className='time mt-4'>
-										2 hr ago
-									</Typography>
-								</div>
-								<div className='menu-icon mt-4'>
-									<EllipsisHorizontalIcon
-										width='2rem'
-										height='2rem'
-									/>
-								</div>
-							</div>
-							<CardHeader
-								floated={false}
-								color='blue-gray'
-								className='h-[239px] shadow-none'>
-								<div>
-									<img
-										src={discussion?.featured_image}
-										alt='ui/ux review check'
-										className='image-cover'
-									/>
-								</div>
-							</CardHeader>
-							<CardBody>
-								<Typography
-									color='gray'
-									className='details'>
-									{discussion?.desc}
-								</Typography>
-							</CardBody>
-
-							<div className='user-detail'>
-								<div className='flex comment-det  flex-[1] w-full justify-end gap-2 mr-8'>
-									<div className='flex items-center justify-between'>
+									<div className='flex gap-3 items-center justify-center'>
+										<Typography
+											variant='p'
+											color='blue-gray'
+											className='time '>
+											{getTimeAgo(singleDiscussion?.created_at)}
+										</Typography>
 										<Typography
 											variant='h5'
 											color='blue-gray'
-											className='comment-user'>
-											<span className='text-[#3d4146]'>Discussion post by</span>
-											Candice Wu
+											className='comment-user mb-0'>
+											<span className='text-[#3d4146]'> by </span>
+											{singleDiscussion?.user_id?.name}
 										</Typography>
 									</div>
-									<Avatar
-										size='sm'
-										variant='circular'
-										src='https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80'
-										alt='candice wu'
-									/>
+									<Typography
+										color='gray'
+										className='details'>
+										{singleDiscussion?.description}
+									</Typography>
 								</div>
-							</div>
+							</CardBody>
 						</Card>
 					</DialogBody>
-					{/* <DialogFooter>
-						<Button
-							variant='text'
-							color='red'
-							onClick={handleOpen}
-							className='mr-1'>
-							<span>Cancel</span>
-						</Button>
-						<Button
-							variant='gradient'
-							color='green'
-							onClick={handleOpen}>
-							<span>Confirm</span>
-						</Button>
-					</DialogFooter> */}
+					<DialogFooter>
+						<div className='flex gap-2 p-3 justify-end em-bt'>
+							<Button
+								variant='text'
+								className=' ml-0 font-poppins px-6 py-2 rounded text-gray-600 hover:text-white hover:bg-gray-400'
+								onClick={handleOpen}>
+								Close
+							</Button>
+							<Button
+								type='submit'
+								className='bg-red-200 hover:ring-red-400 px-6 py-2 ml-0 font-poppins w-[100%] rounded text-red-600 hover:text-red-700 transition-all duration-500 focus:ring-2 focus:ring-red-600 em-sbt !shadow-none'
+								onClick={() => handleDeleteDiscussion(singleDiscussion._id)}>
+								Delete Discussion Post
+							</Button>
+						</div>
+					</DialogFooter>
 				</Dialog>
 			</div>
 		</>

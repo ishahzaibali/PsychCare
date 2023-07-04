@@ -27,6 +27,10 @@ import {
 	RoomPage,
 	UserAppointments,
 	UnApprovedPsychologist,
+	ResetPassword,
+	ResetPasswordPage,
+	VerificationPage,
+	EmailSentPage,
 } from './Components';
 import {
 	DashboardDiscussions,
@@ -84,6 +88,24 @@ const App = () => {
 							path='/contact'
 							element={<Contact />}
 						/>
+						<Route
+							path='/users/reset-password'
+							element={<ResetPassword />}
+						/>
+						<Route
+							path='/users/reset-password/email-sent'
+							element={<EmailSentPage />}
+						/>
+						<Route
+							path='/users/:id/verify/:token'
+							element={<VerificationPage />}
+						/>
+
+						<Route
+							path='/users/reset-password/:id/:token'
+							element={<ResetPasswordPage />}
+						/>
+
 						<Route
 							path='/unapproved-psychologist'
 							element={<UnApprovedPsychologist />}

@@ -6,7 +6,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import TableHead from '@mui/material/TableHead';
 import TableCell from '@mui/material/TableCell';
-import { postData } from '../../../DiscussionForum/DiscussionPostsCard/postData';
 import {
 	Card,
 	CardBody,
@@ -68,10 +67,13 @@ const DashboardDiscussions = () => {
 	const handleOpen = () => setOpen(!open);
 	const [discussionPost, setDiscussionPost] = useState([]);
 	const [loading, setLoading] = useState(false);
+	const [discussionPostID, setDiscussionPostID] = useState('');
 
 	const getDiscussionPosts = async () => {
 		try {
-			const res = await axios.get('discussionforums');
+			const res = await axios.get(
+				'discussionforums?category=Psychology&perPage=30'
+			);
 			setLoading(true);
 			if (!res.status === 200) {
 				window.alert('Invalid Information');
@@ -117,7 +119,7 @@ const DashboardDiscussions = () => {
 	return (
 		<>
 			<div className='dis-main'>
-				<Card className='w-full mb-[1rem] mr-[1rem]  shadow-lg '>
+				<Card className='w-full mb-[1rem] mr-[1rem]  shadow-3xl '>
 					<div className='header'>
 						<div className='title-user'>
 							<Typography
@@ -133,34 +135,6 @@ const DashboardDiscussions = () => {
 								List of all Discussion Posts
 							</Typography>
 						</div>
-						{/* <div className='action-menu'>
-							<Menu placement='left-start'>
-								<MenuHandler>
-									<svg
-										xmlns='http://www.w3.org/2000/svg'
-										fill='none'
-										viewBox='0 0 24 24'
-										stroke-width='2.5'
-										stroke='currentColor'
-										class='w-6 h-6 cursor-pointer'>
-										<path
-											stroke-linecap='round'
-											stroke-linejoin='round'
-											d='M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z'
-										/>
-									</svg>
-								</MenuHandler>
-								<MenuList className='menu-list'>
-									<MenuItem className='ml-0 menu-list-item'>
-										Search Users
-									</MenuItem>
-									<MenuItem className='ml-0 menu-list-item'>Add Users</MenuItem>
-									<MenuItem className='ml-0 menu-list-item'>
-										Delete Users
-									</MenuItem>
-								</MenuList>
-							</Menu>
-						</div> */}
 					</div>
 
 					<CardBody
@@ -269,7 +243,10 @@ const DashboardDiscussions = () => {
 													<EyeIcon
 														width='1.25rem'
 														height='1.25rem'
-														onClick={handleOpen}
+														onClick={() => {
+															setOpen(true);
+															setDiscussionPostID(row._id);
+														}}
 													/>
 												</TableCell>
 											</TableRow>
@@ -278,6 +255,7 @@ const DashboardDiscussions = () => {
 								</Table>
 								<DiscussionDialog
 									open={open}
+									discussionPostId={discussionPostID}
 									handleOpen={handleOpen}
 								/>
 							</TableContainer>

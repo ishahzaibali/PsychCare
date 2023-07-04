@@ -22,6 +22,10 @@ module.exports = withMT({
 			boxShadow: {
 				'3xl': 'rgba(0, 0, 0, 0.05) 0rem 1.25rem 1.6875rem 0rem',
 			},
+			BackgroundColor: {
+				blackGradient:
+					'linear-gradient(195deg, rgb(66, 66, 74), rgb(25, 25, 25))',
+			},
 		},
 	},
 	plugins: [

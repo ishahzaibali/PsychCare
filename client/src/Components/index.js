@@ -28,3 +28,7 @@ export { default as AppointmentBooking } from './PsychologistPage/AppointmentBoo
 export { default as RoomPage } from './RoomPage/RoomPage';
 export { default as UserAppointments } from './UserProfilePages/MyAppointments/UserAppointments';
 export { default as UnApprovedPsychologist } from './PsychologistProfilePages/UnApprovedPsychologist/UnApprovedPsychologist';
+export { default as ResetPassword } from './ResetPassword/ResetPassword';
+export { default as VerificationPage } from './VerificationPage/VerificationPage';
+export { default as ResetPasswordPage } from './ResetPassword/ResetPasswordPage/ResetPasswordPage';
+export { default as EmailSentPage } from './ResetPassword/EmailSentPage/EmailSentPage';

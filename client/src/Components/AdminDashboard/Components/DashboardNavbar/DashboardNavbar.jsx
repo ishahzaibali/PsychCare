@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './DashboardNavbar.css';
 import { useLocation, NavLink, useNavigate, Link } from 'react-router-dom';
 import DashboardSideNav from '../DashboardSideNav/DashboardSideNav';
-import avatar from '../../../../assets/team-4.jpg';
 import userService from '../../../../services/UserService.js';
 import avatar2 from '../../../../assets/team-3.jpg';
 import {
@@ -30,14 +29,22 @@ import {
 } from '@heroicons/react/24/solid';
 import { storage } from '../../../../firebase';
 import { ref, getDownloadURL } from 'firebase/storage';
+import { useSelector } from 'react-redux';
 
 const DashboardNavbar = () => {
 	const location = useLocation();
 	const history = useNavigate();
+
 	const [open, setOpen] = useState(false);
 	const [user, setUser] = useState(null);
 	const [imageUrl, setImageUrl] = useState('');
-
+	const notifications = useSelector(
+		(state) => state?.notifications?.notifications || []
+	);
+	console.log(
+		'🚀 ~ file: DashboardNavbar.jsx:44 ~ DashboardNavbar ~ notifications:',
+		notifications
+	);
 	useEffect(() => {
 		const loggedInUser = userService.getLoggedInUser();
 		console.log(
@@ -67,18 +74,41 @@ const DashboardNavbar = () => {
 		e.preventDefault();
 		userService.logout();
 		history('/login', { replace: true });
+		// dispatch(addNotification(null));
 	};
 	const profileMenuItems = [
 		{
 			label: 'My Profile',
 			icon: UserCircleIcon,
-			url: '/Profile'
+			url: '/Profile',
 		},
 		{
 			label: 'Sign Out',
 			icon: PowerIcon,
 		},
 	];
+	function getTimeAgo(postTime) {
+		const currentTime = new Date();
+		const postedTime = new Date(postTime);
+		const timeDifference = currentTime - postedTime;
+		const seconds = Math.floor(timeDifference / 1000);
+		const minutes = Math.floor(seconds / 60);
+		const hours = Math.floor(minutes / 60);
+		const days = Math.floor(hours / 24);
+
+		if (seconds < 60) {
+			return 'just now';
+		} else if (minutes < 60) {
+			return `${minutes} ${minutes === 1 ? 'minute' : 'minutes'} ago`;
+		} else if (hours < 24) {
+			return `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
+		} else if (days < 7) {
+			return `${days} ${days === 1 ? 'day' : 'days'} ago`;
+		} else {
+			const options = { year: 'numeric', month: 'long', day: 'numeric' };
+			return postedTime.toLocaleDateString(undefined, options);
+		}
+	}
 	function ProfileMenu() {
 		const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 		const closeMenu = () => setIsMenuOpen(false);
@@ -130,31 +160,31 @@ const DashboardNavbar = () => {
 					) : (
 						''
 					)}
-					{profileMenuItems.map(({ label, icon,url }, key) => {
+					{profileMenuItems.map(({ label, icon, url }, key) => {
 						const isLastItem = key === profileMenuItems.length - 1;
 						return (
 							<>
 								<Link to={url}>
-								<MenuItem
-									key={label}
-									onClick={isLastItem ? handleLogout : closeMenu}
-									className={`flex font-[poppins] ml-0 bg-transparent text-gray-600 border-none items-center gap-2 rounded ${
-										isLastItem
-											? 'hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10'
-											: ''
-									}`}>
-									{React.createElement(icon, {
-										className: `h-4 w-4 ${isLastItem ? 'text-red-500' : ''}`,
-										strokeWidth: 2,
-									})}
-									<Typography
-										as='span'
-										variant='small'
-										className='font-normal font-[poppins]'
-										color={isLastItem ? 'red' : 'inherit'}>
-										{label}
-									</Typography>
-								</MenuItem>
+									<MenuItem
+										key={label}
+										onClick={isLastItem ? handleLogout : closeMenu}
+										className={`flex font-[poppins] ml-0 bg-transparent text-gray-600 border-none items-center gap-2 rounded ${
+											isLastItem
+												? 'hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10'
+												: ''
+										}`}>
+										{React.createElement(icon, {
+											className: `h-4 w-4 ${isLastItem ? 'text-red-500' : ''}`,
+											strokeWidth: 2,
+										})}
+										<Typography
+											as='span'
+											variant='small'
+											className='font-normal font-[poppins]'
+											color={isLastItem ? 'red' : 'inherit'}>
+											{label}
+										</Typography>
+									</MenuItem>
 								</Link>
 							</>
 						);
@@ -236,10 +266,12 @@ const DashboardNavbar = () => {
 						{userService.isLoggedIn() ? (
 							<>
 								<div className='setting-btn cursor-pointer'>
-									<Cog6ToothIcon
-										width='1.25rem'
-										height='1.25rem'
-									/>
+									<Link to={'/Profile'}>
+										<Cog6ToothIcon
+											width='1.25rem'
+											height='1.25rem'
+										/>
+									</Link>
 								</div>
 								<div className='drawer-btn'>
 									<BarsArrowUpIcon
@@ -271,58 +303,35 @@ const DashboardNavbar = () => {
 											/>
 										</MenuHandler>
 										<MenuList className='mt-4 p-[0.5rem] border-none shadow-xl bg-white'>
-											<MenuItem
-												color='blue-grey'
-												className='m-0  font-[poppins] text-[rgb(52,71,103)] p-[0.7rem]  bg-transparent'>
-												<div className='flex gap-2 items-center justify-center'>
-													<Avatar
-														src={avatar2}
-														alt='avatar'
-														size='sm'
-													/>
-													<div className='flex gap-2 flex-col'>
-														<h4>
-															<span className='font-[700] text-[rgb(52,71,103)]'>
-																New Message
-															</span>{' '}
-															from Shahzaib{' '}
-														</h4>
-														<div className='flex gap-1 opacity-[0.5] font-[poppins] text-xs'>
-															<ClockIcon
-																height='1rem'
-																width='1rem'
-															/>
-															<p>13 minutes ago</p>
-														</div>
-													</div>
-												</div>
-											</MenuItem>
-											<MenuItem
-												color='blue-grey'
-												className='m-0 font-[poppins] text-[rgb(52,71,103)] p-[0.7rem]  bg-transparent'>
-												<div className='flex gap-2 items-center justify-start'>
-													<Avatar
-														src={avatar}
-														alt='avatar'
-														size='sm'
-													/>
-													<div className='flex gap-2 flex-col'>
-														<h4>
-															<span className='font-[700] text-[rgb(52,71,103)]'>
-																New Album
-															</span>{' '}
-															from Uzair{' '}
-														</h4>
-														<div className='flex gap-1 opacity-[0.5] font-[poppins] text-xs'>
-															<ClockIcon
-																height='1rem'
-																width='1rem'
-															/>
-															<p>20 minutes ago</p>
-														</div>
-													</div>
-												</div>
-											</MenuItem>
+											{notifications &&
+												notifications.map((notification) =>
+													notification.notifications.map((notify) => (
+														<MenuItem
+															color='blue-grey'
+															className='m-0  font-[poppins] text-[rgb(52,71,103)] p-[0.7rem]  bg-transparent'>
+															<div className='flex gap-2 items-center justify-center'>
+																<Avatar
+																	src={avatar2}
+																	alt='avatar'
+																	size='sm'
+																/>
+																<div className='flex gap-2 flex-col'>
+																	<h4>
+																		<span className='font-[700] text-[rgb(52,71,103)]'></span>{' '}
+																		{notify?.message}
+																	</h4>
+																	<div className='flex gap-1 opacity-[0.5] font-[poppins] text-xs'>
+																		<ClockIcon
+																			height='1rem'
+																			width='1rem'
+																		/>
+																		<p>{getTimeAgo(notify?.createdAt)}</p>
+																	</div>
+																</div>
+															</div>
+														</MenuItem>
+													))
+												)}
 										</MenuList>
 									</Menu>
 								</div>
@@ -375,56 +384,7 @@ const DashboardNavbar = () => {
 										<MenuList className='mt-4 p-[0.5rem] border-none shadow-xl bg-white'>
 											<MenuItem
 												color='blue-grey'
-												className='m-0  font-[poppins] text-[rgb(52,71,103)] p-[0.7rem]  bg-transparent'>
-												<div className='flex gap-2 items-center justify-center'>
-													<Avatar
-														src={avatar2}
-														alt='avatar'
-														size='sm'
-													/>
-													<div className='flex gap-2 flex-col'>
-														<h4>
-															<span className='font-[700] text-[rgb(52,71,103)]'>
-																New Message
-															</span>{' '}
-															from Shahzaib{' '}
-														</h4>
-														<div className='flex gap-1 opacity-[0.5] font-[poppins] text-xs'>
-															<ClockIcon
-																height='1rem'
-																width='1rem'
-															/>
-															<p>13 minutes ago</p>
-														</div>
-													</div>
-												</div>
-											</MenuItem>
-											<MenuItem
-												color='blue-grey'
-												className='m-0 font-[poppins] text-[rgb(52,71,103)] p-[0.7rem]  bg-transparent'>
-												<div className='flex gap-2 items-center justify-start'>
-													<Avatar
-														src={avatar}
-														alt='avatar'
-														size='sm'
-													/>
-													<div className='flex gap-2 flex-col'>
-														<h4>
-															<span className='font-[700] text-[rgb(52,71,103)]'>
-																New Album
-															</span>{' '}
-															from Uzair{' '}
-														</h4>
-														<div className='flex gap-1 opacity-[0.5] font-[poppins] text-xs'>
-															<ClockIcon
-																height='1rem'
-																width='1rem'
-															/>
-															<p>20 minutes ago</p>
-														</div>
-													</div>
-												</div>
-											</MenuItem>
+												className='m-0 font-[poppins] text-[rgb(52,71,103)] p-[0.7rem]  bg-transparent'></MenuItem>
 										</MenuList>
 									</Menu>
 								</div>

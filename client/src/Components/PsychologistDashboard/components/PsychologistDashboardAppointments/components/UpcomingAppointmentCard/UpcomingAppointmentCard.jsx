@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './UpcomingAppointmentCard.css';
+import { useNavigate } from 'react-router-dom';
 import {
 	Card,
 	CardBody,
 	CardFooter,
 	Typography,
 	Button,
+	Alert,
 } from '@material-tailwind/react';
 import { ClockIcon } from '@heroicons/react/24/outline';
 import { ExclamationCircleIcon } from '@heroicons/react/24/solid';
 
 const UpcomingAppointmentCard = ({ card }) => {
+	const history = useNavigate();
 	function convertTo12HourFormat(timeString) {
 		const [hours, minutes] = timeString.split(':');
 		let formattedTime = '';
@@ -84,6 +87,76 @@ const UpcomingAppointmentCard = ({ card }) => {
 		return getTimeStatus();
 	}
 
+	const getCurrentDateTime = () => {
+		const currentDateTime = new Date();
+		const currentDate = currentDateTime.toISOString().split('T')[0];
+		const currentTime = currentDateTime.toLocaleTimeString([], {
+			hour: '2-digit',
+			minute: '2-digit',
+		});
+
+		return { currentDate, currentTime };
+	};
+	const [isEnabled, setEnabled] = useState(false);
+	const [remainingTime, setRemainingTime] = useState(null);
+	const [dayName, setDayName] = useState(null);
+	useEffect(() => {
+		const { currentDate, currentTime } = getCurrentDateTime();
+		const appointmentDateTime = `${card.datetime.date} ${card.datetime.time}`;
+		const currentDateTime = `${currentDate} ${currentTime}`;
+
+		if (currentDateTime >= appointmentDateTime) {
+			setEnabled(true);
+		} else {
+			const remainingTime = calculateRemainingTime(
+				currentDateTime,
+				appointmentDateTime
+			);
+
+			setRemainingTime(remainingTime);
+			setDayName(card.datetime.day);
+			setTimeout(() => {
+				setEnabled(true);
+			}, remainingTime);
+		}
+	}, []);
+	const calculateRemainingTime = (currentDateTime, appointmentDateTime) => {
+		const currentTimestamp = new Date(currentDateTime).getTime();
+		const appointmentTimestamp = new Date(appointmentDateTime).getTime();
+		const remainingTime = appointmentTimestamp - currentTimestamp;
+		return remainingTime;
+	};
+	const formatTime = (milliseconds) => {
+		const hours = Math.floor(milliseconds / (1000 * 60 * 60));
+		const minutes = Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60));
+
+		return `${hours}h ${minutes}m`;
+	};
+	const roomID = card?._id;
+	const handleVideoCall = () => {
+		if (isEnabled) {
+			// Handle video call functionality
+			history(`/room/${roomID}`);
+		} else if (remainingTime) {
+			const formattedTime = formatTime(remainingTime);
+			return (
+				<Alert>
+					Video Call Disabled, You can join the video call in {formattedTime}
+				</Alert>
+			);
+		} else if (dayName) {
+			return (
+				<Alert>
+					Video Call Disabled, The video call is scheduled for {dayName}
+				</Alert>
+			);
+		}
+		console.log(
+			'🚀 ~ file: UpcomingAppointmentCard.jsx:138 ~ handleVideoCall ~ isEnabled:',
+			isEnabled
+		);
+	};
+
 	return (
 		<>
 			<div>
@@ -134,6 +207,8 @@ const UpcomingAppointmentCard = ({ card }) => {
 							) : (
 								<Button
 									size='sm'
+									disabled={!isEnabled}
+									onClick={handleVideoCall}
 									className='rounded-2xl font-poppins ml-0 shadow-none border-none  hover:shadow-none'>
 									Video Call
 								</Button>

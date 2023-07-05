@@ -54,25 +54,25 @@ import {
 } from './Components/PsychologistDashboard';
 
 const App = () => {
-	const [user, setUser] = useState({});
-	useEffect(() => {
-		const fetchUser = async () => {
-			try {
-				const loggedInUser = await userService.getLoggedInUser();
-				setUser(loggedInUser);
-				console.log(loggedInUser);
-			} catch (err) {
-				console.error(err);
-			}
-		};
-		fetchUser();
-	}, []);
+	// const [user, setUser] = useState({});
+	// useEffect(() => {
+	// 	const fetchUser = async () => {
+	// 		try {
+	// 			const loggedInUser = await userService.getLoggedInUser();
+	// 			setUser(loggedInUser);
+	// 			console.log(loggedInUser);
+	// 		} catch (err) {
+	// 			console.error(err);
+	// 		}
+	// 	};
+	// 	fetchUser();
+	// }, []);
 
-	useEffect(() => {
-		if (user) {
-			socket.emit('addUser', user._id);
-		}
-	}, [user]);
+	// useEffect(() => {
+	// 	if (user) {
+	// 		socket.emit('addUser', user._id);
+	// 	}
+	// }, [user]);
 
 	return (
 		<>

@@ -78,7 +78,7 @@ const Signup = () => {
 				.then((data) => {
 					e.preventDefault();
 					console.log(data);
-					history('/login');
+					history('/users/:id/verify/:token');
 				})
 				.catch((err) => {
 					setSignupError(true);
@@ -121,7 +121,7 @@ const Signup = () => {
 							<Input
 								size='lg'
 								label='Name'
-								className='font-poppins'
+								className='!font-poppins'
 								value={name}
 								onChange={(e) => setName(e.target.value)}
 							/>
@@ -135,6 +135,7 @@ const Signup = () => {
 							<Input
 								size='lg'
 								label='Email'
+								className='!font-poppins'
 								onFocus={handleFocusEmail}
 								onBlur={handleBlur}
 								value={email}
@@ -158,6 +159,7 @@ const Signup = () => {
 								type='password'
 								size='lg'
 								label='Password'
+								className='!font-poppins'
 								onFocus={handleFocus}
 								onBlur={handleBlur}
 								value={password}

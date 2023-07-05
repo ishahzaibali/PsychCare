@@ -68,7 +68,7 @@ const DashboardNavbar = () => {
 		};
 
 		fetchUserAvatar();
-	}, []);
+	}, [imageUrl]);
 
 	const handleLogout = (e) => {
 		e.preventDefault();

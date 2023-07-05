@@ -21,6 +21,8 @@ import {
 import placeholder from '../../../../assets/placeholder.png';
 import placeholder_female from '../../../../assets/placeholder_female.png';
 import Loading from '../../../Loading/Loading';
+import patientService from '../../../../services/PatientService';
+import { useToast } from '@chakra-ui/react';
 
 const columns = [
 	{
@@ -52,6 +54,7 @@ const columns = [
 const DashboardUsers = () => {
 	const [showUsers, setShowUsers] = useState([]);
 	const [loading, setLoading] = useState(false);
+	const toast = useToast();
 
 	const getUsers = async () => {
 		try {
@@ -75,6 +78,38 @@ const DashboardUsers = () => {
 		}
 	};
 
+	const deleteUser = (id) => {
+		patientService
+			.deletePatient(id)
+			.then((res) => {
+				console.log(
+					'🚀 ~ file: DashboardUsers.jsx:81 ~ patientService.deletePatient ~ res:',
+					res
+				);
+				getUsers();
+				toast({
+					title: 'User Deleted successfully.',
+					status: 'success',
+					duration: 4000,
+					position: 'top-right',
+					isClosable: true,
+				});
+			})
+			.catch((err) => {
+				console.log(
+					'🚀 ~ file: DashboardUsers.jsx:85 ~ patientService.deletePatient ~ err:',
+					err
+				);
+				toast({
+					title: 'Something went wrong.',
+					status: 'error',
+					duration: 4000,
+					position: 'top-right',
+					isClosable: true,
+				});
+			});
+	};
+
 	useEffect(() => {
 		getUsers();
 	}, []);
@@ -82,7 +117,7 @@ const DashboardUsers = () => {
 	return (
 		<>
 			<div className='users-container '>
-				<Card className='w-full mb-[1rem] shadow-lg '>
+				<Card className='w-full mb-[1rem] shadow-3xl '>
 					<div className='header'>
 						<div className='title-user'>
 							<Typography
@@ -163,7 +198,7 @@ const DashboardUsers = () => {
 													<div className='flex flex-row gap-4'>
 														<span className='flex gap-2 flex-row'>
 															{!row.image ? (
-																row.gender === 'male' ? (
+																row?.gender === 'male' ? (
 																	<Avatar
 																		size='sm'
 																		variant='circular'
@@ -171,7 +206,7 @@ const DashboardUsers = () => {
 																		src={placeholder}
 																		alt='candice wu'
 																	/>
-																) : row.gender === 'female' ? (
+																) : row?.gender === 'female' ? (
 																	<Avatar
 																		size='sm'
 																		variant='circular'
@@ -193,15 +228,15 @@ const DashboardUsers = () => {
 																	size='sm'
 																	variant='circular'
 																	className='object-cover rounded-lg'
-																	src={row.image}
+																	src={row?.image}
 																	alt='candice wu'
 																/>
 															)}
 														</span>
 														<div className='flex flex-col'>
-															{row.user_id.name}
+															{row?.user_id?.name}
 															<span className='opacity-[0.6] font-[400]'>
-																{row.user_id.email}
+																{row?.user_id?.email}
 															</span>
 														</div>
 													</div>
@@ -210,12 +245,12 @@ const DashboardUsers = () => {
 												<TableCell
 													className='table-row-2 '
 													align='left'>
-													{row.contact_number}
+													{row?.contact_number}
 												</TableCell>
 												<TableCell
 													className='table-row-2 '
 													align='left'>
-													<div className='flex flex-col'>{row.gender}</div>
+													<div className='flex flex-col'>{row?.gender}</div>
 												</TableCell>
 
 												<Menu placement='left-start'>
@@ -227,10 +262,12 @@ const DashboardUsers = () => {
 														</TableCell>
 													</MenuHandler>
 													<MenuList className='menu-list'>
-														<MenuItem className='ml-0 menu-list-item'>
+														{/* <MenuItem className='ml-0 menu-list-item'>
 															Edit User Details
-														</MenuItem>
-														<MenuItem className='ml-0 menu-list-item'>
+														</MenuItem> */}
+														<MenuItem
+															onClick={() => deleteUser(row._id)}
+															className='ml-0 menu-list-item'>
 															Delete User
 														</MenuItem>
 													</MenuList>

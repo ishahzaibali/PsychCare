@@ -8,6 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableCell from '@mui/material/TableCell';
 import placeholder from '../../../../../assets/placeholder.png';
 import placeholder_female from '../../../../../assets/placeholder_female.png';
+import { useToast } from '@chakra-ui/react';
 
 import {
 	Card,
@@ -21,12 +22,33 @@ import {
 } from '@material-tailwind/react';
 import psychologistService from '../../../../../services/PsychologistService';
 
-const Psychologists = ({ DetailedPsychologists }) => {
-	const deletePsychologist = async (id) => {
-		await psychologistService.deletePsychologist(id);
-		console.log(`Psychologist with ${id} is deleted.`);
+const Psychologists = ({ DetailedPsychologists, props }) => {
+	const toast = useToast();
+	const deletePsychologist = (id) => {
+		psychologistService
+			.deletePsychologist(id)
+			.then(() => {
+				console.log(`Psychologist with ${id} is deleted.`);
+				// props.getPsychologists();
+				toast({
+					title: 'User Deleted successfully.',
+					status: 'success',
+					duration: 4000,
+					position: 'top-right',
+					isClosable: true,
+				});
+			})
+			.catch((err) => {
+				console.log('deletePsychologist ~ err:', err);
+				toast({
+					title: 'Something went wrong.',
+					status: 'error',
+					duration: 4000,
+					position: 'top-right',
+					isClosable: true,
+				});
+			});
 	};
-	
 
 	return (
 		<>

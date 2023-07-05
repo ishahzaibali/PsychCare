@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './AppointmentBooking.css';
 import { Navbar } from '../../index';
 import 'date-carousel/date-carousel.js';
@@ -18,6 +18,7 @@ import { motion } from 'framer-motion';
 import appointmentService from '../../../services/AppointmentService';
 import { message } from 'antd';
 import userService from '../../../services/UserService';
+import socket from '../../../socket';
 
 // const responsive = {
 // 	superLargeDesktop: {
@@ -50,15 +51,12 @@ const AppointmentBooking = () => {
 
 	const { state } = useLocation();
 	const history = useNavigate();
-	// const { card } = state;
 	const user = state.card;
-	// console.log(
-	// 	'🚀 ~ file: AppointmentBooking.jsx:44 ~ AppointmentBooking ~ user:',
-	// 	user
-	// );
+
 	const online = state.online;
 	const type = state.onsite;
 
+	const socketRef = useRef(socket);
 	useEffect(() => {
 		const getDatesArray = () => {
 			const dates = [];
@@ -207,6 +205,9 @@ const AppointmentBooking = () => {
 		console.log('Selected Date:', formattedDate);
 	};
 
+	const PsychologistIDOnsite = user?.user_id._id;
+	const PsychologistIDOnline = online?.user_id._id;
+
 	const handleOnsiteBooking = async (e) => {
 		e.preventDefault();
 		const data = {
@@ -252,6 +253,12 @@ const AppointmentBooking = () => {
 
 		try {
 			const res = await addAppointmentAsync(data);
+			socketRef.current.emit('sendNotification', {
+				type: 'Appointmentnotification',
+				message: 'New appointment have been booked',
+				PsychologistIDOnsite,
+			});
+
 			console.log('Appointment added successfully:', res);
 			message.success('Appointment booked successfully!');
 			history('/users/psychologists/' + user._id);
@@ -304,6 +311,11 @@ const AppointmentBooking = () => {
 
 		try {
 			const res = await addAppointmentAsync(data);
+			socketRef.current.emit('sendNotification', {
+				type: 'Appointmentnotification',
+				message: 'New appointment have been booked',
+				PsychologistIDOnline,
+			});
 			console.log('Appointment added successfully:', res);
 			message.success('Appointment booked successfully!');
 			history('/users/psychologists/' + online._id);

@@ -28,24 +28,24 @@ export const navData = [
 		icon: <ChatBubbleOvalLeftIcon className='w-5 h-5' />,
 		cName: 'nav-links',
 	},
-	{
-		title: 'Payments',
-		url: '/psychologist_payments',
-		icon: <CreditCardIcon className='w-5 h-5' />,
-		cName: 'nav-links',
-	},
-	{
-		title: 'Video Calls',
-		url: '/psychologist_video_calls',
-		icon: <VideoCameraIcon className='w-5 h-5' />,
-		cName: 'nav-links',
-	},
-	{
-		title: 'Treated Patients',
-		url: '/treated_patients',
-		icon: <UserGroupIcon className='w-5 h-5' />,
-		cName: 'nav-links',
-	},
+	// {
+	// 	title: 'Payments',
+	// 	url: '/psychologist_payments',
+	// 	icon: <CreditCardIcon className='w-5 h-5' />,
+	// 	cName: 'nav-links',
+	// },
+	// {
+	// 	title: 'Video Calls',
+	// 	url: '/psychologist_video_calls',
+	// 	icon: <VideoCameraIcon className='w-5 h-5' />,
+	// 	cName: 'nav-links',
+	// },
+	// {
+	// 	title: 'Treated Patients',
+	// 	url: '/treated_patients',
+	// 	icon: <UserGroupIcon className='w-5 h-5' />,
+	// 	cName: 'nav-links',
+	// },
 	{
 		title: 'Profile',
 		url: '/psychologist_profile',

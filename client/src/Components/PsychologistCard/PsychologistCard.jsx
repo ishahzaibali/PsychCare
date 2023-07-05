@@ -48,7 +48,7 @@ const PsychologistCard = ({ Psychologist }) => {
 			<Card
 				color='transparent'
 				shadow={false}
-				className='card-body'>
+				className='card-body shadow-3xl'>
 				<CardBody className='mb-6 p-0'>
 					<div className='content-container'>
 						<div className='card-data'>

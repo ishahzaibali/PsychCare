@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './PsychologistDashboardNavbar.css';
-import avatar from '../../../../assets/team-4.jpg';
-import avatar2 from '../../../../assets/team-3.jpg';
-import { Drawer } from 'antd';
+// import place from '../../../../assets/team-3.jpg';
+import { Drawer, Badge } from 'antd';
 import {
 	Navbar,
 	Typography,
@@ -22,7 +21,7 @@ import {
 	ClockIcon,
 	BarsArrowUpIcon,
 } from '@heroicons/react/24/outline';
-import { BellIcon, EnvelopeIcon } from '@heroicons/react/24/solid';
+import { BellIcon } from '@heroicons/react/24/solid';
 import userService from '../../../../services/UserService';
 import { useNavigate } from 'react-router-dom';
 import { PsychologistDashboardSidebar } from '../../index';
@@ -54,13 +53,15 @@ const PsychologistDashboardNavbar = () => {
 	const [user, setUser] = useState(null);
 	const [open, setOpen] = useState(false);
 	const [imageUrl, setImageUrl] = useState('');
+	// const [buttonClicked, setButtonClicked] = useState(true);
 	const notifications = useSelector(
 		(state) => state?.notifications?.notifications || []
 	);
 	console.log(
-		'🚀 ~ file: DashboardNavbar.jsx:44 ~ DashboardNavbar ~ notifications:',
+		'🚀 ~ file: PsychologistDashboardNavbar.jsx:60 ~ PsychologistDashboardNavbar ~ notifications:',
 		notifications
 	);
+
 	const showDrawer = () => {
 		setOpen(true);
 	};
@@ -287,7 +288,7 @@ const PsychologistDashboardNavbar = () => {
 													className='m-0  font-[poppins] text-[rgb(52,71,103)] p-[0.7rem]  bg-transparent'>
 													<div className='flex gap-2 items-center justify-center'>
 														<Avatar
-															src={avatar2}
+															src={placeholder}
 															alt='avatar'
 															size='sm'
 														/>

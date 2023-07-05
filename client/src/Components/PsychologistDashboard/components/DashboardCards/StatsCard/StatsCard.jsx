@@ -47,38 +47,6 @@ const StatsCard = () => {
 								<Typography
 									variant='p'
 									className='font-[poppins] font-[600] leading-tight text-xs opacity-[0.8]'>
-									Appointments
-								</Typography>
-								<div className='flex items-center gap-4'>
-									<Typography
-										variant='h4'
-										className='font-[poppins] text-2xl font-[700]'>
-										7
-									</Typography>
-									<div
-										variant='h4'
-										className='today-chip flex items-center justify-center font-[poppins] px-2 py-1 font-[700] leading-tight text-[8px] text-white opacity-[0.8]'>
-										TODAY
-									</div>
-								</div>
-							</div>
-							<div className='cardButton'>
-								<div
-									size='lg'
-									className='ml-0 iButton2'>
-									<CalendarDaysIcon className='w-5 h-5' />
-								</div>
-							</div>
-						</CardBody>
-					</Card>
-				</div>
-				<div className='w-full'>
-					<Card className='card-abc'>
-						<CardBody className='card-main p-[16px] w-full'>
-							<div className='cardData'>
-								<Typography
-									variant='p'
-									className='font-[poppins] font-[600] leading-tight text-xs opacity-[0.8]'>
 									Patients Treated
 								</Typography>
 								<div className='flex items-center gap-4'>
@@ -99,6 +67,38 @@ const StatsCard = () => {
 									size='lg'
 									className='ml-0 iButton2'>
 									<UsersIcon className='w-5 h-5' />
+								</div>
+							</div>
+						</CardBody>
+					</Card>
+				</div>
+				<div className='w-full'>
+					<Card className='card-abc'>
+						<CardBody className='card-main p-[16px] w-full'>
+							<div className='cardData'>
+								<Typography
+									variant='p'
+									className='font-[poppins] font-[600] leading-tight text-xs opacity-[0.8]'>
+									Pending Balance
+								</Typography>
+								<div className='flex items-center gap-4'>
+									<Typography
+										variant='h4'
+										className='font-[poppins] text-2xl font-[700]'>
+										Rs. <span>{formatValue(billing.pendingBalance)}</span>
+									</Typography>
+									{/* <div
+										variant='h4'
+										className='today-chip flex items-center justify-center font-[poppins] px-2 py-1 font-[700] leading-tight text-[8px] text-white opacity-[0.8]'>
+										TODAY
+									</div> */}
+								</div>
+							</div>
+							<div className='cardButton'>
+								<div
+									size='lg'
+									className='ml-0 iButton2'>
+									<MoneyIcon />
 								</div>
 							</div>
 						</CardBody>

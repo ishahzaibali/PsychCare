@@ -1,20 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Search.css';
-import { Input, Button } from '@material-tailwind/react';
+import { Button } from '@material-tailwind/react';
 import { DatePicker, Select } from 'antd';
-import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-const Search = () => {
+const Search = ({ onDataReceived, executeFunction, setExecuteFunction }) => {
+	const [location, setLocation] = useState('');
+	const [residence, setResidence] = useState('');
+
+	const history = useNavigate();
 	const onChange = (value, dateString) => {
 		console.log('Selected Time: ', value);
 		console.log('Formatted Selected Time: ', dateString);
 	};
-	const onSearch = (value) => {
-		console.log('search:', value);
+
+	const handleSearch = async () => {
+		// Construct the URL based on the selected filters
+		let url = '/users/psychologists/allpsycholocistwithpagination?';
+
+		if (residence) {
+			url += `specialization=${residence}`;
+		}
+
+		try {
+			const res = await axios.get(url);
+			console.log('🚀 ~ file: Search.jsx:28 ~ handleSearch ~ url:', url);
+			const data = res.data;
+			history('/users/psychologists', { state: { data } });
+			onDataReceived(res.data);
+			setExecuteFunction(true);
+			console.log('🚀 ~ getPsychologists ~ data:', res.data);
+
+			if (res.status !== 200) {
+				window.alert('Invalid Information');
+			}
+		} catch (error) {
+			console.log('🚀 ~ getPsychologists ~ error:', error);
+		}
 	};
-	const onCityChange = (value) => {
-		console.log(`selected ${value}`);
-	};
+
 	return (
 		<div className='main-container'>
 			<div className='input-fields'>
@@ -26,7 +51,7 @@ const Search = () => {
 							size='large'
 							style={{
 								width: '100%',
-								fontSize:'0.875rem'
+								fontSize: '0.875rem',
 							}}
 							placeholder='Location'
 							optionFilterProp='children'
@@ -64,6 +89,11 @@ const Search = () => {
 									label: 'Sheikhupura',
 								},
 							]}
+							value={location || undefined}
+							onChange={(value) => {
+								setLocation(value);
+								console.log(location);
+							}}
 						/>
 					</div>
 				</div>
@@ -85,7 +115,7 @@ const Search = () => {
 					</div>
 				</div>
 				<div className='residence-container'>
-					<h4>Residence</h4>
+					<h4>Mental Issues</h4>
 					<div className='residence-input'>
 						<Select
 							showSearch
@@ -138,15 +168,25 @@ const Search = () => {
 									label: 'Posttraumatic Stress Disorder',
 								},
 							]}
+							value={residence || undefined}
+							onChange={(value) => {
+								setResidence(value);
+								console.log(residence);
+							}}
 						/>
 					</div>
 				</div>
 			</div>
 
 			<div className='search-button'>
-				<NavLink to='users/psychologists'>
-					<Button className='w-full font-poppins ml-0'>Search</Button>
-				</NavLink>
+				{/* <NavLink to='users/psychologists'>
+					
+				</NavLink> */}
+				<Button
+					onClick={handleSearch}
+					className='w-full font-poppins ml-0'>
+					Search
+				</Button>
 			</div>
 		</div>
 	);

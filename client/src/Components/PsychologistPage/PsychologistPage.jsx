@@ -21,6 +21,7 @@ import {
 } from '@heroicons/react/24/outline';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { useLocation } from 'react-router-dom';
 
 const responsive = {
 	superLargeDesktop: {
@@ -48,6 +49,19 @@ const PsychologistPage = () => {
 	const [loading, setLoading] = useState(false);
 	const [postsPerPage] = useState(4);
 	const [appliedFilters, setAppliedFilters] = useState({});
+	const { state } = useLocation();
+	const psychologistsData = state?.data;
+	console.log(
+		'🚀 ~ file: PsychologistPage.jsx:54 ~ PsychologistPage ~ psychologistsData:',
+		psychologistsData
+	);
+	const [executeFunction, setExecuteFunction] = useState(false);
+
+	const handleDataReceived = (data) => {
+		if (executeFunction) {
+			setshowPsychologists(data);
+		}
+	};
 
 	const getPsychologists = async (filters) => {
 		try {
@@ -117,7 +131,9 @@ const PsychologistPage = () => {
 						</div>
 						<h1 className='flex-[2] p-[0.5rem]'>Lowest Onsite Fee</h1>
 					</div>
-					<div className='filter-option'>
+					<div
+						onClick={() => handleFilterSelection('sortBy', 'rating')}
+						className='filter-option'>
 						<div className='icon-section flex-[1]'>
 							<ChatBubbleOvalLeftEllipsisIcon
 								width='1.75rem'
@@ -168,7 +184,9 @@ const PsychologistPage = () => {
 						</div>
 						<h1 className='flex-[2] p-[0.5rem]'>Male Doctors</h1>
 					</div>
-					<div className='filter-option'>
+					<div
+						onClick={() => handleFilterSelection('sortBy', 'onlineFee')}
+						className='filter-option'>
 						<div className='icon-section flex-[1]'>
 							<VideoCameraIcon
 								width='1.75rem'
@@ -203,7 +221,11 @@ const PsychologistPage = () => {
 						Discover the best psychologists, clinic & hospital the city nearest
 						you.
 					</p>
-					<Search />
+					<Search
+						executeFunction={executeFunction}
+						setExecuteFunction={setExecuteFunction}
+						onDataReceived={handleDataReceived}
+					/>
 				</div>
 				<div className='psychologists-search-section'>
 					<h1 className='heading'>

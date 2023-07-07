@@ -97,7 +97,7 @@ const UpcomingAppointmentCard = ({ card }) => {
 
 		return { currentDate, currentTime };
 	};
-	const [isEnabled, setEnabled] = useState(false);
+	const [isEnabled, setEnabled] = useState(true);
 	const [remainingTime, setRemainingTime] = useState(null);
 	const [dayName, setDayName] = useState(null);
 	useEffect(() => {

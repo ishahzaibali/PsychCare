@@ -270,7 +270,7 @@ const PsychologistDashboardNavbar = () => {
 						</div>
 
 						<div className='userMenu'>
-							<Menu
+							{/* <Menu
 								animate={{
 									mount: { scale: 1, y: 0 },
 									unmount: { scale: 0, y: 25 },
@@ -310,7 +310,7 @@ const PsychologistDashboardNavbar = () => {
 											))
 										)}
 								</MenuList>
-							</Menu>
+							</Menu> */}
 							<ProfileMenu />
 						</div>
 					</div>

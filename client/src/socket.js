@@ -1,7 +1,7 @@
 import { io } from 'socket.io-client';
 import userService from './services/UserService';
 
-const socket = io('ws://localhost:4000');
+const socket = io('ws://13.53.139.102:4000');
 socket.on('connect', () => {
 	console.log('Socket connected');
 	const fetchUser = async () => {

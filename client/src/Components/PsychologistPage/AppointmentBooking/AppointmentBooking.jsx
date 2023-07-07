@@ -19,6 +19,8 @@ import appointmentService from '../../../services/AppointmentService';
 import { message } from 'antd';
 import userService from '../../../services/UserService';
 import socket from '../../../socket';
+import axios from 'axios';
+import { useToast } from '@chakra-ui/react';
 
 // const responsive = {
 // 	superLargeDesktop: {
@@ -48,7 +50,7 @@ const AppointmentBooking = () => {
 	const [selectedDate, setSelectedDate] = useState([]);
 	const [dateCard, setDateCard] = useState([]);
 	const [startTime, setStartTime] = useState('');
-
+	const toast = useToast();
 	const { state } = useLocation();
 	const history = useNavigate();
 	const user = state.card;
@@ -310,15 +312,44 @@ const AppointmentBooking = () => {
 		};
 
 		try {
-			const res = await addAppointmentAsync(data);
-			socketRef.current.emit('sendNotification', {
-				type: 'Appointmentnotification',
-				message: 'New appointment have been booked',
-				PsychologistIDOnline,
-			});
-			console.log('Appointment added successfully:', res);
-			message.success('Appointment booked successfully!');
-			history('/users/psychologists/' + online._id);
+			await addAppointmentAsync(data)
+				.then((res) => {
+					// socketRef.current.emit('sendNotification', {
+					// 	type: 'Appointmentnotification',
+					// 	message: 'New appointment have been booked',
+					// 	PsychologistIDOnline,
+					// });
+					axios
+						.post(
+							`https://backend-ir87-pbonfsrc4-uzairghaffar1144.vercel.app/api/payments/create-checkout-session`,
+							{
+								psychologistId: online._id,
+							}
+						)
+						.then((response) => {
+							console.log('success');
+							history('/users/psychologists/' + online._id);
+							toast({
+								title: 'Appointment added successfully.',
+								status: 'success',
+								duration: 4000,
+								position: 'top-right',
+								isClosable: true,
+							});
+
+							if (response.data.url) {
+								window.location.href = response.data.url;
+							}
+						})
+						.catch((err) => console.log(err.message));
+					console.log('Appointment added successfully:', res);
+				})
+				.catch((err) => {
+					console.log(
+						'🚀 ~ file: AppointmentBooking.jsx:345 ~ awaitaddAppointmentAsync ~ err:',
+						err
+					);
+				});
 		} catch (err) {
 			console.log('Error adding appointment:', err);
 		}

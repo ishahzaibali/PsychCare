@@ -288,7 +288,7 @@ const DashboardNavbar = () => {
 										<DashboardSideNav className='bg-white' />
 									</Dialog>
 								</div>
-								<div className='notification-btn'>
+								{/* <div className='notification-btn'>
 									<Menu
 										animate={{
 											mount: { scale: 1, y: 0 },
@@ -334,7 +334,7 @@ const DashboardNavbar = () => {
 												)}
 										</MenuList>
 									</Menu>
-								</div>
+								</div> */}
 								<ProfileMenu />
 							</>
 						) : (

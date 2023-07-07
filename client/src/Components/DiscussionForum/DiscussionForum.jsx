@@ -19,9 +19,7 @@ const DiscussionForum = () => {
 
 	const getDiscussionPosts = async () => {
 		try {
-			const res = await axios.get(
-				'discussionforums?category=Psychology&perPage=30'
-			);
+			const res = await axios.get('discussionforums?&perPage=30');
 			setLoading(true);
 			if (!res.status === 200) {
 				window.alert('Invalid Information');

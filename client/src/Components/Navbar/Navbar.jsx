@@ -27,7 +27,7 @@ import { menuData } from './menuData';
 import userService from '../../services/UserService';
 import { storage } from '../../firebase';
 import { ref, getDownloadURL } from 'firebase/storage';
-import placeholder from '../../assets/placeholder.png'
+import placeholder from '../../assets/placeholder.png';
 
 const Navbar = () => {
 	const [openNav, setOpenNav] = useState(false);
@@ -94,10 +94,15 @@ const Navbar = () => {
 			icon: CalendarIcon,
 			url: `/${user?.name}/appointments`,
 		},
+		// {
+		// 	label: 'Notifications',
+		// 	icon: BellIcon,
+		// 	url: '#',
+		// },
 		{
-			label: 'Notifications',
+			label: 'Messages',
 			icon: BellIcon,
-			url: '#',
+			url: `/${user?.name}/messages`,
 		},
 		{
 			label: 'My Account',
@@ -233,7 +238,7 @@ const Navbar = () => {
 					) : (
 						''
 					)}
-					
+
 					{userService.isPsychologist()
 						? psychologistProfile.map(({ label, icon, url }, key) => {
 								const isLastItem = key === psychologistProfile.length - 1;

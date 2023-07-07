@@ -27,8 +27,10 @@ export { default as MinimalPsychologistCards } from './PsychologistCard/MinimalP
 export { default as AppointmentBooking } from './PsychologistPage/AppointmentBooking/AppointmentBooking';
 export { default as RoomPage } from './RoomPage/RoomPage';
 export { default as UserAppointments } from './UserProfilePages/MyAppointments/UserAppointments';
+export { default as UserMessages } from './UserProfilePages/MyMessages/UserMessages';
 export { default as UnApprovedPsychologist } from './PsychologistProfilePages/UnApprovedPsychologist/UnApprovedPsychologist';
 export { default as ResetPassword } from './ResetPassword/ResetPassword';
 export { default as VerificationPage } from './VerificationPage/VerificationPage';
 export { default as ResetPasswordPage } from './ResetPassword/ResetPasswordPage/ResetPasswordPage';
 export { default as EmailSentPage } from './ResetPassword/EmailSentPage/EmailSentPage';
+export { default as CheckoutSuccess } from './PayButton.jsx';

@@ -31,6 +31,8 @@ import {
 	ResetPasswordPage,
 	VerificationPage,
 	EmailSentPage,
+	CheckoutSuccess,
+	UserMessages,
 } from './Components';
 import {
 	DashboardDiscussions,
@@ -85,6 +87,10 @@ const App = () => {
 							element={<Home />}
 						/>
 						<Route
+							path='/checkout-success'
+							element={<CheckoutSuccess />}
+						/>
+						<Route
 							path='/contact'
 							element={<Contact />}
 						/>
@@ -113,6 +119,10 @@ const App = () => {
 						<Route
 							path='/:username/appointments'
 							element={<UserAppointments />}
+						/>
+						<Route
+							path='/:username/messages'
+							element={<UserMessages />}
 						/>
 						<Route
 							path='/room/:roomId'

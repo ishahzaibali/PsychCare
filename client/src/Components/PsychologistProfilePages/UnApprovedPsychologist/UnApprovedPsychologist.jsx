@@ -27,14 +27,14 @@ const UnApprovedPsychologist = () => {
 						Sincerely,
 						<br /> PsychCare Team
 					</Typography>
-					<Button
+					{/* <Button
 						size='lg'
 						className='ml-0 mt-8 font-poppins'>
 						<span>
 							<ChatBubbleOvalLeftIcon className='w-4 h-4 text-white' />
 						</span>{' '}
 						Help Center
-					</Button>
+					</Button> */}
 				</div>
 				<div className=' flex-[1] flex items-center justify-end'>
 					<OfficeWork />
